@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MedOps AI — Ticket Classification Console</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+:root{--bg:#0a1628;--panel:#0f2038;--panel2:#13284a;--line:#1e3a5f;--tx:#e8f0f8;--mu:#8aa5c0;--cy:#22d3ee;--ok:#34d399;--warn:#fbbf24;--bad:#f87171}
+body{background:var(--bg);color:var(--tx);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:72rem;margin:0 auto;padding:2rem 1.25rem}
+.tag{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:.15rem .8rem;font-size:.72rem;letter-spacing:.18em;color:var(--cy)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:1rem}
+.btn{background:var(--cy);color:#06222e;font-weight:700;border-radius:.6rem;padding:.65rem 1.3rem;border:none;cursor:pointer}
+.btn:hover{filter:brightness(1.15)}
+.btn2{background:transparent;color:var(--tx);border:1px solid var(--line);border-radius:.6rem;padding:.4rem .9rem;cursor:pointer;font-size:.8rem;text-align:left}
+.btn2:hover{border-color:var(--cy)}
+textarea{background:var(--panel2);border:1px solid var(--line);color:var(--tx);border-radius:.6rem;padding:.75rem;width:100%;min-height:6rem;font-size:.9rem}
+textarea:focus{outline:none;border-color:var(--cy)}
+.chip{display:inline-block;border-radius:.4rem;padding:.1rem .55rem;font-size:.72rem;font-weight:700}
+.p-High{background:rgba(248,113,113,.15);color:var(--bad);border:1px solid rgba(248,113,113,.4)}
+.p-Medium{background:rgba(251,191,36,.15);color:var(--warn);border:1px solid rgba(251,191,36,.4)}
+.p-Low{background:rgba(52,211,153,.15);color:var(--ok);border:1px solid rgba(52,211,153,.4)}
+pre{background:#071221;border:1px solid var(--line);border-radius:.6rem;padding:1rem;font-size:.8rem;overflow-x:auto;color:#9fe8c3}
+tr.new{animation:fade .4s ease}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="mb-8">
+  <span class="tag">HOSPITAL OPERATIONS · SPRINT 1</span>
+  <h1 class="mt-4 text-4xl font-extrabold">MedOps AI</h1>
+  <p class="mt-3 text-lg" style="color:var(--mu)">Paste a raw hospital operations request. The engine classifies it to one of four departments, assigns dynamic priority, and returns the strict JSON ticket.</p>
+  <p class="mt-2 text-xs" style="color:var(--mu)">Live demo of the Smart Ticket Classification Engine. The full FastAPI backend is on <a href="https://github.com/tshepisofrominnostation/medops-ai" style="color:var(--cy)">GitHub</a>; this console runs the same rules in the browser. Demo data only, never enter real patient information.</p>
+</header>
+
+<section class="card p-6 mb-6">
+  <h2 class="text-xl font-bold">1 · Submit a request</h2>
+  <p class="text-sm mt-1" style="color:var(--mu)">Sign the message like staff do: <code style="color:var(--cy)">- Dr. Name (Department)</code>. Try one of the scenarios below, or type your own.</p>
+  <textarea id="msg" class="mt-3" placeholder='"The patient monitoring terminal in Bay 3 keeps disconnecting..." - Dr. S. Khumalo (Emergency Ward)'></textarea>
+  <div class="mt-3 flex gap-3 items-center flex-wrap">
+    <button class="btn" id="go">Classify ticket</button>
+    <button class="btn2" id="clear">Clear log</button>
+  </div>
+  <div class="mt-4">
+    <p class="text-xs mb-2" style="color:var(--mu)">QUICK SCENARIOS</p>
+    <div class="grid md:grid-cols-2 gap-2" id="samples"></div>
+  </div>
+</section>
+
+<section class="card p-6 mb-6" id="resultCard" style="display:none">
+  <h2 class="text-xl font-bold">2 · Structured ticket</h2>
+  <div class="grid md:grid-cols-2 gap-5 mt-4">
+    <div id="human"></div>
+    <div><p class="text-xs mb-2" style="color:var(--mu)">JSON OUTPUT (strict schema)</p><pre id="json"></pre></div>
+  </div>
+</section>
+
+<section class="card p-6 mb-6">
+  <div class="flex justify-between items-center flex-wrap gap-2">
+    <h2 class="text-xl font-bold">3 · Ticket log</h2>
+    <div class="flex gap-2 text-xs items-center" style="color:var(--mu)">
+      <span id="stats"></span>
+      <button class="btn2" id="dl">Download tickets_processed.json</button>
+    </div>
+  </div>
+  <div class="mt-4 overflow-x-auto">
+    <table class="w-full text-sm" style="border-collapse:collapse">
+      <thead><tr style="color:var(--mu)"><th class="text-left p-2">ID</th><th class="text-left p-2">Priority</th><th class="text-left p-2">Category</th><th class="text-left p-2">Sender</th><th class="text-left p-2">Assigned to</th></tr></thead>
+      <tbody id="log"></tbody>
+    </table>
+  </div>
+</section>
+
+<section class="card p-6 mb-6">
+  <h2 class="text-xl font-bold">How it decides</h2>
+  <div class="grid md:grid-cols-3 gap-4 mt-4 text-sm" style="color:var(--mu)">
+    <div class="p-4 rounded-lg" style="background:var(--panel2)"><b style="color:var(--cy)">Classify</b><p class="mt-2">Weighted keyword lexicons per department. The highest score wins; clinical equipment (telemetry, ventilators, ECG) counts as IT &amp; Medical Tech.</p></div>
+    <div class="p-4 rounded-lg" style="background:var(--panel2)"><b style="color:var(--cy)">Prioritise</b><p class="mt-2">Clinical setting +3, clinical equipment +3, safety hazard +4, urgency +2, routine admin −2. Score ≥5 High, 2–4 Medium, below 2 Low.</p></div>
+    <div class="p-4 rounded-lg" style="background:var(--panel2)"><b style="color:var(--cy)">Structure</b><p class="mt-2">Seven-key JSON: ticket_id, timestamp, sender, category, priority, summary, assigned_to. Persisted to a local database file.</p></div>
+  </div>
+</section>
+<footer class="text-center text-xs pb-8" style="color:var(--mu)">MedOps AI · CAPACITI / Clickatell AI Bootcamp · Tshepiso Freddy Thosago</footer>
+</div>
+<script src="engine.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+const SAMPLES=[
+ ['Emergency: monitoring terminal drops off network','"The patient monitoring terminal in Bay 3 keeps disconnecting from the local network during telemetry sync." - Dr. S. Khumalo (Emergency Ward)'],
+ ['ICU ventilator alarm','"The ventilator in ICU bed 4 is showing an alarm and will not start." - Dr. Peters (ICU)'],
+ ['Medical-aid invoice query','"I have a query about the invoice for a patient medical aid claim from last month." - T. Mokoena (Accounts)'],
+ ['Annual leave request','"Nurse Dlamalo requests annual leave for December." - S. Dlamalo (ICU)'],
+ ['Power outage in emergency','"Power outage in the emergency department, generator did not start." - Facilities Desk (Emergency)'],
+ ['Air conditioner in staff room','"The air conditioner in the staff room is not working." - P. Sithole (Admin Block)']
+];
+const KEY="medops_tickets";
+let rows=JSON.parse(localStorage.getItem(KEY)||"[]");
+$("samples").innerHTML=SAMPLES.map((s,i)=>`<button class="btn2" data-i="${i}">${s[0]}</button>`).join("");
+document.querySelectorAll("[data-i]").forEach(b=>b.onclick=()=>{$("msg").value=SAMPLES[+b.dataset.i][1];$("go").click();});
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
+function renderLog(){
+  $("log").innerHTML=rows.slice().reverse().map(t=>`<tr style="border-top:1px solid var(--line)">
+   <td class="p-2" style="color:var(--cy)">${esc(t.ticket_id)}</td>
+   <td class="p-2"><span class="chip p-${t.priority}">${t.priority}</span></td>
+   <td class="p-2">${esc(t.category)}</td><td class="p-2 text-xs">${esc(t.sender)}</td>
+   <td class="p-2 text-xs" style="color:var(--mu)">${esc(t.assigned_to)}</td></tr>`).join("");
+  const c={High:0,Medium:0,Low:0};rows.forEach(r=>c[r.priority]++);
+  $("stats").textContent=rows.length?`${rows.length} tickets · ${c.High} High · ${c.Medium} Medium · ${c.Low} Low`:"No tickets yet";
+}
+function show(t){
+  $("resultCard").style.display="block";
+  $("human").innerHTML=`<p class="text-sm" style="color:var(--mu)">${esc(t.ticket_id)} · ${esc(t.timestamp)}</p>
+   <p class="mt-2"><span class="chip p-${t.priority}">${t.priority} priority</span></p>
+   <p class="mt-3 text-lg font-bold">${esc(t.category)}</p>
+   <p class="text-sm mt-1" style="color:var(--mu)">Assigned to <b style="color:var(--tx)">${esc(t.assigned_to)}</b></p>
+   <p class="text-sm mt-3">${esc(t.summary)}</p>`;
+  $("json").textContent=JSON.stringify(t,null,2);
+}
+$("go").onclick=()=>{
+  const raw=$("msg").value.trim();
+  if(raw.length<5){$("msg").focus();return;}
+  const t=processTicket(raw,rows.length+1);
+  rows.push(t);localStorage.setItem(KEY,JSON.stringify(rows));
+  show(t);renderLog();
+};
+$("clear").onclick=()=>{rows=[];localStorage.removeItem(KEY);$("resultCard").style.display="none";renderLog();};
+$("dl").onclick=()=>{
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(new Blob([JSON.stringify(rows,null,2)],{type:"application/json"}));
+  a.download="tickets_processed.json";a.click();
+};
+renderLog();
+</script>
+</body>
+</html>

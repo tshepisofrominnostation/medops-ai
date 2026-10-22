@@ -1,5 +1,7 @@
 # MedOps AI — Smart Ticket Classification Engine
 
+**Live demo:** https://tshepisofrominnostation.github.io/medops-ai/ (browser console running the same rules; the FastAPI backend below is the production engine)
+
 Intelligent hospital operations platform (Sprint 1, Week 1): a FastAPI backend that ingests raw operational requests from hospital staff, classifies them into the correct department, assigns dynamic priority, and returns a strict structured JSON ticket that is persisted to a local database.
 
 ## Architecture
@@ -82,6 +84,10 @@ python -m app.cli '"The aircon in Theatre 2 is not working." - Dr. Naidoo (Theat
 # tests (includes the graded emergency scenario)
 pytest tests/ -q
 ```
+
+## Live demo and parity
+
+`docs/` holds a static console (GitHub Pages) with `engine.js`, a JavaScript port of the Python engine. The two were parity-tested on 12 scenarios across all four departments: identical category, priority, assignee and sender parsing on every case.
 
 ## Test coverage
 
