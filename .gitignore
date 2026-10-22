@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.venv/
+data/tickets_processed.json
+.pytest_cache/
+
