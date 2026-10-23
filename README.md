@@ -75,7 +75,7 @@ pip install -r requirements.txt
 
 ```bash
 # API server
-uvicorn app.main:app --reload
+uvicorn app. main: app --reload
 # then: POST http://localhost:8000/tickets {"message": "..."}
 
 # or one-shot CLI, no server
@@ -91,10 +91,10 @@ pytest tests/ -q
 
 ## Test coverage
 
-Eight tests including the exact Week 1 validation scenario (Dr. S. Khumalo's telemetry failure must route to IT & Medical Tech at High priority), schema strictness (exactly the seven required keys), the four category routes, priority bands, and persistence/sequencing.
+Eight tests, including the exact Week 1 validation scenario (Dr. S. Khumalo's telemetry failure must route to IT & Medical Tech at High priority), schema strictness (exactly the seven required keys), the four category routes, priority bands, and persistence/sequencing.
 
 ## Sprint 1 scope note
 
 Rule-based classification is deliberate: deterministic, testable, no API cost, and no patient-identifying text leaves the hospital network. The `classify()` interface already returns confidence, matching the planned LLM-assisted engine for Sprint 2.
 
-Author: Tshepiso Freddy Thosago · CAPACITI / Clickatell AI Bootcamp
+Author: Tshepiso ·Xoliswa ·Anastacia ·Avuyile  CAPACITI / Clickatell AI Bootcamp
