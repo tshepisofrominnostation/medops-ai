@@ -97,4 +97,7 @@ Eight tests including the exact Week 1 validation scenario (Dr. S. Khumalo's tel
 
 Rule-based classification is deliberate: deterministic, testable, no API cost, and no patient-identifying text leaves the hospital network. The `classify()` interface already returns confidence, matching the planned LLM-assisted engine for Sprint 2.
 
+## Team
+Tshepiso Freddy Thosago (Scrum Master / Developer), Xoliswa-Dee, Anastacia202, Avuyile-Plaatjie. Sprint plan and board: SPRINT_PLAN.md and the Issues/Milestones tabs.
+
 Author: Tshepiso Freddy Thosago · CAPACITI / Clickatell AI Bootcamp
