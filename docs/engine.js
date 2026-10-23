@@ -19,13 +19,13 @@ const CATEGORY_KEYWORDS = {
     reimbursement:3, tender:2, expense:2, accounts:2, debtors:3,
     "medical aid":3, tariff:2, finance:3
   },
-  "Facilities": {
+  "Operations": {
     light:2, aircon:3, "air conditioning":3, water:2, leak:3, generator:3,
     door:1, elevator:2, lift:2, cleaning:2, plumbing:3, maintenance:3,
     ceiling:2, paint:2, refuse:2, "bed ":1, garden:2, kitchen:2
   }
 };
-const DEFAULT_CATEGORY = "Facilities";
+const DEFAULT_CATEGORY = "Operations";
 const CLINICAL_CONTEXT = ["emergency","icu","intensive care","theatre","operating room","telemetry","patient monitor","patient bay","ward","bay "];
 const CLINICAL_EQUIPMENT = ["ventilator","defibrillator","patient monitor","monitoring terminal","telemetry","infusion pump","dialysis","crash cart","life support"];
 const SAFETY = ["fire","flood","gas leak","power failure","outage","electrical hazard","spill"];
@@ -35,7 +35,7 @@ const ASSIGN = {
   "IT & Medical Tech": {High:"IT & Biomedical Engineering on-call",Medium:"IT Service Desk",Low:"IT Service Desk"},
   "HR": {High:"HR Duty Officer",Medium:"HR Business Partner",Low:"HR Admin Team"},
   "Finance": {High:"Finance Duty Officer",Medium:"Finance Operations Team",Low:"Finance Operations Team"},
-  "Facilities": {High:"Facilities Emergency Response",Medium:"Facilities & Maintenance Team",Low:"Facilities & Maintenance Team"}
+  "Operations": {High:"Operations Emergency Response",Medium:"Operations & Maintenance Team",Low:"Operations & Maintenance Team"}
 };
 
 function dequote(t){
