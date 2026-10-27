@@ -3,7 +3,7 @@ from typing import Literal, Optional
 from pydantic import BaseModel, Field
 
 Priority = Literal["High", "Medium", "Low"]
-Category = Literal["IT & Medical Tech", "HR", "Finance", "Facilities"]
+Category = Literal["IT & Medical Tech", "HR", "Finance", "Operations"]
 
 
 class TicketIn(BaseModel):

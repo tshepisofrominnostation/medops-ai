@@ -9,7 +9,7 @@ ASSIGN: dict[Category, dict[Priority, str]] = {
     },
     "HR": {"High": "HR Duty Officer", "Medium": "HR Business Partner", "Low": "HR Admin Team"},
     "Finance": {"High": "Finance Duty Officer", "Medium": "Finance Operations Team", "Low": "Finance Operations Team"},
-    "Facilities": {"High": "Facilities Emergency Response", "Medium": "Facilities & Maintenance Team", "Low": "Facilities & Maintenance Team"},
+    "Operations": {"High": "Operations Emergency Response", "Medium": "Operations & Maintenance Team", "Low": "Operations & Maintenance Team"},
 }
 
 

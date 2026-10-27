@@ -32,9 +32,9 @@ Modular by design: every stage is an independent module with a single responsibi
 
 ## Classification logic
 
-**Categories (exactly one per ticket):** IT & Medical Tech, HR, Finance, Facilities.
+**Categories (exactly one per ticket):** IT & Medical Tech, HR, Finance, Operations.
 
-Each category holds a weighted keyword lexicon. The score is the sum of matched keyword weights (repeat mentions count), and the winner takes the ticket. Zero matches route to Facilities (operations catch-all, confidence 0.0). Clinical equipment (ventilators, telemetry, patient monitors, ECG, dialysis) scores into IT & Medical Tech because in a hospital, clinical equipment faults are engineering faults.
+Each category holds a weighted keyword lexicon. The score is the sum of matched keyword weights (repeat mentions count), and the winner takes the ticket. Zero matches route to Operations (operations catch-all, confidence 0.0). Clinical equipment (ventilators, telemetry, patient monitors, ECG, dialysis) scores into IT & Medical Tech because in a hospital, clinical equipment faults are engineering faults.
 
 **Dynamic priority:** additive scoring over the message plus sender context:
 - Clinical context (Emergency, ICU, Theatre, telemetry, patient monitoring): +3
@@ -98,3 +98,7 @@ Eight tests, including the exact Week 1 validation scenario (Dr. S. Khumalo's te
 Rule-based classification is deliberate: deterministic, testable, no API cost, and no patient-identifying text leaves the hospital network. The `classify()` interface already returns confidence, matching the planned LLM-assisted engine for Sprint 2.
 
 Author: Tshepiso ·Xoliswa ·Anastacia ·Avuyile  CAPACITI / Clickatell AI Bootcamp
+## Team
+Tshepiso Freddy Thosago (Scrum Master / Developer), Xoliswa-Dee, Anastacia202, Avuyile-Plaatjie. Sprint plan and board: SPRINT_PLAN.md and the Issues/Milestones tabs.
+
+Author: Tshepiso Freddy Thosago · CAPACITI / Clickatell AI Bootcamp

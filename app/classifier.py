@@ -28,7 +28,7 @@ CATEGORY_KEYWORDS: dict[Category, dict[str, int]] = {
         "purchase": 2, "reimbursement": 3, "tender": 2, "expense": 2,
         "accounts": 2, "debtors": 3, "medical aid": 3, "tariff": 2, "finance": 3,
     },
-    "Facilities": {
+    "Operations": {
         "light": 2, "aircon": 3, "air conditioning": 3, "water": 2, "leak": 3,
         "generator": 3, "door": 1, "elevator": 2, "lift": 2, "cleaning": 2,
         "plumbing": 3, "maintenance": 3, "ceiling": 2, "paint": 2, "refuse": 2,
@@ -36,7 +36,7 @@ CATEGORY_KEYWORDS: dict[Category, dict[str, int]] = {
     },
 }
 
-DEFAULT_CATEGORY: Category = "Facilities"  # operations catch-all for unmatched text
+DEFAULT_CATEGORY: Category = "Operations"  # operations catch-all for unmatched text
 
 
 def classify(message: str) -> tuple[Category, float]:

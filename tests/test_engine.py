@@ -53,7 +53,7 @@ def test_leave_routes_to_hr_low(tmp_path, monkeypatch):
 def test_aircon_routes_to_facilities_medium(tmp_path, monkeypatch):
     raw = '"The air conditioner in the staff room is not working." - P. Sithole (Admin Block)'
     t = process_fresh(tmp_path, monkeypatch, raw)
-    assert t.category == "Facilities"
+    assert t.category == "Operations"
     assert t.priority == "Medium"
 
 
