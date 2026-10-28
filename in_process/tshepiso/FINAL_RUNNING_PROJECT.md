@@ -4,8 +4,9 @@
 with the same rules as the FastAPI backend (parity-tested 20/20 on the evaluation set).
 
 ## Try it
-- **Live UI (no setup):** open `final-running-project.html` — hosted link in the PR
-  description and in the pinned team chat. Or open the file in any browser from this folder.
+- **Live UI (no setup, click and use):**
+  https://base44.app/api/apps/6a37c12b561889870147c07a/files/mp/public/6a37c12b561889870147c07a/d5e7c5be6_final-running-project.html
+- Or open `final-running-project.html` in any browser from this folder.
 - **Backend (production engine):**
   ```
   pip install -r requirements.txt
