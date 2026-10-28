@@ -21,3 +21,4 @@ class TicketOut(BaseModel):
     priority: Priority
     summary: str
     assigned_to: str
+response: Optional[str] = Field(None, description="Generated response template if feature flag is enabled")
