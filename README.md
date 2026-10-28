@@ -101,3 +101,43 @@ Rule-based classification is deliberate: deterministic, testable, no API cost, a
 Tshepiso Freddy Thosago (Scrum Master / Developer), Xoliswa-Dee, Anastacia202, Avuyile-Plaatjie. Sprint plan and board: SPRINT_PLAN.md and the Issues/Milestones tabs.
 
 Author: Tshepiso Freddy Thosago · CAPACITI / Clickatell AI Bootcamp
+
+## Reply Writer (feature/reply-writer-agent)
+
+Each classified ticket gets a drafted department reply through `app/reply_writer.py`:
+
+- **TemplateReplyEngine** - deterministic, offline drafting with tone control:
+  High priority -> `concise-professional` (<= 65 words, one immediate action, an
+  escalation path); Medium/Low -> `warm-administrative` (acknowledge, inform,
+  reassure, a one-or-two-working-day timeframe).
+- **LLMReplyEngine** (optional) - OpenAI-compatible provider with JSON-mode
+  structured output. Configure via `MEDOPS_LLM_BASE_URL`, `MEDOPS_LLM_API_KEY`,
+  `MEDOPS_LLM_MODEL`, `MEDOPS_LLM_TIMEOUT`. On timeout, HTTP error, malformed
+  JSON, tone-contract violation or any safety breach it returns None and the
+  facade falls back to the template engine - drafting never fails.
+- **Medical-advice guardrail** - no reply may contain diagnosis, medication,
+  dosage or treatment language (`MEDICAL_ADVICE_BAN`). LLM output is scanned
+  before acceptance; violations are rejected and routed to the fallback.
+- Structured output via the `DraftedReply` Pydantic model (ticket_id, tone,
+  reply_body, safety_flags, generated_by, model).
+
+`POST /replies` runs the full loop: classify the request, draft the reply.
+
+## Evaluation harness
+
+`tests/data/evaluation_set.json` holds 20 realistic hospital requests with
+hand-written ground truth (category, priority, tone, required phrases, banned
+phrases, model answer). Measure the engine:
+
+    python -m tests.evaluate
+
+Targets: category >= 95%, priority >= 90%, tone 100%, phrase coverage >= 90%,
+safety 100%. Current run: 100% on every metric (2026-10-28).
+
+## API robustness
+
+Bad input returns descriptive `400 Bad Request` responses, never a 500:
+empty or whitespace messages, too-short text, oversized text (> 2000 chars),
+control characters, malformed JSON bodies and missing fields all get clear
+error details (`app/main.py`). Unexpected failures fall back to a clean
+JSON 500. Tests: `tests/test_api_robustness.py`.

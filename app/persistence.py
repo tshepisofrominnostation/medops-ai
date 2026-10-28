@@ -1,9 +1,11 @@
 """Persistence — append-only local database (data/tickets_processed.json)."""
 import json
+import os
 import threading
 from pathlib import Path
 
-DB_PATH = Path(__file__).resolve().parent.parent / "data" / "tickets_processed.json"
+DB_PATH = Path(os.environ.get("MEDOPS_DB_PATH",
+    str(Path(__file__).resolve().parent.parent / "data" / "tickets_processed.json")))
 _lock = threading.Lock()
 
 

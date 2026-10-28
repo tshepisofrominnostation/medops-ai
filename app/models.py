@@ -8,7 +8,7 @@ Category = Literal["IT & Medical Tech", "HR", "Finance", "Operations"]
 
 class TicketIn(BaseModel):
     """Raw intake: the unstructured message from hospital staff."""
-    message: str = Field(..., min_length=5, description="Raw operational request text")
+    message: str = Field(..., description="Raw operational request text (validated in main.validate_message)")
     sender: Optional[str] = Field(None, description="Optional sender override, e.g. 'Dr. X (ICU)'")
 
 

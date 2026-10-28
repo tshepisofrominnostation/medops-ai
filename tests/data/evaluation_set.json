@@ -1,0 +1,282 @@
+{
+  "version": "2026-10-28",
+  "description": "20 realistic hospital requests with hand-written ground truth: expected classification, priority, tone, phrases the reply must contain, phrases it must never contain, and a model answer written by a human.",
+  "cases": [
+    {
+      "id": "E01",
+      "message": "\"The patient monitoring terminal in Bay 3 keeps disconnecting from the local network during telemetry sync.\" - Dr. S. Khumalo (Emergency Ward)",
+      "expected_category": "IT & Medical Tech",
+      "expected_priority": "High",
+      "expected_tone": "concise-professional",
+      "reply_must_include": [
+        "do not use the affected equipment",
+        "on-call coordinator"
+      ],
+      "reply_must_not_include": [
+        "diagnos",
+        "dosage",
+        "medication"
+      ],
+      "ground_truth_reply": "Biomedical Engineering on-call has been activated for the Bay 3 monitoring terminal. Do not use the affected equipment for patient care until it is cleared. Reference the ticket number and escalate to the on-call coordinator immediately if the situation changes."
+    },
+    {
+      "id": "E02",
+      "message": "\"The ICU bedside monitor in Bed 4 is displaying an alarm but the readings look normal.\" - Sr. L. Mabuza (ICU)",
+      "expected_category": "IT & Medical Tech",
+      "expected_priority": "High",
+      "expected_tone": "concise-professional",
+      "reply_must_include": [
+        "do not use the affected equipment",
+        "biomedical"
+      ],
+      "reply_must_not_include": [
+        "diagnos",
+        "dosage",
+        "mg"
+      ],
+      "ground_truth_reply": "IT & Biomedical Engineering on-call is engaged for the ICU bedside monitor alarm. Do not rely on the affected monitor until it is checked; keep the patient under observation per ward protocol and escalate immediately if the alarm repeats."
+    },
+    {
+      "id": "E03",
+      "message": "\"I cannot log into the patient records system this morning, it says my password expired.\" - Dr. R. Sithole (Outpatients)",
+      "expected_category": "IT & Medical Tech",
+      "expected_priority": "Medium",
+      "expected_tone": "warm-administrative",
+      "reply_must_include": [
+        "thank you for logging",
+        "one working day"
+      ],
+      "reply_must_not_include": [
+        "diagnos"
+      ],
+      "ground_truth_reply": "Thank you for reporting the login problem. The IT Service Desk has your ticket and will restore your access and confirm with you. Expect an update within one working day; please keep a note of any error message you see."
+    },
+    {
+      "id": "E04",
+      "message": "\"The theatre scheduling software is very slow but still working.\" - Ms N. Dube (Theatre Admin)",
+      "expected_category": "IT & Medical Tech",
+      "expected_priority": "Medium",
+      "expected_tone": "warm-administrative",
+      "reply_must_include": [
+        "it service desk",
+        "one working day"
+      ],
+      "reply_must_not_include": [
+        "diagnos"
+      ],
+      "ground_truth_reply": "Thank you for letting us know. The IT Service Desk has your ticket about the slow theatre scheduling software and will investigate and confirm. Expect an update within one working day."
+    },
+    {
+      "id": "E05",
+      "message": "\"Please install the updated radiology viewer on the X-ray department workstation.\" - Mr P. Nkosi (Radiology)",
+      "expected_category": "IT & Medical Tech",
+      "expected_priority": "Low",
+      "expected_tone": "warm-administrative",
+      "reply_must_include": [
+        "two working days"
+      ],
+      "reply_must_not_include": [
+        "diagnos"
+      ],
+      "ground_truth_reply": "Thank you for the request. The IT Service Desk will schedule the radiology viewer installation and confirm the time with you. Expect an update within two working days."
+    },
+    {
+      "id": "E06",
+      "message": "\"The generator failed during the night shift and the theatre is on backup power.\" - Sr. M. Peters (Theatre)",
+      "expected_category": "Operations",
+      "expected_priority": "High",
+      "expected_tone": "concise-professional",
+      "reply_must_include": [
+        "close off the affected area",
+        "duty manager"
+      ],
+      "reply_must_not_include": [
+        "diagnos"
+      ],
+      "ground_truth_reply": "Operations Emergency Response is responding to the generator failure. Keep the theatre running on backup power only as long as protocol allows and keep the corridor to the plant room clear. Escalate immediately if backup power shows any instability."
+    },
+    {
+      "id": "E07",
+      "message": "\"There is a water leak in the corridor near the pharmacy entrance.\" - Mr J. Dube (Maintenance)",
+      "expected_category": "Operations",
+      "expected_priority": "Medium",
+      "expected_tone": "warm-administrative",
+      "reply_must_include": [
+        "one working day",
+        "operations & maintenance"
+      ],
+      "reply_must_not_include": [
+        "diagnos"
+      ],
+      "ground_truth_reply": "Thank you for reporting the leak. Operations & Maintenance has your ticket and will send a crew and confirm. Expect an update within one working day; please mark the wet area so nobody slips."
+    },
+    {
+      "id": "E08",
+      "message": "\"The air conditioner in Ward 5 has stopped cooling.\" - Nurse T. Mokoena (Ward 5)",
+      "expected_category": "Operations",
+      "expected_priority": "Medium",
+      "expected_tone": "warm-administrative",
+      "reply_must_include": [
+        "one working day"
+      ],
+      "reply_must_not_include": [
+        "diagnos"
+      ],
+      "ground_truth_reply": "Thank you for letting us know. Operations & Maintenance will check the Ward 5 air conditioner and confirm. Expect an update within one working day."
+    },
+    {
+      "id": "E09",
+      "message": "\"All the light bulbs in Reception need replacing.\" - Ms B. Sithole (Reception)",
+      "expected_category": "Operations",
+      "expected_priority": "Low",
+      "expected_tone": "warm-administrative",
+      "reply_must_include": [
+        "two working days"
+      ],
+      "reply_must_not_include": [],
+      "ground_truth_reply": "Thank you for the note. Operations & Maintenance will schedule the Reception light replacement and confirm the visit. Expect an update within two working days."
+    },
+    {
+      "id": "E10",
+      "message": "\"The kitchen's cold room temperature alarm keeps going off.\" - Ms R. Mahlangu (Nutrition Services)",
+      "expected_category": "Operations",
+      "expected_priority": "Medium",
+      "expected_tone": "warm-administrative",
+      "reply_must_include": [
+        "one working day"
+      ],
+      "reply_must_not_include": [],
+      "ground_truth_reply": "Thank you for flagging the cold room alarm. Operations & Maintenance will inspect the cold room and confirm the cause. Expect an update within one working day; please log the temperature readings until then."
+    },
+    {
+      "id": "E11",
+      "message": "\"We are short two nurses for the night shift tomorrow in the Emergency Ward.\" - Sr. N. Mabaso (Emergency Ward)",
+      "expected_category": "HR",
+      "expected_priority": "High",
+      "expected_tone": "concise-professional",
+      "reply_must_include": [
+        "confirmation within the hour",
+        "cover"
+      ],
+      "reply_must_not_include": [
+        "diagnos"
+      ],
+      "ground_truth_reply": "The HR Duty Officer is sourcing cover for tomorrow's Emergency Ward night shift now. The unit manager will be called with confirmation within the hour. Do not leave the roster unconfirmed before handover."
+    },
+    {
+      "id": "E12",
+      "message": "\"I need to apply for annual leave from 3 to 7 December.\" - Nurse T. Mokoena (Ward 5)",
+      "expected_category": "HR",
+      "expected_priority": "Low",
+      "expected_tone": "warm-administrative",
+      "reply_must_include": [
+        "hr admin team",
+        "two working days"
+      ],
+      "reply_must_not_include": [],
+      "ground_truth_reply": "Thank you for your leave request. The HR Admin Team will process the December dates and confirm with you. Expect an update within two working days."
+    },
+    {
+      "id": "E13",
+      "message": "\"New doctor starting Monday needs onboarding and system access.\" - Ms L. Fourie (HR Office)",
+      "expected_category": "HR",
+      "expected_priority": "Low",
+      "expected_tone": "warm-administrative",
+      "reply_must_include": [
+        "two working days"
+      ],
+      "reply_must_not_include": [],
+      "ground_truth_reply": "Thank you for the heads-up. The HR Admin Team will arrange the Monday onboarding and request system access with IT. Expect confirmation within two working days."
+    },
+    {
+      "id": "E14",
+      "message": "\"There is a discrepancy in my overtime pay on my payslip.\" - Nurse Z. Khumalo (Ward 3)",
+      "expected_category": "HR",
+      "expected_priority": "Low",
+      "expected_tone": "warm-administrative",
+      "reply_must_include": [
+        "two working days"
+      ],
+      "reply_must_not_include": [],
+      "ground_truth_reply": "Thank you for raising the payslip query. The HR Admin Team will review the overtime entries and confirm the outcome with you. Expect an update within two working days."
+    },
+    {
+      "id": "E15",
+      "message": "\"The medical aid claim for patient Mokoena was rejected and needs resubmission before Friday.\" - Ms P. Naidoo (Billing Office)",
+      "expected_category": "Finance",
+      "expected_priority": "Medium",
+      "expected_tone": "warm-administrative",
+      "reply_must_include": [
+        "finance operations",
+        "one working day"
+      ],
+      "reply_must_not_include": [
+        "diagnos"
+      ],
+      "ground_truth_reply": "Thank you for flagging the rejected claim. Finance Operations will review the rejection and prepare the resubmission before Friday. Expect an update within one working day."
+    },
+    {
+      "id": "E16",
+      "message": "\"We need to query an invoice from the medical supplier that overcharged us.\" - Mr S. Patel (Procurement)",
+      "expected_category": "Finance",
+      "expected_priority": "Low",
+      "expected_tone": "warm-administrative",
+      "reply_must_include": [
+        "two working days"
+      ],
+      "reply_must_not_include": [],
+      "ground_truth_reply": "Thank you for the query. Finance Operations will review the supplier invoice and confirm the findings. Expect an update within two working days."
+    },
+    {
+      "id": "E17",
+      "message": "\"Please process the payment for the oxygen supplier urgently, supply stops this week.\" - Mr K. Naidoo (Procurement)",
+      "expected_category": "Finance",
+      "expected_priority": "High",
+      "expected_tone": "concise-professional",
+      "reply_must_include": [
+        "urgent payment",
+        "finance duty officer"
+      ],
+      "reply_must_not_include": [
+        "diagnos"
+      ],
+      "ground_truth_reply": "The Finance Duty Officer is processing the oxygen supplier payment as an urgent release. Confirm the delivery hold with the supplier in writing while the payment completes. Escalate immediately if the supply date is at risk."
+    },
+    {
+      "id": "E18",
+      "message": "\"Budget query: what is left in the ward supplies budget for this quarter?\" - Mr T. Mothibi (Finance Office)",
+      "expected_category": "Finance",
+      "expected_priority": "Low",
+      "expected_tone": "warm-administrative",
+      "reply_must_include": [
+        "two working days"
+      ],
+      "reply_must_not_include": [],
+      "ground_truth_reply": "Thank you for the budget query. Finance Operations will compile the current ward supplies figures and confirm. Expect an update within two working days."
+    },
+    {
+      "id": "E19",
+      "message": "\"Patient Dlamini's account needs a payment plan arrangement.\" - Ms G. Adams (Cashier Office)",
+      "expected_category": "Finance",
+      "expected_priority": "Low",
+      "expected_tone": "warm-administrative",
+      "reply_must_include": [
+        "two working days"
+      ],
+      "reply_must_not_include": [],
+      "ground_truth_reply": "Thank you for the request. Finance Operations will prepare the payment plan options for the account and confirm. Expect an update within two working days."
+    },
+    {
+      "id": "E20",
+      "message": "\"Tender documents for the new ambulance contract are due tomorrow.\" - Adv. M. Sekano (Legal Office)",
+      "expected_category": "Finance",
+      "expected_priority": "Medium",
+      "expected_tone": "warm-administrative",
+      "reply_must_include": [
+        "one working day"
+      ],
+      "reply_must_not_include": [],
+      "ground_truth_reply": "Thank you for the reminder. Finance Operations will coordinate the tender submission and confirm the status with Legal before the deadline. Expect an update within one working day."
+    }
+  ]
+}
