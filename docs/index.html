@@ -97,7 +97,7 @@ body=opener+tk.assigned_to+" has received "+tk.ticket_id+" and will "+WARM[tk.ca
 let flags=["standard-queue"];if(high){flags=["escalated-on-call"];
 if(tk.category==="IT & Medical Tech")flags.push("clinical-equipment-escalation");
 if(tk.category==="Operations")flags.push("area-safety-protocol");}
-return{ticket_id:tk.ticket_id,tone,reply_body:body,safety_flags:flags,generated_by:"template"};}
+return{ticket_id:tk.ticket_id,tone,reply_body:body,safety_flags:flags,generated_by:"template",sender_tone:detectTone(tk.summary||"")};}
 function locate(s){const m=s.match(/\b(Bay \d+|ICU|Theatre \d+|Ward \w+|Room \d+|Bed \d+|Block [A-Z])\b/i);return m?m[1]:"the affected area";}
 function parse(raw){let s=raw.trim();const m=s.match(/[-—–]\s*([A-Z][\w\.\-\s]+?)\s*\((.+?)\)\s*$/);
 let sender="Unspecified hospital staff",body=s;
