@@ -21,3 +21,7 @@ class TicketOut(BaseModel):
     priority: Priority
     summary: str
     assigned_to: str
+
+ # Optional fields for Sprint 1 response generation
+    response: Optional[str] = None
+    tone: Optional[Literal["formal", "friendly", "urgent"]] = None

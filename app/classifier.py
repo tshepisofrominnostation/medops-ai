@@ -22,6 +22,10 @@ CATEGORY_KEYWORDS: dict[Category, dict[str, int]] = {
         "onboarding": 2, "staffing": 2, "roster": 2, "sabbatical": 2, "grievance": 2,
         "disciplinary": 2, "training": 1, "resignation": 3, "payroll": 2, "hr": 3,
         "overtime": 2, "personnel": 2,
+
+        #Employee records and staff-information requests
+        "employee details": 3,"employee information": 3,"personnel details": 3,"staff details": 3,
+        "update my employee": 3,"employee record": 3,
     },
     "Finance": {
         "invoice": 3, "billing": 3, "payment": 3, "claim": 3, "budget": 3,
@@ -41,7 +45,7 @@ DEFAULT_CATEGORY: Category = "Operations"  # operations catch-all for unmatched 
 
 def classify(message: str) -> tuple[Category, float]:
     """Return (category, confidence). Confidence = top score share of total."""
-    text = message.lower()
+    text = message.lower() #convert everything to lowercase so matching is case-insensitive
     scores = {}
     for cat, kws in CATEGORY_KEYWORDS.items():
         s = 0

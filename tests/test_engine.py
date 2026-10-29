@@ -6,7 +6,7 @@ from app.models import TicketOut
 from app.pipeline import process_ticket
 from app.prioritizer import prioritize
 
-REQUIRED_KEYS = {"ticket_id", "timestamp", "sender", "category", "priority", "summary", "assigned_to"}
+REQUIRED_KEYS = {"ticket_id", "timestamp", "sender", "category", "priority", "summary", "assigned_to", "response", "tone"}
 
 
 def process_fresh(tmp_path, monkeypatch, message, sender=None):
