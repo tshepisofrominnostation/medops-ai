@@ -87,7 +87,16 @@ pytest tests/ -q
 
 ## Live demo and parity
 
-`docs/` holds a static console (GitHub Pages) with `engine.js`, a JavaScript port of the Python engine. The two were parity-tested on 12 scenarios across all four departments: identical category, priority, assignee and sender parsing on every case.
+`docs/` holds the live console (GitHub Pages): a self-contained single file running the full loop (classify -> prioritise -> drafted reply) with the same rules as the Python backend, parity-tested 20/20 on the evaluation set.
+
+## Team integration (Sprint 1)
+
+Sprint 1 merged the team's work into one coherent engine:
+
+- **Xoli (PR #25)** contributed email-style `From:` header parsing (`app/parser.py`) and message-based tone detection (`app/tone_detector.py`). Tone detection now stamps every drafted reply with the sender's register and gives friendly senders a warmer opener. Her keyword matching was hardened to word boundaries so "hi" no longer matches inside "this" and "down" no longer matches inside "download".
+- **Anastacia (PR #24)** contributed an initial priority-based responder. Its intent (a fast acknowledgement) is delivered by the reply writer's template engine, which additionally enforces tone rules, the medical-advice guardrail and the LLM fallback.
+- **Tshepiso (PR #21)** contributed the reply writer, the 20-case evaluation harness and the hardened API.
+- Detection stays separate from priority: priority answers "how urgent is this for the hospital"; tone answers "how is the sender writing". A polite message can still be an emergency.
 
 ## Test coverage
 

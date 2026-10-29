@@ -15,6 +15,7 @@ from pydantic import BaseModel, Field
 
 from .models import TicketOut
 from .parser import extract_location
+from .tone_detector import detect_tone
 
 Tone = Literal["concise-professional", "warm-administrative"]
 
@@ -27,6 +28,8 @@ class DraftedReply(BaseModel):
     safety_flags: list[str]
     generated_by: str
     model: Optional[str] = None
+    # Detected register of the incoming message (Xoli's tone signal, team PR #25).
+    sender_tone: Optional[str] = None
 
 
 # Words that must NEVER appear in a generated reply: the assistant handles
@@ -114,8 +117,13 @@ class TemplateReplyEngine:
 
     def _routine(self, t: TicketOut) -> str:
         window = "one working day" if t.priority == "Medium" else "two working days"
+        opener = (
+            "Thank you for reaching out."
+            if detect_tone(t.summary) == "friendly"
+            else "Thank you for logging this."
+        )
         return (
-            f"Thank you for logging this. {t.assigned_to} has received {t.ticket_id} and will "
+            f"{opener} {t.assigned_to} has received {t.ticket_id} and will "
             f"{self.WARM_ACTIONS[t.category]}. Expect an update within {window}; you will "
             "get written confirmation once it is done. Please reply to this ticket with "
             "any extra detail that will help the team."
@@ -212,8 +220,15 @@ class ReplyWriter:
         if self.llm.configured:
             reply = self.llm.draft(ticket)
             if reply is not None:
-                return reply
+                return self._stamp(reply, ticket)
             fallback = self.template.draft(ticket)
             fallback.generated_by = "template (llm-fallback)"
-            return fallback
-        return self.template.draft(ticket)
+            return self._stamp(fallback, ticket)
+        return self._stamp(self.template.draft(ticket), ticket)
+
+    @staticmethod
+    def _stamp(reply: DraftedReply, ticket: TicketOut) -> DraftedReply:
+        """Attach the detected sender tone to every draft, whichever engine wrote it."""
+        if reply.sender_tone is None:
+            reply.sender_tone = detect_tone(ticket.summary)
+        return reply

@@ -2,6 +2,8 @@
 import re
 
 SENDER_RE = re.compile(r'[-—–]\s*([A-Z][\w\.\-\s]+?)\s*[–—-]*\s*\((.+?)\)\s*$', re.M)
+# Email-style sender header — adopted from Xoli's contribution (team PR #25).
+FROM_RE = re.compile(r"^\s*From:\s*(.+?)\s*$", re.IGNORECASE | re.MULTILINE)
 SIGNED_RE = re.compile(r'[-—–]\s*([A-Z][\w\.\-\s]+?)\s*\((.+?)\)\s*$')
 
 
@@ -10,6 +12,11 @@ def parse_sender(raw: str, override: str | None = None) -> tuple[str, str]:
     raw = raw.strip()
     if override:
         return _dequote(raw), override
+    m = FROM_RE.search(raw)
+    if m:
+        sender = m.group(1).strip()
+        body = _dequote(FROM_RE.sub("", raw, count=1).strip())
+        return body, sender
     m = SIGNED_RE.search(raw)
     if m:
         name, dept = m.group(1).strip(), m.group(2).strip()
