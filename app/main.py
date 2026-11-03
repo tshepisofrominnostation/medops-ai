@@ -1,11 +1,13 @@
 """FastAPI service - hardened intake, descriptive errors, reply drafting with fallback."""
 import re
+from typing import Optional
 
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from pydantic import ValidationError
 
+from .analytics import current_analytics
 from .models import TicketIn, TicketOut
 from .pipeline import process_ticket
 from .persistence import load_all
@@ -94,3 +96,12 @@ def draft_reply(payload: TicketIn):
 @app.get("/tickets")
 def list_tickets():
     return load_all()
+
+
+@app.get("/analytics")
+def analytics(start: Optional[str] = None, end: Optional[str] = None):
+    """Ticket analytics for the dashboard (S2-2) and PDF report (S2-3).
+
+    Optional inclusive ISO-date window: /analytics?start=2026-11-01&end=2026-11-06
+    """
+    return current_analytics(start=start, end=end)
