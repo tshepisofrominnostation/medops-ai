@@ -150,3 +150,24 @@ empty or whitespace messages, too-short text, oversized text (> 2000 chars),
 control characters, malformed JSON bodies and missing fields all get clear
 error details (`app/main.py`). Unexpected failures fall back to a clean
 JSON 500. Tests: `tests/test_api_robustness.py`.
+
+## Analytics contract (S2-1, Sprint 2)
+
+`GET /analytics?start=YYYY-MM-DD&end=YYYY-MM-DD` (window optional, inclusive) returns:
+
+```json
+{
+  "total_tickets": 5,
+  "date_range": {"first": "2026-11-02", "last": "2026-11-04"},
+  "window": {"start": null, "end": null},
+  "by_category": {"IT & Medical Tech": 2, "HR": 1, "Finance": 1, "Operations": 1},
+  "by_priority": {"High": 2, "Medium": 2, "Low": 1},
+  "by_department": {"IT & Biomedical Engineering on-call": 1, "...": 1},
+  "by_day": [{"date": "2026-11-02", "count": 2}],
+  "rates": {"high_priority_share": 0.4, "tickets_per_day": 1.67}
+}
+```
+
+All four categories and all three priorities are always present, zero-filled.
+Add fields freely; never rename or remove one without telling the dashboard
+(S2-2) and PDF report (S2-3) owners.
