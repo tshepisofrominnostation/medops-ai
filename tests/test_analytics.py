@@ -58,3 +58,33 @@ def test_window_excludes_undated_records():
     assert d["total_tickets"] == 5
     d_all = build_analytics(rows)
     assert d_all["total_tickets"] == 6
+
+
+def test_by_day_supports_timestamp_field():
+    rows = [
+        {
+            "ticket_id": "MED-101",
+            "category": "HR",
+            "priority": "Low",
+            "assigned_to": "HR Admin Team",
+            "timestamp": "2026-10-28T11:26:16+02:00",
+        },
+        {
+            "ticket_id": "MED-102",
+            "category": "Finance",
+            "priority": "High",
+            "assigned_to": "Finance Duty Officer",
+            "timestamp": "2026-10-28T14:30:00+02:00",
+        },
+    ]
+
+    d = build_analytics(rows)
+
+    assert d["total_tickets"] == 2
+    assert d["by_day"] == [
+        {"date": "2026-10-28", "count": 2}
+    ]
+    assert d["date_range"] == {
+        "first": "2026-10-28",
+        "last": "2026-10-28",
+    }

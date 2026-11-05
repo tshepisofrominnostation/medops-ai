@@ -14,8 +14,12 @@ PRIORITIES = ("High", "Medium", "Low")
 
 
 def _record_date(rec: dict) -> Optional[str]:
-    """Best-effort date for a record: created_date, else extracted from ticket_id."""
-    stamp = rec.get("created_date") or rec.get("date")
+    """Extract the ticket date from the available timestamp fields"""
+    stamp = (
+        rec.get("created_date")
+        or rec.get("date")
+        or rec.get("timestamp")
+    )
     return stamp[:10] if isinstance(stamp, str) and len(stamp) >= 10 else None
 
 
