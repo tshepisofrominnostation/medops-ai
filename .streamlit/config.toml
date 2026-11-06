@@ -1,10 +1,14 @@
+# MedOps AI console theme. Kept in the repo so a hosted deploy looks like the local one.
 [theme]
 base = "dark"
-primaryColor = "#38A8F5"
+primaryColor = "#38a8f5"
 backgroundColor = "#071426"
 secondaryBackgroundColor = "#102641"
-textColor = "#F3F7FC"
+textColor = "#f3f7fc"
 font = "sans serif"
 
 [server]
 headless = true
+
+[browser]
+gatherUsageStats = false
