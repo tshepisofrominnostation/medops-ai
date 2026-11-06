@@ -58,3 +58,61 @@ def test_window_excludes_undated_records():
     assert d["total_tickets"] == 5
     d_all = build_analytics(rows)
     assert d_all["total_tickets"] == 6
+
+
+def test_by_day_supports_timestamp_field():
+    rows = [
+        {
+            "ticket_id": "MED-101",
+            "category": "HR",
+            "priority": "Low",
+            "assigned_to": "HR Admin Team",
+            "timestamp": "2026-10-28T11:26:16+02:00",
+        },
+        {
+            "ticket_id": "MED-102",
+            "category": "Finance",
+            "priority": "High",
+            "assigned_to": "Finance Duty Officer",
+            "timestamp": "2026-10-28T14:30:00+02:00",
+        },
+    ]
+
+    d = build_analytics(rows)
+
+    assert d["total_tickets"] == 2
+    assert d["by_day"] == [
+        {"date": "2026-10-28", "count": 2}
+    ]
+    assert d["date_range"] == {
+        "first": "2026-10-28",
+        "last": "2026-10-28",
+    }
+
+
+# --- regression: persisted tickets use the `timestamp` key ---
+
+def _persisted(tid, cat, pri, day_iso, dept="Ops"):
+    return {"ticket_id": tid, "category": cat, "priority": pri,
+            "assigned_to": dept, "timestamp": day_iso}
+
+
+def test_timestamp_records_are_grouped_by_day():
+    recs = [_persisted("MED-1", "IT & Medical Tech", "High", "2026-11-04T09:00:00+00:00"),
+            _persisted("MED-2", "HR", "Low", "2026-11-04T15:30:00+00:00"),
+            _persisted("MED-3", "Finance", "Medium", "2026-11-05T08:10:00+00:00")]
+    out = build_analytics(recs)
+    days = {d["date"]: d["count"] for d in out["by_day"]}
+    assert days == {"2026-11-04": 2, "2026-11-05": 1}
+    assert out["date_range"]["first"] == "2026-11-04"
+    assert out["rates"]["tickets_per_day"] > 0
+
+
+def test_date_window_keeps_timestamp_records_inside_it():
+    recs = [_persisted("MED-1", "IT & Medical Tech", "High", "2026-11-03T09:00:00+00:00"),
+            _persisted("MED-2", "HR", "Low", "2026-11-05T09:00:00+00:00")]
+    inside = build_analytics(recs, start="2026-11-04", end="2026-11-06")
+    assert inside["total_tickets"] == 1
+    assert inside["by_day"] == [{"date": "2026-11-05", "count": 1}]
+    outside = build_analytics(recs, start="2026-01-01", end="2026-01-31")
+    assert outside["total_tickets"] == 0

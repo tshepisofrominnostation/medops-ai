@@ -13,10 +13,21 @@ CATEGORIES = ("IT & Medical Tech", "HR", "Finance", "Operations")
 PRIORITIES = ("High", "Medium", "Low")
 
 
+DATE_KEYS = ("created_date", "date", "timestamp")
+
+
 def _record_date(rec: dict) -> Optional[str]:
-    """Best-effort date for a record: created_date, else extracted from ticket_id."""
-    stamp = rec.get("created_date") or rec.get("date")
-    return stamp[:10] if isinstance(stamp, str) and len(stamp) >= 10 else None
+    """Best-effort day for a record.
+
+    Persisted tickets carry `timestamp` (ISO-8601, e.g. 2026-11-05T09:03:10+00:00),
+    while callers building analytics by hand tend to pass `created_date` or `date`.
+    All three are accepted, in that order of preference.
+    """
+    for key in DATE_KEYS:
+        stamp = rec.get(key)
+        if isinstance(stamp, str) and len(stamp) >= 10:
+            return stamp[:10]
+    return None
 
 
 def build_analytics(records: list[dict], start: Optional[str] = None,
