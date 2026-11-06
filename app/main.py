@@ -8,6 +8,10 @@ from fastapi.responses import JSONResponse
 from pydantic import ValidationError
 
 from .analytics import current_analytics
+from .compliance import screen as screen_text
+from .forecast import forecast_from_analytics
+from .notify import notify_assignment
+from .report import write_report
 from .models import TicketIn, TicketOut
 from .pipeline import process_ticket
 from .persistence import load_all
@@ -76,7 +80,9 @@ def create_ticket(payload: TicketIn):
     error = validate_message(payload.message)
     if error:
         raise HTTPException(status_code=400, detail=error)
-    return process_ticket(payload.message, payload.sender)
+    ticket = process_ticket(payload.message, payload.sender)
+    alert = notify_assignment(ticket.model_dump())
+    return ticket
 
 
 @app.post("/replies")
@@ -90,7 +96,9 @@ def draft_reply(payload: TicketIn):
         reply = writer.draft(ticket)
     except ValidationError:
         raise HTTPException(status_code=503, detail="Reply drafting temporarily unavailable")
-    return {"ticket": ticket, "reply": reply}
+    # S3-2: screen the drafted reply before it can ever be sent
+    body = getattr(reply, "reply_body", "") or ""
+    return {"ticket": ticket, "reply": reply, "compliance": screen_text(body)}
 
 
 @app.get("/tickets")
@@ -105,3 +113,29 @@ def analytics(start: Optional[str] = None, end: Optional[str] = None):
     Optional inclusive ISO-date window: /analytics?start=2026-11-01&end=2026-11-06
     """
     return current_analytics(start=start, end=end)
+
+
+@app.get("/forecast")
+def forecast(horizon: int = 7):
+    """S3-1: ticket surge forecast with a backtested MAE, not a bare number."""
+    return forecast_from_analytics(current_analytics(), horizon=horizon)
+
+
+@app.post("/compliance")
+def compliance(payload: dict):
+    """S3-2: screen any text for identifiers, clinical advice and promises."""
+    text = (payload or {}).get("text", "")
+    return screen_text(text)
+
+
+@app.get("/report.pdf")
+def report_pdf(department: Optional[str] = None):
+    """S2-3: one-click PDF summary, optionally scoped to one department."""
+    from fastapi.responses import FileResponse
+    import tempfile, pathlib
+    out = pathlib.Path(tempfile.mkdtemp()) / "summary.pdf"
+    info = write_report(load_all(), str(out), department)
+    if not info["pdf"]:
+        raise HTTPException(status_code=503, detail="PDF engine unavailable; HTML written instead")
+    name = f"medops-summary-{(department or 'all').lower().replace(' ', '-')}.pdf"
+    return FileResponse(info["pdf"], media_type="application/pdf", filename=name)
