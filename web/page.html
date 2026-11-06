@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MedOps AI Platform — Hospital Operations Assistant</title>
+<style>
+:root{--bg:#0a1628;--panel:#0f2035;--panel2:#13263e;--line:#1e3a5f;--cyan:#22d3ee;--mut:#94a3b8;
+ --hi:#7f1d1d;--hi-fg:#fca5a5;--med:#78350f;--med-fg:#fcd34d;--low:#064e3b;--low-fg:#6ee7b7}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:#e2e8f0;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;line-height:1.5}
+.wrap{max-width:1100px;margin:0 auto;padding:28px 20px 72px}
+h1{font-size:28px;margin:6px 0 6px;letter-spacing:-.02em}
+h2{font-size:18px;margin:0 0 4px}
+h3{font-size:15px;margin:0 0 6px}
+p{margin:0 0 10px}
+.eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);font-weight:700}
+.sub{color:var(--mut);font-size:14px;max-width:74ch}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;margin-bottom:16px}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.grow{flex:1 1 240px}
+.muted{color:var(--mut)}
+.small{font-size:12px}
+.tiny{font-size:11px}
+.btn{background:var(--cyan);color:#06222e;font-weight:700;padding:10px 20px;border:0;border-radius:8px;cursor:pointer;font-size:14px}
+.btn:hover{filter:brightness(1.08)}
+.btn2{background:transparent;border:1px solid var(--line);color:#e2e8f0;padding:9px 16px;border-radius:8px;cursor:pointer;font-size:13px}
+.btn2:hover{border-color:var(--cyan)}
+.btn2.on{background:var(--cyan);border-color:var(--cyan);color:#06222e;font-weight:700}
+.linkbtn{background:none;border:0;color:var(--cyan);cursor:pointer;font-size:12px;padding:0;text-decoration:underline}
+textarea{background:var(--panel2);border:1px solid var(--line);border-radius:8px;color:#e2e8f0;width:100%;padding:12px;font:14px/1.5 inherit;resize:vertical}
+textarea:focus{outline:none;border-color:var(--cyan)}
+.chip{display:inline-block;padding:2px 10px;border-radius:999px;font-size:12px;font-weight:700;margin:0 6px 6px 0}
+.hi{background:var(--hi);color:var(--hi-fg)}
+.med{background:var(--med);color:var(--med-fg)}
+.low{background:var(--low);color:var(--low-fg)}
+.neutral{background:var(--panel2);color:#cbd5e1;border:1px solid var(--line)}
+.cat{background:#0c3b52;color:#7dd3fc}
+.warn{background:#4a1d1d;color:#fca5a5;border:1px solid #7f1d1d}
+.tabs{display:flex;gap:8px;margin:22px 0 18px;border-bottom:1px solid var(--line);padding-bottom:0;flex-wrap:wrap}
+.tab{background:none;border:0;color:var(--mut);font:600 14px inherit;padding:10px 4px;margin-right:20px;cursor:pointer;border-bottom:2px solid transparent}
+.tab.on{color:#fff;border-bottom-color:var(--cyan)}
+.panel{display:none}
+.panel.on{display:block}
+pre{background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:12px;overflow:auto;font-size:12px;line-height:1.55;margin:8px 0 0}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.kpi .label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);font-weight:700}
+.kpi .value{font-size:26px;font-weight:700;margin-top:6px;letter-spacing:-.02em}
+.kpi .note{font-size:12px;color:var(--mut);margin-top:4px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);border-bottom:1px solid var(--line);padding:8px 8px}
+td{padding:8px;border-bottom:1px solid #16283f;vertical-align:top}
+tr:last-child td{border-bottom:0}
+.bar{height:8px;background:var(--cyan);border-radius:4px}
+.bartrack{background:#16283f;border-radius:4px;overflow:hidden;height:8px}
+.dept{display:grid;grid-template-columns:1fr auto;gap:4px 10px;margin-bottom:10px;font-size:13px}
+.dept .name{color:#dbe6f2}
+.dept .val{color:var(--mut);font-variant-numeric:tabular-nums}
+.dept .track{grid-column:1/-1}
+.finding{background:var(--panel2);border:1px solid var(--line);border-left:3px solid var(--cyan);border-radius:8px;padding:12px 14px;margin-bottom:10px}
+.finding.watch{border-left-color:#f59e0b}
+.finding.act{border-left-color:#ef4444}
+.finding.unknown{border-left-color:#64748b}
+.finding .ev{margin-top:6px}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.hide{display:none}
+.empty{color:var(--mut);font-size:13px;padding:10px 0}
+a{color:var(--cyan)}
+.footer{margin-top:28px;color:var(--mut);font-size:12px;border-top:1px solid var(--line);padding-top:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="eyebrow">Hospital operations · MedOps AI Platform</div>
+  <h1>MedOps AI — classify → prioritise → <span style="color:var(--cyan)">learn from the week</span></h1>
+  <p class="sub">One page, three steps: log a staff request and get a classified, prioritised ticket with a drafted
+  reply; every ticket is stored with its timestamps and response times; the dashboard and the weekly summary are
+  computed from that stored data, not typed in by hand.</p>
+
+  <div class="tabs" role="tablist">
+    <button class="tab on" data-tab="log" role="tab" aria-selected="true">1 · Log a request</button>
+    <button class="tab" data-tab="dash" role="tab" aria-selected="false">2 · Dashboard</button>
+    <button class="tab" data-tab="weekly" role="tab" aria-selected="false">3 · Weekly summary</button>
+  </div>
+
+  <!-- ============ TAB 1: request → ticket → reply ============ -->
+  <section class="panel on" id="panel-log">
+
+    <div class="card">
+      <h2>Log a staff request</h2>
+      <p class="sub">Paste it the way it arrives: an email, a WhatsApp, a note at the ward station. The classifier
+      reads the wording, not just keywords, and tells you how sure it is.</p>
+      <textarea id="msg" rows="4" placeholder='e.g. "The patient monitoring terminal in Bay 3 keeps disconnecting mid-surgery. This is unacceptable, we nearly lost a patient. Dr. S. Khumalo (Emergency Ward)"'></textarea>
+      <div class="row" style="margin-top:10px">
+        <button class="btn" id="submit">Classify &amp; draft reply</button>
+        <span class="small muted" id="hint">Nothing is sent anywhere: the model runs in this page.</span>
+      </div>
+      <div id="quick" class="row" style="margin-top:12px"></div>
+    </div>
+
+    <div class="card hide" id="result">
+      <h2>Ticket &amp; drafted reply</h2>
+      <div id="verdict"></div>
+      <div id="replybox" style="margin-top:14px"></div>
+      <div style="margin-top:14px">
+        <button class="linkbtn" id="togglejson">show the stored record</button>
+        <pre id="json" class="hide"></pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="row" style="justify-content:space-between">
+        <div>
+          <h2>Ticket log</h2>
+          <p class="small muted" id="logmeta">Everything you log here is stored in this browser.</p>
+        </div>
+        <div class="row">
+          <button class="btn2" id="demo">Reset to sample history</button>
+          <button class="btn2" id="exportcsv">Download CSV</button>
+          <button class="btn2" id="clearlog">Clear my tickets</button>
+        </div>
+      </div>
+      <div id="log"></div>
+    </div>
+  </section>
+
+  <!-- ============ TAB 2: dashboard ============ -->
+  <section class="panel" id="panel-dash">
+    <div class="row" style="justify-content:space-between;margin-bottom:12px">
+      <div>
+        <h2 style="margin:0">Operations dashboard</h2>
+        <p class="small muted" id="dashwindow" style="margin:4px 0 0"></p>
+      </div>
+      <div class="row">
+        <button class="btn2 on" data-window="7">This week</button>
+        <button class="btn2" data-window="30">Last 30 days</button>
+        <button class="btn2" data-window="all">All time</button>
+      </div>
+    </div>
+
+    <div class="grid" id="kpis"></div>
+
+    <div class="card" style="margin-top:16px">
+      <h3>Volume by department</h3>
+      <p class="small muted">Where the work actually lands, once priority has decided who answers.</p>
+      <div id="deptchart"></div>
+    </div>
+
+    <div class="card">
+      <h3>Category mix</h3>
+      <p class="small muted">What the requests were about, from the classifier's own labels.</p>
+      <div id="catchart"></div>
+    </div>
+
+    <div class="card">
+      <h3>First response against target</h3>
+      <p class="small muted">Median minutes to first response by priority, against the target line. Targets are
+      proposed internal targets, not hospital policy.</p>
+      <div id="slachart"></div>
+    </div>
+
+    <div class="card">
+      <h3>Tickets in this window</h3>
+      <div id="dashtable"></div>
+    </div>
+  </section>
+
+  <!-- ============ TAB 3: weekly summary ============ -->
+  <section class="panel" id="panel-weekly">
+    <div class="card">
+      <div class="row" style="justify-content:space-between">
+        <div>
+          <h2 style="margin:0">Weekly summary</h2>
+          <p class="small muted" id="weekwindow" style="margin:4px 0 0"></p>
+        </div>
+        <div class="row">
+          <button class="btn2" id="copy">Copy summary</button>
+          <button class="btn2" id="download">Download JSON</button>
+        </div>
+      </div>
+      <p id="headline" style="margin-top:14px;font-size:15px"></p>
+      <p class="tiny muted">Generated from the stored tickets by counting them. No language model writes these
+      sentences, so a number cannot be invented; where the sample is too small to support a claim, it says so.</p>
+    </div>
+    <div id="findings"></div>
+  </section>
+
+  <div class="footer">
+    <span id="footmeta"></span>
+    <span> · </span>
+    <a href="artifacts/report.pdf">week report (PDF)</a>
+    <span> · </span>
+    <a href="https://github.com/tshepisofrominnostation/medops-ai">source</a>
+    <span> · engine parity-tested against the Python service</span>
+  </div>
+</div>
+
+<script id="bundle" type="application/json">__BUNDLE__</script>
+<script>__APP_JS__</script>
+</body>
+</html>

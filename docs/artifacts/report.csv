@@ -1,0 +1,30 @@
+section,metric,value
+meta,scope,All departments
+meta,window_start,2026-10-31
+meta,window_end,2026-11-06
+totals,tickets,32
+totals,undated_tickets,0
+category,IT & Medical Tech,15
+category,HR,9
+category,Finance,2
+category,Operations,6
+priority,High,17
+priority,Medium,2
+priority,Low,13
+status,Open,31
+status,In Progress,1
+status,Resolved,0
+department,IT & Biomedical Engineering on-call,11
+department,HR Admin Team,7
+department,Operations & Maintenance Team,4
+department,IT Service Desk,4
+department,HR Duty Officer,2
+department,Finance Duty Officer,2
+department,Operations Emergency Response,2
+response_time,measured_tickets,1
+response_time,unmeasured_tickets,31
+response_time,mean_minutes,42.82
+response_time,median_minutes,42.82
+response_time,worst_minutes,42.82
+sla,attainment,0.0
+daily_volume,2026-11-06,32

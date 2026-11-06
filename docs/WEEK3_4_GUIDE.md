@@ -423,7 +423,8 @@ product next to the Streamlit console. It is one app:
 * and the tiles, the mix charts and the ticket table below are recomputed from the
   same store, so the number you just changed is the number you can see.
 
-Live at <https://tshepisofrominnostation.github.io/medops-ai/console/>.
+Live at <https://tshepisofrominnostation.github.io/medops-ai/> (the console and the
+dashboard are now one page; see [WEEK3_ANALYTICS.md](WEEK3_ANALYTICS.md)).
 
 ### How the two halves stay honest
 
@@ -487,16 +488,16 @@ only in the console (`streamlit run console.py`, no API server needed).
 
 ### Publishing
 
-`docs/console/` is generated: GitHub Pages serves it from `main`/`docs`, so the link
+`docs/index.html` is generated: GitHub Pages serves it from `main`/`docs`, so the link
 rebuilds whenever `main` moves. Do not hand-edit it.
 
 ```bash
-python scripts/build_pages.py            # writes docs/console/ + artifacts
+python scripts/build_pages.py            # writes docs/index.html + artifacts/
 git add docs/console && git commit -m "chore(pages): regenerate console page"
 ```
 
 The ticket explorer takes deep links, so you can send someone a view rather than
-describe it: `.../console/?q=biomedical&pri=High` or `.../console/?cat=HR&status=Open`.
+describe it in the dashboard's table and filters.
 
 One caveat for the pitch: the seeded store on that page is synthetic (simulated response
 gaps, real classifications). Tickets you generate are your own input, classified by the
