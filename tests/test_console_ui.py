@@ -138,3 +138,60 @@ def test_console_explains_a_dead_api_instead_of_showing_empty_charts(monkeypatch
     md = " ".join(m.value for m in at.markdown)
     assert "Cannot reach the MedOps API" in md
     assert "uvicorn app.main:app" in md
+
+
+# ---------------------------------------------------------------------------
+# Single-service mode: the console deployed as one Streamlit app, no API server.
+# ---------------------------------------------------------------------------
+
+def test_in_process_mode_needs_no_api_server(monkeypatch):
+    """Unsetting MEDOPS_API_URL runs the engine in-process, so the UI can be hosted
+    alone. Same routes, same numbers, just a local transport."""
+    monkeypatch.delenv("MEDOPS_API_URL", raising=False)
+    monkeypatch.setenv("MEDOPS_DB_PATH", str(_fresh_store()))
+    at = AppTest.from_file(CONSOLE, default_timeout=180).run()
+    assert not at.exception, [e.value for e in at.exception]
+    md = " ".join(m.value for m in at.markdown)
+    assert "Single-service mode" in md
+    assert any(c.value == "API: `in-process`" for c in at.caption)
+
+
+def test_in_process_intake_works(monkeypatch):
+    monkeypatch.delenv("MEDOPS_API_URL", raising=False)
+    monkeypatch.setenv("MEDOPS_DB_PATH", str(_fresh_store()))
+    at = AppTest.from_file(CONSOLE, default_timeout=180).run()
+    at.text_area[0].set_value('"The ventilator alarm panel in ICU is not responding." '
+                              '- Sr. T. Mokoena (ICU)')
+    [b for b in at.button if "Classify" in b.label][0].click()
+    at.run()
+    assert not at.exception, [e.value for e in at.exception]
+    md = " ".join(m.value for m in at.markdown)
+    assert "Drafted reply" in md
+    assert "IT & Medical Tech" in md
+
+
+def test_demo_history_button_only_on_an_empty_store(monkeypatch):
+    """A hosted demo must not present synthetic data as if it were pre-existing fact."""
+    monkeypatch.delenv("MEDOPS_API_URL", raising=False)
+    store = _fresh_store()
+    monkeypatch.setenv("MEDOPS_DB_PATH", str(store))
+
+    at = AppTest.from_file(CONSOLE, default_timeout=180).run()
+    buttons = [b for b in at.button if b.label == "Load demo history"]
+    assert buttons, "empty store should offer the demo loader"
+
+    buttons[0].click()
+    at.run()
+    assert not at.exception, [e.value for e in at.exception]
+    assert not any(b.label == "Load demo history" for b in at.button)
+
+    import json
+    rows = json.loads(store.read_text())
+    assert len(rows) > 50
+    assert all(r.get("synthetic") is True for r in rows), "demo data must stay labelled"
+
+
+def _fresh_store():
+    import tempfile
+    from pathlib import Path
+    return Path(tempfile.mkdtemp(prefix="medops-ui-")) / "tickets.json"

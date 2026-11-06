@@ -9,6 +9,7 @@ Intelligent hospital operations platform (Sprint 1, Week 1): a FastAPI backend t
 | Surface | For | Command |
 |---|---|---|
 | **Operations console** (`console.py`) | Doing the Week 3 work: log a request, work the queue, read the week, generate reports | `streamlit run console.py` |
+| | Runs **without a separate API**: with `MEDOPS_API_URL` unset the console calls the same FastAPI app in-process, so it deploys as a single Streamlit app | |
 | **Analytics dashboard** (`dashboard.py`) | Read-only monitoring of the same numbers | `streamlit run dashboard.py` |
 | **API** (`app/main.py`) | Everything else, and the source of every figure on both screens | `uvicorn app.main:app --reload` |
 
