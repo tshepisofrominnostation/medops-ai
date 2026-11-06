@@ -23,6 +23,10 @@ STATUSES = ("Open", "In Progress", "Resolved")
 # policy; the dashboard labels them as targets, not as commitments.
 SLA_TARGET_MINUTES = {"High": 15, "Medium": 120, "Low": 480}
 
+# Resolution-time targets in minutes, by priority, for the weekly report's second
+# compliance column. Same status as the response targets: proposed, stated once.
+RESOLUTION_TARGET_MINUTES = {"High": 240, "Medium": 480, "Low": 1440}
+
 
 class LifecycleError(ValueError):
     """Raised for an unknown ticket or an invalid transition."""

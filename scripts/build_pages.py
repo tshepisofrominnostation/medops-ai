@@ -14,12 +14,18 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
+
+# Published artifacts describe the committed sample history. This must be set before
+# anything imports app.persistence, which reads the path once at import time: setting it
+# later silently leaves the service pointed at this machine's runtime store.
+os.environ["MEDOPS_DB_PATH"] = str(ROOT / "data" / "demo_tickets.json")
 WEB = ROOT / "web"
 
 # In order: the data layer, the engine, the view. Each file attaches itself to window.
@@ -77,7 +83,13 @@ def _retire_console_page(out_dir: Path) -> None:
 
 
 def _write_artifacts(out_dir: Path) -> None:
-    """The Week 4 report, rendered from the committed store, next to the page."""
+    """The reports, rendered from the *committed sample history*, next to the page.
+
+    The service's default store is the runtime one, which holds whatever that machine
+    happened to process. Published artifacts must match the 103 tickets the page is
+    built from, so the build points the service at the seed explicitly rather than
+    inheriting the environment it was launched in.
+    """
     try:
         from fastapi.testclient import TestClient
 
@@ -90,7 +102,7 @@ def _write_artifacts(out_dir: Path) -> None:
     target = out_dir / "artifacts"
     target.mkdir(parents=True, exist_ok=True)
     for name, path in (("report.pdf", "/report.pdf"), ("report.csv", "/report.csv"),
-                       ("report.json", "/report")):
+                       ("report.json", "/report"), ("weekly_report.pdf", "/report/weekly.pdf")):
         try:
             resp = client.get(path)
             if resp.status_code == 200:
