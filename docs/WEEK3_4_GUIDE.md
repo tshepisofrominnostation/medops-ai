@@ -410,3 +410,38 @@ Tick these before you say Week 4 is done.
 - **Not a prediction engine.** The forecast is a planning aid with a published backtest
   error, and it says when it has too little history to quote one (R3).
 - **Not load tested.** Single-user throughput is all we know.
+
+---
+
+## 9. Publishing the shareable page
+
+`docs/console/` is a generated page: GitHub Pages serves it from `main`/`docs`, so
+<https://tshepisofrominnostation.github.io/medops-ai/console/> is rebuilt whenever
+`main` moves. Do not hand-edit it; regenerate it.
+
+```bash
+python scripts/build_pages.py            # writes docs/console/ + artifacts
+git add docs/console && git commit -m "chore(pages): regenerate console page"
+```
+
+It runs `app.main:app` in-process against `data/demo_tickets.json`, so every number on
+the page comes from the engine. If you regenerate after changing the engine, the page
+and the report move together, which is the point.
+
+What is on it: five KPI tiles, the executive summary and the engine that wrote it,
+findings with their evidence and confidence, category and priority mix, actual versus
+target response times, 21 days of volume, a searchable ticket explorer, the
+patient-data screen over the six R4 phrasings, live classifications against the
+labelled set, and the week's PDF, CSV and JSON.
+
+The ticket explorer takes deep links, so you can send someone a view rather than
+describe it:
+
+```
+.../console/?q=biomedical&pri=High
+.../console/?cat=HR&status=Open
+```
+
+Two honest notes for the pitch: the store on that page is synthetic (simulated time
+gaps, real classifications), and it is a snapshot, not a live store. The live console
+is `streamlit run console.py`, either locally or on a host you sign in to.
