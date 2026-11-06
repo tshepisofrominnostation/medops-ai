@@ -4,6 +4,17 @@
 
 Intelligent hospital operations platform (Sprint 1, Week 1): a FastAPI backend that ingests raw operational requests from hospital staff, classifies them into the correct department, assigns dynamic priority, and returns a strict structured JSON ticket that is persisted to a local database.
 
+## Two surfaces, one engine
+
+| Surface | For | Command |
+|---|---|---|
+| **Operations console** (`console.py`) | Doing the Week 3 work: log a request, work the queue, read the week, generate reports | `streamlit run console.py` |
+| **Analytics dashboard** (`dashboard.py`) | Read-only monitoring of the same numbers | `streamlit run dashboard.py` |
+| **API** (`app/main.py`) | Everything else, and the source of every figure on both screens | `uvicorn app.main:app --reload` |
+
+The Week 3 and Week 4 walkthrough, with expected outputs and a completion checklist,
+is in **[docs/WEEK3_4_GUIDE.md](docs/WEEK3_4_GUIDE.md)**.
+
 ## Architecture
 
 ```
@@ -29,6 +40,56 @@ Hospital staff (message + sender)
 ```
 
 Modular by design: every stage is an independent module with a single responsibility, so the rule-based classifier can be swapped for an LLM engine without touching the pipeline, API, or persistence layers.
+
+## Working the platform (Week 3)
+
+A ticket is not finished when it is classified; it is finished when someone answers it.
+The lifecycle is what turns triage into measurement:
+
+```
+POST /tickets                 -> status Open, no response time yet
+POST /tickets/{id}/status     {"status": "In Progress"}  -> stamps first_response_at
+POST /tickets/{id}/status     {"status": "Resolved"}     -> stamps resolved_at
+POST /tickets/{id}/status     {"status": "Open"}         -> reopens, keeps the response
+```
+
+From those two timestamps the platform derives response time, resolution time and SLA
+attainment. **Proposed** response targets live in one place (`app/lifecycle.py:
+SLA_TARGET_MINUTES`, High 15 min / Medium 2 h / Low 8 h) and are labelled as proposals
+everywhere they appear, because they are the team's proposal, not hospital policy.
+
+## Analysis and reporting (Week 3 and Week 4)
+
+`GET /insights?department=X&end=YYYY-MM-DD` returns one week of findings, each with the
+evidence it rests on and a confidence label. `GET /report`, `/report.pdf` and
+`/report.csv` turn the same payload into a department document, a spreadsheet and raw
+data. The rules that keep those outputs honest:
+
+- **No trend from noise.** A volume comparison needs 8+ tickets in each of two weeks
+  and 4+ active days; otherwise the finding says `insufficient-data` out loud.
+- **A threshold is not a verdict.** Response performance is "well below target" under
+  70% met, "close to" from 70 to 90%, and unmentioned above 90%.
+- **Undated tickets are disclosed**, never silently dropped from a total.
+- **Forecast error is suppressed below 14 days of history**, because a two-point
+  backtest produces a meaningless 0.00.
+- **Every report states its own limits** and which engine wrote its narrative.
+
+## The NLP layer
+
+| Module | What it does | Honest limitation |
+|---|---|---|
+| `app/nlp/semantic.py` | TF-IDF + cosine second opinion on category, to flag misroutes for review | ~71% by 5-fold CV on 80 synthetic sentences; it is a review trigger, not an authority |
+| `app/nlp/phi.py` | Detects semantic patient information (name + bed, relative + ward, pronoun + condition) | Heuristic. Raises the floor; human review still required |
+| `app/nlp/narrative.py` | Writes the executive summary | Every number must exist in the findings or the whole output is rejected |
+
+The semantic model is trained on a hand-written seed corpus plus the rule engine's own
+weighted lexicon as priors. Those priors are what lift it from 41% to 71%: the rules
+carry real domain knowledge, the corpus carries phrasing the rules lack. Both numbers
+are reproducible with `python -m tests.semantic_report`.
+
+It only ever produces a **second opinion**. The deterministic rules stay the system of
+record because they are auditable, and a disagreement is shown to a human rather than
+silently overriding the route.
 
 ## Classification logic
 
@@ -81,6 +142,9 @@ uvicorn app.main:app --reload
 # or one-shot CLI, no server
 python -m app.cli '"The aircon in Theatre 2 is not working." - Dr. Naidoo (Theatre 2)'
 
+# operations console (Week 3 working surface)
+streamlit run console.py
+
 # tests (includes the graded emergency scenario)
 pytest tests/ -q
 ```
@@ -98,7 +162,26 @@ Sprint 1 merged the team's work into one coherent engine:
 - **Tshepiso (PR #21)** contributed the reply writer, the 20-case evaluation harness and the hardened API.
 - Detection stays separate from priority: priority answers "how urgent is this for the hospital"; tone answers "how is the sender writing". A polite message can still be an emergency.
 
-## Test coverage
+## Test coverage (Week 4)
+
+**147 tests.** `pytest -q`. Each suite proves a specific claim:
+
+| File | Proves |
+|---|---|
+| `test_engine.py`, `test_reply_writer.py` | classification, priority, drafted replies |
+| `test_api_robustness.py` | bad input returns a described 400, never a 500 |
+| `test_lifecycle.py` | response/resolution stamps, reopen, impossible timestamps rejected |
+| `test_insights.py` | no trend from thin data, undated disclosed, SLA wording bands |
+| `test_phi_semantic.py` | the six R4 phrasings stay caught; benign text stays clean |
+| `test_narrative.py` | an LLM that invents a figure or leaks a name is rejected |
+| `test_semantic.py` | second opinion, accuracy floor, never guesses on unknown vocabulary |
+| `test_api_week34.py` | queue work, insights, report PDF/CSV/JSON |
+| `test_console_ui.py` | every tab renders, buttons work, a dead API explains itself |
+
+`test_console_ui.py` starts a real server and drives the real console through
+Streamlit's harness, so a broken chart fails the build rather than the demo.
+
+### Older coverage notes
 
 Eight tests including the exact Week 1 validation scenario (Dr. S. Khumalo's telemetry failure must route to IT & Medical Tech at High priority), schema strictness (exactly the seven required keys), the four category routes, priority bands, and persistence/sequencing.
 
@@ -171,3 +254,31 @@ JSON 500. Tests: `tests/test_api_robustness.py`.
 All four categories and all three priorities are always present, zero-filled.
 Add fields freely; never rename or remove one without telling the dashboard
 (S2-2) and PDF report (S2-3) owners.
+
+### Additive keys (Week 3)
+
+The contract above is unchanged. These keys were added, never renamed:
+
+```json
+{
+  "undated_tickets": 1,
+  "by_status": {"Open": 2, "In Progress": 8, "Resolved": 22},
+  "by_category_by_day": [{"date": "2026-11-02", "IT & Medical Tech": 2, "HR": 1, "Finance": 0, "Operations": 0}],
+  "response_time": {
+    "measured_tickets": 30, "unmeasured_tickets": 2,
+    "mean_minutes": 53.4, "median_minutes": 21.0, "worst_minutes": 470.2,
+    "by_priority": {"High": 13.2, "Medium": 77.9, "Low": 344.8},
+    "by_category": {"IT & Medical Tech": 41.0, "HR": 88.5, "Finance": 60.2, "Operations": 30.1},
+    "mean_resolution_minutes": 132.5
+  },
+  "sla": {
+    "targets_minutes": {"High": 15, "Medium": 120, "Low": 480},
+    "measured_tickets": 30, "attainment": 0.67,
+    "by_priority": {"High": 0.55, "Medium": 0.6, "Low": 0.79}
+  }
+}
+```
+
+`response_time` and `sla` count only tickets someone actually answered, and say how
+many that was. A ticket still `Open` is not a failure, it is unmeasured, and
+`sla_met` returns `null` for it rather than `false`.
