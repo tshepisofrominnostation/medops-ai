@@ -2,7 +2,7 @@
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MedOps AI — live operations console</title>
-<meta name="description" content="MedOps AI operations console: real classification, routing and response-time analytics from the engine, generated 06 Nov 2026, 09:45 UTC.">
+<meta name="description" content="MedOps AI operations console: real classification, routing and response-time analytics from the engine, generated 06 Nov 2026, 10:10 UTC.">
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#071426;color:#f3f7fc;
@@ -63,17 +63,81 @@ td.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
 footer{margin-top:44px;border-top:1px solid #1e3a5c;padding-top:18px;color:#93a7bf;font-size:12.5px}
 ul.lim{margin:8px 0 0;padding-left:20px}
 ul.lim li{margin-bottom:5px}
+
+.intake{border-color:#1b4a75;background:linear-gradient(180deg,#0d2438,#0a1a2b)}
+.intake textarea,.intake input{width:100%;box-sizing:border-box;margin:4px 0 10px;padding:10px 12px;
+ border-radius:8px;border:1px solid #24405f;background:#08182a;color:#f3f7fc;font:14px/1.5 inherit;
+ resize:vertical}
+.intake textarea:focus,.intake input:focus{outline:none;border-color:#38a8f5;
+ box-shadow:0 0 0 3px rgba(56,168,245,.18)}
+.intake-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+.intake button{cursor:pointer;border-radius:8px;padding:10px 16px;font:600 14px/1 inherit;
+ border:1px solid #24405f;background:#102641;color:#f3f7fc}
+.intake button.primary{background:#38a8f5;border-color:#38a8f5;color:#04121f}
+.intake button:hover{filter:brightness(1.08)}
+.intake .small-btn{padding:6px 12px;font-size:12px;font-weight:500}
+.session{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:8px;
+ padding-top:10px;border-top:1px solid #17324d}
+.session p{flex-basis:100%;margin:2px 0 0}
+.ticket-head{display:flex;gap:12px;align-items:baseline;margin:14px 0 8px}
+.badges{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.chip.accent{background:rgba(56,168,245,.16);border-color:#2b6f9f;color:#8fd2ff}
+.chip.new{margin-left:8px;font-size:10px;padding:1px 6px;border-color:#2b6f9f;color:#8fd2ff}
+.routed{margin:6px 0 12px}
+.scores{margin:10px 0 12px}
+.score-row{display:grid;grid-template-columns:130px 1fr 34px;gap:10px;align-items:center;margin:5px 0}
+.score-label{font-size:13px;color:#c9d8e9}
+.score-track{height:8px;border-radius:4px;background:#102641;overflow:hidden}
+.score-fill{display:block;height:100%;background:#38a8f5}
+.score-fill.dim{background:#2b4c6b}
+.score-value{font-size:12px;color:#93a7bf;text-align:right}
+.why{margin:10px 0 12px}
+ul.signals{list-style:none;padding:0;margin:6px 0 0}
+ul.signals li{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap;margin:4px 0;font-size:13px}
+ul.signals .chip{font-size:11px}
+.signal-label{color:#f3f7fc}
+.summary-out{margin:12px 0;padding:12px 14px;border-left:3px solid #38a8f5;background:#07182a;
+ border-radius:0 8px 8px 0}
+.summary-out p{margin:4px 0 0}
+.block{display:block}
+.intake button.danger{border-color:#a3403f;color:#ffb4b3}
+.confirm-wrap{display:inline-flex;gap:8px;align-items:center;flex-wrap:wrap}
+
 </style></head><body><div class="wrap">
 
 <header>
   <p class="eyebrow">MedOps AI · Operations Intelligence</p>
   <h1>Live console output</h1>
   <p class="sub">Week 2026-10-31 to 2026-11-06 ·
-     generated 06 Nov 2026, 09:45 UTC from the engine ·
+     generated 06 Nov 2026, 10:10 UTC from the engine ·
      narrative: <b>deterministic</b></p>
 </header>
 
-<div class="grid tiles"><div class="tile"><p class="tlabel">Tickets in window</p><p class="tvalue">32</p><p class="tsub">2026-10-31 to 2026-11-06</p></div><div class="tile"><p class="tlabel">High priority share</p><p class="tvalue">30%</p><p class="tsub">all time · 31 of 103</p></div><div class="tile"><p class="tlabel">Median response</p><p class="tvalue">1.6 h</p><p class="tsub">all time · 101 answered of 103</p></div><div class="tile"><p class="tlabel">Met response target</p><p class="tvalue">66%</p><p class="tsub">all time · targets are proposals</p></div><div class="tile"><p class="tlabel">Still open</p><p class="tvalue">2</p><p class="tsub">all time · 31 in progress · 70 resolved</p></div></div>
+
+<section class="card intake" id="console">
+  <div class="intake-head">
+    <h2>Generate a ticket</h2>
+    <span class="pill">runs in your browser</span>
+  </div>
+  <p class="sub">Type a request the way staff actually send them. The same rules the
+     console uses decide the category, the priority and who owns it, and the ticket goes
+     straight into the tiles, charts and table below.</p>
+  <label class="small muted" for="msg">Message</label>
+  <textarea id="msg" rows="3">The ventilator in ICU Bay 3 is alarming and will not start. Patient is on it now.</textarea>
+  <label class="small muted" for="sender">Sender (optional, or end the message with "- Name (Department)")</label>
+  <input id="sender" type="text" value="Sister Naidoo (ICU)">
+  <div class="intake-actions">
+    <button id="go" class="primary">Generate ticket</button>
+    <button id="another">Another example</button>
+  </div>
+  <div id="out" aria-live="polite"></div>
+  <div id="session-state" class="session"></div>
+  <p class="small muted">Nothing leaves the page: no request, no server. Your tickets are
+     stored in this browser and can be exported for import into the shared store.</p>
+</section>
+
+
+<div class="grid tiles"><div class="tile" id="kpi-window"><p class="tlabel">Tickets in window</p><p class="tvalue">32</p><p class="tsub">2026-10-31 to 2026-11-06</p></div><div class="tile" id="kpi-high"><p class="tlabel">High priority share</p><p class="tvalue">30%</p><p class="tsub">all time · 31 of 103</p></div><div class="tile" id="kpi-median"><p class="tlabel">Median response</p><p class="tvalue">1.6 h</p><p class="tsub">all time · 101 answered of 103</p></div><div class="tile"><p class="tlabel">Met response target</p><p class="tvalue">66%</p><p class="tsub">all time · targets are proposals</p></div><div class="tile" id="kpi-open"><p class="tlabel">Still open</p><p class="tvalue">2</p><p class="tsub">all time · 31 in progress · 70 resolved</p></div></div>
 
 <h2>Executive summary</h2>
 <div class="summary">
@@ -92,8 +156,8 @@ Outlook: about 40 tickets are expected over the next 7 days, but with only 7 day
 
 <h2>Where the tickets went</h2>
 <div class="grid cards">
-  <div class="card"><h3>By category</h3><svg viewBox="0 0 520 136" width="100%" height="136" role="img"><text x="0" y="15" fill="#f3f7fc" font-size="13">IT &amp; Medical Tech</text><rect x="150" y="4" width="288.8" height="18" rx="4" fill="#38a8f5"/><text x="446.8" y="18" fill="#93a7bf" font-size="13">35</text><text x="0" y="49" fill="#f3f7fc" font-size="13">HR</text><rect x="150" y="38" width="123.8" height="18" rx="4" fill="#38a8f5"/><text x="281.8" y="52" fill="#93a7bf" font-size="13">15</text><text x="0" y="83" fill="#f3f7fc" font-size="13">Finance</text><rect x="150" y="72" width="107.2" height="18" rx="4" fill="#38a8f5"/><text x="265.2" y="86" fill="#93a7bf" font-size="13">13</text><text x="0" y="117" fill="#f3f7fc" font-size="13">Operations</text><rect x="150" y="106" width="330.0" height="18" rx="4" fill="#38a8f5"/><text x="488.0" y="120" fill="#93a7bf" font-size="13">40</text></svg></div>
-  <div class="card"><h3>By priority</h3><svg viewBox="0 0 520 102" width="100%" height="102" role="img"><text x="0" y="15" fill="#f3f7fc" font-size="13">High</text><rect x="150" y="4" width="189.4" height="18" rx="4" fill="#38a8f5"/><text x="347.4" y="18" fill="#93a7bf" font-size="13">31</text><text x="0" y="49" fill="#f3f7fc" font-size="13">Medium</text><rect x="150" y="38" width="110.0" height="18" rx="4" fill="#38a8f5"/><text x="268.0" y="52" fill="#93a7bf" font-size="13">18</text><text x="0" y="83" fill="#f3f7fc" font-size="13">Low</text><rect x="150" y="72" width="330.0" height="18" rx="4" fill="#38a8f5"/><text x="488.0" y="86" fill="#93a7bf" font-size="13">54</text></svg></div>
+  <div class="card"><h3>By category</h3><div id="chart-cat"><svg viewBox="0 0 520 136" width="100%" height="136" role="img"><text x="0" y="15" fill="#f3f7fc" font-size="13">IT &amp; Medical Tech</text><rect x="150" y="4" width="288.8" height="18" rx="4" fill="#38a8f5"/><text x="446.8" y="18" fill="#93a7bf" font-size="13">35</text><text x="0" y="49" fill="#f3f7fc" font-size="13">HR</text><rect x="150" y="38" width="123.8" height="18" rx="4" fill="#38a8f5"/><text x="281.8" y="52" fill="#93a7bf" font-size="13">15</text><text x="0" y="83" fill="#f3f7fc" font-size="13">Finance</text><rect x="150" y="72" width="107.2" height="18" rx="4" fill="#38a8f5"/><text x="265.2" y="86" fill="#93a7bf" font-size="13">13</text><text x="0" y="117" fill="#f3f7fc" font-size="13">Operations</text><rect x="150" y="106" width="330.0" height="18" rx="4" fill="#38a8f5"/><text x="488.0" y="120" fill="#93a7bf" font-size="13">40</text></svg></div></div>
+  <div class="card"><h3>By priority</h3><div id="chart-pri"><svg viewBox="0 0 520 102" width="100%" height="102" role="img"><text x="0" y="15" fill="#f3f7fc" font-size="13">High</text><rect x="150" y="4" width="189.4" height="18" rx="4" fill="#38a8f5"/><text x="347.4" y="18" fill="#93a7bf" font-size="13">31</text><text x="0" y="49" fill="#f3f7fc" font-size="13">Medium</text><rect x="150" y="38" width="110.0" height="18" rx="4" fill="#38a8f5"/><text x="268.0" y="52" fill="#93a7bf" font-size="13">18</text><text x="0" y="83" fill="#f3f7fc" font-size="13">Low</text><rect x="150" y="72" width="330.0" height="18" rx="4" fill="#38a8f5"/><text x="488.0" y="86" fill="#93a7bf" font-size="13">54</text></svg></div></div>
 </div>
 
 <h2>Response time against target</h2>
@@ -175,9 +239,11 @@ Outlook: about 40 tickets are expected over the next 7 days, but with only 7 day
 (function () {
   var q = document.getElementById('q'), fc = document.getElementById('fc'),
       fp = document.getElementById('fp'), fs = document.getElementById('fs'),
-      rows = [].slice.call(document.querySelectorAll('#rows tr')),
+      // rows are re-read on every pass: the console prepends generated tickets
+      rows = [],
       count = document.getElementById('count');
   function apply() {
+    rows = [].slice.call(document.querySelectorAll('#rows tr'));
     var term = q.value.trim().toLowerCase(), c = fc.value, p = fp.value, s = fs.value, n = 0;
     rows.forEach(function (r) {
       var ok = (!term || r.dataset.t.indexOf(term) > -1)
@@ -188,6 +254,7 @@ Outlook: about 40 tickets are expected over the next 7 days, but with only 7 day
     });
     count.textContent = n + ' of ' + rows.length + ' tickets shown';
   }
+  window.medopsApplyFilters = apply;
   // Deep links: ?q=..., &cat=..., &pri=..., &status=... so a filtered view can be
   // shared with the person who needs to see it.
   var params = new URLSearchParams(location.search);
@@ -197,6 +264,598 @@ Outlook: about 40 tickets are expected over the next 7 days, but with only 7 day
   fs.value = params.get('status') || '';
   [q, fc, fp, fs].forEach(function (el) { el.addEventListener('input', apply); });
   apply();
+})();
+</script>
+<script>/* MedOps AI — browser engine.
+ *
+ * A faithful port of the deterministic core in app/: parser.py, classifier.py,
+ * prioritizer.py, assigner.py and summarizer.py. All keyword tables, the routing
+ * table and the sender regexes are injected from the Python modules at build time
+ * (see scripts/build_pages.py), so the only duplicated thing here is the handful of
+ * lines of control flow, not the knowledge.
+ *
+ * It exists because the published page is static: GitHub Pages cannot run Python, and
+ * a form that only looks like a form would be a lie. Everything below runs locally in
+ * the reader's browser. Nothing is sent anywhere and nothing is stored.
+ *
+ * Drift is checked, not assumed: scripts/check_engine_parity.mjs replays several
+ * hundred real messages through both this file and the Python engine and fails on any
+ * difference. tests/test_web_engine_parity.py runs it inside pytest.
+ */
+var MedOpsEngine = (function () {
+  'use strict';
+
+  function countAll(text, needle) {
+    // Python's str.count counts non-overlapping occurrences; split does the same.
+    if (!needle) return 0;
+    return text.split(needle).length - 1;
+  }
+
+  /* Python's \w is Unicode-aware (é, ṋ, combining marks); JavaScript's is ASCII only.
+   * Translating the class and adding the u flag keeps sender names across the two
+   * languages in agreement, which the parity check would otherwise flag. */
+  function compile(pattern, flags) {
+    // \w always appears inside a character class in these patterns, so the
+    // replacement is the class body, not a nested class.
+    var translated = pattern.replace(/\\w/g, '\\p{L}\\p{N}\\p{M}_');
+    return new RegExp(translated, flags + 'u');
+  }
+
+  function dequote(text) {
+    if (text.startsWith('"')) text = text.slice(1);
+    if (text.endsWith('"')) text = text.slice(0, -1);
+    text = text.replace(/\.\" /g, '. ');
+    return text.trim();
+  }
+
+  function parseSender(raw, bundle, override) {
+    var text = raw.trim();
+    if (override) return { body: dequote(text), sender: override };
+
+    var fromRe = compile(bundle.parser.from, bundle.parser.from_flags);
+    var from = fromRe.exec(text);
+    if (from) {
+      var body = dequote(text.replace(from[0], '').trim());
+      return { body: body, sender: from[1].trim() };
+    }
+
+    var signedRe = compile(bundle.parser.signed, bundle.parser.signed_flags);
+    var signed = signedRe.exec(text);
+    if (signed) {
+      var name = signed[1].trim();
+      var dept = signed[2].trim();
+      var signedAll = compile(bundle.parser.signed, bundle.parser.signed_flags + 'g');
+      return { body: dequote(text.replace(signedAll, '').trim()), sender: name + ' (' + dept + ')' };
+    }
+    return { body: dequote(text), sender: 'Unspecified hospital staff' };
+  }
+
+  function classify(message, bundle) {
+    var text = message.toLowerCase();
+    var scores = {};
+    var total = 0;
+    Object.keys(bundle.category_keywords).forEach(function (category) {
+      var score = 0;
+      var keywords = bundle.category_keywords[category];
+      Object.keys(keywords).forEach(function (keyword) {
+        if (text.indexOf(keyword) !== -1) score += keywords[keyword] * countAll(text, keyword);
+      });
+      scores[category] = score;
+      total += score;
+    });
+    if (total === 0) return { category: bundle.default_category, confidence: 0, scores: scores };
+    var best = null;
+    Object.keys(scores).forEach(function (category) {
+      if (best === null || scores[category] > scores[best]) best = category;
+    });
+    return { category: best, confidence: Math.round((scores[best] / total) * 1000) / 1000, scores: scores };
+  }
+
+  function prioritize(message, sender, bundle) {
+    var text = (message + ' ' + (sender || '')).toLowerCase();
+    var rules = bundle.priority;
+    var score = 0;
+    var signals = [];
+
+    function hit(list) {
+      for (var i = 0; i < list.length; i++) if (text.indexOf(list[i]) !== -1) return list[i];
+      return null;
+    }
+
+    var clinical = hit(rules.clinical_context);
+    if (clinical) { score += 3; signals.push({ label: 'clinical area named', detail: clinical, points: 3 }); }
+
+    var equipment = hit(rules.clinical_equipment);
+    if (equipment) { score += 3; signals.push({ label: 'clinical equipment named', detail: equipment, points: 3 }); }
+
+    var safety = hit(rules.safety);
+    if (safety) { score += 4; signals.push({ label: 'safety hazard', detail: safety, points: 4 }); }
+
+    var urgent = hit(rules.urgent);
+    if (urgent) { score += 2; signals.push({ label: 'failure or urgency language', detail: urgent, points: 2 }); }
+
+    if (hit(rules.staffing_critical) && hit(rules.clinical_context)) {
+      score += 3;
+      signals.push({ label: 'understaffing in a clinical area', detail: 'treated as a safety event', points: 3 });
+    }
+
+    var routine = hit(rules.routine);
+    if (routine) { score -= 2; signals.push({ label: 'routine administrative wording', detail: routine, points: -2 }); }
+
+    if (text.indexOf('high') !== -1 || text.indexOf('emergency') !== -1) {
+      score += 1;
+      signals.push({ label: 'escalation word in the message', detail: 'high / emergency', points: 1 });
+    }
+
+    var priority = score >= rules.high_threshold ? 'High'
+                 : score >= rules.medium_threshold ? 'Medium'
+                 : 'Low';
+    return { priority: priority, score: score, signals: signals };
+  }
+
+  function route(category, priority, bundle) {
+    return bundle.assign[category][priority];
+  }
+
+  function summarize(message, sender, category, priority, bundle) {
+    var core = message.trim().replace(/\.+$/, '').replace(/\s+/g, ' ');
+    var words = core.split(' ');
+    if (words.length > bundle.summary.max_words) {
+      core = words.slice(0, bundle.summary.max_words).join(' ') + '...';
+    }
+    var dept = sender.indexOf('(') !== -1
+      ? sender.split('(').pop().replace(/\)+$/, '')
+      : 'hospital staff';
+    return core + '. Reported by ' + dept + '; classified as ' + category + ' with ' + priority + ' priority.';
+  }
+
+  /* One message in, one ticket out — the same order pipeline.process_ticket uses,
+   * minus persistence, which a static page cannot do honestly. */
+  function generate(raw, bundle, options) {
+    options = options || {};
+    var parsed = parseSender(raw, bundle, options.sender || null);
+    var classification = classify(parsed.body, bundle);
+    var triage = prioritize(parsed.body, parsed.sender, bundle);
+    return {
+      message: parsed.body,
+      sender: parsed.sender,
+      category: classification.category,
+      confidence: classification.confidence,
+      scores: classification.scores,
+      priority: triage.priority,
+      score: triage.score,
+      signals: triage.signals,
+      assigned_to: route(classification.category, triage.priority, bundle),
+      summary: summarize(parsed.body, parsed.sender, classification.category, triage.priority, bundle)
+    };
+  }
+
+  return { generate: generate, classify: classify, prioritize: prioritize, parseSender: parseSender };
+})();
+
+
+/* MedOps AI console — one page, generator and results together.
+ *
+ * A ticket you generate here is not a preview. It goes into this browser's store and
+ * immediately moves the KPI tiles, the mix charts and the ticket explorer on the same
+ * page, because those are all recomputed from the same store.
+ *
+ * The written executive summary is the one thing that cannot move: it is composed by
+ * the Python narrative engine at build time. The page says so rather than pretending.
+ *
+ * Everything runs locally. The store is localStorage, so it is per browser, not shared.
+ * To put tickets into the shared record, export them and run
+ * `python -m app.cli import tickets.json`; the next build then includes them everywhere.
+ */
+(function () {
+  'use strict';
+
+  var bundle = {"category_keywords":{"IT & Medical Tech":{"network":3,"server":3,"terminal":3,"telemetry":3,"monitoring":2,"monitor":2,"disconnect":2,"wifi":3,"software":2,"login":2,"emr":3,"database":3,"computer":2,"system":1,"connectivity":2,"bedside monitor":3,"scheduling":2,"synch":1,"sync":1,"reboot":2,"crash":2,"offline":2,"workstation":2,"ventilator":3,"defibrillator":3,"infusion pump":3,"dialysis":3,"crash cart":3,"x-ray":3,"scanner":2,"eeg":3,"ecg":3},"HR":{"leave":3,"shift":2,"contract":2,"recruitment":3,"hiring":3,"onboarding":3,"payslip":3,"overtime":2,"nurse":2,"staffing":2,"roster":2,"sabbatical":2,"grievance":2,"disciplinary":2,"training":1,"resignation":3,"payroll":2,"hr":3,"personnel":2},"Finance":{"invoice":3,"billing":3,"payment":3,"claim":3,"budget":3,"pay ":3,"purchase":2,"reimbursement":3,"tender":3,"expense":2,"accounts":2,"debtors":3,"medical aid":3,"tariff":2,"finance":3,"overcharge":2},"Operations":{"light":2,"kitchen":2,"cold room":3,"bulb":2,"aircon":3,"air conditioning":3,"water":2,"leak":3,"generator":3,"door":1,"elevator":2,"lift":2,"cleaning":2,"plumbing":3,"maintenance":3,"ceiling":2,"paint":2,"refuse":2,"bed ":1,"garden":2}},"default_category":"Operations","assign":{"IT & Medical Tech":{"High":"IT & Biomedical Engineering on-call","Medium":"IT Service Desk","Low":"IT Service Desk"},"HR":{"High":"HR Duty Officer","Medium":"HR Business Partner","Low":"HR Admin Team"},"Finance":{"High":"Finance Duty Officer","Medium":"Finance Operations Team","Low":"Finance Operations Team"},"Operations":{"High":"Operations Emergency Response","Medium":"Operations & Maintenance Team","Low":"Operations & Maintenance Team"}},"priority":{"clinical_context":["emergency","icu","intensive care","theatre","operating room","telemetry","patient monitor","patient bay","bedside monitor","patient monitoring","patient care"],"clinical_equipment":["ventilator","defibrillator","patient monitor","monitoring terminal","telemetry","infusion pump","dialysis","crash cart","life support","bedside monitor","oxygen"],"safety":["fire","flood","gas leak","power failure","outage","electrical hazard","spill","generator","water leak"],"urgent":["down","not working","fail","keeps disconnect","urgent","immediately","critical","alarm","no power","offline","will not start","stopped","rejected","cannot log","locked out","password expired","deadline","due tomorrow","leaking","stopped cooling"],"staffing_critical":["shortage","short of","short two","no staff","cover needed","no cover","understaffed","cannot fill","unfilled shift"],"routine":["invoice","query","leave request","schedule","booking","question","monthly","routine","annual","reminder","planning"],"high_threshold":5,"medium_threshold":2},"parser":{"from":"^\\s*From:\\s*(.+?)\\s*$","from_flags":"im","signed":"[-\u2014\u2013]\\s*([A-Z][\\w\\.\\-\\s]+?)\\s*\\((.+?)\\)\\s*$","signed_flags":""},"summary":{"max_words":22}};
+  var baseline = {"window":{"start":"2026-10-31","end":"2026-11-06"},"window_total":32,"all_time":{"total":103,"high":31,"open":2,"in_progress":31,"resolved":70},"answered":101,"categories":{"IT & Medical Tech":35,"HR":15,"Finance":13,"Operations":40},"priorities":{"High":31,"Medium":18,"Low":54},"bar":{"width":520,"rowh":34,"colour":"#38a8f5","text":"#f3f7fc","muted":"#93a7bf"}};
+  var STORE_KEY = 'medops.console.tickets.v1';
+  var memoryStore = [];       // fallback when localStorage is unavailable
+  var storageWorks = true;
+
+  var message = document.getElementById('msg');
+  var sender = document.getElementById('sender');
+  var out = document.getElementById('out');
+  var sessionState = document.getElementById('session-state');
+
+  var examples = [
+    { text: 'The ventilator in ICU Bay 3 is alarming and will not start. Patient is on it now.',
+      sender: 'Sister Naidoo (ICU)' },
+    { text: 'The aircon in Theatre 2 stopped cooling overnight and the room is at 29 degrees. First case is at 8am.',
+      sender: 'Dr Pillay (Theatre 2)' },
+    { text: 'Please could you send through my payslip for October, the overtime line looks wrong.',
+      sender: 'Mr Khumalo (Finance query)' },
+    { text: 'Generator did not start during the switch-over test in Block B, and the ward is short two nurses tonight.',
+      sender: 'Mr Adams (Block B)' },
+    { text: 'The telemetry is down and nobody can see the cardiac monitors on Ward 4.',
+      sender: 'Sister Mokoena (Ward 4)' }
+  ];
+
+  /* ---------- store ---------- */
+
+  function load() {
+    try {
+      var raw = window.localStorage.getItem(STORE_KEY);
+      return raw ? JSON.parse(raw) : [];
+    } catch (error) {
+      storageWorks = false;
+      return memoryStore;
+    }
+  }
+
+  function save(tickets) {
+    memoryStore = tickets;
+    try {
+      window.localStorage.setItem(STORE_KEY, JSON.stringify(tickets));
+    } catch (error) {
+      storageWorks = false;
+    }
+  }
+
+  function nextId(tickets) {
+    return 'MED-WEB-' + String(tickets.length + 1).padStart(2, '0');
+  }
+
+  /* ---------- small dom helpers ---------- */
+
+  function el(tag, className, text) {
+    var node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text !== undefined && text !== null) node.textContent = String(text);
+    return node;
+  }
+
+  function clear(node) {
+    while (node.firstChild) node.removeChild(node.firstChild);
+  }
+
+  function setKpi(id, value, sub) {
+    var tile = document.getElementById(id);
+    if (!tile) return;
+    var valueNode = tile.querySelector('.tvalue');
+    var subNode = tile.querySelector('.tsub');
+    if (valueNode && value !== undefined) valueNode.textContent = value;
+    if (subNode && sub !== undefined) subNode.textContent = sub;
+  }
+
+  function priorityClass(priority) {
+    return priority === 'High' ? 'p-high' : priority === 'Medium' ? 'p-mid' : 'p-low';
+  }
+
+  function percent(part, whole) {
+    if (!whole) return '—';
+    return Math.round((part / whole) * 100) + '%';
+  }
+
+  /* ---------- charts: the same geometry as scripts/build_pages.py hbars() ---------- */
+
+  function hbars(container, pairs) {
+    if (!container) return;
+    clear(container);
+    var width = baseline.bar.width;
+    var rowh = baseline.bar.rowh;
+    var top = Math.max.apply(null, pairs.map(function (p) { return p[1]; }).concat([1]));
+    var height = rowh * pairs.length;
+    var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('viewBox', '0 0 ' + width + ' ' + height);
+    svg.setAttribute('width', '100%');
+    svg.setAttribute('height', height);
+    svg.setAttribute('role', 'img');
+
+    pairs.forEach(function (pair, index) {
+      var label = pair[0];
+      var value = pair[1];
+      var w = (value / top) * (width - 190);
+      var y = index * rowh;
+
+      var text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      text.setAttribute('x', 0); text.setAttribute('y', y + 15);
+      text.setAttribute('fill', baseline.bar.text);
+      text.setAttribute('font-size', 13);
+      text.textContent = label;
+      svg.appendChild(text);
+
+      var rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+      rect.setAttribute('x', 150); rect.setAttribute('y', y + 4);
+      rect.setAttribute('width', w.toFixed(1)); rect.setAttribute('height', 18);
+      rect.setAttribute('rx', 4); rect.setAttribute('fill', baseline.bar.colour);
+      svg.appendChild(rect);
+
+      var count = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      count.setAttribute('x', (150 + w + 8).toFixed(1));
+      count.setAttribute('y', y + 18);
+      count.setAttribute('fill', baseline.bar.muted);
+      count.setAttribute('font-size', 12);
+      count.textContent = value;
+      svg.appendChild(count);
+    });
+    container.appendChild(svg);
+  }
+
+  /* ---------- dashboard recompute ---------- */
+
+  function sessionWithinWindow(tickets) {
+    return tickets.filter(function (ticket) {
+      var day = (ticket.created_at || '').slice(0, 10);
+      return day >= baseline.window.start && day <= baseline.window.end;
+    });
+  }
+
+  function renderDashboard(tickets) {
+    var inWindow = sessionWithinWindow(tickets);
+    var totals = baseline.all_time;
+    var high = tickets.filter(function (t) { return t.priority === 'High'; }).length;
+
+    setKpi('kpi-window', totals && baseline.window_total + inWindow.length,
+      baseline.window.start + ' to ' + baseline.window.end +
+      (inWindow.length ? ' · includes ' + inWindow.length + ' you added' : ''));
+
+    setKpi('kpi-high', percent(totals.high + high, totals.total + tickets.length),
+      'all time · ' + (totals.high + high) + ' of ' + (totals.total + tickets.length));
+
+    setKpi('kpi-open', totals.open + tickets.length,
+      'all time · ' + totals.in_progress + ' in progress · ' + totals.resolved + ' resolved' +
+      (tickets.length ? ' · ' + tickets.length + ' new' : ''));
+
+    if (tickets.length) {
+      setKpi('kpi-median', undefined,
+        'all time · ' + baseline.answered + ' answered of ' + (totals.total + tickets.length) +
+        ' · your ' + tickets.length + ' unanswered ticket(s) are not in this figure');
+    } else {
+      setKpi('kpi-median', undefined,
+        'all time · ' + baseline.answered + ' answered of ' + totals.total);
+    }
+
+    var categories = {};
+    Object.keys(baseline.categories).forEach(function (key) { categories[key] = baseline.categories[key]; });
+    var priorities = {};
+    Object.keys(baseline.priorities).forEach(function (key) { priorities[key] = baseline.priorities[key]; });
+    tickets.forEach(function (ticket) {
+      categories[ticket.category] = (categories[ticket.category] || 0) + 1;
+      priorities[ticket.priority] = (priorities[ticket.priority] || 0) + 1;
+    });
+
+    hbars(document.getElementById('chart-cat'), Object.keys(categories).map(function (key) {
+      return [key, categories[key]];
+    }));
+    hbars(document.getElementById('chart-pri'), Object.keys(priorities).map(function (key) {
+      return [key, priorities[key]];
+    }));
+
+    renderSessionState(tickets);
+  }
+
+  /* ---------- explorer ---------- */
+
+  function explorerRow(ticket) {
+    var row = el('tr');
+    row.setAttribute('data-c', ticket.category);
+    row.setAttribute('data-p', ticket.priority);
+    row.setAttribute('data-s', ticket.status);
+    row.setAttribute('data-session', '1');
+    row.setAttribute('data-t', (ticket.message + ' ' + ticket.assigned_to + ' ' + ticket.id).toLowerCase());
+
+    row.appendChild(el('td', 'mono', ticket.id));
+    var messageCell = el('td', 'msg', (ticket.message || '').slice(0, 96));
+    var badge = el('span', 'chip new', 'new');
+    messageCell.appendChild(badge);
+    row.appendChild(messageCell);
+    var categoryCell = el('td');
+    categoryCell.appendChild(el('span', 'chip', ticket.category));
+    row.appendChild(categoryCell);
+    var priorityCell = el('td');
+    priorityCell.appendChild(el('span', 'chip ' + priorityClass(ticket.priority), ticket.priority));
+    row.appendChild(priorityCell);
+    row.appendChild(el('td', null, ticket.assigned_to));
+    var statusCell = el('td');
+    statusCell.appendChild(el('span', 'dot s-Open', ticket.status));
+    row.appendChild(statusCell);
+    row.appendChild(el('td', 'num', '—'));
+    return row;
+  }
+
+  function syncExplorer(tickets) {
+    var body = document.getElementById('rows');
+    if (!body) return;
+    var existing = body.querySelectorAll('tr[data-session="1"]');
+    for (var i = 0; i < existing.length; i++) existing[i].remove();
+    // newest first, matching the table's ordering
+    tickets.slice().reverse().forEach(function (ticket) {
+      body.insertBefore(explorerRow(ticket), body.firstChild);
+    });
+    if (window.medopsApplyFilters) window.medopsApplyFilters();
+  }
+
+  /* ---------- session state strip ---------- */
+
+  function renderSessionState(tickets) {
+    if (!sessionState) return;
+    clear(sessionState);
+    if (!tickets.length) {
+      sessionState.appendChild(el('span', 'small muted',
+        'No tickets added yet. Generate one and it appears in the tiles, the charts and the table below.'));
+      return;
+    }
+    var open = tickets.filter(function (t) { return t.status === 'Open'; }).length;
+    sessionState.appendChild(el('span', 'small',
+      tickets.length + ' ticket(s) added in this browser · ' + open + ' Open · ' +
+      (storageWorks ? 'stored in this browser only' : 'not stored (storage blocked)')));
+    sessionState.appendChild(clearControl(tickets));
+    var csv = el('button', 'ghost small-btn', 'Download CSV');
+    csv.addEventListener('click', function () { download('medops-my-tickets.csv', toCsv(tickets), 'text/csv'); });
+    sessionState.appendChild(csv);
+    var json = el('button', 'ghost small-btn', 'Export for import');
+    json.addEventListener('click', function () { download('medops-my-tickets.json', toExport(tickets), 'application/json'); });
+    sessionState.appendChild(json);
+    var note = el('p', 'small muted');
+    note.textContent = 'To add them to the shared record: run python -m app.cli import ' +
+      'medops-my-tickets.json, then rebuild the page. The written summary below is ' +
+      'composed at build time, so it keeps describing the committed store until then.';
+    sessionState.appendChild(note);
+  }
+
+  /* Two-step clear. A native confirm() blocks the page and cannot be styled, and this
+   * is destructive, so it gets an explicit second click instead. */
+  function clearControl(tickets) {
+    var wrap = el('span', 'confirm-wrap');
+    var button = el('button', 'ghost small-btn', 'Clear my tickets');
+    button.addEventListener('click', function () {
+      clear(wrap);
+      wrap.appendChild(el('span', 'small', 'Remove all ' + tickets.length + '?'));
+      var yes = el('button', 'small-btn danger', 'Yes, remove');
+      yes.addEventListener('click', function () { save([]); paint([]); clear(out); });
+      var no = el('button', 'small-btn', 'Keep');
+      no.addEventListener('click', function () { renderSessionState(load()); });
+      wrap.appendChild(yes);
+      wrap.appendChild(no);
+    });
+    wrap.appendChild(button);
+    return wrap;
+  }
+
+  /* ---------- export ---------- */
+
+  function download(name, text, type) {
+    var blob = new Blob([text], { type: type + ';charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var link = document.createElement('a');
+    link.href = url;
+    link.download = name;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  }
+
+  function toCsv(tickets) { return MedOpsExport.toCsv(tickets); }
+  function toExport(tickets) { return MedOpsExport.toExport(tickets); }
+
+  /* ---------- the generated ticket ---------- */
+
+  function renderTicket(ticket, index, total) {
+    clear(out);
+    var head = el('div', 'ticket-head');
+    head.appendChild(el('span', 'mono small muted', ticket.id));
+    head.appendChild(el('span', 'small muted', 'added to this browser · ticket ' + index + ' of ' + total));
+    out.appendChild(head);
+
+    var badges = el('div', 'badges');
+    badges.appendChild(el('span', 'chip accent', ticket.category));
+    badges.appendChild(el('span', 'chip ' + priorityClass(ticket.priority), ticket.priority + ' priority'));
+    out.appendChild(badges);
+
+    var routed = el('p', 'routed');
+    routed.appendChild(el('span', 'small muted', 'Routed to '));
+    routed.appendChild(el('b', null, ticket.assigned_to));
+    out.appendChild(routed);
+
+    var scores = el('div', 'scores');
+    var totalScore = Object.keys(ticket.scores).reduce(function (sum, key) { return sum + ticket.scores[key]; }, 0);
+    scores.appendChild(el('p', 'small muted', 'Category scores' + (totalScore === 0
+      ? ' (no keyword matched, so the operations catch-all applies)'
+      : ' — confidence ' + Math.round(ticket.confidence * 100) + '%')));
+    Object.keys(ticket.scores).forEach(function (category) {
+      var share = totalScore === 0 ? 0 : Math.round((ticket.scores[category] / totalScore) * 100);
+      var row = el('div', 'score-row');
+      row.appendChild(el('span', 'score-label', category));
+      var track = el('span', 'score-track');
+      var fill = el('span', 'score-fill' + (category === ticket.category ? '' : ' dim'));
+      fill.style.width = share + '%';
+      track.appendChild(fill);
+      row.appendChild(track);
+      row.appendChild(el('span', 'score-value mono', ticket.scores[category]));
+      scores.appendChild(row);
+    });
+    out.appendChild(scores);
+
+    var why = el('div', 'why');
+    why.appendChild(el('p', 'small muted', 'Priority score ' + ticket.score + ' (5+ is High, 2-4 is Medium)'));
+    if (!ticket.signals.length) {
+      why.appendChild(el('p', 'small', 'No priority signal fired, so it sits at Low.'));
+    } else {
+      var list = el('ul', 'signals');
+      ticket.signals.forEach(function (signal) {
+        var item = el('li');
+        item.appendChild(el('span', 'chip ' + (signal.points > 0 ? 'p-mid' : 'p-low'),
+          (signal.points > 0 ? '+' : '') + signal.points));
+        item.appendChild(el('span', 'signal-label', signal.label));
+        item.appendChild(el('span', 'small muted', ' (' + signal.detail + ')'));
+        list.appendChild(item);
+      });
+      why.appendChild(list);
+    }
+    out.appendChild(why);
+
+    var block = el('blockquote', 'summary-out');
+    block.appendChild(el('span', 'small muted block', 'One-sentence summary'));
+    block.appendChild(el('p', null, ticket.summary));
+    out.appendChild(block);
+
+    out.appendChild(el('p', 'small muted',
+      'Sender read as: ' + ticket.sender + '. The patient-data screen and the drafted ' +
+      'reply need the Python console; this page runs the classification core only.'));
+  }
+
+  function paint(tickets) {
+    renderDashboard(tickets);
+    syncExplorer(tickets);
+  }
+
+  function generate(persist) {
+    var text = (message.value || '').trim();
+    if (!text) {
+      clear(out);
+      out.appendChild(el('p', 'small', 'Type a message first.'));
+      return;
+    }
+    var result = MedOpsEngine.generate(text, bundle, { sender: (sender.value || '').trim() });
+    var tickets = load();
+    var ticket = {
+      id: nextId(tickets),
+      created_at: new Date().toISOString().slice(0, 19) + 'Z',
+      message: result.message,
+      sender: result.sender,
+      category: result.category,
+      priority: result.priority,
+      assigned_to: result.assigned_to,
+      summary: result.summary,
+      status: 'Open',
+      confidence: result.confidence,
+      scores: result.scores,
+      score: result.score,
+      signals: result.signals
+    };
+    if (persist !== false) {
+      tickets.push(ticket);
+      save(tickets);
+    }
+    renderTicket(ticket, (persist === false ? tickets.length : tickets.length), tickets.length);
+    paint(tickets);
+  }
+
+  /* ---------- wiring ---------- */
+
+  document.getElementById('go').addEventListener('click', function () { generate(true); });
+  document.getElementById('another').addEventListener('click', function () {
+    var next = examples[Math.floor(Math.random() * examples.length)];
+    message.value = next.text;
+    sender.value = next.sender;
+  });
+  message.addEventListener('keydown', function (event) {
+    if ((event.metaKey || event.ctrlKey) && event.key === 'Enter') generate(true);
+  });
+
+  var stored = load();
+  if (stored.length) {
+    var last = stored[stored.length - 1];
+    message.value = last.message;
+    sender.value = last.sender;
+    if (last.scores) renderTicket(last, stored.length, stored.length);
+  }
+  paint(stored);
 })();
 </script>
 </body></html>

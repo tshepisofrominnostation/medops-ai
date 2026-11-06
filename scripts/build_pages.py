@@ -122,8 +122,9 @@ def sparkline(series, width=760, height=150):
             f'{labels}</svg>')
 
 
-def tile(label, value, sub=""):
-    return (f'<div class="tile"><p class="tlabel">{esc(label)}</p>'
+def tile(label, value, sub="", tile_id=None):
+    ident = f' id="{tile_id}"' if tile_id else ""
+    return (f'<div class="tile"{ident}><p class="tlabel">{esc(label)}</p>'
             f'<p class="tvalue">{esc(value)}</p>'
             f'<p class="tsub">{esc(sub)}</p></div>')
 
@@ -146,6 +147,95 @@ def finding_card(f):
 
 
 # ---------------------------------------------------------------- page
+
+
+# -----------------------------------------------------------------------------
+# The console: the published page is static, so the engine's deterministic core runs
+# in the reader's browser and its results drive this same page. The keyword tables,
+# routing table and regexes are injected from the Python modules (engine_bundle.py)
+# and web/engine.js is parity-tested against them. See docs/WEEK3_4_GUIDE.md.
+# -----------------------------------------------------------------------------
+WEB = ROOT / "web"
+
+CONSOLE_CSS = """
+.intake{border-color:#1b4a75;background:linear-gradient(180deg,#0d2438,#0a1a2b)}
+.intake textarea,.intake input{width:100%;box-sizing:border-box;margin:4px 0 10px;padding:10px 12px;
+ border-radius:8px;border:1px solid #24405f;background:#08182a;color:#f3f7fc;font:14px/1.5 inherit;
+ resize:vertical}
+.intake textarea:focus,.intake input:focus{outline:none;border-color:#38a8f5;
+ box-shadow:0 0 0 3px rgba(56,168,245,.18)}
+.intake-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+.intake button{cursor:pointer;border-radius:8px;padding:10px 16px;font:600 14px/1 inherit;
+ border:1px solid #24405f;background:#102641;color:#f3f7fc}
+.intake button.primary{background:#38a8f5;border-color:#38a8f5;color:#04121f}
+.intake button:hover{filter:brightness(1.08)}
+.intake .small-btn{padding:6px 12px;font-size:12px;font-weight:500}
+.session{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:8px;
+ padding-top:10px;border-top:1px solid #17324d}
+.session p{flex-basis:100%;margin:2px 0 0}
+.ticket-head{display:flex;gap:12px;align-items:baseline;margin:14px 0 8px}
+.badges{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.chip.accent{background:rgba(56,168,245,.16);border-color:#2b6f9f;color:#8fd2ff}
+.chip.new{margin-left:8px;font-size:10px;padding:1px 6px;border-color:#2b6f9f;color:#8fd2ff}
+.routed{margin:6px 0 12px}
+.scores{margin:10px 0 12px}
+.score-row{display:grid;grid-template-columns:130px 1fr 34px;gap:10px;align-items:center;margin:5px 0}
+.score-label{font-size:13px;color:#c9d8e9}
+.score-track{height:8px;border-radius:4px;background:#102641;overflow:hidden}
+.score-fill{display:block;height:100%;background:#38a8f5}
+.score-fill.dim{background:#2b4c6b}
+.score-value{font-size:12px;color:#93a7bf;text-align:right}
+.why{margin:10px 0 12px}
+ul.signals{list-style:none;padding:0;margin:6px 0 0}
+ul.signals li{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap;margin:4px 0;font-size:13px}
+ul.signals .chip{font-size:11px}
+.signal-label{color:#f3f7fc}
+.summary-out{margin:12px 0;padding:12px 14px;border-left:3px solid #38a8f5;background:#07182a;
+ border-radius:0 8px 8px 0}
+.summary-out p{margin:4px 0 0}
+.block{display:block}
+.intake button.danger{border-color:#a3403f;color:#ffb4b3}
+.confirm-wrap{display:inline-flex;gap:8px;align-items:center;flex-wrap:wrap}
+"""
+
+CONSOLE_MARKUP = """
+<section class="card intake" id="console">
+  <div class="intake-head">
+    <h2>Generate a ticket</h2>
+    <span class="pill">runs in your browser</span>
+  </div>
+  <p class="sub">Type a request the way staff actually send them. The same rules the
+     console uses decide the category, the priority and who owns it, and the ticket goes
+     straight into the tiles, charts and table below.</p>
+  <label class="small muted" for="msg">Message</label>
+  <textarea id="msg" rows="3">The ventilator in ICU Bay 3 is alarming and will not start. Patient is on it now.</textarea>
+  <label class="small muted" for="sender">Sender (optional, or end the message with "- Name (Department)")</label>
+  <input id="sender" type="text" value="Sister Naidoo (ICU)">
+  <div class="intake-actions">
+    <button id="go" class="primary">Generate ticket</button>
+    <button id="another">Another example</button>
+  </div>
+  <div id="out" aria-live="polite"></div>
+  <div id="session-state" class="session"></div>
+  <p class="small muted">Nothing leaves the page: no request, no server. Your tickets are
+     stored in this browser and can be exported for import into the shared store.</p>
+</section>
+"""
+
+
+def _console_script(baseline: dict) -> str:
+    """Inline the engine and the console wiring, with Python-owned values injected."""
+    from scripts.engine_bundle import build_bundle
+
+    engine = (WEB / "engine.js").read_text(encoding="utf-8")
+    engine = engine.split("if (typeof module !== 'undefined'")[0]   # drop the CommonJS tail
+    export_js = (WEB / "export.js").read_text(encoding="utf-8")
+    export_js = export_js.split("if (typeof module !== 'undefined'")[0]
+    console_js = (WEB / "console.js").read_text(encoding="utf-8")
+    console_js = console_js.replace("__BUNDLE__", json.dumps(build_bundle(), separators=(",", ":")))
+    console_js = console_js.replace("__BASELINE__", json.dumps(baseline, separators=(",", ":")))
+    return f"<script>{engine}\n{console_js}</script>"
+
 
 def build(out_dir: Path) -> Path:
     from fastapi.testclient import TestClient
@@ -217,16 +307,16 @@ def build(out_dir: Path) -> Path:
     hi = (analytics.get("by_priority") or {}).get("High", 0)
     kpis = "".join([
         tile("Tickets in window", (insights.get("analytics") or {}).get("total_tickets", "—"),
-             f"{window.get('start','')} to {window.get('end','')}"),
+             f"{window.get('start','')} to {window.get('end','')}", tile_id="kpi-window"),
         tile("High priority share", pct((analytics.get("rates") or {}).get("high_priority_share")),
-             f"all time · {hi} of {total}"),
+             f"all time · {hi} of {total}", tile_id="kpi-high"),
         tile("Median response", mins(rt.get("median_minutes")),
-             f"all time · {rt.get('measured_tickets', 0)} answered of {total}"),
+             f"all time · {rt.get('measured_tickets', 0)} answered of {total}", tile_id="kpi-median"),
         tile("Met response target", pct(sla.get("attainment")),
              "all time · targets are proposals"),
         tile("Still open", status.get("Open", 0),
              f"all time · {status.get('In Progress', 0)} in progress · "
-             f"{status.get('Resolved', 0)} resolved"),
+             f"{status.get('Resolved', 0)} resolved", tile_id="kpi-open"),
     ])
 
     findings = "".join(finding_card(f) for f in insights.get("findings", []))
@@ -329,6 +419,7 @@ td.num{{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}}
 footer{{margin-top:44px;border-top:1px solid {C['line']};padding-top:18px;color:{C['muted']};font-size:12.5px}}
 ul.lim{{margin:8px 0 0;padding-left:20px}}
 ul.lim li{{margin-bottom:5px}}
+__CONSOLE_CSS__
 </style></head><body><div class="wrap">
 
 <header>
@@ -338,6 +429,8 @@ ul.lim li{{margin-bottom:5px}}
      generated {esc(generated)} from the engine ·
      narrative: <b>{esc(narrative.get('engine','deterministic'))}</b></p>
 </header>
+
+__CONSOLE_CARD__
 
 <div class="grid tiles">{kpis}</div>
 
@@ -354,8 +447,8 @@ ul.lim li{{margin-bottom:5px}}
 
 <h2>Where the tickets went</h2>
 <div class="grid cards">
-  <div class="card"><h3>By category</h3>{hbars(list((analytics.get('by_category') or {{}}).items()))}</div>
-  <div class="card"><h3>By priority</h3>{hbars(list((analytics.get('by_priority') or {{}}).items()))}</div>
+  <div class="card"><h3>By category</h3><div id="chart-cat">{hbars(list((analytics.get('by_category') or {{}}).items()))}</div></div>
+  <div class="card"><h3>By priority</h3><div id="chart-pri">{hbars(list((analytics.get('by_priority') or {{}}).items()))}</div></div>
 </div>
 
 <h2>Response time against target</h2>
@@ -437,9 +530,11 @@ ul.lim li{{margin-bottom:5px}}
 (function () {{
   var q = document.getElementById('q'), fc = document.getElementById('fc'),
       fp = document.getElementById('fp'), fs = document.getElementById('fs'),
-      rows = [].slice.call(document.querySelectorAll('#rows tr')),
+      // rows are re-read on every pass: the console prepends generated tickets
+      rows = [],
       count = document.getElementById('count');
   function apply() {{
+    rows = [].slice.call(document.querySelectorAll('#rows tr'));
     var term = q.value.trim().toLowerCase(), c = fc.value, p = fp.value, s = fs.value, n = 0;
     rows.forEach(function (r) {{
       var ok = (!term || r.dataset.t.indexOf(term) > -1)
@@ -450,6 +545,7 @@ ul.lim li{{margin-bottom:5px}}
     }});
     count.textContent = n + ' of ' + rows.length + ' tickets shown';
   }}
+  window.medopsApplyFilters = apply;
   // Deep links: ?q=..., &cat=..., &pri=..., &status=... so a filtered view can be
   // shared with the person who needs to see it.
   var params = new URLSearchParams(location.search);
@@ -461,8 +557,28 @@ ul.lim li{{margin-bottom:5px}}
   apply();
 }})();
 </script>
+__CONSOLE_SCRIPT__
 </body></html>
 """
+    baseline = {
+        "window": {"start": window.get("start", ""), "end": window.get("end", "")},
+        "window_total": (insights.get("analytics") or {}).get("total_tickets", 0),
+        "all_time": {
+            "total": total,
+            "high": hi,
+            "open": status.get("Open", 0),
+            "in_progress": status.get("In Progress", 0),
+            "resolved": status.get("Resolved", 0),
+        },
+        "answered": rt.get("measured_tickets", 0),
+        "categories": dict(analytics.get("by_category") or {}),
+        "priorities": dict(analytics.get("by_priority") or {}),
+        "bar": {"width": 520, "rowh": 34, "colour": C["accent"],
+                "text": C["text"], "muted": C["muted"]},
+    }
+    doc = doc.replace("__CONSOLE_CARD__", CONSOLE_MARKUP)
+    doc = doc.replace("__CONSOLE_CSS__", CONSOLE_CSS)
+    doc = doc.replace("__CONSOLE_SCRIPT__", _console_script(baseline))
     out_dir.mkdir(parents=True, exist_ok=True)
     index = out_dir / "index.html"
     index.write_text(doc, encoding="utf-8")
