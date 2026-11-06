@@ -206,7 +206,9 @@
       kpi('Median first response', a.response_time.median_minutes === null ? '–' : Math.round(a.response_time.median_minutes) + ' min',
         a.response_time.measured_tickets + ' of ' + a.total_tickets + ' measured') +
       kpi('On target', pct(a.sla.attainment), a.sla.measured_tickets + ' tickets with a response') +
-      kpi('Open now', num(a.by_status.Open + a.by_status['In Progress']), a.by_status.Resolved + ' resolved');
+      kpi('Open now',
+        num(list.filter(function (r) { return A.statusOf(r) !== 'Resolved'; }).length),
+        list.filter(function (r) { return A.statusOf(r) === 'Resolved'; }).length + ' resolved in total');
 
     $('deptchart').innerHTML = bars(Object.keys(a.by_department).map(function (k) {
       return { label: k, value: a.by_department[k] };
