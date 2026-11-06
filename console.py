@@ -26,7 +26,94 @@ import pandas as pd
 import requests
 import streamlit as st
 
-API_URL = os.getenv("MEDOPS_API_URL", "http://127.0.0.1:8000").rstrip("/")
+# Transport. Two modes, one code path:
+#
+#   MEDOPS_API_URL set   -> talk to that server over HTTP (local dev, or API deployed
+#                           separately from the UI)
+#   MEDOPS_API_URL unset -> run the same FastAPI app in-process
+#
+# The in-process mode exists so the console can be deployed as a single Streamlit app
+# with no backend service. It is not a second implementation: it calls app.main:app,
+# the same routes a remote client would hit, so the screen still cannot disagree with
+# the report. The only difference is that the process holds the ticket store itself,
+# which means data does not survive a restart on an ephemeral host. The sidebar says so.
+API_URL = os.getenv("MEDOPS_API_URL", "").rstrip("/")
+IN_PROCESS = not API_URL
+HTTP_FALLBACK = "http://127.0.0.1:8000"
+
+# Where the store lives, shown in the sidebar so nobody has to guess.
+DB_PATH = os.getenv("MEDOPS_DB_PATH") or "data/tickets_processed.json"
+
+
+@st.cache_resource(show_spinner=False)
+def _inproc_client():
+    """The real FastAPI app, called in-process. Cached across reruns."""
+    from fastapi.testclient import TestClient
+    from app.main import app as _app
+    return TestClient(_app)
+
+
+def _send(method: str, path: str, **kw):
+    """Issue one request through whichever transport is configured."""
+    if IN_PROCESS:
+        kw.pop("timeout", None)          # TestClient has no timeout argument
+        return _inproc_client().request(method, path, **kw)
+    return requests.request(method, f"{API_URL}{path}", timeout=kw.pop("timeout", 30), **kw)
+
+
+class ApiError(Exception):
+    def __init__(self, message, hint):
+        super().__init__(message)
+        self.hint = hint
+
+
+def _read(method: str, path: str, **kw):
+    """Shared error handling: every failure becomes something a tester can act on."""
+    try:
+        r = _send(method, path, **kw)
+    except requests.exceptions.ConnectionError:
+        raise ApiError("Cannot reach the MedOps API.",
+                       f"Start it first: <code>uvicorn app.main:app --reload</code> "
+                       f"(expected at {API_URL}), or unset <code>MEDOPS_API_URL</code> "
+                       f"to run the engine in-process.")
+    except requests.exceptions.Timeout:
+        raise ApiError("The API took too long to answer.", "Try again, then check the API logs.")
+    except Exception as exc:                      # in-process import or runtime failure
+        raise ApiError("The classification engine failed to load.",
+                       f"{type(exc).__name__}: {exc}")
+    if r.status_code >= 500:
+        detail = ""
+        try:
+            detail = r.json().get("detail", "")
+        except Exception:
+            pass
+        raise ApiError(f"The API failed ({r.status_code}).", detail or "Check the API log.")
+    if r.status_code >= 400:
+        detail = ""
+        try:
+            body = r.json()
+            detail = body.get("detail") or body.get("error") or str(body)
+        except Exception:
+            detail = r.text[:200]
+        raise ApiError(f"Request rejected ({r.status_code}).", str(detail))
+    return r
+
+
+def api(method: str, path: str, **kw):
+    r = _read(method, path, **kw)
+    try:
+        return r.json()
+    except ValueError:
+        return r.text
+
+
+def api_bytes(path: str, **kw):
+    """For PDF and CSV: bytes, or None when the endpoint could not produce them."""
+    try:
+        return _read("GET", path, **kw).content
+    except ApiError:
+        return None
+
 
 st.set_page_config(page_title="MedOps AI · Operations Console", page_icon="🏥",
                    layout="wide", initial_sidebar_state="expanded")
@@ -79,44 +166,6 @@ div[data-testid="stMetricValue"] {{ color: {C['text']}; }}
 
 
 # ------------------------------------------------------------------- api client
-class ApiError(Exception):
-    def __init__(self, message, hint):
-        super().__init__(message)
-        self.hint = hint
-
-
-def api(method: str, path: str, **kw):
-    """One request helper: every failure becomes a message a tester can act on."""
-    url = f"{API_URL}{path}"
-    try:
-        r = requests.request(method, url, timeout=kw.pop("timeout", 30), **kw)
-    except requests.exceptions.ConnectionError:
-        raise ApiError("Cannot reach the MedOps API.",
-                       f"Start it first: <code>uvicorn app.main:app --reload</code> "
-                       f"(expected at {API_URL})")
-    except requests.exceptions.Timeout:
-        raise ApiError("The API took too long to answer.", "Try again, then check the API logs.")
-    if r.status_code >= 500:
-        detail = ""
-        try:
-            detail = r.json().get("detail", "")
-        except Exception:
-            pass
-        raise ApiError(f"The API failed ({r.status_code}).", detail or "Check the API console.")
-    if r.status_code >= 400:
-        detail = ""
-        try:
-            body = r.json()
-            detail = body.get("detail") or body.get("error") or str(body)
-        except Exception:
-            detail = r.text[:200]
-        raise ApiError(f"Request rejected ({r.status_code}).", str(detail))
-    try:
-        return r.json()
-    except ValueError:
-        return r.text
-
-
 def show_api_error(e: ApiError):
     st.markdown(f'<div class="stop"><b>{e}</b><br>{e.hint}</div>', unsafe_allow_html=True)
 
@@ -164,6 +213,13 @@ with st.sidebar:
         <div style="font-size:.8rem;color:{C['muted']}">Operations Console · Week 3</div></div>""",
                 unsafe_allow_html=True)
     st.divider()
+    if IN_PROCESS:
+        st.markdown(f"""<div class="note"><b>Single-service mode</b><br>
+            The engine runs inside this app, so there is no API to start. The ticket
+            store is <code>{DB_PATH}</code>.</div>""", unsafe_allow_html=True)
+        st.caption("On a hosted demo the store is ephemeral: tickets added today are "
+                   "lost when the host restarts. The numbers stay reproducible because "
+                   "the same pipeline regenerates them.")
     try:
         health = api("GET", "/health", timeout=6)
         st.markdown(f"""<div class="ok"><b>API connected</b><br>
@@ -175,12 +231,30 @@ with st.sidebar:
     except ApiError as e:
         show_api_error(e)
         health = {}
+    if IN_PROCESS:
+        from pathlib import Path as _Path
+        _demo = _Path("data/demo_tickets.json")
+        _store = _Path(DB_PATH)
+        _empty = not _store.exists() or not _store.read_text(encoding="utf-8").strip(" \n[]")
+        if _empty and _demo.exists():
+            st.markdown('<div class="warn">This deployment starts empty. Load 21 days of '
+                        '<b>synthetic</b> history to see the weekly insight and reports.</div>',
+                        unsafe_allow_html=True)
+            if st.button("Load demo history", type="primary", width="stretch"):
+                import shutil
+                _store.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy(_demo, _store)
+                st.cache_data.clear()
+                st.rerun()
+            st.caption("Synthetic data from the real pipeline. It never touches a "
+                       "hospital file, and every record is tagged synthetic.")
     st.divider()
     if st.button("↻  Reload data", width="stretch"):
         st.cache_data.clear()
         st.rerun()
-    st.caption(f"API: `{API_URL}`")
-    st.caption("Every figure on screen is computed by the API from persisted tickets.")
+    st.caption(f"API: `{API_URL or 'in-process'}`")
+    st.caption("Every figure on screen is computed by the API layer from persisted "
+               "tickets, never in this file.")
 
 tabs = st.tabs(["➕  New request", "🗂  Work the queue", "📈  Weekly insight", "📄  Reports"])
 
@@ -572,11 +646,12 @@ with tabs[3]:
         try:
             with st.spinner("Building the report…"):
                 full = api("GET", "/report", params=rparams)
-                pdf = requests.get(f"{API_URL}/report.pdf", params=rparams, timeout=60)
-                csv = requests.get(f"{API_URL}/report.csv", params=rparams, timeout=60)
+                pdf_bytes = api_bytes("/report.pdf", params=rparams)
+                csv_bytes = api_bytes("/report.csv", params=rparams)
             st.session_state["report"] = full
-            st.session_state["pdf_bytes"] = pdf.content if pdf.ok else None
-            st.session_state["csv_bytes"] = csv.content if csv.ok else None
+            st.session_state["pdf_bytes"] = pdf_bytes
+            st.session_state["csv_bytes"] = csv_bytes
+            st.session_state["pdf_missing"] = pdf_bytes is None
         except ApiError as e:
             show_api_error(e)
 
@@ -598,6 +673,11 @@ with tabs[3]:
             d1.download_button("⬇  Download PDF", st.session_state["pdf_bytes"],
                                file_name=f"medops-weekly-{rep_dept.lower().replace(' ', '-')}.pdf",
                                mime="application/pdf", width="stretch", type="primary")
+        if st.session_state.get("pdf_missing"):
+            st.markdown('<div class="warn">The PDF engine is not available on this host '
+                        '(WeasyPrint needs system libraries). The CSV and JSON below carry '
+                        'the same numbers, and the <code>/report.pdf</code> endpoint works '
+                        'on any host that installs them.</div>', unsafe_allow_html=True)
         if st.session_state.get("csv_bytes"):
             d2.download_button("⬇  Download CSV", st.session_state["csv_bytes"],
                                file_name=f"medops-weekly-{rep_dept.lower().replace(' ', '-')}.csv",
