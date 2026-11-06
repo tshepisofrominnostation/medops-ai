@@ -1,0 +1,1321 @@
+{
+ "generated_by": "scripts/make_app_fixtures.py",
+ "ticket_count": 103,
+ "sla_targets": {
+  "High": 15,
+  "Medium": 120,
+  "Low": 480
+ },
+ "predictions": [
+  {
+   "text": "The patient monitoring terminal in Bay 3 keeps disconnecting mid-surgery. This is unacceptable, we nearly lost a patient. Dr. S. Khumalo (Emergency Ward)",
+   "rule_category": "IT & Medical Tech",
+   "rule_confidence": 1.0,
+   "priority": "High",
+   "category": "IT & Medical Tech",
+   "similarity": 0.3003,
+   "margin": 0.1532,
+   "confident": true,
+   "scores": {
+    "Operations": 0.0861,
+    "IT & Medical Tech": 0.3003,
+    "Finance": 0.1471,
+    "HR": 0.0903
+   },
+   "phi": {
+    "blocked": false,
+    "review": false,
+    "rules": []
+   }
+  },
+  {
+   "text": "Ventilator will not start in ICU, alarm screaming, patient on it now - Sr. Naidoo",
+   "rule_category": "IT & Medical Tech",
+   "rule_confidence": 1.0,
+   "priority": "High",
+   "category": "IT & Medical Tech",
+   "similarity": 0.198,
+   "margin": 0.0752,
+   "confident": true,
+   "scores": {
+    "Operations": 0.0671,
+    "IT & Medical Tech": 0.198,
+    "Finance": 0.1228,
+    "HR": 0.0387
+   },
+   "phi": {
+    "blocked": true,
+    "review": true,
+    "rules": [
+     "named_staff",
+     "relative_reference"
+    ]
+   }
+  },
+  {
+   "text": "wifi down in the ward again",
+   "rule_category": "IT & Medical Tech",
+   "rule_confidence": 1.0,
+   "priority": "Medium",
+   "category": "IT & Medical Tech",
+   "similarity": 0.1398,
+   "margin": 0.1088,
+   "confident": true,
+   "scores": {
+    "Operations": 0.031,
+    "IT & Medical Tech": 0.1398,
+    "Finance": 0.0,
+    "HR": 0.0189
+   },
+   "phi": {
+    "blocked": false,
+    "review": false,
+    "rules": []
+   }
+  },
+  {
+   "text": "cant log into the EMR system, password expired, need access urgently",
+   "rule_category": "IT & Medical Tech",
+   "rule_confidence": 1.0,
+   "priority": "Medium",
+   "category": "IT & Medical Tech",
+   "similarity": 0.1407,
+   "margin": 0.0884,
+   "confident": true,
+   "scores": {
+    "Operations": 0.0365,
+    "IT & Medical Tech": 0.1407,
+    "Finance": 0.0523,
+    "HR": 0.0456
+   },
+   "phi": {
+    "blocked": false,
+    "review": false,
+    "rules": []
+   }
+  },
+  {
+   "text": "Theatre 2 aircon is blowing hot air, surgeons complaining",
+   "rule_category": "Operations",
+   "rule_confidence": 1.0,
+   "priority": "Medium",
+   "category": "Operations",
+   "similarity": 0.1923,
+   "margin": 0.1397,
+   "confident": true,
+   "scores": {
+    "Operations": 0.1923,
+    "IT & Medical Tech": 0.0526,
+    "Finance": 0.0279,
+    "HR": 0.0403
+   },
+   "phi": {
+    "blocked": false,
+    "review": false,
+    "rules": []
+   }
+  },
+  {
+   "text": "Water leak in the corridor outside maternity, floor is flooding",
+   "rule_category": "Operations",
+   "rule_confidence": 1.0,
+   "priority": "Medium",
+   "category": "Operations",
+   "similarity": 0.1479,
+   "margin": 0.0385,
+   "confident": false,
+   "scores": {
+    "Operations": 0.1479,
+    "IT & Medical Tech": 0.1094,
+    "Finance": 0.039,
+    "HR": 0.0468
+   },
+   "phi": {
+    "blocked": false,
+    "review": false,
+    "rules": []
+   }
+  },
+  {
+   "text": "Please can you check why my payslip shows no overtime for October",
+   "rule_category": "HR",
+   "rule_confidence": 1.0,
+   "priority": "Low",
+   "category": "HR",
+   "similarity": 0.3027,
+   "margin": 0.2603,
+   "confident": true,
+   "scores": {
+    "Operations": 0.0089,
+    "IT & Medical Tech": 0.0251,
+    "Finance": 0.0424,
+    "HR": 0.3027
+   },
+   "phi": {
+    "blocked": false,
+    "review": false,
+    "rules": []
+   }
+  },
+  {
+   "text": "I want to apply for study leave for next year, forms please",
+   "rule_category": "HR",
+   "rule_confidence": 1.0,
+   "priority": "Low",
+   "category": "HR",
+   "similarity": 0.1373,
+   "margin": 0.1248,
+   "confident": true,
+   "scores": {
+    "Operations": 0.0,
+    "IT & Medical Tech": 0.0,
+    "Finance": 0.0125,
+    "HR": 0.1373
+   },
+   "phi": {
+    "blocked": false,
+    "review": false,
+    "rules": []
+   }
+  },
+  {
+   "text": "Invoice from MedSupply is double what we agreed, R48 000 instead of R24 000",
+   "rule_category": "Finance",
+   "rule_confidence": 1.0,
+   "priority": "Low",
+   "category": "Finance",
+   "similarity": 0.2094,
+   "margin": 0.1725,
+   "confident": true,
+   "scores": {
+    "Operations": 0.012,
+    "IT & Medical Tech": 0.0369,
+    "Finance": 0.2094,
+    "HR": 0.0237
+   },
+   "phi": {
+    "blocked": false,
+    "review": false,
+    "rules": []
+   }
+  },
+  {
+   "text": "Urgent payment for the dialysis supplier, they are refusing delivery today",
+   "rule_category": "IT & Medical Tech",
+   "rule_confidence": 0.5,
+   "priority": "High",
+   "category": "Finance",
+   "similarity": 0.2082,
+   "margin": 0.0977,
+   "confident": true,
+   "scores": {
+    "Operations": 0.0622,
+    "IT & Medical Tech": 0.1105,
+    "Finance": 0.2082,
+    "HR": 0.084
+   },
+   "phi": {
+    "blocked": false,
+    "review": false,
+    "rules": []
+   }
+  },
+  {
+   "text": "Bathroom in ward 4B has no water since Monday",
+   "rule_category": "HR",
+   "rule_confidence": 0.6,
+   "priority": "Low",
+   "category": "Operations",
+   "similarity": 0.0957,
+   "margin": 0.0446,
+   "confident": false,
+   "scores": {
+    "Operations": 0.0957,
+    "IT & Medical Tech": 0.0509,
+    "Finance": 0.0086,
+    "HR": 0.0511
+   },
+   "phi": {
+    "blocked": false,
+    "review": false,
+    "rules": []
+   }
+  },
+  {
+   "text": "Generator did not start during load shedding, theatre backup failed",
+   "rule_category": "Operations",
+   "rule_confidence": 1.0,
+   "priority": "High",
+   "category": "Operations",
+   "similarity": 0.1936,
+   "margin": 0.1061,
+   "confident": true,
+   "scores": {
+    "Operations": 0.1936,
+    "IT & Medical Tech": 0.0875,
+    "Finance": 0.0218,
+    "HR": 0.035
+   },
+   "phi": {
+    "blocked": false,
+    "review": false,
+    "rules": []
+   }
+  },
+  {
+   "text": "Roster for December is still not published, staff are threatening to strike",
+   "rule_category": "HR",
+   "rule_confidence": 1.0,
+   "priority": "Low",
+   "category": "HR",
+   "similarity": 0.1701,
+   "margin": 0.1247,
+   "confident": true,
+   "scores": {
+    "Operations": 0.0314,
+    "IT & Medical Tech": 0.0302,
+    "Finance": 0.0454,
+    "HR": 0.1701
+   },
+   "phi": {
+    "blocked": false,
+    "review": false,
+    "rules": []
+   }
+  },
+  {
+   "text": "Staff shortage in ICU tonight, short two nurses, no cover",
+   "rule_category": "HR",
+   "rule_confidence": 1.0,
+   "priority": "High",
+   "category": "HR",
+   "similarity": 0.0943,
+   "margin": 0.0483,
+   "confident": false,
+   "scores": {
+    "Operations": 0.0317,
+    "IT & Medical Tech": 0.046,
+    "Finance": 0.0105,
+    "HR": 0.0943
+   },
+   "phi": {
+    "blocked": false,
+    "review": false,
+    "rules": []
+   }
+  },
+  {
+   "text": "bed 12 patient Mr. Dlamini says his drip alarm keeps going off",
+   "rule_category": "Operations",
+   "rule_confidence": 1.0,
+   "priority": "Medium",
+   "category": "Finance",
+   "similarity": 0.1109,
+   "margin": 0.0356,
+   "confident": false,
+   "scores": {
+    "Operations": 0.0444,
+    "IT & Medical Tech": 0.0753,
+    "Finance": 0.1109,
+    "HR": 0.0365
+   },
+   "phi": {
+    "blocked": true,
+    "review": false,
+    "rules": [
+     "bed_or_room_location",
+     "named_person"
+    ]
+   }
+  },
+  {
+   "text": "The 62-year-old woman in cubicle 7 has been waiting since Tuesday, she is on ARVs and her treatment was interrupted",
+   "rule_category": "Operations",
+   "rule_confidence": 0.0,
+   "priority": "Low",
+   "category": "Finance",
+   "similarity": 0.0995,
+   "margin": 0.0008,
+   "confident": false,
+   "scores": {
+    "Operations": 0.0619,
+    "IT & Medical Tech": 0.0635,
+    "Finance": 0.0995,
+    "HR": 0.0987
+   },
+   "phi": {
+    "blocked": true,
+    "review": true,
+    "rules": [
+     "age_and_gender",
+     "bed_or_room_location",
+     "pronoun_medical_history",
+     "relative_reference"
+    ]
+   }
+  },
+  {
+   "text": "Patient tried to overdose last night, psychiatric referral needed, the lady from Germiston",
+   "rule_category": "Operations",
+   "rule_confidence": 0.0,
+   "priority": "Low",
+   "category": "Finance",
+   "similarity": 0.1085,
+   "margin": 0.0106,
+   "confident": false,
+   "scores": {
+    "Operations": 0.0454,
+    "IT & Medical Tech": 0.0944,
+    "Finance": 0.1085,
+    "HR": 0.0979
+   },
+   "phi": {
+    "blocked": true,
+    "review": false,
+    "rules": [
+     "relative_reference",
+     "sensitive_condition_with_person"
+    ]
+   }
+  },
+  {
+   "text": "MRI scanner is offline, service provider says part is on backorder",
+   "rule_category": "IT & Medical Tech",
+   "rule_confidence": 1.0,
+   "priority": "Medium",
+   "category": "IT & Medical Tech",
+   "similarity": 0.178,
+   "margin": 0.0946,
+   "confident": true,
+   "scores": {
+    "Operations": 0.0517,
+    "IT & Medical Tech": 0.178,
+    "Finance": 0.0834,
+    "HR": 0.0377
+   },
+   "phi": {
+    "blocked": false,
+    "review": false,
+    "rules": []
+   }
+  },
+  {
+   "text": "Kitchen fridge temperature log is not being completed, cold chain risk",
+   "rule_category": "Operations",
+   "rule_confidence": 1.0,
+   "priority": "Low",
+   "category": "Operations",
+   "similarity": 0.224,
+   "margin": 0.1789,
+   "confident": true,
+   "scores": {
+    "Operations": 0.224,
+    "IT & Medical Tech": 0.0451,
+    "Finance": 0.0361,
+    "HR": 0.0343
+   },
+   "phi": {
+    "blocked": false,
+    "review": false,
+    "rules": []
+   }
+  },
+  {
+   "text": "Elevator in block C is stuck between floors with people inside",
+   "rule_category": "Operations",
+   "rule_confidence": 1.0,
+   "priority": "Low",
+   "category": "Operations",
+   "similarity": 0.1596,
+   "margin": 0.0444,
+   "confident": true,
+   "scores": {
+    "Operations": 0.1596,
+    "IT & Medical Tech": 0.1152,
+    "Finance": 0.0104,
+    "HR": 0.0215
+   },
+   "phi": {
+    "blocked": false,
+    "review": false,
+    "rules": []
+   }
+  },
+  {
+   "text": "asdfgh qwerty zxcv",
+   "rule_category": "Operations",
+   "rule_confidence": 0.0,
+   "priority": "Low",
+   "category": "HR",
+   "similarity": 0.0591,
+   "margin": 0.047,
+   "confident": false,
+   "scores": {
+    "Operations": 0.0121,
+    "IT & Medical Tech": 0.0083,
+    "Finance": 0.0,
+    "HR": 0.0591
+   },
+   "phi": {
+    "blocked": false,
+    "review": false,
+    "rules": []
+   }
+  },
+  {
+   "text": "Good morning, thank you for your help last week, could you please resend the tariff schedule",
+   "rule_category": "Finance",
+   "rule_confidence": 1.0,
+   "priority": "Low",
+   "category": "Finance",
+   "similarity": 0.1392,
+   "margin": 0.0573,
+   "confident": true,
+   "scores": {
+    "Operations": 0.0206,
+    "IT & Medical Tech": 0.0819,
+    "Finance": 0.1392,
+    "HR": 0.067
+   },
+   "phi": {
+    "blocked": false,
+    "review": false,
+    "rules": []
+   }
+  },
+  {
+   "text": "Die rekenaar in ontvangs werk nie, ons kan nie pasiente help nie",
+   "rule_category": "Operations",
+   "rule_confidence": 0.0,
+   "priority": "Low",
+   "category": "HR",
+   "similarity": 0.0854,
+   "margin": 0.0125,
+   "confident": false,
+   "scores": {
+    "Operations": 0.0729,
+    "IT & Medical Tech": 0.0301,
+    "Finance": 0.0582,
+    "HR": 0.0854
+   },
+   "phi": {
+    "blocked": false,
+    "review": false,
+    "rules": []
+   }
+  },
+  {
+   "text": "Security gate camera footage for the parking is not recording",
+   "rule_category": "Operations",
+   "rule_confidence": 0.0,
+   "priority": "Low",
+   "category": "Operations",
+   "similarity": 0.0693,
+   "margin": 0.0244,
+   "confident": false,
+   "scores": {
+    "Operations": 0.0693,
+    "IT & Medical Tech": 0.0449,
+    "Finance": 0.0257,
+    "HR": 0.0363
+   },
+   "phi": {
+    "blocked": false,
+    "review": false,
+    "rules": []
+   }
+  }
+ ],
+ "analytics": [
+  {
+   "start": null,
+   "end": null,
+   "value": {
+    "total_tickets": 103,
+    "date_range": {
+     "first": "2026-10-17",
+     "last": "2026-11-06"
+    },
+    "window": {
+     "start": null,
+     "end": null
+    },
+    "by_category": {
+     "IT & Medical Tech": 35,
+     "HR": 15,
+     "Finance": 13,
+     "Operations": 40
+    },
+    "by_priority": {
+     "High": 31,
+     "Medium": 18,
+     "Low": 54
+    },
+    "by_department": {
+     "Operations & Maintenance Team": 30,
+     "IT & Biomedical Engineering on-call": 21,
+     "HR Admin Team": 15,
+     "IT Service Desk": 14,
+     "Finance Operations Team": 13,
+     "Operations Emergency Response": 10
+    },
+    "by_day": [
+     {
+      "date": "2026-10-17",
+      "count": 1
+     },
+     {
+      "date": "2026-10-18",
+      "count": 2
+     },
+     {
+      "date": "2026-10-19",
+      "count": 5
+     },
+     {
+      "date": "2026-10-20",
+      "count": 3
+     },
+     {
+      "date": "2026-10-21",
+      "count": 6
+     },
+     {
+      "date": "2026-10-22",
+      "count": 6
+     },
+     {
+      "date": "2026-10-23",
+      "count": 3
+     },
+     {
+      "date": "2026-10-24",
+      "count": 1
+     },
+     {
+      "date": "2026-10-25",
+      "count": 1
+     },
+     {
+      "date": "2026-10-26",
+      "count": 4
+     },
+     {
+      "date": "2026-10-27",
+      "count": 12
+     },
+     {
+      "date": "2026-10-28",
+      "count": 9
+     },
+     {
+      "date": "2026-10-29",
+      "count": 12
+     },
+     {
+      "date": "2026-10-30",
+      "count": 6
+     },
+     {
+      "date": "2026-10-31",
+      "count": 3
+     },
+     {
+      "date": "2026-11-01",
+      "count": 1
+     },
+     {
+      "date": "2026-11-02",
+      "count": 7
+     },
+     {
+      "date": "2026-11-03",
+      "count": 5
+     },
+     {
+      "date": "2026-11-04",
+      "count": 7
+     },
+     {
+      "date": "2026-11-05",
+      "count": 4
+     },
+     {
+      "date": "2026-11-06",
+      "count": 5
+     }
+    ],
+    "rates": {
+     "high_priority_share": 0.301,
+     "tickets_per_day": 4.9
+    },
+    "undated_tickets": 0,
+    "by_status": {
+     "Open": 2,
+     "In Progress": 31,
+     "Resolved": 70
+    },
+    "by_category_by_day": [
+     {
+      "date": "2026-10-17",
+      "IT & Medical Tech": 1,
+      "HR": 0,
+      "Finance": 0,
+      "Operations": 0
+     },
+     {
+      "date": "2026-10-18",
+      "IT & Medical Tech": 0,
+      "HR": 0,
+      "Finance": 1,
+      "Operations": 1
+     },
+     {
+      "date": "2026-10-19",
+      "IT & Medical Tech": 1,
+      "HR": 1,
+      "Finance": 1,
+      "Operations": 2
+     },
+     {
+      "date": "2026-10-20",
+      "IT & Medical Tech": 1,
+      "HR": 0,
+      "Finance": 1,
+      "Operations": 1
+     },
+     {
+      "date": "2026-10-21",
+      "IT & Medical Tech": 2,
+      "HR": 2,
+      "Finance": 1,
+      "Operations": 1
+     },
+     {
+      "date": "2026-10-22",
+      "IT & Medical Tech": 2,
+      "HR": 1,
+      "Finance": 1,
+      "Operations": 2
+     },
+     {
+      "date": "2026-10-23",
+      "IT & Medical Tech": 1,
+      "HR": 2,
+      "Finance": 0,
+      "Operations": 0
+     },
+     {
+      "date": "2026-10-24",
+      "IT & Medical Tech": 1,
+      "HR": 0,
+      "Finance": 0,
+      "Operations": 0
+     },
+     {
+      "date": "2026-10-25",
+      "IT & Medical Tech": 1,
+      "HR": 0,
+      "Finance": 0,
+      "Operations": 0
+     },
+     {
+      "date": "2026-10-26",
+      "IT & Medical Tech": 1,
+      "HR": 2,
+      "Finance": 1,
+      "Operations": 0
+     },
+     {
+      "date": "2026-10-27",
+      "IT & Medical Tech": 3,
+      "HR": 2,
+      "Finance": 1,
+      "Operations": 6
+     },
+     {
+      "date": "2026-10-28",
+      "IT & Medical Tech": 3,
+      "HR": 0,
+      "Finance": 1,
+      "Operations": 5
+     },
+     {
+      "date": "2026-10-29",
+      "IT & Medical Tech": 3,
+      "HR": 1,
+      "Finance": 0,
+      "Operations": 8
+     },
+     {
+      "date": "2026-10-30",
+      "IT & Medical Tech": 2,
+      "HR": 1,
+      "Finance": 2,
+      "Operations": 1
+     },
+     {
+      "date": "2026-10-31",
+      "IT & Medical Tech": 1,
+      "HR": 0,
+      "Finance": 0,
+      "Operations": 2
+     },
+     {
+      "date": "2026-11-01",
+      "IT & Medical Tech": 0,
+      "HR": 0,
+      "Finance": 1,
+      "Operations": 0
+     },
+     {
+      "date": "2026-11-02",
+      "IT & Medical Tech": 3,
+      "HR": 2,
+      "Finance": 0,
+      "Operations": 2
+     },
+     {
+      "date": "2026-11-03",
+      "IT & Medical Tech": 3,
+      "HR": 0,
+      "Finance": 0,
+      "Operations": 2
+     },
+     {
+      "date": "2026-11-04",
+      "IT & Medical Tech": 3,
+      "HR": 0,
+      "Finance": 1,
+      "Operations": 3
+     },
+     {
+      "date": "2026-11-05",
+      "IT & Medical Tech": 1,
+      "HR": 1,
+      "Finance": 1,
+      "Operations": 1
+     },
+     {
+      "date": "2026-11-06",
+      "IT & Medical Tech": 2,
+      "HR": 0,
+      "Finance": 0,
+      "Operations": 3
+     }
+    ],
+    "response_time": {
+     "measured_tickets": 101,
+     "unmeasured_tickets": 2,
+     "mean_minutes": 192.97,
+     "median_minutes": 96.97,
+     "worst_minutes": 960.45,
+     "by_priority": {
+      "High": 11.51,
+      "Medium": 101.82,
+      "Low": 320.8
+     },
+     "by_category": {
+      "IT & Medical Tech": 92.3,
+      "HR": 307.76,
+      "Finance": 241.84,
+      "Operations": 220.29
+     },
+     "mean_resolution_minutes": 704.84
+    },
+    "sla": {
+     "targets_minutes": {
+      "High": 15,
+      "Medium": 120,
+      "Low": 480
+     },
+     "measured_tickets": 101,
+     "attainment": 0.6634,
+     "by_priority": {
+      "High": 0.6207,
+      "Medium": 0.5,
+      "Low": 0.7407
+     }
+    }
+   }
+  },
+  {
+   "start": "2026-10-31",
+   "end": "2026-11-06",
+   "value": {
+    "total_tickets": 32,
+    "date_range": {
+     "first": "2026-10-31",
+     "last": "2026-11-06"
+    },
+    "window": {
+     "start": "2026-10-31",
+     "end": "2026-11-06"
+    },
+    "by_category": {
+     "IT & Medical Tech": 13,
+     "HR": 3,
+     "Finance": 3,
+     "Operations": 13
+    },
+    "by_priority": {
+     "High": 13,
+     "Medium": 5,
+     "Low": 14
+    },
+    "by_department": {
+     "Operations & Maintenance Team": 9,
+     "IT & Biomedical Engineering on-call": 9,
+     "Operations Emergency Response": 4,
+     "IT Service Desk": 4,
+     "Finance Operations Team": 3,
+     "HR Admin Team": 3
+    },
+    "by_day": [
+     {
+      "date": "2026-10-31",
+      "count": 3
+     },
+     {
+      "date": "2026-11-01",
+      "count": 1
+     },
+     {
+      "date": "2026-11-02",
+      "count": 7
+     },
+     {
+      "date": "2026-11-03",
+      "count": 5
+     },
+     {
+      "date": "2026-11-04",
+      "count": 7
+     },
+     {
+      "date": "2026-11-05",
+      "count": 4
+     },
+     {
+      "date": "2026-11-06",
+      "count": 5
+     }
+    ],
+    "rates": {
+     "high_priority_share": 0.4062,
+     "tickets_per_day": 4.57
+    },
+    "undated_tickets": 0,
+    "by_status": {
+     "Open": 2,
+     "In Progress": 8,
+     "Resolved": 22
+    },
+    "by_category_by_day": [
+     {
+      "date": "2026-10-31",
+      "IT & Medical Tech": 1,
+      "HR": 0,
+      "Finance": 0,
+      "Operations": 2
+     },
+     {
+      "date": "2026-11-01",
+      "IT & Medical Tech": 0,
+      "HR": 0,
+      "Finance": 1,
+      "Operations": 0
+     },
+     {
+      "date": "2026-11-02",
+      "IT & Medical Tech": 3,
+      "HR": 2,
+      "Finance": 0,
+      "Operations": 2
+     },
+     {
+      "date": "2026-11-03",
+      "IT & Medical Tech": 3,
+      "HR": 0,
+      "Finance": 0,
+      "Operations": 2
+     },
+     {
+      "date": "2026-11-04",
+      "IT & Medical Tech": 3,
+      "HR": 0,
+      "Finance": 1,
+      "Operations": 3
+     },
+     {
+      "date": "2026-11-05",
+      "IT & Medical Tech": 1,
+      "HR": 1,
+      "Finance": 1,
+      "Operations": 1
+     },
+     {
+      "date": "2026-11-06",
+      "IT & Medical Tech": 2,
+      "HR": 0,
+      "Finance": 0,
+      "Operations": 3
+     }
+    ],
+    "response_time": {
+     "measured_tickets": 30,
+     "unmeasured_tickets": 2,
+     "mean_minutes": 178.74,
+     "median_minutes": 72.03,
+     "worst_minutes": 960.45,
+     "by_priority": {
+      "High": 13.21,
+      "Medium": 77.85,
+      "Low": 344.83
+     },
+     "by_category": {
+      "IT & Medical Tech": 55.89,
+      "HR": 285.02,
+      "Finance": 87.2,
+      "Operations": 297.9
+     },
+     "mean_resolution_minutes": 678.32
+    },
+    "sla": {
+     "targets_minutes": {
+      "High": 15,
+      "Medium": 120,
+      "Low": 480
+     },
+     "measured_tickets": 30,
+     "attainment": 0.6667,
+     "by_priority": {
+      "High": 0.5455,
+      "Medium": 0.6,
+      "Low": 0.7857
+     }
+    }
+   }
+  },
+  {
+   "start": "2026-10-17",
+   "end": "2026-10-23",
+   "value": {
+    "total_tickets": 26,
+    "date_range": {
+     "first": "2026-10-17",
+     "last": "2026-10-23"
+    },
+    "window": {
+     "start": "2026-10-17",
+     "end": "2026-10-23"
+    },
+    "by_category": {
+     "IT & Medical Tech": 8,
+     "HR": 6,
+     "Finance": 5,
+     "Operations": 7
+    },
+    "by_priority": {
+     "High": 4,
+     "Medium": 5,
+     "Low": 17
+    },
+    "by_department": {
+     "Operations & Maintenance Team": 6,
+     "HR Admin Team": 6,
+     "Finance Operations Team": 5,
+     "IT Service Desk": 5,
+     "IT & Biomedical Engineering on-call": 3,
+     "Operations Emergency Response": 1
+    },
+    "by_day": [
+     {
+      "date": "2026-10-17",
+      "count": 1
+     },
+     {
+      "date": "2026-10-18",
+      "count": 2
+     },
+     {
+      "date": "2026-10-19",
+      "count": 5
+     },
+     {
+      "date": "2026-10-20",
+      "count": 3
+     },
+     {
+      "date": "2026-10-21",
+      "count": 6
+     },
+     {
+      "date": "2026-10-22",
+      "count": 6
+     },
+     {
+      "date": "2026-10-23",
+      "count": 3
+     }
+    ],
+    "rates": {
+     "high_priority_share": 0.1538,
+     "tickets_per_day": 3.71
+    },
+    "undated_tickets": 0,
+    "by_status": {
+     "Open": 0,
+     "In Progress": 8,
+     "Resolved": 18
+    },
+    "by_category_by_day": [
+     {
+      "date": "2026-10-17",
+      "IT & Medical Tech": 1,
+      "HR": 0,
+      "Finance": 0,
+      "Operations": 0
+     },
+     {
+      "date": "2026-10-18",
+      "IT & Medical Tech": 0,
+      "HR": 0,
+      "Finance": 1,
+      "Operations": 1
+     },
+     {
+      "date": "2026-10-19",
+      "IT & Medical Tech": 1,
+      "HR": 1,
+      "Finance": 1,
+      "Operations": 2
+     },
+     {
+      "date": "2026-10-20",
+      "IT & Medical Tech": 1,
+      "HR": 0,
+      "Finance": 1,
+      "Operations": 1
+     },
+     {
+      "date": "2026-10-21",
+      "IT & Medical Tech": 2,
+      "HR": 2,
+      "Finance": 1,
+      "Operations": 1
+     },
+     {
+      "date": "2026-10-22",
+      "IT & Medical Tech": 2,
+      "HR": 1,
+      "Finance": 1,
+      "Operations": 2
+     },
+     {
+      "date": "2026-10-23",
+      "IT & Medical Tech": 1,
+      "HR": 2,
+      "Finance": 0,
+      "Operations": 0
+     }
+    ],
+    "response_time": {
+     "measured_tickets": 26,
+     "unmeasured_tickets": 0,
+     "mean_minutes": 223.83,
+     "median_minutes": 39.8,
+     "worst_minutes": 875.93,
+     "by_priority": {
+      "High": 9.86,
+      "Medium": 53.27,
+      "Low": 324.35
+     },
+     "by_category": {
+      "IT & Medical Tech": 148.65,
+      "HR": 336.1,
+      "Finance": 413.84,
+      "Operations": 77.81
+     },
+     "mean_resolution_minutes": 868.73
+    },
+    "sla": {
+     "targets_minutes": {
+      "High": 15,
+      "Medium": 120,
+      "Low": 480
+     },
+     "measured_tickets": 26,
+     "attainment": 0.7308,
+     "by_priority": {
+      "High": 0.75,
+      "Medium": 0.8,
+      "Low": 0.7059
+     }
+    }
+   }
+  },
+  {
+   "start": "2026-11-06",
+   "end": "2026-11-06",
+   "value": {
+    "total_tickets": 5,
+    "date_range": {
+     "first": "2026-11-06",
+     "last": "2026-11-06"
+    },
+    "window": {
+     "start": "2026-11-06",
+     "end": "2026-11-06"
+    },
+    "by_category": {
+     "IT & Medical Tech": 2,
+     "HR": 0,
+     "Finance": 0,
+     "Operations": 3
+    },
+    "by_priority": {
+     "High": 2,
+     "Medium": 0,
+     "Low": 3
+    },
+    "by_department": {
+     "Operations & Maintenance Team": 2,
+     "IT Service Desk": 1,
+     "Operations Emergency Response": 1,
+     "IT & Biomedical Engineering on-call": 1
+    },
+    "by_day": [
+     {
+      "date": "2026-11-06",
+      "count": 5
+     }
+    ],
+    "rates": {
+     "high_priority_share": 0.4,
+     "tickets_per_day": 5.0
+    },
+    "undated_tickets": 0,
+    "by_status": {
+     "Open": 0,
+     "In Progress": 1,
+     "Resolved": 4
+    },
+    "by_category_by_day": [
+     {
+      "date": "2026-11-06",
+      "IT & Medical Tech": 2,
+      "HR": 0,
+      "Finance": 0,
+      "Operations": 3
+     }
+    ],
+    "response_time": {
+     "measured_tickets": 5,
+     "unmeasured_tickets": 0,
+     "mean_minutes": 227.5,
+     "median_minutes": 93.07,
+     "worst_minutes": 595.5,
+     "by_priority": {
+      "High": 19.59,
+      "Medium": null,
+      "Low": 366.1
+     },
+     "by_category": {
+      "IT & Medical Tech": 56.47,
+      "HR": null,
+      "Finance": null,
+      "Operations": 341.52
+     },
+     "mean_resolution_minutes": 716.51
+    },
+    "sla": {
+     "targets_minutes": {
+      "High": 15,
+      "Medium": 120,
+      "Low": 480
+     },
+     "measured_tickets": 5,
+     "attainment": 0.4,
+     "by_priority": {
+      "High": 0.0,
+      "Medium": null,
+      "Low": 0.6667
+     }
+    }
+   }
+  },
+  {
+   "start": "2025-01-01",
+   "end": "2025-01-07",
+   "value": {
+    "total_tickets": 0,
+    "date_range": {
+     "first": null,
+     "last": null
+    },
+    "window": {
+     "start": "2025-01-01",
+     "end": "2025-01-07"
+    },
+    "by_category": {
+     "IT & Medical Tech": 0,
+     "HR": 0,
+     "Finance": 0,
+     "Operations": 0
+    },
+    "by_priority": {
+     "High": 0,
+     "Medium": 0,
+     "Low": 0
+    },
+    "by_department": {},
+    "by_day": [],
+    "rates": {
+     "high_priority_share": 0.0,
+     "tickets_per_day": 0.0
+    },
+    "undated_tickets": 0,
+    "by_status": {
+     "Open": 0,
+     "In Progress": 0,
+     "Resolved": 0
+    },
+    "by_category_by_day": [],
+    "response_time": {
+     "measured_tickets": 0,
+     "unmeasured_tickets": 0,
+     "mean_minutes": null,
+     "median_minutes": null,
+     "worst_minutes": null,
+     "by_priority": {
+      "High": null,
+      "Medium": null,
+      "Low": null
+     },
+     "by_category": {
+      "IT & Medical Tech": null,
+      "HR": null,
+      "Finance": null,
+      "Operations": null
+     },
+     "mean_resolution_minutes": null
+    },
+    "sla": {
+     "targets_minutes": {
+      "High": 15,
+      "Medium": 120,
+      "Low": 480
+     },
+     "measured_tickets": 0,
+     "attainment": null,
+     "by_priority": {
+      "High": null,
+      "Medium": null,
+      "Low": null
+     }
+    }
+   }
+  }
+ ]
+}
