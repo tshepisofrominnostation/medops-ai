@@ -18,6 +18,7 @@ from .report import write_full_report, report_to_csv
 from .models import TicketIn, TicketOut
 from .pipeline import process_ticket
 from .persistence import load_all
+from .weekly_report import build_weekly_summary
 from .reply_writer import ReplyWriter
 
 MAX_MESSAGE = 2000
@@ -240,6 +241,54 @@ def report_csv(department: Optional[str] = None, end: Optional[str] = None):
     name = f"medops-weekly-{(department or 'all').lower().replace(' ', '-')}.csv"
     return PlainTextResponse(report_to_csv(data), media_type="text/csv",
                              headers={"Content-Disposition": f'attachment; filename="{name}"'})
+
+
+def _validated_window(start: Optional[str], end: Optional[str]) -> tuple[Optional[str], Optional[str]]:
+    """Dates arrive from a URL: reject anything that is not exactly YYYY-MM-DD."""
+    from datetime import date as _date
+    for label, value in (("start", start), ("end", end)):
+        if value is None:
+            continue
+        try:
+            if _date.fromisoformat(value).isoformat() != value:
+                raise ValueError
+        except ValueError:
+            raise HTTPException(status_code=400, detail=f"Invalid {label} date. Use YYYY-MM-DD.")
+    if start and end and start > end:
+        raise HTTPException(status_code=400, detail="Start date cannot be after end date.")
+    return start, end
+
+
+@app.get("/report/weekly.json")
+def weekly_report_json(start: Optional[str] = None, end: Optional[str] = None):
+    """S2-3: the weekly operations summary as data (SLA, departments, category mix)."""
+    start, end = _validated_window(start, end)
+    summary = build_weekly_summary(load_all(), start=start, end=end)
+    return {
+        "period": summary["period"],
+        "generated_at": summary["generated_at"],
+        "analytics": summary["analytics"],
+        "departments": summary["departments"],
+        "sla": summary["sla"],
+    }
+
+
+@app.get("/report/weekly.pdf")
+def weekly_report_pdf(start: Optional[str] = None, end: Optional[str] = None):
+    """S2-3: one-page weekly PDF — SLA compliance, queues, category mix."""
+    from fastapi.responses import Response
+
+    from .weekly_report import generate_weekly_pdf
+
+    start, end = _validated_window(start, end)
+    try:
+        payload = generate_weekly_pdf(load_all(), start=start, end=end)
+    except RuntimeError as exc:
+        raise HTTPException(status_code=503, detail=f"{exc}; use /report/weekly.json") from exc
+    period = build_weekly_summary(load_all(), start=start, end=end)["period"]
+    name = f"medops-weekly-{period['start'] or 'all'}.pdf"
+    return Response(content=payload, media_type="application/pdf",
+                    headers={"Content-Disposition": f'attachment; filename="{name}"'})
 
 
 @app.get("/report.pdf")

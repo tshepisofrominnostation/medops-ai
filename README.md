@@ -27,6 +27,13 @@ Do not hand-edit `docs/index.html`.
 The Week 3 module — storage schema, trend functions, dashboard and summary generator — is
 documented in **[docs/WEEK3_ANALYTICS.md](docs/WEEK3_ANALYTICS.md)**.
 
+The weekly operations report is `/report/weekly.pdf` (one page: SLA compliance for response
+*and* resolution, volume by queue, category mix) with `/report/weekly.json` behind it. It is
+also published at
+[`docs/artifacts/weekly_report.pdf`](docs/artifacts/weekly_report.pdf), generated from the
+committed sample history at build time, next to the Week 4 executive report at
+`/report.pdf` (`/report`, `/report.csv`).
+
 The Week 3 and Week 4 walkthrough, with expected outputs and a completion checklist,
 is in **[docs/WEEK3_4_GUIDE.md](docs/WEEK3_4_GUIDE.md)**.
 

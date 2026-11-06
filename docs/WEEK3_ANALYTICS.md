@@ -176,6 +176,24 @@ This is the deliberate opposite of the earlier `app/nlp/narrative.py` rule: a mo
 reword these findings, never add one. On the static page there is no model in the loop at
 all, which is the honest option when the page must work offline.
 
+### The weekly PDF
+
+`app/weekly_report.py` renders the week as a one-page PDF: SLA compliance per priority for
+both first response and resolution, volume by receiving queue with its priority mix, and the
+category breakdown. Served at `/report/weekly.pdf`, with `/report/weekly.json` behind it for
+anything that wants the numbers rather than the page. A copy built from the committed sample
+history ships as `docs/artifacts/weekly_report.pdf` and is linked from the summary tab.
+
+Two details worth knowing, because both were bugs waiting to happen:
+
+- **One target definition.** Response targets live in `app/lifecycle.py`
+  (`SLA_TARGET_MINUTES`), resolution targets beside them
+  (`RESOLUTION_TARGET_MINUTES`). The dashboard, the JSON, the executive report and the weekly
+  PDF all import them, so the same ticket cannot be on target in one view and late in another.
+- **One response field.** Week 3 writes `first_response_at`. Exports made before that
+  existed carry `responded_at`, which the weekly report reads as a fallback: old history stays
+  measurable and nothing is invented for a ticket that has no timestamp.
+
 ---
 
 ## 5. How it integrates
