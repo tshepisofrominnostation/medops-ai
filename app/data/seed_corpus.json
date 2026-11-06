@@ -1,0 +1,326 @@
+{
+ "synthetic": true,
+ "note": "Hand-written seed corpus for the semantic classifier. Synthetic, not real hospital data, not drawn from tests/data/evaluation_set.json. Do not quote accuracy on it as real-world accuracy.",
+ "rows": [
+  {
+   "text": "Cleaning staff have not serviced the isolation ward today",
+   "category": "Operations"
+  },
+  {
+   "text": "The ward computer froze and I cannot open the patient record screen",
+   "category": "IT & Medical Tech"
+  },
+  {
+   "text": "We need approval to purchase additional gloves before the budget closes",
+   "category": "Finance"
+  },
+  {
+   "text": "Request for maternity leave paperwork and the dates that apply",
+   "category": "HR"
+  },
+  {
+   "text": "Garden refuse has blocked the drainage outside the mortuary",
+   "category": "Operations"
+  },
+  {
+   "text": "Several light fittings in the east corridor have burnt out",
+   "category": "Operations"
+  },
+  {
+   "text": "How many sick days do I have left this year",
+   "category": "HR"
+  },
+  {
+   "text": "Please update my bank details for salary payments",
+   "category": "HR"
+  },
+  {
+   "text": "The lab results interface is not sending results to the electronic record",
+   "category": "IT & Medical Tech"
+  },
+  {
+   "text": "Tender documents for cleaning services need finance sign off",
+   "category": "Finance"
+  },
+  {
+   "text": "I want to hand in my resignation and need to know the notice period",
+   "category": "HR"
+  },
+  {
+   "text": "The air conditioning in theatre two has stopped and the room is getting hot",
+   "category": "Operations"
+  },
+  {
+   "text": "Staff training on fire safety needs to be scheduled for the new interns",
+   "category": "HR"
+  },
+  {
+   "text": "The lift between the ground and fourth floors is stuck again",
+   "category": "Operations"
+  },
+  {
+   "text": "A strong smell of gas near the boiler room",
+   "category": "Operations"
+  },
+  {
+   "text": "Recruitment panel for the ward manager post needs a venue and dates",
+   "category": "HR"
+  },
+  {
+   "text": "I would like to apply for annual leave from the first to the fifth of December",
+   "category": "HR"
+  },
+  {
+   "text": "The car park gate barrier is broken and ambulances are queuing",
+   "category": "Operations"
+  },
+  {
+   "text": "Our email stopped syncing on the ward tablets since last night",
+   "category": "IT & Medical Tech"
+  },
+  {
+   "text": "The nurse call system is not registering requests from room twelve",
+   "category": "IT & Medical Tech"
+  },
+  {
+   "text": "We need to advertise a vacancy for a radiographer",
+   "category": "HR"
+  },
+  {
+   "text": "My payslip for October shows the wrong number of overtime hours",
+   "category": "HR"
+  },
+  {
+   "text": "ECG cart will not power on after being moved",
+   "category": "IT & Medical Tech"
+  },
+  {
+   "text": "Disciplinary hearing outcome letter has not been issued yet",
+   "category": "HR"
+  },
+  {
+   "text": "A purchase order was raised with the wrong cost centre",
+   "category": "Finance"
+  },
+  {
+   "text": "Our bedside monitors lose their link to the central station every few minutes",
+   "category": "IT & Medical Tech"
+  },
+  {
+   "text": "Medical aid rejected the claim for the surgical admission, please review",
+   "category": "Finance"
+  },
+  {
+   "text": "Please process the reimbursement for my conference travel expenses",
+   "category": "Finance"
+  },
+  {
+   "text": "We are short of two night nurses on the paediatric rota this weekend",
+   "category": "HR"
+  },
+  {
+   "text": "Ultrasound machine software needs to be reinstalled it shows a licence error",
+   "category": "IT & Medical Tech"
+  },
+  {
+   "text": "Debtors report shows several accounts over ninety days outstanding",
+   "category": "Finance"
+  },
+  {
+   "text": "Please confirm my employment contract renewal before the end of the month",
+   "category": "HR"
+  },
+  {
+   "text": "Linen delivery is two days late and wards are running out of sheets",
+   "category": "Operations"
+  },
+  {
+   "text": "Security guard needed at the pharmacy entrance after hours",
+   "category": "Operations"
+  },
+  {
+   "text": "A ceiling panel in the waiting area has water stains and looks ready to fall",
+   "category": "Operations"
+  },
+  {
+   "text": "Petty cash float is empty and receipts need to be reconciled",
+   "category": "Finance"
+  },
+  {
+   "text": "The hospital bed in room eight has a broken side rail",
+   "category": "Operations"
+  },
+  {
+   "text": "Paint is peeling badly in the children's play area",
+   "category": "Operations"
+  },
+  {
+   "text": "Cash up discrepancy at the outpatient cashier this morning",
+   "category": "Finance"
+  },
+  {
+   "text": "I was not paid for the extra shifts I covered last month",
+   "category": "HR"
+  },
+  {
+   "text": "The fire extinguisher in block C is past its inspection date",
+   "category": "Operations"
+  },
+  {
+   "text": "I submitted a grievance two weeks ago and have had no feedback",
+   "category": "HR"
+  },
+  {
+   "text": "A virus warning keeps appearing on the reception pc",
+   "category": "IT & Medical Tech"
+  },
+  {
+   "text": "Hot water is not available in the female ward showers",
+   "category": "Operations"
+  },
+  {
+   "text": "A pipe is leaking under the sink in the staff kitchen",
+   "category": "Operations"
+  },
+  {
+   "text": "I am locked out of my account and the password reset email never arrives",
+   "category": "IT & Medical Tech"
+  },
+  {
+   "text": "The cold room temperature alarm is sounding in the main kitchen",
+   "category": "Operations"
+  },
+  {
+   "text": "Audit query about missing supporting documents for last quarter payments",
+   "category": "Finance"
+  },
+  {
+   "text": "A new staff member starts Monday and needs an induction session booked",
+   "category": "HR"
+  },
+  {
+   "text": "VAT on the equipment lease invoice seems wrong",
+   "category": "Finance"
+  },
+  {
+   "text": "Request to write off a small unrecoverable patient balance",
+   "category": "Finance"
+  },
+  {
+   "text": "Forecast of next quarter's consumables spend is needed for planning",
+   "category": "Finance"
+  },
+  {
+   "text": "Employee wellness day request for the whole theatre team",
+   "category": "HR"
+  },
+  {
+   "text": "Credit note has not been applied to the supplier's account",
+   "category": "Finance"
+  },
+  {
+   "text": "The supplier says our invoice from August is still unpaid and is threatening to stop delivery",
+   "category": "Finance"
+  },
+  {
+   "text": "Backup of the patient admissions database failed overnight",
+   "category": "IT & Medical Tech"
+  },
+  {
+   "text": "Need pest control for cockroaches near the canteen",
+   "category": "Operations"
+  },
+  {
+   "text": "The agency staff who covered our ward last week need their timesheets signed",
+   "category": "HR"
+  },
+  {
+   "text": "Can I get a statement for the account of the patient admitted on the ninth",
+   "category": "Finance"
+  },
+  {
+   "text": "The printer on the third floor will not connect to the shared drive",
+   "category": "IT & Medical Tech"
+  },
+  {
+   "text": "The automatic door at the emergency entrance is jammed",
+   "category": "Operations"
+  },
+  {
+   "text": "Who approves study leave for the nursing diploma exams",
+   "category": "HR"
+  },
+  {
+   "text": "The infusion pump display shows an error code after the update",
+   "category": "IT & Medical Tech"
+  },
+  {
+   "text": "My UIF and pension deductions look incorrect on this month's pay",
+   "category": "HR"
+  },
+  {
+   "text": "The theatre scheduling application keeps crashing when I save a booking",
+   "category": "IT & Medical Tech"
+  },
+  {
+   "text": "Our department is over its monthly spending limit, who must approve extra funds",
+   "category": "Finance"
+  },
+  {
+   "text": "Please confirm that the payment to the medical gas vendor went out on Friday",
+   "category": "Finance"
+  },
+  {
+   "text": "The ventilator alarm panel is unresponsive and needs engineering to look at it",
+   "category": "IT & Medical Tech"
+  },
+  {
+   "text": "Barcode scanner at pharmacy dispensing stopped reading wristbands",
+   "category": "IT & Medical Tech"
+  },
+  {
+   "text": "Can the roster be changed so I do not work consecutive night shifts",
+   "category": "HR"
+  },
+  {
+   "text": "The generator did not start during the power cut this afternoon",
+   "category": "Operations"
+  },
+  {
+   "text": "Radiology viewer is extremely slow and images fail to load",
+   "category": "IT & Medical Tech"
+  },
+  {
+   "text": "The quotation for the new autoclave exceeds what we budgeted",
+   "category": "Finance"
+  },
+  {
+   "text": "VPN will not let the on call doctor log in from home",
+   "category": "IT & Medical Tech"
+  },
+  {
+   "text": "Medical waste bins are overflowing and have not been collected",
+   "category": "Operations"
+  },
+  {
+   "text": "Telemetry feed for the cardiac unit is lagging behind real time",
+   "category": "IT & Medical Tech"
+  },
+  {
+   "text": "Wireless signal is dropping in the maternity corridor all morning",
+   "category": "IT & Medical Tech"
+  },
+  {
+   "text": "The tariff applied to the maternity package looks too high",
+   "category": "Finance"
+  },
+  {
+   "text": "Dialysis machine touchscreen is not responding to touch",
+   "category": "IT & Medical Tech"
+  },
+  {
+   "text": "A patient was billed twice for the same procedure and wants a refund",
+   "category": "Finance"
+  }
+ ]
+}

@@ -58,6 +58,10 @@ def screen(text: str) -> dict:
                 "match": m.group(0)[:60],
                 "span": [m.start(), m.end()],
             })
+    # Semantic PHI layer (closes R4): composition-based detection the regexes cannot do.
+    from .nlp.phi import detect as detect_semantic_phi
+    flags.extend(detect_semantic_phi(body)["flags"])
+
     blocked = [f for f in flags if f["severity"] == "block"]
     review = [f for f in flags if f["severity"] == "review"]
     return {
@@ -65,6 +69,10 @@ def screen(text: str) -> dict:
         "verdict": "blocked" if blocked else ("review" if review else "clean"),
         "counts": {"block": len(blocked), "review": len(review)},
         "flags": flags,
+        "layers": ["pattern", "semantic"],
+        # Stated on every result so no consumer mistakes "clean" for "guaranteed safe".
+        "disclaimer": ("Heuristic screen. A 'clean' verdict means no known pattern was found, "
+                       "not that the text is safe. Human review of drafted replies is required."),
     }
 
 

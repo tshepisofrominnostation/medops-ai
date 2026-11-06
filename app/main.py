@@ -10,8 +10,11 @@ from pydantic import ValidationError
 from .analytics import current_analytics
 from .compliance import screen as screen_text
 from .forecast import forecast_from_analytics
+from .insights import build_insights
+from .lifecycle import LifecycleError, STATUSES, update_ticket
+from .nlp.semantic import cross_check
 from .notify import notify_assignment
-from .report import write_report
+from .report import write_full_report, report_to_csv
 from .models import TicketIn, TicketOut
 from .pipeline import process_ticket
 from .persistence import load_all
@@ -23,7 +26,7 @@ CONTROL_CHARS = re.compile(r"[\x00-\x08\x0b\x0c\x0e-\x1f]")
 app = FastAPI(
     title="MedOps AI",
     description="Smart Ticket Classification Engine + Reply Writer for hospital operations.",
-    version="1.1.0",
+    version="1.2.0",
 )
 writer = ReplyWriter()
 
@@ -70,9 +73,18 @@ async def handle_unexpected(request: Request, exc: Exception):
 
 @app.get("/health")
 def health():
-    return {"status": "ok", "service": "MedOps AI classification engine",
-            "reply_writer": "llm" if writer.llm.configured else "template",
-            "version": app.version}
+    """Liveness plus the capabilities actually available in this deployment."""
+    from .nlp.semantic import get_model
+    return {
+        "status": "ok",
+        "service": "MedOps AI classification engine",
+        "version": app.version,
+        "reply_writer": "llm" if writer.llm.configured else "template",
+        "narrative": "llm" if writer.llm.configured else "deterministic",
+        "semantic_classifier": {"loaded": bool(get_model().centroids),
+                                "trained_on": get_model().trained_on},
+        "statuses": list(STATUSES),
+    }
 
 
 @app.post("/tickets", response_model=TicketOut)
@@ -101,11 +113,6 @@ def draft_reply(payload: TicketIn):
     return {"ticket": ticket, "reply": reply, "compliance": screen_text(body)}
 
 
-@app.get("/tickets")
-def list_tickets():
-    return load_all()
-
-
 @app.get("/analytics")
 def analytics(start: Optional[str] = None, end: Optional[str] = None):
     """Ticket analytics for the dashboard (S2-2) and PDF report (S2-3).
@@ -128,14 +135,119 @@ def compliance(payload: dict):
     return screen_text(text)
 
 
+# ---------------------------------------------------------------------------
+# Week 3: working the queue
+# ---------------------------------------------------------------------------
+
+@app.get("/tickets/{ticket_id}")
+def get_ticket(ticket_id: str):
+    """One ticket, with its lifecycle derived from the recorded timestamps."""
+    from .lifecycle import response_minutes, resolution_minutes, status_of
+    for rec in load_all():
+        if rec.get("ticket_id") == ticket_id:
+            return {**rec,
+                    "status": status_of(rec),
+                    "response_minutes": response_minutes(rec),
+                    "resolution_minutes": resolution_minutes(rec)}
+    raise HTTPException(status_code=404, detail=f"unknown ticket {ticket_id}")
+
+
+@app.post("/tickets/{ticket_id}/status")
+def set_status(ticket_id: str, payload: dict):
+    """Move a ticket through its lifecycle. This is what makes response time measurable.
+
+    Body: {"status": "In Progress" | "Resolved" | "Open", "at": "optional ISO-8601"}
+    """
+    payload = payload or {}
+    status = payload.get("status")
+    if not status:
+        raise HTTPException(status_code=400,
+                            detail=f"status is required; one of: {', '.join(STATUSES)}")
+    try:
+        updated = update_ticket(ticket_id, status, payload.get("at"))
+    except LifecycleError as e:
+        detail = str(e)
+        raise HTTPException(status_code=404 if detail.startswith("unknown ticket") else 400,
+                            detail=detail)
+    from .lifecycle import response_minutes, resolution_minutes, status_of, sla_met
+    return {**updated, "status": status_of(updated),
+            "response_minutes": response_minutes(updated),
+            "resolution_minutes": resolution_minutes(updated),
+            "sla_met": sla_met(updated)}
+
+
+@app.get("/tickets")
+def list_tickets(status: Optional[str] = None, category: Optional[str] = None,
+                 priority: Optional[str] = None, limit: int = 200):
+    """The queue, newest first, filterable. `status` accepts Open/In Progress/Resolved."""
+    from .lifecycle import response_minutes, status_of
+    rows = load_all()
+    if status:
+        rows = [r for r in rows if status_of(r).lower() == status.lower()]
+    if category:
+        rows = [r for r in rows if r.get("category", "").lower() == category.lower()]
+    if priority:
+        rows = [r for r in rows if r.get("priority", "").lower() == priority.lower()]
+    rows = sorted(rows, key=lambda r: r.get("timestamp", ""), reverse=True)[:max(1, min(limit, 1000))]
+    return [{**r, "status": status_of(r), "response_minutes": response_minutes(r)} for r in rows]
+
+
+@app.get("/insights")
+def insights(department: Optional[str] = None, end: Optional[str] = None):
+    """Week 3 deliverable: findings for one week, with the narrative written over them."""
+    from .nlp.narrative import write_narrative
+    ins = build_insights(load_all(), department=department, end=end)
+    return {**ins, "narrative": write_narrative(ins)}
+
+
+@app.post("/check/category")
+def check_category(payload: dict):
+    """The semantic second opinion for one message, as used on every ticket."""
+    message = (payload or {}).get("message", "")
+    if not isinstance(message, str) or not message.strip():
+        raise HTTPException(status_code=400, detail="message is required")
+    from .classifier import classify
+    return cross_check(message, classify(message)[0])
+
+
+# ---------------------------------------------------------------------------
+# Week 4: reporting
+# ---------------------------------------------------------------------------
+
+def _report_scope(department: Optional[str], end: Optional[str]) -> dict:
+    import tempfile
+    out = tempfile.mkdtemp(prefix="medops-report-")
+    return write_full_report(load_all(), out, department, end)
+
+
+@app.get("/report")
+def report_json(department: Optional[str] = None, end: Optional[str] = None):
+    """Week 4: the full report as data (scope, findings, narrative, forecast, ethics)."""
+    import json as _json
+    from pathlib import Path
+    info = _report_scope(department, end)
+    return _json.loads(Path(info["json"]).read_text(encoding="utf-8"))
+
+
+@app.get("/report.csv")
+def report_csv(department: Optional[str] = None, end: Optional[str] = None):
+    """Week 4: spreadsheet export of the same numbers."""
+    from fastapi.responses import PlainTextResponse
+    import json as _json
+    from pathlib import Path
+    info = _report_scope(department, end)
+    data = _json.loads(Path(info["json"]).read_text(encoding="utf-8"))
+    name = f"medops-weekly-{(department or 'all').lower().replace(' ', '-')}.csv"
+    return PlainTextResponse(report_to_csv(data), media_type="text/csv",
+                             headers={"Content-Disposition": f'attachment; filename="{name}"'})
+
+
 @app.get("/report.pdf")
-def report_pdf(department: Optional[str] = None):
-    """S2-3: one-click PDF summary, optionally scoped to one department."""
+def report_pdf(department: Optional[str] = None, end: Optional[str] = None):
+    """Week 4: one-click executive PDF for a department (or all departments)."""
     from fastapi.responses import FileResponse
-    import tempfile, pathlib
-    out = pathlib.Path(tempfile.mkdtemp()) / "summary.pdf"
-    info = write_report(load_all(), str(out), department)
+    info = _report_scope(department, end)
     if not info["pdf"]:
-        raise HTTPException(status_code=503, detail="PDF engine unavailable; HTML written instead")
-    name = f"medops-summary-{(department or 'all').lower().replace(' ', '-')}.pdf"
+        raise HTTPException(status_code=503, detail="PDF engine unavailable; use /report (JSON)")
+    name = f"medops-weekly-{(department or 'all').lower().replace(' ', '-')}.pdf"
     return FileResponse(info["pdf"], media_type="application/pdf", filename=name)

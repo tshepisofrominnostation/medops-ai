@@ -33,6 +33,11 @@ who has never seen the classifier, then report the confusion matrix.
 ---
 
 ## R2 — Undated tickets are counted but invisible (Medium)
+**[UPDATED — 6 Nov, `week2-baseline-rebuild`]** The insight layer now counts undated
+tickets at scope level and reports them as a data-quality finding, so they can no
+longer vanish. `build_analytics` still windows them out (by design: an undated ticket
+cannot be placed in a week), but `GET /insights` states the number explicitly.
+Regression test: `tests/test_insights.py::test_undated_tickets_are_disclosed`.
 
 **What we measured.** Two records: one with a timestamp, one without.
 `total_tickets` reports 2, but `by_day` contains a single day with a count of 1.
@@ -55,6 +60,9 @@ explicit, and surface it on the dashboard as "N tickets without a date". Consume
 ---
 
 ## R3 — The forecast is no better than a flat average on noisy data (Medium)
+**[UPDATED — 6 Nov]** The report and console suppress the backtest error until there
+are 14+ days of history, because a 2-point backtest (all that 6 days of data supports)
+produces a misleading 0.00. Below that the output says no error margin can be quoted.
 
 **What we measured.** Three synthetic series through `app/forecast.py`:
 
@@ -78,6 +86,14 @@ accuracy, test seasonal baselines on real history before tuning anything.
 ---
 
 ## R4 — The compliance screen misses all semantic PHI (Critical)
+**[UPDATED — 6 Nov, `week2-baseline-rebuild`]** `app/nlp/phi.py` adds a
+composition-based detector (person reference + location, relationship or health
+context). The six phrasings below are now permanently tested in
+`tests/test_phi_semantic.py` and **all six are caught, with 0 of 20 of the system's own
+generated replies falsely flagged**. Six further unseen phrasings are also caught.
+This raises the floor; it does not make the screen a guarantee. It remains heuristic,
+can miss unusual names and non-English text, and **human review of drafted replies is
+still required**. The API now returns that disclaimer on every screen result.
 
 **What we measured.** Six phrasings that carry patient-identifiable information
 without any regex-detectable pattern. The screen caught **0 of 6**.
