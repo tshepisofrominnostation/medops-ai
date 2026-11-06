@@ -392,6 +392,8 @@ ul.lim li{{margin-bottom:5px}}
   <tbody id="rows">{ticket_rows}</tbody>
 </table></div>
 <p class="small muted" id="count"></p>
+<p class="small muted">Filter views are shareable: append
+   <span class="mono">?q=biomedical&amp;pri=High</span> to this page's address.</p>
 
 <h2>Patient-data screen</h2>
 <p class="sub">The six semantic phrasings that the original screen missed (risk R4). All
@@ -448,6 +450,13 @@ ul.lim li{{margin-bottom:5px}}
     }});
     count.textContent = n + ' of ' + rows.length + ' tickets shown';
   }}
+  // Deep links: ?q=..., &cat=..., &pri=..., &status=... so a filtered view can be
+  // shared with the person who needs to see it.
+  var params = new URLSearchParams(location.search);
+  q.value = params.get('q') || '';
+  fc.value = params.get('cat') || '';
+  fp.value = params.get('pri') || '';
+  fs.value = params.get('status') || '';
   [q, fc, fp, fs].forEach(function (el) {{ el.addEventListener('input', apply); }});
   apply();
 }})();
