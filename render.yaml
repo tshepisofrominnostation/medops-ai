@@ -1,0 +1,23 @@
+# MedOps AI — Render Blueprint (S4-2)
+# Connect this repo at https://render.com/docs/blueprint-spec and Render creates the
+# service below. Free tier: the instance sleeps after 15 minutes idle and cold-starts
+# in roughly 30-60 seconds, so warm it before a demo.
+services:
+  - type: web
+    name: medops-api
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11.9"
+      # Persistence: Render's disk is ephemeral on free tier, so tickets are lost on
+      # redeploy unless a persistent disk is attached or MEDOPS_DB_PATH points at a
+      # mounted volume. Set this before the first real pilot.
+      - key: MEDOPS_DB_PATH
+        value: /var/data/tickets.json
+      # Assignment alerts stay off until an endpoint is confirmed.
+      - key: MEDOPS_ALERTS
+        value: "0"
