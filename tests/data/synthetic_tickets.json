@@ -1,0 +1,1402 @@
+[
+  {
+    "ticket_id": "SYN-001",
+    "category": "IT & Medical Tech",
+    "priority": "Low",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-01T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-002",
+    "category": "Finance",
+    "priority": "High",
+    "assigned_to": "Finance",
+    "created_date": "2026-10-08T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-003",
+    "category": "HR",
+    "priority": "High",
+    "assigned_to": "HR",
+    "created_date": "2026-10-24T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-004",
+    "category": "IT & Medical Tech",
+    "priority": "Medium",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-19T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-005",
+    "category": "IT & Medical Tech",
+    "priority": "High",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-01T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-006",
+    "category": "HR",
+    "priority": "Low",
+    "assigned_to": "HR",
+    "created_date": "2026-10-08T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-007",
+    "category": "IT & Medical Tech",
+    "priority": "High",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-18T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-008",
+    "category": "Operations",
+    "priority": "Medium",
+    "assigned_to": "Operations",
+    "created_date": "2026-10-08T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-009",
+    "category": "Finance",
+    "priority": "High",
+    "assigned_to": "Finance",
+    "created_date": "2026-10-26T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-010",
+    "category": "HR",
+    "priority": "Medium",
+    "assigned_to": "HR",
+    "created_date": "2026-10-23T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-011",
+    "category": "Finance",
+    "priority": "High",
+    "assigned_to": "Finance",
+    "created_date": "2026-10-09T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-012",
+    "category": "HR",
+    "priority": "Medium",
+    "assigned_to": "HR",
+    "created_date": "2026-10-25T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-013",
+    "category": "IT & Medical Tech",
+    "priority": "Medium",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-03T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-014",
+    "category": "IT & Medical Tech",
+    "priority": "Medium",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-12T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-015",
+    "category": "Finance",
+    "priority": "High",
+    "assigned_to": "Finance",
+    "created_date": "2026-10-26T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-016",
+    "category": "Operations",
+    "priority": "High",
+    "assigned_to": "Operations",
+    "created_date": "2026-10-18T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-017",
+    "category": "Operations",
+    "priority": "Low",
+    "assigned_to": "Operations",
+    "created_date": "2026-10-03T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-018",
+    "category": "Finance",
+    "priority": "Low",
+    "assigned_to": "Finance",
+    "created_date": "2026-10-27T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-019",
+    "category": "Finance",
+    "priority": "High",
+    "assigned_to": "Finance",
+    "created_date": "2026-10-19T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-020",
+    "category": "IT & Medical Tech",
+    "priority": "Low",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-02T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-021",
+    "category": "HR",
+    "priority": "Medium",
+    "assigned_to": "HR",
+    "created_date": "2026-10-25T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-022",
+    "category": "IT & Medical Tech",
+    "priority": "High",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-28T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-023",
+    "category": "IT & Medical Tech",
+    "priority": "Medium",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-13T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-024",
+    "category": "Operations",
+    "priority": "Medium",
+    "assigned_to": "Operations",
+    "created_date": "2026-10-21T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-025",
+    "category": "HR",
+    "priority": "Medium",
+    "assigned_to": "HR",
+    "created_date": "2026-10-12T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-026",
+    "category": "HR",
+    "priority": "Medium",
+    "assigned_to": "HR",
+    "created_date": "2026-10-22T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-027",
+    "category": "IT & Medical Tech",
+    "priority": "Low",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-20T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-028",
+    "category": "HR",
+    "priority": "Low",
+    "assigned_to": "HR",
+    "created_date": "2026-10-18T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-029",
+    "category": "HR",
+    "priority": "Medium",
+    "assigned_to": "HR",
+    "created_date": "2026-10-06T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-030",
+    "category": "Operations",
+    "priority": "Low",
+    "assigned_to": "Operations",
+    "created_date": "2026-10-09T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-031",
+    "category": "HR",
+    "priority": "Medium",
+    "assigned_to": "HR",
+    "created_date": "2026-10-22T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-032",
+    "category": "IT & Medical Tech",
+    "priority": "High",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-08T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-033",
+    "category": "Finance",
+    "priority": "Medium",
+    "assigned_to": "Finance",
+    "created_date": "2026-10-13T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-034",
+    "category": "IT & Medical Tech",
+    "priority": "Low",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-07T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-035",
+    "category": "Finance",
+    "priority": "Low",
+    "assigned_to": "Finance",
+    "created_date": "2026-10-07T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-036",
+    "category": "Operations",
+    "priority": "Low",
+    "assigned_to": "Operations",
+    "created_date": "2026-10-13T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-037",
+    "category": "Operations",
+    "priority": "Medium",
+    "assigned_to": "Operations",
+    "created_date": "2026-10-05T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-038",
+    "category": "HR",
+    "priority": "Low",
+    "assigned_to": "HR",
+    "created_date": "2026-10-08T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-039",
+    "category": "Finance",
+    "priority": "Low",
+    "assigned_to": "Finance",
+    "created_date": "2026-10-24T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-040",
+    "category": "Operations",
+    "priority": "Low",
+    "assigned_to": "Operations",
+    "created_date": "2026-10-29T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-041",
+    "category": "Operations",
+    "priority": "High",
+    "assigned_to": "Operations",
+    "created_date": "2026-10-12T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-042",
+    "category": "HR",
+    "priority": "Medium",
+    "assigned_to": "HR",
+    "created_date": "2026-10-17T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-043",
+    "category": "IT & Medical Tech",
+    "priority": "High",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-25T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-044",
+    "category": "IT & Medical Tech",
+    "priority": "Low",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-05T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-045",
+    "category": "HR",
+    "priority": "Low",
+    "assigned_to": "HR",
+    "created_date": "2026-10-26T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-046",
+    "category": "Operations",
+    "priority": "High",
+    "assigned_to": "Operations",
+    "created_date": "2026-10-20T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-047",
+    "category": "Operations",
+    "priority": "Low",
+    "assigned_to": "Operations",
+    "created_date": "2026-10-13T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-048",
+    "category": "Operations",
+    "priority": "Medium",
+    "assigned_to": "Operations",
+    "created_date": "2026-10-17T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-049",
+    "category": "IT & Medical Tech",
+    "priority": "Low",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-22T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-050",
+    "category": "IT & Medical Tech",
+    "priority": "Low",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-22T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-051",
+    "category": "Finance",
+    "priority": "Low",
+    "assigned_to": "Finance",
+    "created_date": "2026-10-25T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-052",
+    "category": "Finance",
+    "priority": "Medium",
+    "assigned_to": "Finance",
+    "created_date": "2026-10-04T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-053",
+    "category": "Operations",
+    "priority": "Medium",
+    "assigned_to": "Operations",
+    "created_date": "2026-10-06T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-054",
+    "category": "IT & Medical Tech",
+    "priority": "Low",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-24T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-055",
+    "category": "Finance",
+    "priority": "High",
+    "assigned_to": "Finance",
+    "created_date": "2026-10-17T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-056",
+    "category": "IT & Medical Tech",
+    "priority": "Low",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-28T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-057",
+    "category": "Finance",
+    "priority": "Low",
+    "assigned_to": "Finance",
+    "created_date": "2026-10-27T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-058",
+    "category": "HR",
+    "priority": "Medium",
+    "assigned_to": "HR",
+    "created_date": "2026-10-05T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-059",
+    "category": "HR",
+    "priority": "Low",
+    "assigned_to": "HR",
+    "created_date": "2026-10-18T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-060",
+    "category": "IT & Medical Tech",
+    "priority": "Medium",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-20T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-061",
+    "category": "Operations",
+    "priority": "High",
+    "assigned_to": "Operations",
+    "created_date": "2026-10-01T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-062",
+    "category": "Finance",
+    "priority": "Medium",
+    "assigned_to": "Finance",
+    "created_date": "2026-10-29T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-063",
+    "category": "HR",
+    "priority": "High",
+    "assigned_to": "HR",
+    "created_date": "2026-10-02T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-064",
+    "category": "IT & Medical Tech",
+    "priority": "Low",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-03T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-065",
+    "category": "Operations",
+    "priority": "High",
+    "assigned_to": "Operations",
+    "created_date": "2026-10-27T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-066",
+    "category": "HR",
+    "priority": "Low",
+    "assigned_to": "HR",
+    "created_date": "2026-10-05T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-067",
+    "category": "Operations",
+    "priority": "High",
+    "assigned_to": "Operations",
+    "created_date": "2026-10-18T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-068",
+    "category": "Finance",
+    "priority": "Low",
+    "assigned_to": "Finance",
+    "created_date": "2026-10-17T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-069",
+    "category": "Operations",
+    "priority": "Low",
+    "assigned_to": "Operations",
+    "created_date": "2026-10-07T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-070",
+    "category": "HR",
+    "priority": "Medium",
+    "assigned_to": "HR",
+    "created_date": "2026-10-23T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-071",
+    "category": "Operations",
+    "priority": "Low",
+    "assigned_to": "Operations",
+    "created_date": "2026-10-22T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-072",
+    "category": "Finance",
+    "priority": "Low",
+    "assigned_to": "Finance",
+    "created_date": "2026-10-15T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-073",
+    "category": "Operations",
+    "priority": "High",
+    "assigned_to": "Operations",
+    "created_date": "2026-10-04T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-074",
+    "category": "HR",
+    "priority": "Medium",
+    "assigned_to": "HR",
+    "created_date": "2026-10-03T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-075",
+    "category": "IT & Medical Tech",
+    "priority": "Low",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-19T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-076",
+    "category": "HR",
+    "priority": "High",
+    "assigned_to": "HR",
+    "created_date": "2026-10-19T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-077",
+    "category": "IT & Medical Tech",
+    "priority": "Low",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-03T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-078",
+    "category": "IT & Medical Tech",
+    "priority": "High",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-08T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-079",
+    "category": "IT & Medical Tech",
+    "priority": "Medium",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-28T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-080",
+    "category": "IT & Medical Tech",
+    "priority": "High",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-17T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-081",
+    "category": "Finance",
+    "priority": "Medium",
+    "assigned_to": "Finance",
+    "created_date": "2026-10-22T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-082",
+    "category": "HR",
+    "priority": "High",
+    "assigned_to": "HR",
+    "created_date": "2026-10-18T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-083",
+    "category": "Operations",
+    "priority": "Medium",
+    "assigned_to": "Operations",
+    "created_date": "2026-10-08T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-084",
+    "category": "Operations",
+    "priority": "High",
+    "assigned_to": "Operations",
+    "created_date": "2026-10-07T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-085",
+    "category": "IT & Medical Tech",
+    "priority": "Medium",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-22T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-086",
+    "category": "Finance",
+    "priority": "Medium",
+    "assigned_to": "Finance",
+    "created_date": "2026-10-14T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-087",
+    "category": "Operations",
+    "priority": "Low",
+    "assigned_to": "Operations",
+    "created_date": "2026-10-28T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-088",
+    "category": "IT & Medical Tech",
+    "priority": "Low",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-22T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-089",
+    "category": "IT & Medical Tech",
+    "priority": "Medium",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-02T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-090",
+    "category": "Finance",
+    "priority": "High",
+    "assigned_to": "Finance",
+    "created_date": "2026-10-26T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-091",
+    "category": "HR",
+    "priority": "High",
+    "assigned_to": "HR",
+    "created_date": "2026-10-07T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-092",
+    "category": "Operations",
+    "priority": "Medium",
+    "assigned_to": "Operations",
+    "created_date": "2026-10-05T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-093",
+    "category": "HR",
+    "priority": "Medium",
+    "assigned_to": "HR",
+    "created_date": "2026-10-09T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-094",
+    "category": "HR",
+    "priority": "High",
+    "assigned_to": "HR",
+    "created_date": "2026-10-28T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-095",
+    "category": "Operations",
+    "priority": "Low",
+    "assigned_to": "Operations",
+    "created_date": "2026-10-26T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-096",
+    "category": "IT & Medical Tech",
+    "priority": "Low",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-02T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-097",
+    "category": "IT & Medical Tech",
+    "priority": "High",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-03T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-098",
+    "category": "HR",
+    "priority": "Medium",
+    "assigned_to": "HR",
+    "created_date": "2026-10-14T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-099",
+    "category": "Operations",
+    "priority": "Medium",
+    "assigned_to": "Operations",
+    "created_date": "2026-10-07T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-100",
+    "category": "IT & Medical Tech",
+    "priority": "Medium",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-06T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-101",
+    "category": "IT & Medical Tech",
+    "priority": "Medium",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-13T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-102",
+    "category": "Operations",
+    "priority": "Medium",
+    "assigned_to": "Operations",
+    "created_date": "2026-10-10T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-103",
+    "category": "Operations",
+    "priority": "High",
+    "assigned_to": "Operations",
+    "created_date": "2026-10-05T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-104",
+    "category": "Finance",
+    "priority": "High",
+    "assigned_to": "Finance",
+    "created_date": "2026-10-07T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-105",
+    "category": "IT & Medical Tech",
+    "priority": "Medium",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-24T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-106",
+    "category": "IT & Medical Tech",
+    "priority": "Low",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-02T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-107",
+    "category": "Operations",
+    "priority": "Low",
+    "assigned_to": "Operations",
+    "created_date": "2026-10-17T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-108",
+    "category": "HR",
+    "priority": "Low",
+    "assigned_to": "HR",
+    "created_date": "2026-10-02T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-109",
+    "category": "IT & Medical Tech",
+    "priority": "High",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-28T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-110",
+    "category": "IT & Medical Tech",
+    "priority": "High",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-20T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-111",
+    "category": "HR",
+    "priority": "High",
+    "assigned_to": "HR",
+    "created_date": "2026-10-13T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-112",
+    "category": "HR",
+    "priority": "Low",
+    "assigned_to": "HR",
+    "created_date": "2026-10-19T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-113",
+    "category": "IT & Medical Tech",
+    "priority": "High",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-20T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-114",
+    "category": "Operations",
+    "priority": "Low",
+    "assigned_to": "Operations",
+    "created_date": "2026-10-22T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-115",
+    "category": "Finance",
+    "priority": "Medium",
+    "assigned_to": "Finance",
+    "created_date": "2026-10-30T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-116",
+    "category": "HR",
+    "priority": "Low",
+    "assigned_to": "HR",
+    "created_date": "2026-10-22T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-117",
+    "category": "Finance",
+    "priority": "Medium",
+    "assigned_to": "Finance",
+    "created_date": "2026-10-08T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-118",
+    "category": "Operations",
+    "priority": "Low",
+    "assigned_to": "Operations",
+    "created_date": "2026-10-05T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-119",
+    "category": "Finance",
+    "priority": "Medium",
+    "assigned_to": "Finance",
+    "created_date": "2026-10-15T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-120",
+    "category": "IT & Medical Tech",
+    "priority": "Medium",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-01T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-121",
+    "category": "IT & Medical Tech",
+    "priority": "Low",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-03T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-122",
+    "category": "HR",
+    "priority": "Medium",
+    "assigned_to": "HR",
+    "created_date": "2026-10-17T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-123",
+    "category": "HR",
+    "priority": "Medium",
+    "assigned_to": "HR",
+    "created_date": "2026-10-30T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-124",
+    "category": "IT & Medical Tech",
+    "priority": "High",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-29T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-125",
+    "category": "Finance",
+    "priority": "High",
+    "assigned_to": "Finance",
+    "created_date": "2026-10-10T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-126",
+    "category": "Operations",
+    "priority": "Low",
+    "assigned_to": "Operations",
+    "created_date": "2026-10-27T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-127",
+    "category": "Finance",
+    "priority": "Low",
+    "assigned_to": "Finance",
+    "created_date": "2026-10-20T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-128",
+    "category": "IT & Medical Tech",
+    "priority": "Low",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-22T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-129",
+    "category": "Finance",
+    "priority": "Low",
+    "assigned_to": "Finance",
+    "created_date": "2026-10-30T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-130",
+    "category": "IT & Medical Tech",
+    "priority": "High",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-29T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-131",
+    "category": "Finance",
+    "priority": "High",
+    "assigned_to": "Finance",
+    "created_date": "2026-10-04T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-132",
+    "category": "HR",
+    "priority": "Medium",
+    "assigned_to": "HR",
+    "created_date": "2026-10-09T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-133",
+    "category": "HR",
+    "priority": "Medium",
+    "assigned_to": "HR",
+    "created_date": "2026-10-23T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-134",
+    "category": "HR",
+    "priority": "Low",
+    "assigned_to": "HR",
+    "created_date": "2026-10-22T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-135",
+    "category": "Finance",
+    "priority": "Medium",
+    "assigned_to": "Finance",
+    "created_date": "2026-10-17T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-136",
+    "category": "Finance",
+    "priority": "High",
+    "assigned_to": "Finance",
+    "created_date": "2026-10-29T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-137",
+    "category": "IT & Medical Tech",
+    "priority": "Medium",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-21T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-138",
+    "category": "Finance",
+    "priority": "High",
+    "assigned_to": "Finance",
+    "created_date": "2026-10-02T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-139",
+    "category": "Finance",
+    "priority": "High",
+    "assigned_to": "Finance",
+    "created_date": "2026-10-25T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-140",
+    "category": "Finance",
+    "priority": "Low",
+    "assigned_to": "Finance",
+    "created_date": "2026-10-06T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-141",
+    "category": "Operations",
+    "priority": "Low",
+    "assigned_to": "Operations",
+    "created_date": "2026-10-18T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-142",
+    "category": "Operations",
+    "priority": "High",
+    "assigned_to": "Operations",
+    "created_date": "2026-10-18T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-143",
+    "category": "IT & Medical Tech",
+    "priority": "Low",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-03T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-144",
+    "category": "HR",
+    "priority": "High",
+    "assigned_to": "HR",
+    "created_date": "2026-10-18T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-145",
+    "category": "Finance",
+    "priority": "Low",
+    "assigned_to": "Finance",
+    "created_date": "2026-10-19T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-146",
+    "category": "HR",
+    "priority": "High",
+    "assigned_to": "HR",
+    "created_date": "2026-10-14T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-147",
+    "category": "IT & Medical Tech",
+    "priority": "Medium",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-10T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-148",
+    "category": "IT & Medical Tech",
+    "priority": "Medium",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-29T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-149",
+    "category": "HR",
+    "priority": "High",
+    "assigned_to": "HR",
+    "created_date": "2026-10-22T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-150",
+    "category": "IT & Medical Tech",
+    "priority": "Low",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-12T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-151",
+    "category": "Operations",
+    "priority": "Low",
+    "assigned_to": "Operations",
+    "created_date": "2026-10-20T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-152",
+    "category": "HR",
+    "priority": "High",
+    "assigned_to": "HR",
+    "created_date": "2026-10-30T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-153",
+    "category": "HR",
+    "priority": "High",
+    "assigned_to": "HR",
+    "created_date": "2026-10-26T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-154",
+    "category": "Operations",
+    "priority": "High",
+    "assigned_to": "Operations",
+    "created_date": "2026-10-01T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-155",
+    "category": "Finance",
+    "priority": "Medium",
+    "assigned_to": "Finance",
+    "created_date": "2026-10-26T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-156",
+    "category": "HR",
+    "priority": "High",
+    "assigned_to": "HR",
+    "created_date": "2026-10-09T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-157",
+    "category": "IT & Medical Tech",
+    "priority": "High",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-13T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-158",
+    "category": "Operations",
+    "priority": "High",
+    "assigned_to": "Operations",
+    "created_date": "2026-10-08T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-159",
+    "category": "Operations",
+    "priority": "Medium",
+    "assigned_to": "Operations",
+    "created_date": "2026-10-12T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-160",
+    "category": "HR",
+    "priority": "High",
+    "assigned_to": "HR",
+    "created_date": "2026-10-08T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-161",
+    "category": "HR",
+    "priority": "Medium",
+    "assigned_to": "HR",
+    "created_date": "2026-10-13T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-162",
+    "category": "Finance",
+    "priority": "High",
+    "assigned_to": "Finance",
+    "created_date": "2026-10-28T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-163",
+    "category": "Finance",
+    "priority": "Low",
+    "assigned_to": "Finance",
+    "created_date": "2026-10-12T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-164",
+    "category": "Operations",
+    "priority": "Low",
+    "assigned_to": "Operations",
+    "created_date": "2026-10-22T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-165",
+    "category": "Finance",
+    "priority": "High",
+    "assigned_to": "Finance",
+    "created_date": "2026-10-01T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-166",
+    "category": "Finance",
+    "priority": "Low",
+    "assigned_to": "Finance",
+    "created_date": "2026-10-06T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-167",
+    "category": "Finance",
+    "priority": "High",
+    "assigned_to": "Finance",
+    "created_date": "2026-10-02T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-168",
+    "category": "Operations",
+    "priority": "Low",
+    "assigned_to": "Operations",
+    "created_date": "2026-10-12T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-169",
+    "category": "Finance",
+    "priority": "Low",
+    "assigned_to": "Finance",
+    "created_date": "2026-10-14T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-170",
+    "category": "IT & Medical Tech",
+    "priority": "Low",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-13T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-171",
+    "category": "HR",
+    "priority": "High",
+    "assigned_to": "HR",
+    "created_date": "2026-10-09T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-172",
+    "category": "Operations",
+    "priority": "Low",
+    "assigned_to": "Operations",
+    "created_date": "2026-10-01T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-173",
+    "category": "HR",
+    "priority": "Medium",
+    "assigned_to": "HR",
+    "created_date": "2026-10-12T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-174",
+    "category": "IT & Medical Tech",
+    "priority": "Medium",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-22T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-175",
+    "category": "Finance",
+    "priority": "High",
+    "assigned_to": "Finance",
+    "created_date": "2026-10-22T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-176",
+    "category": "Finance",
+    "priority": "Medium",
+    "assigned_to": "Finance",
+    "created_date": "2026-10-17T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-177",
+    "category": "Operations",
+    "priority": "Medium",
+    "assigned_to": "Operations",
+    "created_date": "2026-10-11T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-178",
+    "category": "Finance",
+    "priority": "High",
+    "assigned_to": "Finance",
+    "created_date": "2026-10-18T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-179",
+    "category": "HR",
+    "priority": "Low",
+    "assigned_to": "HR",
+    "created_date": "2026-10-14T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-180",
+    "category": "Operations",
+    "priority": "Low",
+    "assigned_to": "Operations",
+    "created_date": "2026-10-22T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-181",
+    "category": "HR",
+    "priority": "Low",
+    "assigned_to": "HR",
+    "created_date": "2026-10-20T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-182",
+    "category": "Finance",
+    "priority": "Low",
+    "assigned_to": "Finance",
+    "created_date": "2026-10-13T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-183",
+    "category": "IT & Medical Tech",
+    "priority": "Medium",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-10T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-184",
+    "category": "HR",
+    "priority": "Low",
+    "assigned_to": "HR",
+    "created_date": "2026-10-14T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-185",
+    "category": "Finance",
+    "priority": "Medium",
+    "assigned_to": "Finance",
+    "created_date": "2026-10-15T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-186",
+    "category": "Operations",
+    "priority": "High",
+    "assigned_to": "Operations",
+    "created_date": "2026-10-22T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-187",
+    "category": "Operations",
+    "priority": "Low",
+    "assigned_to": "Operations",
+    "created_date": "2026-10-26T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-188",
+    "category": "HR",
+    "priority": "High",
+    "assigned_to": "HR",
+    "created_date": "2026-10-22T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-189",
+    "category": "Finance",
+    "priority": "Low",
+    "assigned_to": "Finance",
+    "created_date": "2026-10-17T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-190",
+    "category": "Finance",
+    "priority": "High",
+    "assigned_to": "Finance",
+    "created_date": "2026-10-03T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-191",
+    "category": "Finance",
+    "priority": "High",
+    "assigned_to": "Finance",
+    "created_date": "2026-10-08T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-192",
+    "category": "HR",
+    "priority": "High",
+    "assigned_to": "HR",
+    "created_date": "2026-10-01T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-193",
+    "category": "HR",
+    "priority": "Low",
+    "assigned_to": "HR",
+    "created_date": "2026-10-16T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-194",
+    "category": "IT & Medical Tech",
+    "priority": "Medium",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-15T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-195",
+    "category": "HR",
+    "priority": "Low",
+    "assigned_to": "HR",
+    "created_date": "2026-10-23T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-196",
+    "category": "Operations",
+    "priority": "Medium",
+    "assigned_to": "Operations",
+    "created_date": "2026-10-16T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-197",
+    "category": "HR",
+    "priority": "Low",
+    "assigned_to": "HR",
+    "created_date": "2026-10-05T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-198",
+    "category": "IT & Medical Tech",
+    "priority": "High",
+    "assigned_to": "IT & Medical Tech",
+    "created_date": "2026-10-29T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-199",
+    "category": "Operations",
+    "priority": "High",
+    "assigned_to": "Operations",
+    "created_date": "2026-10-08T09:00:00"
+  },
+  {
+    "ticket_id": "SYN-200",
+    "category": "Operations",
+    "priority": "Low",
+    "assigned_to": "Operations",
+    "created_date": "2026-10-02T09:00:00"
+  }
+]
