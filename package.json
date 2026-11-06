@@ -1,0 +1,13 @@
+{
+  "private": true,
+  "name": "medops-ai-web",
+  "description": "Checks for the published console page. The service itself is Python; this only holds the headless-DOM test dependency.",
+  "scripts": {
+    "check:console": "node scripts/check_console.mjs docs/console/index.html",
+    "check:engine": "node scripts/check_engine_parity.mjs web/engine_bundle.json tests/data/engine_parity.json",
+    "check": "npm run check:engine && npm run check:console"
+  },
+  "devDependencies": {
+    "jsdom": "^24.1.0"
+  }
+}

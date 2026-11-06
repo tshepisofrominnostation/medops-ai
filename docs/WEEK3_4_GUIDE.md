@@ -413,35 +413,91 @@ Tick these before you say Week 4 is done.
 
 ---
 
-## 9. Publishing the shareable page
+## 9. One app: the console page
 
-`docs/console/` is a generated page: GitHub Pages serves it from `main`/`docs`, so
-<https://tshepisofrominnostation.github.io/medops-ai/console/> is rebuilt whenever
-`main` moves. Do not hand-edit it; regenerate it.
+The published page is not a report with a form bolted on, and it is not a second
+product next to the Streamlit console. It is one app:
+
+* you generate a ticket at the top,
+* the ticket is classified by the same engine,
+* and the tiles, the mix charts and the ticket table below are recomputed from the
+  same store, so the number you just changed is the number you can see.
+
+Live at <https://tshepisofrominnostation.github.io/medops-ai/console/>.
+
+### How the two halves stay honest
+
+The page is static, so the deterministic core runs in the browser:
+
+| What | Where | Checked by |
+|---|---|---|
+| keyword tables, routing table, sender regexes | `app/*.py`, serialised by `scripts/engine_bundle.py` | nothing to drift: read from Python at build time |
+| scoring, confidence, priority, routing, summary | `web/engine.js` | `scripts/check_engine_parity.mjs` against the Python engine |
+| form, store, dashboard, filters, clear, export | `web/console.js` | `scripts/check_console.mjs` in a headless DOM |
+| export file shape | `web/export.js` | `tests/test_export_contract.py` feeds it to `app/importer.py` |
+
+Run all three:
+
+```bash
+npm install          # jsdom, dev only
+npm run check        # engine parity + console behaviour
+python -m pytest     # includes both of the above as tests when node is present
+```
+
+### The store, and what "your tickets" means
+
+Tickets you generate live in that browser's `localStorage`. That is the honest
+consequence of a static host: no server, no shared state, and nothing sent anywhere.
+The page says so, next to the tickets.
+
+The committed store is still the shared record. Two stores exist on purpose:
+
+| File | Role |
+|---|---|
+| `data/demo_tickets.json` | committed seed; the published page is built from it |
+| `data/tickets_processed.json` | this machine's working store for the API and CLI |
+
+`--store` decides where an import lands, and the result always names the file it wrote,
+so "which dashboard did my ticket go to" is never a guess.
+
+```bash
+# on the page: Export for import  ->  medops-my-tickets.json
+
+# publish them: into the seed the page is built from
+python -m app.cli import medops-my-tickets.json --store data/demo_tickets.json --dry-run
+python -m app.cli import medops-my-tickets.json --store data/demo_tickets.json
+python scripts/build_pages.py && git add docs/console && git commit -m "chore: rebuild"
+
+# or keep working locally, without touching what is published
+python -m app.cli import medops-my-tickets.json
+```
+
+Either way the ticket lands with status `Open`, no first response, `synthetic: false`,
+so it is counted as an open ticket rather than quietly padding the response-time
+figures and the importer rejects unknown categories, missing fields and bad timestamps
+with a reason. It also skips rows already in the store, so importing the same file
+twice is safe.
+
+### What still needs Python
+
+The written executive summary is composed at build time, so it keeps describing the
+committed store until you rebuild; the page tells the reader that instead of pretending
+otherwise. The semantic layer, the drafted replies and the patient-data screen also run
+only in the console (`streamlit run console.py`, no API server needed).
+
+### Publishing
+
+`docs/console/` is generated: GitHub Pages serves it from `main`/`docs`, so the link
+rebuilds whenever `main` moves. Do not hand-edit it.
 
 ```bash
 python scripts/build_pages.py            # writes docs/console/ + artifacts
 git add docs/console && git commit -m "chore(pages): regenerate console page"
 ```
 
-It runs `app.main:app` in-process against `data/demo_tickets.json`, so every number on
-the page comes from the engine. If you regenerate after changing the engine, the page
-and the report move together, which is the point.
-
-What is on it: five KPI tiles, the executive summary and the engine that wrote it,
-findings with their evidence and confidence, category and priority mix, actual versus
-target response times, 21 days of volume, a searchable ticket explorer, the
-patient-data screen over the six R4 phrasings, live classifications against the
-labelled set, and the week's PDF, CSV and JSON.
-
 The ticket explorer takes deep links, so you can send someone a view rather than
-describe it:
+describe it: `.../console/?q=biomedical&pri=High` or `.../console/?cat=HR&status=Open`.
 
-```
-.../console/?q=biomedical&pri=High
-.../console/?cat=HR&status=Open
-```
-
-Two honest notes for the pitch: the store on that page is synthetic (simulated time
-gaps, real classifications), and it is a snapshot, not a live store. The live console
-is `streamlit run console.py`, either locally or on a host you sign in to.
+One caveat for the pitch: the seeded store on that page is synthetic (simulated response
+gaps, real classifications). Tickets you generate are your own input, classified by the
+real engine.
