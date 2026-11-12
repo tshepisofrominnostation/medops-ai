@@ -94,7 +94,7 @@ def create_ticket(payload: TicketIn):
     if error:
         raise HTTPException(status_code=400, detail=error)
     ticket = process_ticket(payload.message, payload.sender)
-    alert = notify_assignment(ticket.model_dump())
+    notify_assignment(ticket.model_dump())
     return ticket
 
 

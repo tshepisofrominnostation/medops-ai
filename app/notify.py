@@ -9,6 +9,10 @@ Configuration (environment):
   MEDOPS_WEBHOOK_URL=...     POST JSON to a webhook (Slack/Teams compatible text)
   MEDOPS_SMTP_HOST/PORT/USER/PASSWORD/FROM, MEDOPS_ALERT_TO=ops@example.com
                              send email via SMTP when the host is set
+  MEDOPS_ALERT_ROUTES='{"HR Duty Officer": {"webhook": "https://...", "email": "hr@x.org"}}'
+                             optional per-team destinations, keyed by assigned_to;
+                             teams not listed fall back to the defaults above
+The alert carries the full ticket JSON (S4-1 Definition of Done).
 Anything unconfigured is recorded to the alert log instead of failing.
 """
 import json
@@ -45,25 +49,35 @@ def _log(record: dict, transport: str, detail: str = "") -> None:
         fh.write(json.dumps(line) + "\n")
 
 
+def _route_for(record: dict) -> dict:
+    """Per-team destination from MEDOPS_ALERT_ROUTES, or {} to use the defaults."""
+    try:
+        routes = json.loads(os.environ.get("MEDOPS_ALERT_ROUTES", "") or "{}")
+    except ValueError:
+        return {}
+    route = routes.get(record.get("assigned_to"), {})
+    return route if isinstance(route, dict) else {}
+
+
 def _send_webhook(url: str, record: dict) -> str:
     import urllib.request
-    payload = json.dumps({"text": _message_for(record), "ticket": {
-        k: record.get(k) for k in ("ticket_id", "category", "priority", "assigned_to", "summary")
-    }}).encode()
+    payload = json.dumps({"text": _message_for(record), "ticket": record},
+                         default=str).encode()
     req = urllib.request.Request(url, data=payload,
                                 headers={"Content-Type": "application/json"}, method="POST")
     with urllib.request.urlopen(req, timeout=8) as resp:
         return f"webhook {resp.status}"
 
 
-def _send_email(record: dict) -> str:
+def _send_email(record: dict, to: Optional[str] = None) -> str:
     host = os.environ["MEDOPS_SMTP_HOST"]
     port = int(os.environ.get("MEDOPS_SMTP_PORT", "587"))
     msg = EmailMessage()
     msg["Subject"] = f"MedOps AI alert: {record.get('priority', '')} {record.get('category', '')}"
     msg["From"] = os.environ.get("MEDOPS_SMTP_FROM", "medops@localhost")
-    msg["To"] = os.environ.get("MEDOPS_ALERT_TO", "ops@localhost")
-    msg.set_content(_message_for(record))
+    msg["To"] = to or os.environ.get("MEDOPS_ALERT_TO", "ops@localhost")
+    msg.set_content(_message_for(record) + "\n\nTicket JSON:\n"
+                    + json.dumps(record, indent=2, default=str))
     with smtplib.SMTP(host, port, timeout=10) as smtp:
         if os.environ.get("MEDOPS_SMTP_USER"):
             smtp.starttls()
@@ -79,13 +93,14 @@ def notify_assignment(record: dict, force: bool = False) -> dict:
         return {"sent": False, "transport": "dry-run", "reason": "alerts disabled"}
 
     try:
-        webhook = os.environ.get("MEDOPS_WEBHOOK_URL")
+        route = _route_for(record)
+        webhook = route.get("webhook") or os.environ.get("MEDOPS_WEBHOOK_URL")
         if webhook:
             detail = _send_webhook(webhook, record)
             _log(record, "webhook", detail)
             return {"sent": True, "transport": "webhook", "detail": detail}
         if os.environ.get("MEDOPS_SMTP_HOST"):
-            detail = _send_email(record)
+            detail = _send_email(record, route.get("email"))
             _log(record, "email", detail)
             return {"sent": True, "transport": "email", "detail": detail}
         _log(record, "dry-run", "no transport configured")
