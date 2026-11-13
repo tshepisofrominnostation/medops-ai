@@ -1,6 +1,6 @@
 """FastAPI service - hardened intake, descriptive errors, reply drafting with fallback."""
 import re
-from typing import Optional
+from typing import Literal, Optional
 
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.exceptions import RequestValidationError
@@ -102,15 +102,20 @@ def create_ticket(payload: TicketIn):
     return ticket
 
 
+class ReplyIn(TicketIn):
+    """Week 2 tone control: formal | friendly | urgent. Omitted = priority-driven."""
+    tone: Optional[Literal["formal", "friendly", "urgent"]] = None
+
+
 @app.post("/replies")
-def draft_reply(payload: TicketIn):
+def draft_reply(payload: ReplyIn):
     """Full loop: classify the request, then draft the department reply."""
     error = validate_message(payload.message)
     if error:
         raise HTTPException(status_code=400, detail=error)
     ticket = process_ticket(payload.message, payload.sender)
     try:
-        reply = writer.draft(ticket)
+        reply = writer.draft(ticket, payload.tone)
     except ValidationError:
         raise HTTPException(status_code=503, detail="Reply drafting temporarily unavailable")
     # S3-2: screen the drafted reply before it can ever be sent

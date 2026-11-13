@@ -17,7 +17,8 @@ from .models import TicketOut
 from .parser import extract_location
 from .tone_detector import detect_tone
 
-Tone = Literal["concise-professional", "warm-administrative"]
+# Priority-driven labels plus the three an operator can request (Week 2 tone control).
+Tone = Literal["concise-professional", "warm-administrative", "formal", "friendly", "urgent"]
 
 
 class DraftedReply(BaseModel):
@@ -94,7 +95,19 @@ class TemplateReplyEngine:
         "HR": "process your request and confirm the details with you",
     }
 
-    def draft(self, ticket: TicketOut) -> DraftedReply:
+    ALLOWED_TONES = ("formal", "friendly", "urgent")
+
+    def draft(self, ticket: TicketOut, tone: Optional[str] = None) -> DraftedReply:
+        """tone=None keeps the historical priority-driven behaviour.
+
+        A requested tone changes the framing only. The ticket id, the assigned team,
+        the response window and every safety instruction stay identical, because a
+        tone is a courtesy, not a fact that can be negotiated.
+        """
+        if tone is not None:
+            if tone not in self.ALLOWED_TONES:
+                raise ValueError(f"unsupported tone: {tone!r}")
+            return self._toned(ticket, tone)
         if ticket.priority == "High":
             body = self._urgent(ticket)
             tone = "concise-professional"
@@ -106,6 +119,46 @@ class TemplateReplyEngine:
             tone=tone,
             reply_body=body,
             safety_flags=safety_flags_for(ticket),
+            generated_by="template",
+        )
+
+    def _facts(self, t: TicketOut) -> dict:
+        """The parts of a reply that must not change with tone."""
+        window = "one working day" if t.priority == "Medium" else "two working days"
+        return {
+            "assigned": t.assigned_to,
+            "tid": t.ticket_id,
+            "loc": extract_location(t.summary) or "the affected area",
+            "window": window,
+            "action": self.WARM_ACTIONS[t.category],
+        }
+
+    def _toned(self, t: TicketOut, tone: str) -> DraftedReply:
+        f = self._facts(t)
+        if tone == "urgent":
+            body = self.URGENT[t.category].format(**f)
+            label = "concise-professional"
+        elif tone == "formal":
+            body = (
+                "Please be advised that {tid} has been received and assigned to "
+                "{assigned}. The team will {action}. An update is to be expected within "
+                "{window}, and written confirmation will follow upon completion. "
+                "Kindly append any further detail to this ticket reference."
+            ).format(**f)
+            label = "formal"
+        else:  # friendly
+            body = (
+                "Thanks for flagging this. {tid} is with {assigned} now and they'll "
+                "{action}. You'll hear from us within {window}, and we'll confirm in "
+                "writing once it's sorted. If anything changes in the meantime, just "
+                "reply here with {tid}."
+            ).format(**f)
+            label = "friendly"
+        return DraftedReply(
+            ticket_id=t.ticket_id,
+            tone=label,
+            reply_body=body,
+            safety_flags=safety_flags_for(t),
             generated_by="template",
         )
 
@@ -216,7 +269,11 @@ class ReplyWriter:
         self.template = TemplateReplyEngine()
         self.llm = LLMReplyEngine()
 
-    def draft(self, ticket: TicketOut) -> DraftedReply:
+    def draft(self, ticket: TicketOut, tone: Optional[str] = None) -> DraftedReply:
+        if tone is not None:
+            # A requested tone must be honoured exactly, so it uses the deterministic
+            # engine rather than hoping a model complies.
+            return self._stamp(self.template.draft(ticket, tone), ticket)
         if self.llm.configured:
             reply = self.llm.draft(ticket)
             if reply is not None:
