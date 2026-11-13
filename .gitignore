@@ -7,3 +7,4 @@ data/tickets_processed.json
 
 # headless-DOM test dependency for the published page
 node_modules/
+data/decisions.jsonl

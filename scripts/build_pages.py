@@ -29,7 +29,7 @@ os.environ["MEDOPS_DB_PATH"] = str(ROOT / "data" / "demo_tickets.json")
 WEB = ROOT / "web"
 
 # In order: the data layer, the engine, the view. Each file attaches itself to window.
-MODULES = ["analytics.js", "semantic.js", "app.js", "ui.js"]
+MODULES = ["analytics.js", "semantic.js", "governance.js", "app.js", "ui.js", "ui_views.js"]
 
 
 def _bundle() -> dict:
@@ -47,6 +47,9 @@ def build(out_dir: Path) -> Path:
 
     html = _read("page.html")
     # json.dumps keeps the payload from breaking out of the <script> tag.
+    # The stylesheet is inlined too: a page that needs a second request to look
+    # right is a page that flashes unstyled for every visitor.
+    html = html.replace("__CLINICAL_CSS__", _read("clinical.css"))
     html = html.replace("__BUNDLE__", json.dumps(bundle).replace("</", "<\\/"))
     html = html.replace("__APP_JS__", app_js)
 

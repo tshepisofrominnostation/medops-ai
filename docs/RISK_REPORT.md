@@ -78,6 +78,22 @@ forecast available. Selling this as "prediction" would overstate what it does.
 
 **Evidence.** `probe: forecast_vs_naive` in the audit output above.
 
+**Re-tested on real project data, 12 Nov** (`data/demo_tickets.json`, 21 days, 103
+tickets). Walk-forward, one day ahead, 13 points: the model's average miss was
+**3.38 tickets/day against 3.08 for a plain 7-day average**. The model is slightly
+worse than the cheapest possible forecast.
+
+We then tried the obvious fix. The data has a strong weekday pattern (weekends average
+about 1.5 tickets, midweek about 7), so a weekday-aware method looked promising. It was
+not reliably better: its advantage was **+0.07 tickets/day with a 95% interval of
+[-1.07, +1.29]**, which crosses zero, so it is indistinguishable from luck on 21 days.
+We did **not** swap the model and call it an improvement.
+
+What shipped instead is `GET /forecast/compare` (`app/forecast_compare.py`): the
+platform scores three methods walk-forward and says whether the winner is real. On
+this data it reports that the methods are equally good, and why. With more history it
+will name a winner when the evidence supports one.
+
 **Mitigation.** Publish `backtest_mae` next to every forecast (already done) and
 label the feature "planning aid, not a prediction". If a real use case needs
 accuracy, test seasonal baselines on real history before tuning anything.
@@ -126,12 +142,65 @@ which is why they all pass.
 
 ---
 
+## R5 — Priority depends on how a message is worded, not only what it says (High)
+**[ADDED — 12 Nov, Week 6 governance layer]** Closes the gap noted below ("we did not test
+non-English messages") and the answer is not flattering.
+
+**What we measured.** Six matched pairs: the *same underlying need*, different wording.
+`GET /governance/bias-audit` re-runs this on demand. Result: **4 of 6 pairs received a
+different priority.** Every disagreement went the same way.
+
+| Need | Wording at risk | Priority | Reference wording | Priority |
+|---|---|---|---|---|
+| Low oxygen on a ward | plain English | Medium | keyword-rich English | High |
+| Lift out of service | Afrikaans | Low | English | Medium |
+| Dialysis machine down | isiZulu | Medium | English | High |
+| Burst pipe, flooded corridor | Afrikaans | Low | English | Medium |
+
+The two pairs that matched (theatre air conditioning, blood fridge) are the ones whose
+plain wording happened to contain a rule keyword (`fail`, `not working`).
+
+**Why it happens.** `app/prioritizer.py` scores keyword lists written in English
+(`urgent`, `immediately`, `critical`, `down`). A message that says the same thing in
+isiZulu or Afrikaans, or plainly without an urgency word, scores lower. This is a
+design limit of rule-based scoring, not a typo, and tuning a few words will not remove
+it.
+
+**Why it matters.** A hospital's staff and patients write in the languages they speak.
+A system that quietly ranks a dialysis failure lower because it was reported in isiZulu
+is making a clinical-safety decision on the basis of language. In South Africa that is
+also an equity problem, not just a bug.
+
+**What we did about it (and did not).**
+- Did: built the audit so the problem is *measurable and repeatable*, not anecdotal.
+- Did: the decision log (`app/decision_log.py`) flags any message that looks non-English
+  and fired no urgency signal as `needs_bias_review`, so a person is prompted to check.
+  `GET /governance/transparency` summarises how many were flagged.
+- Did **not**: change the priority itself. Flagging asks a human to look; it does not
+  fix the ranking. The honest status is *detected and surfaced, not corrected*.
+
+**What we cannot claim.** Six pairs prove the bias exists. They cannot say how large it
+is or whether it covers every phrasing. Language detection in the log is a cheap hint,
+so flagged counts are approximate.
+
+**Mitigation, in order.**
+1. Keep the flag and require human confirmation for flagged tickets (live now).
+2. Have native isiZulu, Afrikaans and Sesotho speakers write 30+ matched pairs each.
+3. Add multilingual urgency terms, then re-run the audit; the target is not 100% but a
+   documented, shrinking gap. A fix is a decision worth noticing, so
+   `tests/test_bias_audit.py::test_real_pipeline_bias_is_on_record` must be updated on
+   purpose when it lands.
+4. Consider a multilingual classifier only after 2 gives us a test set to judge it by.
+**Owner:** Tshepiso with Avuyile (governance). **Due:** before any live patient data.
+
+---
+
 ## What we deliberately did not claim
 
 - We did not measure clinical safety. We screen for identifiers and advice-shaped
   language, which is not the same thing.
 - We did not test under load. Single-user throughput is all we know.
-- We did not test non-English messages beyond the tone detector's tolerance.
+- We tested non-English messages with six matched pairs (R5). That shows a bias exists; it does not size it.
 
 A platform that lists its weaknesses is more useful to a hospital than one that
 reports none.

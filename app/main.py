@@ -1,6 +1,6 @@
 """FastAPI service - hardened intake, descriptive errors, reply drafting with fallback."""
 import re
-from typing import Optional
+from typing import Literal, Optional
 
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.exceptions import RequestValidationError
@@ -10,6 +10,10 @@ from pydantic import ValidationError
 from .analytics import current_analytics
 from .compliance import screen as screen_text
 from .forecast import forecast_from_analytics
+from .forecast_compare import compare_methods
+from .bias_audit import run_audit
+from .decision_log import transparency_note
+from .pipeline import process_ticket as _process_for_audit
 from .insights import build_insights
 from .lifecycle import LifecycleError, STATUSES, update_ticket
 from .nlp.semantic import cross_check
@@ -98,15 +102,20 @@ def create_ticket(payload: TicketIn):
     return ticket
 
 
+class ReplyIn(TicketIn):
+    """Week 2 tone control: formal | friendly | urgent. Omitted = priority-driven."""
+    tone: Optional[Literal["formal", "friendly", "urgent"]] = None
+
+
 @app.post("/replies")
-def draft_reply(payload: TicketIn):
+def draft_reply(payload: ReplyIn):
     """Full loop: classify the request, then draft the department reply."""
     error = validate_message(payload.message)
     if error:
         raise HTTPException(status_code=400, detail=error)
     ticket = process_ticket(payload.message, payload.sender)
     try:
-        reply = writer.draft(ticket)
+        reply = writer.draft(ticket, payload.tone)
     except ValidationError:
         raise HTTPException(status_code=503, detail="Reply drafting temporarily unavailable")
     # S3-2: screen the drafted reply before it can ever be sent
@@ -127,6 +136,12 @@ def analytics(start: Optional[str] = None, end: Optional[str] = None):
 def forecast(horizon: int = 7):
     """S3-1: ticket surge forecast with a backtested MAE, not a bare number."""
     return forecast_from_analytics(current_analytics(), horizon=horizon)
+
+
+@app.get("/forecast/compare")
+def forecast_compare():
+    """Week 5: which forecasting method is best here, and is the gap real or luck?"""
+    return compare_methods(current_analytics().get("by_day", []))
 
 
 @app.post("/compliance")
@@ -300,3 +315,17 @@ def report_pdf(department: Optional[str] = None, end: Optional[str] = None):
         raise HTTPException(status_code=503, detail="PDF engine unavailable; use /report (JSON)")
     name = f"medops-weekly-{(department or 'all').lower().replace(' ', '-')}.pdf"
     return FileResponse(info["pdf"], media_type="application/pdf", filename=name)
+
+
+@app.get("/governance/bias-audit")
+def governance_bias_audit():
+    """Week 6: matched-pair audit. Does the same need get the same priority, whatever the wording?"""
+    from .models import TicketOut  # noqa: F401  (kept explicit: audit uses the real classifier)
+    from .prioritizer import prioritize
+    return run_audit(lambda text: {"priority": prioritize(text, "")})
+
+
+@app.get("/governance/transparency")
+def governance_transparency():
+    """Week 6: what has the system decided, and where is it unsure? No message text is stored."""
+    return transparency_note()

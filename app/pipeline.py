@@ -3,6 +3,7 @@ from datetime import datetime, timezone
 
 from .assigner import assign
 from .classifier import classify
+from .decision_log import log_decision
 from .models import TicketOut
 from .parser import parse_sender
 from .persistence import append
@@ -26,4 +27,10 @@ def process_ticket(message: str, sender_override: str | None = None) -> TicketOu
         "assigned_to": assigned_to,
     }
     record = append(record)
-    return TicketOut(**record)
+    ticket = TicketOut(**record)
+    # Governance: record WHY, never the message text. Cannot block triage.
+    try:
+        log_decision(body, ticket)
+    except Exception:
+        pass
+    return ticket

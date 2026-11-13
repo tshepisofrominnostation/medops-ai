@@ -1,0 +1,6208 @@
+{
+ "generated_by": "scripts/make_governance_fixtures.py",
+ "demo_ticket_count": 103,
+ "demo_by_day": [
+  {
+   "date": "2026-10-17",
+   "count": 1
+  },
+  {
+   "date": "2026-10-18",
+   "count": 2
+  },
+  {
+   "date": "2026-10-19",
+   "count": 5
+  },
+  {
+   "date": "2026-10-20",
+   "count": 3
+  },
+  {
+   "date": "2026-10-21",
+   "count": 6
+  },
+  {
+   "date": "2026-10-22",
+   "count": 6
+  },
+  {
+   "date": "2026-10-23",
+   "count": 3
+  },
+  {
+   "date": "2026-10-24",
+   "count": 1
+  },
+  {
+   "date": "2026-10-25",
+   "count": 1
+  },
+  {
+   "date": "2026-10-26",
+   "count": 4
+  },
+  {
+   "date": "2026-10-27",
+   "count": 12
+  },
+  {
+   "date": "2026-10-28",
+   "count": 9
+  },
+  {
+   "date": "2026-10-29",
+   "count": 12
+  },
+  {
+   "date": "2026-10-30",
+   "count": 6
+  },
+  {
+   "date": "2026-10-31",
+   "count": 3
+  },
+  {
+   "date": "2026-11-01",
+   "count": 1
+  },
+  {
+   "date": "2026-11-02",
+   "count": 7
+  },
+  {
+   "date": "2026-11-03",
+   "count": 5
+  },
+  {
+   "date": "2026-11-04",
+   "count": 7
+  },
+  {
+   "date": "2026-11-05",
+   "count": 4
+  },
+  {
+   "date": "2026-11-06",
+   "count": 5
+  }
+ ],
+ "forecasts": [
+  {
+   "label": "demo history h7",
+   "by_day": [
+    {
+     "date": "2026-10-17",
+     "count": 1
+    },
+    {
+     "date": "2026-10-18",
+     "count": 2
+    },
+    {
+     "date": "2026-10-19",
+     "count": 5
+    },
+    {
+     "date": "2026-10-20",
+     "count": 3
+    },
+    {
+     "date": "2026-10-21",
+     "count": 6
+    },
+    {
+     "date": "2026-10-22",
+     "count": 6
+    },
+    {
+     "date": "2026-10-23",
+     "count": 3
+    },
+    {
+     "date": "2026-10-24",
+     "count": 1
+    },
+    {
+     "date": "2026-10-25",
+     "count": 1
+    },
+    {
+     "date": "2026-10-26",
+     "count": 4
+    },
+    {
+     "date": "2026-10-27",
+     "count": 12
+    },
+    {
+     "date": "2026-10-28",
+     "count": 9
+    },
+    {
+     "date": "2026-10-29",
+     "count": 12
+    },
+    {
+     "date": "2026-10-30",
+     "count": 6
+    },
+    {
+     "date": "2026-10-31",
+     "count": 3
+    },
+    {
+     "date": "2026-11-01",
+     "count": 1
+    },
+    {
+     "date": "2026-11-02",
+     "count": 7
+    },
+    {
+     "date": "2026-11-03",
+     "count": 5
+    },
+    {
+     "date": "2026-11-04",
+     "count": 7
+    },
+    {
+     "date": "2026-11-05",
+     "count": 4
+    },
+    {
+     "date": "2026-11-06",
+     "count": 5
+    }
+   ],
+   "horizon": 7,
+   "history_days": null,
+   "value": {
+    "method": "moving_average_7 + linear_trend (50/50 blend)",
+    "horizon": 7,
+    "history_days": 21,
+    "reliable": true,
+    "slope_per_day": 0.144,
+    "recent_daily_average": 4.57,
+    "backtest_mae": 6.2,
+    "predicted_total": 41,
+    "forecast": [
+     {
+      "date": "2026-11-07",
+      "predicted": 5
+     },
+     {
+      "date": "2026-11-08",
+      "predicted": 6
+     },
+     {
+      "date": "2026-11-09",
+      "predicted": 6
+     },
+     {
+      "date": "2026-11-10",
+      "predicted": 6
+     },
+     {
+      "date": "2026-11-11",
+      "predicted": 6
+     },
+     {
+      "date": "2026-11-12",
+      "predicted": 6
+     },
+     {
+      "date": "2026-11-13",
+      "predicted": 6
+     }
+    ]
+   }
+  },
+  {
+   "label": "demo history h3 last14",
+   "by_day": [
+    {
+     "date": "2026-10-17",
+     "count": 1
+    },
+    {
+     "date": "2026-10-18",
+     "count": 2
+    },
+    {
+     "date": "2026-10-19",
+     "count": 5
+    },
+    {
+     "date": "2026-10-20",
+     "count": 3
+    },
+    {
+     "date": "2026-10-21",
+     "count": 6
+    },
+    {
+     "date": "2026-10-22",
+     "count": 6
+    },
+    {
+     "date": "2026-10-23",
+     "count": 3
+    },
+    {
+     "date": "2026-10-24",
+     "count": 1
+    },
+    {
+     "date": "2026-10-25",
+     "count": 1
+    },
+    {
+     "date": "2026-10-26",
+     "count": 4
+    },
+    {
+     "date": "2026-10-27",
+     "count": 12
+    },
+    {
+     "date": "2026-10-28",
+     "count": 9
+    },
+    {
+     "date": "2026-10-29",
+     "count": 12
+    },
+    {
+     "date": "2026-10-30",
+     "count": 6
+    },
+    {
+     "date": "2026-10-31",
+     "count": 3
+    },
+    {
+     "date": "2026-11-01",
+     "count": 1
+    },
+    {
+     "date": "2026-11-02",
+     "count": 7
+    },
+    {
+     "date": "2026-11-03",
+     "count": 5
+    },
+    {
+     "date": "2026-11-04",
+     "count": 7
+    },
+    {
+     "date": "2026-11-05",
+     "count": 4
+    },
+    {
+     "date": "2026-11-06",
+     "count": 5
+    }
+   ],
+   "horizon": 3,
+   "history_days": 14,
+   "value": {
+    "method": "moving_average_7 + linear_trend (50/50 blend)",
+    "horizon": 3,
+    "history_days": 14,
+    "reliable": true,
+    "slope_per_day": 0.037,
+    "recent_daily_average": 4.57,
+    "backtest_mae": 1.46,
+    "predicted_total": 15,
+    "forecast": [
+     {
+      "date": "2026-11-07",
+      "predicted": 5
+     },
+     {
+      "date": "2026-11-08",
+      "predicted": 5
+     },
+     {
+      "date": "2026-11-09",
+      "predicted": 5
+     }
+    ]
+   }
+  },
+  {
+   "label": "clean weekly cycle h7",
+   "by_day": [
+    {
+     "date": "2026-01-05",
+     "count": 8
+    },
+    {
+     "date": "2026-01-06",
+     "count": 9
+    },
+    {
+     "date": "2026-01-07",
+     "count": 9
+    },
+    {
+     "date": "2026-01-08",
+     "count": 8
+    },
+    {
+     "date": "2026-01-09",
+     "count": 7
+    },
+    {
+     "date": "2026-01-10",
+     "count": 1
+    },
+    {
+     "date": "2026-01-11",
+     "count": 1
+    },
+    {
+     "date": "2026-01-12",
+     "count": 8
+    },
+    {
+     "date": "2026-01-13",
+     "count": 9
+    },
+    {
+     "date": "2026-01-14",
+     "count": 9
+    },
+    {
+     "date": "2026-01-15",
+     "count": 8
+    },
+    {
+     "date": "2026-01-16",
+     "count": 7
+    },
+    {
+     "date": "2026-01-17",
+     "count": 1
+    },
+    {
+     "date": "2026-01-18",
+     "count": 1
+    },
+    {
+     "date": "2026-01-19",
+     "count": 8
+    },
+    {
+     "date": "2026-01-20",
+     "count": 9
+    },
+    {
+     "date": "2026-01-21",
+     "count": 9
+    },
+    {
+     "date": "2026-01-22",
+     "count": 8
+    },
+    {
+     "date": "2026-01-23",
+     "count": 7
+    },
+    {
+     "date": "2026-01-24",
+     "count": 1
+    },
+    {
+     "date": "2026-01-25",
+     "count": 1
+    },
+    {
+     "date": "2026-01-26",
+     "count": 8
+    },
+    {
+     "date": "2026-01-27",
+     "count": 9
+    },
+    {
+     "date": "2026-01-28",
+     "count": 9
+    },
+    {
+     "date": "2026-01-29",
+     "count": 8
+    },
+    {
+     "date": "2026-01-30",
+     "count": 7
+    },
+    {
+     "date": "2026-01-31",
+     "count": 1
+    },
+    {
+     "date": "2026-02-01",
+     "count": 1
+    },
+    {
+     "date": "2026-02-02",
+     "count": 8
+    },
+    {
+     "date": "2026-02-03",
+     "count": 9
+    },
+    {
+     "date": "2026-02-04",
+     "count": 9
+    },
+    {
+     "date": "2026-02-05",
+     "count": 8
+    },
+    {
+     "date": "2026-02-06",
+     "count": 7
+    },
+    {
+     "date": "2026-02-07",
+     "count": 1
+    },
+    {
+     "date": "2026-02-08",
+     "count": 1
+    },
+    {
+     "date": "2026-02-09",
+     "count": 8
+    },
+    {
+     "date": "2026-02-10",
+     "count": 9
+    },
+    {
+     "date": "2026-02-11",
+     "count": 9
+    },
+    {
+     "date": "2026-02-12",
+     "count": 8
+    },
+    {
+     "date": "2026-02-13",
+     "count": 7
+    },
+    {
+     "date": "2026-02-14",
+     "count": 1
+    },
+    {
+     "date": "2026-02-15",
+     "count": 1
+    },
+    {
+     "date": "2026-02-16",
+     "count": 8
+    },
+    {
+     "date": "2026-02-17",
+     "count": 9
+    },
+    {
+     "date": "2026-02-18",
+     "count": 9
+    },
+    {
+     "date": "2026-02-19",
+     "count": 8
+    },
+    {
+     "date": "2026-02-20",
+     "count": 7
+    },
+    {
+     "date": "2026-02-21",
+     "count": 1
+    },
+    {
+     "date": "2026-02-22",
+     "count": 1
+    },
+    {
+     "date": "2026-02-23",
+     "count": 8
+    },
+    {
+     "date": "2026-02-24",
+     "count": 9
+    },
+    {
+     "date": "2026-02-25",
+     "count": 9
+    },
+    {
+     "date": "2026-02-26",
+     "count": 8
+    },
+    {
+     "date": "2026-02-27",
+     "count": 7
+    },
+    {
+     "date": "2026-02-28",
+     "count": 1
+    },
+    {
+     "date": "2026-03-01",
+     "count": 1
+    },
+    {
+     "date": "2026-03-02",
+     "count": 8
+    },
+    {
+     "date": "2026-03-03",
+     "count": 9
+    },
+    {
+     "date": "2026-03-04",
+     "count": 9
+    },
+    {
+     "date": "2026-03-05",
+     "count": 8
+    },
+    {
+     "date": "2026-03-06",
+     "count": 7
+    },
+    {
+     "date": "2026-03-07",
+     "count": 1
+    },
+    {
+     "date": "2026-03-08",
+     "count": 1
+    },
+    {
+     "date": "2026-03-09",
+     "count": 8
+    },
+    {
+     "date": "2026-03-10",
+     "count": 9
+    },
+    {
+     "date": "2026-03-11",
+     "count": 9
+    },
+    {
+     "date": "2026-03-12",
+     "count": 8
+    },
+    {
+     "date": "2026-03-13",
+     "count": 7
+    },
+    {
+     "date": "2026-03-14",
+     "count": 1
+    },
+    {
+     "date": "2026-03-15",
+     "count": 1
+    },
+    {
+     "date": "2026-03-16",
+     "count": 8
+    },
+    {
+     "date": "2026-03-17",
+     "count": 9
+    },
+    {
+     "date": "2026-03-18",
+     "count": 9
+    },
+    {
+     "date": "2026-03-19",
+     "count": 8
+    },
+    {
+     "date": "2026-03-20",
+     "count": 7
+    },
+    {
+     "date": "2026-03-21",
+     "count": 1
+    },
+    {
+     "date": "2026-03-22",
+     "count": 1
+    },
+    {
+     "date": "2026-03-23",
+     "count": 8
+    },
+    {
+     "date": "2026-03-24",
+     "count": 9
+    },
+    {
+     "date": "2026-03-25",
+     "count": 9
+    },
+    {
+     "date": "2026-03-26",
+     "count": 8
+    },
+    {
+     "date": "2026-03-27",
+     "count": 7
+    },
+    {
+     "date": "2026-03-28",
+     "count": 1
+    },
+    {
+     "date": "2026-03-29",
+     "count": 1
+    }
+   ],
+   "horizon": 7,
+   "history_days": null,
+   "value": {
+    "method": "moving_average_7 + linear_trend (50/50 blend)",
+    "horizon": 7,
+    "history_days": 84,
+    "reliable": true,
+    "slope_per_day": -0.009,
+    "recent_daily_average": 6.14,
+    "backtest_mae": 3.12,
+    "predicted_total": 42,
+    "forecast": [
+     {
+      "date": "2026-03-30",
+      "predicted": 6
+     },
+     {
+      "date": "2026-03-31",
+      "predicted": 6
+     },
+     {
+      "date": "2026-04-01",
+      "predicted": 6
+     },
+     {
+      "date": "2026-04-02",
+      "predicted": 6
+     },
+     {
+      "date": "2026-04-03",
+      "predicted": 6
+     },
+     {
+      "date": "2026-04-04",
+      "predicted": 6
+     },
+     {
+      "date": "2026-04-05",
+      "predicted": 6
+     }
+    ]
+   }
+  },
+  {
+   "label": "clean weekly cycle h3 last14",
+   "by_day": [
+    {
+     "date": "2026-01-05",
+     "count": 8
+    },
+    {
+     "date": "2026-01-06",
+     "count": 9
+    },
+    {
+     "date": "2026-01-07",
+     "count": 9
+    },
+    {
+     "date": "2026-01-08",
+     "count": 8
+    },
+    {
+     "date": "2026-01-09",
+     "count": 7
+    },
+    {
+     "date": "2026-01-10",
+     "count": 1
+    },
+    {
+     "date": "2026-01-11",
+     "count": 1
+    },
+    {
+     "date": "2026-01-12",
+     "count": 8
+    },
+    {
+     "date": "2026-01-13",
+     "count": 9
+    },
+    {
+     "date": "2026-01-14",
+     "count": 9
+    },
+    {
+     "date": "2026-01-15",
+     "count": 8
+    },
+    {
+     "date": "2026-01-16",
+     "count": 7
+    },
+    {
+     "date": "2026-01-17",
+     "count": 1
+    },
+    {
+     "date": "2026-01-18",
+     "count": 1
+    },
+    {
+     "date": "2026-01-19",
+     "count": 8
+    },
+    {
+     "date": "2026-01-20",
+     "count": 9
+    },
+    {
+     "date": "2026-01-21",
+     "count": 9
+    },
+    {
+     "date": "2026-01-22",
+     "count": 8
+    },
+    {
+     "date": "2026-01-23",
+     "count": 7
+    },
+    {
+     "date": "2026-01-24",
+     "count": 1
+    },
+    {
+     "date": "2026-01-25",
+     "count": 1
+    },
+    {
+     "date": "2026-01-26",
+     "count": 8
+    },
+    {
+     "date": "2026-01-27",
+     "count": 9
+    },
+    {
+     "date": "2026-01-28",
+     "count": 9
+    },
+    {
+     "date": "2026-01-29",
+     "count": 8
+    },
+    {
+     "date": "2026-01-30",
+     "count": 7
+    },
+    {
+     "date": "2026-01-31",
+     "count": 1
+    },
+    {
+     "date": "2026-02-01",
+     "count": 1
+    },
+    {
+     "date": "2026-02-02",
+     "count": 8
+    },
+    {
+     "date": "2026-02-03",
+     "count": 9
+    },
+    {
+     "date": "2026-02-04",
+     "count": 9
+    },
+    {
+     "date": "2026-02-05",
+     "count": 8
+    },
+    {
+     "date": "2026-02-06",
+     "count": 7
+    },
+    {
+     "date": "2026-02-07",
+     "count": 1
+    },
+    {
+     "date": "2026-02-08",
+     "count": 1
+    },
+    {
+     "date": "2026-02-09",
+     "count": 8
+    },
+    {
+     "date": "2026-02-10",
+     "count": 9
+    },
+    {
+     "date": "2026-02-11",
+     "count": 9
+    },
+    {
+     "date": "2026-02-12",
+     "count": 8
+    },
+    {
+     "date": "2026-02-13",
+     "count": 7
+    },
+    {
+     "date": "2026-02-14",
+     "count": 1
+    },
+    {
+     "date": "2026-02-15",
+     "count": 1
+    },
+    {
+     "date": "2026-02-16",
+     "count": 8
+    },
+    {
+     "date": "2026-02-17",
+     "count": 9
+    },
+    {
+     "date": "2026-02-18",
+     "count": 9
+    },
+    {
+     "date": "2026-02-19",
+     "count": 8
+    },
+    {
+     "date": "2026-02-20",
+     "count": 7
+    },
+    {
+     "date": "2026-02-21",
+     "count": 1
+    },
+    {
+     "date": "2026-02-22",
+     "count": 1
+    },
+    {
+     "date": "2026-02-23",
+     "count": 8
+    },
+    {
+     "date": "2026-02-24",
+     "count": 9
+    },
+    {
+     "date": "2026-02-25",
+     "count": 9
+    },
+    {
+     "date": "2026-02-26",
+     "count": 8
+    },
+    {
+     "date": "2026-02-27",
+     "count": 7
+    },
+    {
+     "date": "2026-02-28",
+     "count": 1
+    },
+    {
+     "date": "2026-03-01",
+     "count": 1
+    },
+    {
+     "date": "2026-03-02",
+     "count": 8
+    },
+    {
+     "date": "2026-03-03",
+     "count": 9
+    },
+    {
+     "date": "2026-03-04",
+     "count": 9
+    },
+    {
+     "date": "2026-03-05",
+     "count": 8
+    },
+    {
+     "date": "2026-03-06",
+     "count": 7
+    },
+    {
+     "date": "2026-03-07",
+     "count": 1
+    },
+    {
+     "date": "2026-03-08",
+     "count": 1
+    },
+    {
+     "date": "2026-03-09",
+     "count": 8
+    },
+    {
+     "date": "2026-03-10",
+     "count": 9
+    },
+    {
+     "date": "2026-03-11",
+     "count": 9
+    },
+    {
+     "date": "2026-03-12",
+     "count": 8
+    },
+    {
+     "date": "2026-03-13",
+     "count": 7
+    },
+    {
+     "date": "2026-03-14",
+     "count": 1
+    },
+    {
+     "date": "2026-03-15",
+     "count": 1
+    },
+    {
+     "date": "2026-03-16",
+     "count": 8
+    },
+    {
+     "date": "2026-03-17",
+     "count": 9
+    },
+    {
+     "date": "2026-03-18",
+     "count": 9
+    },
+    {
+     "date": "2026-03-19",
+     "count": 8
+    },
+    {
+     "date": "2026-03-20",
+     "count": 7
+    },
+    {
+     "date": "2026-03-21",
+     "count": 1
+    },
+    {
+     "date": "2026-03-22",
+     "count": 1
+    },
+    {
+     "date": "2026-03-23",
+     "count": 8
+    },
+    {
+     "date": "2026-03-24",
+     "count": 9
+    },
+    {
+     "date": "2026-03-25",
+     "count": 9
+    },
+    {
+     "date": "2026-03-26",
+     "count": 8
+    },
+    {
+     "date": "2026-03-27",
+     "count": 7
+    },
+    {
+     "date": "2026-03-28",
+     "count": 1
+    },
+    {
+     "date": "2026-03-29",
+     "count": 1
+    }
+   ],
+   "horizon": 3,
+   "history_days": 14,
+   "value": {
+    "method": "moving_average_7 + linear_trend (50/50 blend)",
+    "horizon": 3,
+    "history_days": 14,
+    "reliable": true,
+    "slope_per_day": -0.343,
+    "recent_daily_average": 6.14,
+    "backtest_mae": 3.14,
+    "predicted_total": 15,
+    "forecast": [
+     {
+      "date": "2026-03-30",
+      "predicted": 5
+     },
+     {
+      "date": "2026-03-31",
+      "predicted": 5
+     },
+     {
+      "date": "2026-04-01",
+      "predicted": 5
+     }
+    ]
+   }
+  },
+  {
+   "label": "pure noise h7",
+   "by_day": [
+    {
+     "date": "2026-01-05",
+     "count": 4
+    },
+    {
+     "date": "2026-01-06",
+     "count": 3
+    },
+    {
+     "date": "2026-01-07",
+     "count": 5
+    },
+    {
+     "date": "2026-01-08",
+     "count": 7
+    },
+    {
+     "date": "2026-01-09",
+     "count": 2
+    },
+    {
+     "date": "2026-01-10",
+     "count": 2
+    },
+    {
+     "date": "2026-01-11",
+     "count": 8
+    },
+    {
+     "date": "2026-01-12",
+     "count": 6
+    },
+    {
+     "date": "2026-01-13",
+     "count": 2
+    },
+    {
+     "date": "2026-01-14",
+     "count": 4
+    },
+    {
+     "date": "2026-01-15",
+     "count": 6
+    },
+    {
+     "date": "2026-01-16",
+     "count": 2
+    },
+    {
+     "date": "2026-01-17",
+     "count": 6
+    },
+    {
+     "date": "2026-01-18",
+     "count": 3
+    },
+    {
+     "date": "2026-01-19",
+     "count": 2
+    },
+    {
+     "date": "2026-01-20",
+     "count": 2
+    },
+    {
+     "date": "2026-01-21",
+     "count": 5
+    },
+    {
+     "date": "2026-01-22",
+     "count": 5
+    },
+    {
+     "date": "2026-01-23",
+     "count": 2
+    },
+    {
+     "date": "2026-01-24",
+     "count": 3
+    },
+    {
+     "date": "2026-01-25",
+     "count": 2
+    },
+    {
+     "date": "2026-01-26",
+     "count": 6
+    },
+    {
+     "date": "2026-01-27",
+     "count": 5
+    },
+    {
+     "date": "2026-01-28",
+     "count": 2
+    },
+    {
+     "date": "2026-01-29",
+     "count": 8
+    },
+    {
+     "date": "2026-01-30",
+     "count": 6
+    },
+    {
+     "date": "2026-01-31",
+     "count": 2
+    },
+    {
+     "date": "2026-02-01",
+     "count": 3
+    }
+   ],
+   "horizon": 7,
+   "history_days": null,
+   "value": {
+    "method": "moving_average_7 + linear_trend (50/50 blend)",
+    "horizon": 7,
+    "history_days": 28,
+    "reliable": true,
+    "slope_per_day": -0.014,
+    "recent_daily_average": 4.57,
+    "backtest_mae": 1.83,
+    "predicted_total": 28,
+    "forecast": [
+     {
+      "date": "2026-02-02",
+      "predicted": 4
+     },
+     {
+      "date": "2026-02-03",
+      "predicted": 4
+     },
+     {
+      "date": "2026-02-04",
+      "predicted": 4
+     },
+     {
+      "date": "2026-02-05",
+      "predicted": 4
+     },
+     {
+      "date": "2026-02-06",
+      "predicted": 4
+     },
+     {
+      "date": "2026-02-07",
+      "predicted": 4
+     },
+     {
+      "date": "2026-02-08",
+      "predicted": 4
+     }
+    ]
+   }
+  },
+  {
+   "label": "pure noise h3 last14",
+   "by_day": [
+    {
+     "date": "2026-01-05",
+     "count": 4
+    },
+    {
+     "date": "2026-01-06",
+     "count": 3
+    },
+    {
+     "date": "2026-01-07",
+     "count": 5
+    },
+    {
+     "date": "2026-01-08",
+     "count": 7
+    },
+    {
+     "date": "2026-01-09",
+     "count": 2
+    },
+    {
+     "date": "2026-01-10",
+     "count": 2
+    },
+    {
+     "date": "2026-01-11",
+     "count": 8
+    },
+    {
+     "date": "2026-01-12",
+     "count": 6
+    },
+    {
+     "date": "2026-01-13",
+     "count": 2
+    },
+    {
+     "date": "2026-01-14",
+     "count": 4
+    },
+    {
+     "date": "2026-01-15",
+     "count": 6
+    },
+    {
+     "date": "2026-01-16",
+     "count": 2
+    },
+    {
+     "date": "2026-01-17",
+     "count": 6
+    },
+    {
+     "date": "2026-01-18",
+     "count": 3
+    },
+    {
+     "date": "2026-01-19",
+     "count": 2
+    },
+    {
+     "date": "2026-01-20",
+     "count": 2
+    },
+    {
+     "date": "2026-01-21",
+     "count": 5
+    },
+    {
+     "date": "2026-01-22",
+     "count": 5
+    },
+    {
+     "date": "2026-01-23",
+     "count": 2
+    },
+    {
+     "date": "2026-01-24",
+     "count": 3
+    },
+    {
+     "date": "2026-01-25",
+     "count": 2
+    },
+    {
+     "date": "2026-01-26",
+     "count": 6
+    },
+    {
+     "date": "2026-01-27",
+     "count": 5
+    },
+    {
+     "date": "2026-01-28",
+     "count": 2
+    },
+    {
+     "date": "2026-01-29",
+     "count": 8
+    },
+    {
+     "date": "2026-01-30",
+     "count": 6
+    },
+    {
+     "date": "2026-01-31",
+     "count": 2
+    },
+    {
+     "date": "2026-02-01",
+     "count": 3
+    }
+   ],
+   "horizon": 3,
+   "history_days": 14,
+   "value": {
+    "method": "moving_average_7 + linear_trend (50/50 blend)",
+    "horizon": 3,
+    "history_days": 14,
+    "reliable": true,
+    "slope_per_day": 0.116,
+    "recent_daily_average": 4.57,
+    "backtest_mae": 2.59,
+    "predicted_total": 15,
+    "forecast": [
+     {
+      "date": "2026-02-02",
+      "predicted": 5
+     },
+     {
+      "date": "2026-02-03",
+      "predicted": 5
+     },
+     {
+      "date": "2026-02-04",
+      "predicted": 5
+     }
+    ]
+   }
+  },
+  {
+   "label": "declining h7",
+   "by_day": [
+    {
+     "date": "2026-01-05",
+     "count": 12
+    },
+    {
+     "date": "2026-01-06",
+     "count": 12
+    },
+    {
+     "date": "2026-01-07",
+     "count": 12
+    },
+    {
+     "date": "2026-01-08",
+     "count": 11
+    },
+    {
+     "date": "2026-01-09",
+     "count": 11
+    },
+    {
+     "date": "2026-01-10",
+     "count": 8
+    },
+    {
+     "date": "2026-01-11",
+     "count": 7
+    },
+    {
+     "date": "2026-01-12",
+     "count": 10
+    },
+    {
+     "date": "2026-01-13",
+     "count": 10
+    },
+    {
+     "date": "2026-01-14",
+     "count": 9
+    },
+    {
+     "date": "2026-01-15",
+     "count": 9
+    },
+    {
+     "date": "2026-01-16",
+     "count": 9
+    },
+    {
+     "date": "2026-01-17",
+     "count": 5
+    },
+    {
+     "date": "2026-01-18",
+     "count": 5
+    },
+    {
+     "date": "2026-01-19",
+     "count": 8
+    },
+    {
+     "date": "2026-01-20",
+     "count": 7
+    },
+    {
+     "date": "2026-01-21",
+     "count": 7
+    },
+    {
+     "date": "2026-01-22",
+     "count": 7
+    },
+    {
+     "date": "2026-01-23",
+     "count": 6
+    },
+    {
+     "date": "2026-01-24",
+     "count": 3
+    },
+    {
+     "date": "2026-01-25",
+     "count": 3
+    },
+    {
+     "date": "2026-01-26",
+     "count": 5
+    },
+    {
+     "date": "2026-01-27",
+     "count": 5
+    },
+    {
+     "date": "2026-01-28",
+     "count": 5
+    },
+    {
+     "date": "2026-01-29",
+     "count": 4
+    },
+    {
+     "date": "2026-01-30",
+     "count": 4
+    },
+    {
+     "date": "2026-01-31",
+     "count": 1
+    },
+    {
+     "date": "2026-02-01",
+     "count": 0
+    },
+    {
+     "date": "2026-02-02",
+     "count": 3
+    },
+    {
+     "date": "2026-02-03",
+     "count": 3
+    },
+    {
+     "date": "2026-02-04",
+     "count": 2
+    },
+    {
+     "date": "2026-02-05",
+     "count": 2
+    },
+    {
+     "date": "2026-02-06",
+     "count": 2
+    },
+    {
+     "date": "2026-02-07",
+     "count": -2
+    },
+    {
+     "date": "2026-02-08",
+     "count": -2
+    }
+   ],
+   "horizon": 7,
+   "history_days": null,
+   "value": {
+    "method": "moving_average_7 + linear_trend (50/50 blend)",
+    "horizon": 7,
+    "history_days": 35,
+    "reliable": true,
+    "slope_per_day": -0.354,
+    "recent_daily_average": 1.14,
+    "backtest_mae": 1.37,
+    "predicted_total": 0,
+    "forecast": [
+     {
+      "date": "2026-02-09",
+      "predicted": 0
+     },
+     {
+      "date": "2026-02-10",
+      "predicted": 0
+     },
+     {
+      "date": "2026-02-11",
+      "predicted": 0
+     },
+     {
+      "date": "2026-02-12",
+      "predicted": 0
+     },
+     {
+      "date": "2026-02-13",
+      "predicted": 0
+     },
+     {
+      "date": "2026-02-14",
+      "predicted": 0
+     },
+     {
+      "date": "2026-02-15",
+      "predicted": 0
+     }
+    ]
+   }
+  },
+  {
+   "label": "declining h3 last14",
+   "by_day": [
+    {
+     "date": "2026-01-05",
+     "count": 12
+    },
+    {
+     "date": "2026-01-06",
+     "count": 12
+    },
+    {
+     "date": "2026-01-07",
+     "count": 12
+    },
+    {
+     "date": "2026-01-08",
+     "count": 11
+    },
+    {
+     "date": "2026-01-09",
+     "count": 11
+    },
+    {
+     "date": "2026-01-10",
+     "count": 8
+    },
+    {
+     "date": "2026-01-11",
+     "count": 7
+    },
+    {
+     "date": "2026-01-12",
+     "count": 10
+    },
+    {
+     "date": "2026-01-13",
+     "count": 10
+    },
+    {
+     "date": "2026-01-14",
+     "count": 9
+    },
+    {
+     "date": "2026-01-15",
+     "count": 9
+    },
+    {
+     "date": "2026-01-16",
+     "count": 9
+    },
+    {
+     "date": "2026-01-17",
+     "count": 5
+    },
+    {
+     "date": "2026-01-18",
+     "count": 5
+    },
+    {
+     "date": "2026-01-19",
+     "count": 8
+    },
+    {
+     "date": "2026-01-20",
+     "count": 7
+    },
+    {
+     "date": "2026-01-21",
+     "count": 7
+    },
+    {
+     "date": "2026-01-22",
+     "count": 7
+    },
+    {
+     "date": "2026-01-23",
+     "count": 6
+    },
+    {
+     "date": "2026-01-24",
+     "count": 3
+    },
+    {
+     "date": "2026-01-25",
+     "count": 3
+    },
+    {
+     "date": "2026-01-26",
+     "count": 5
+    },
+    {
+     "date": "2026-01-27",
+     "count": 5
+    },
+    {
+     "date": "2026-01-28",
+     "count": 5
+    },
+    {
+     "date": "2026-01-29",
+     "count": 4
+    },
+    {
+     "date": "2026-01-30",
+     "count": 4
+    },
+    {
+     "date": "2026-01-31",
+     "count": 1
+    },
+    {
+     "date": "2026-02-01",
+     "count": 0
+    },
+    {
+     "date": "2026-02-02",
+     "count": 3
+    },
+    {
+     "date": "2026-02-03",
+     "count": 3
+    },
+    {
+     "date": "2026-02-04",
+     "count": 2
+    },
+    {
+     "date": "2026-02-05",
+     "count": 2
+    },
+    {
+     "date": "2026-02-06",
+     "count": 2
+    },
+    {
+     "date": "2026-02-07",
+     "count": -2
+    },
+    {
+     "date": "2026-02-08",
+     "count": -2
+    }
+   ],
+   "horizon": 3,
+   "history_days": 14,
+   "value": {
+    "method": "moving_average_7 + linear_trend (50/50 blend)",
+    "horizon": 3,
+    "history_days": 14,
+    "reliable": true,
+    "slope_per_day": -0.462,
+    "recent_daily_average": 1.14,
+    "backtest_mae": 1.42,
+    "predicted_total": 0,
+    "forecast": [
+     {
+      "date": "2026-02-09",
+      "predicted": 0
+     },
+     {
+      "date": "2026-02-10",
+      "predicted": 0
+     },
+     {
+      "date": "2026-02-11",
+      "predicted": 0
+     }
+    ]
+   }
+  },
+  {
+   "label": "rising h7",
+   "by_day": [
+    {
+     "date": "2026-01-05",
+     "count": 2
+    },
+    {
+     "date": "2026-01-06",
+     "count": 3
+    },
+    {
+     "date": "2026-01-07",
+     "count": 4
+    },
+    {
+     "date": "2026-01-08",
+     "count": 5
+    },
+    {
+     "date": "2026-01-09",
+     "count": 6
+    },
+    {
+     "date": "2026-01-10",
+     "count": 7
+    },
+    {
+     "date": "2026-01-11",
+     "count": 8
+    },
+    {
+     "date": "2026-01-12",
+     "count": 9
+    },
+    {
+     "date": "2026-01-13",
+     "count": 10
+    },
+    {
+     "date": "2026-01-14",
+     "count": 11
+    },
+    {
+     "date": "2026-01-15",
+     "count": 12
+    },
+    {
+     "date": "2026-01-16",
+     "count": 13
+    },
+    {
+     "date": "2026-01-17",
+     "count": 14
+    },
+    {
+     "date": "2026-01-18",
+     "count": 15
+    },
+    {
+     "date": "2026-01-19",
+     "count": 16
+    },
+    {
+     "date": "2026-01-20",
+     "count": 17
+    },
+    {
+     "date": "2026-01-21",
+     "count": 18
+    },
+    {
+     "date": "2026-01-22",
+     "count": 19
+    },
+    {
+     "date": "2026-01-23",
+     "count": 20
+    },
+    {
+     "date": "2026-01-24",
+     "count": 21
+    }
+   ],
+   "horizon": 7,
+   "history_days": null,
+   "value": {
+    "method": "moving_average_7 + linear_trend (50/50 blend)",
+    "horizon": 7,
+    "history_days": 20,
+    "reliable": true,
+    "slope_per_day": 1.0,
+    "recent_daily_average": 18.0,
+    "backtest_mae": 0.0,
+    "predicted_total": 147,
+    "forecast": [
+     {
+      "date": "2026-01-25",
+      "predicted": 20
+     },
+     {
+      "date": "2026-01-26",
+      "predicted": 20
+     },
+     {
+      "date": "2026-01-27",
+      "predicted": 20
+     },
+     {
+      "date": "2026-01-28",
+      "predicted": 21
+     },
+     {
+      "date": "2026-01-29",
+      "predicted": 22
+     },
+     {
+      "date": "2026-01-30",
+      "predicted": 22
+     },
+     {
+      "date": "2026-01-31",
+      "predicted": 22
+     }
+    ]
+   }
+  },
+  {
+   "label": "rising h3 last14",
+   "by_day": [
+    {
+     "date": "2026-01-05",
+     "count": 2
+    },
+    {
+     "date": "2026-01-06",
+     "count": 3
+    },
+    {
+     "date": "2026-01-07",
+     "count": 4
+    },
+    {
+     "date": "2026-01-08",
+     "count": 5
+    },
+    {
+     "date": "2026-01-09",
+     "count": 6
+    },
+    {
+     "date": "2026-01-10",
+     "count": 7
+    },
+    {
+     "date": "2026-01-11",
+     "count": 8
+    },
+    {
+     "date": "2026-01-12",
+     "count": 9
+    },
+    {
+     "date": "2026-01-13",
+     "count": 10
+    },
+    {
+     "date": "2026-01-14",
+     "count": 11
+    },
+    {
+     "date": "2026-01-15",
+     "count": 12
+    },
+    {
+     "date": "2026-01-16",
+     "count": 13
+    },
+    {
+     "date": "2026-01-17",
+     "count": 14
+    },
+    {
+     "date": "2026-01-18",
+     "count": 15
+    },
+    {
+     "date": "2026-01-19",
+     "count": 16
+    },
+    {
+     "date": "2026-01-20",
+     "count": 17
+    },
+    {
+     "date": "2026-01-21",
+     "count": 18
+    },
+    {
+     "date": "2026-01-22",
+     "count": 19
+    },
+    {
+     "date": "2026-01-23",
+     "count": 20
+    },
+    {
+     "date": "2026-01-24",
+     "count": 21
+    }
+   ],
+   "horizon": 3,
+   "history_days": 14,
+   "value": {
+    "method": "moving_average_7 + linear_trend (50/50 blend)",
+    "horizon": 3,
+    "history_days": 14,
+    "reliable": true,
+    "slope_per_day": 1.0,
+    "recent_daily_average": 18.0,
+    "backtest_mae": 0.0,
+    "predicted_total": 60,
+    "forecast": [
+     {
+      "date": "2026-01-25",
+      "predicted": 20
+     },
+     {
+      "date": "2026-01-26",
+      "predicted": 20
+     },
+     {
+      "date": "2026-01-27",
+      "predicted": 20
+     }
+    ]
+   }
+  },
+  {
+   "label": "flat h7",
+   "by_day": [
+    {
+     "date": "2026-01-05",
+     "count": 5
+    },
+    {
+     "date": "2026-01-06",
+     "count": 5
+    },
+    {
+     "date": "2026-01-07",
+     "count": 5
+    },
+    {
+     "date": "2026-01-08",
+     "count": 5
+    },
+    {
+     "date": "2026-01-09",
+     "count": 5
+    },
+    {
+     "date": "2026-01-10",
+     "count": 5
+    },
+    {
+     "date": "2026-01-11",
+     "count": 5
+    },
+    {
+     "date": "2026-01-12",
+     "count": 5
+    },
+    {
+     "date": "2026-01-13",
+     "count": 5
+    },
+    {
+     "date": "2026-01-14",
+     "count": 5
+    },
+    {
+     "date": "2026-01-15",
+     "count": 5
+    },
+    {
+     "date": "2026-01-16",
+     "count": 5
+    },
+    {
+     "date": "2026-01-17",
+     "count": 5
+    },
+    {
+     "date": "2026-01-18",
+     "count": 5
+    },
+    {
+     "date": "2026-01-19",
+     "count": 5
+    },
+    {
+     "date": "2026-01-20",
+     "count": 5
+    },
+    {
+     "date": "2026-01-21",
+     "count": 5
+    },
+    {
+     "date": "2026-01-22",
+     "count": 5
+    },
+    {
+     "date": "2026-01-23",
+     "count": 5
+    },
+    {
+     "date": "2026-01-24",
+     "count": 5
+    },
+    {
+     "date": "2026-01-25",
+     "count": 5
+    },
+    {
+     "date": "2026-01-26",
+     "count": 5
+    },
+    {
+     "date": "2026-01-27",
+     "count": 5
+    },
+    {
+     "date": "2026-01-28",
+     "count": 5
+    },
+    {
+     "date": "2026-01-29",
+     "count": 5
+    },
+    {
+     "date": "2026-01-30",
+     "count": 5
+    },
+    {
+     "date": "2026-01-31",
+     "count": 5
+    },
+    {
+     "date": "2026-02-01",
+     "count": 5
+    },
+    {
+     "date": "2026-02-02",
+     "count": 5
+    },
+    {
+     "date": "2026-02-03",
+     "count": 5
+    }
+   ],
+   "horizon": 7,
+   "history_days": null,
+   "value": {
+    "method": "moving_average_7 + linear_trend (50/50 blend)",
+    "horizon": 7,
+    "history_days": 30,
+    "reliable": true,
+    "slope_per_day": 0.0,
+    "recent_daily_average": 5.0,
+    "backtest_mae": 0.0,
+    "predicted_total": 35,
+    "forecast": [
+     {
+      "date": "2026-02-04",
+      "predicted": 5
+     },
+     {
+      "date": "2026-02-05",
+      "predicted": 5
+     },
+     {
+      "date": "2026-02-06",
+      "predicted": 5
+     },
+     {
+      "date": "2026-02-07",
+      "predicted": 5
+     },
+     {
+      "date": "2026-02-08",
+      "predicted": 5
+     },
+     {
+      "date": "2026-02-09",
+      "predicted": 5
+     },
+     {
+      "date": "2026-02-10",
+      "predicted": 5
+     }
+    ]
+   }
+  },
+  {
+   "label": "flat h3 last14",
+   "by_day": [
+    {
+     "date": "2026-01-05",
+     "count": 5
+    },
+    {
+     "date": "2026-01-06",
+     "count": 5
+    },
+    {
+     "date": "2026-01-07",
+     "count": 5
+    },
+    {
+     "date": "2026-01-08",
+     "count": 5
+    },
+    {
+     "date": "2026-01-09",
+     "count": 5
+    },
+    {
+     "date": "2026-01-10",
+     "count": 5
+    },
+    {
+     "date": "2026-01-11",
+     "count": 5
+    },
+    {
+     "date": "2026-01-12",
+     "count": 5
+    },
+    {
+     "date": "2026-01-13",
+     "count": 5
+    },
+    {
+     "date": "2026-01-14",
+     "count": 5
+    },
+    {
+     "date": "2026-01-15",
+     "count": 5
+    },
+    {
+     "date": "2026-01-16",
+     "count": 5
+    },
+    {
+     "date": "2026-01-17",
+     "count": 5
+    },
+    {
+     "date": "2026-01-18",
+     "count": 5
+    },
+    {
+     "date": "2026-01-19",
+     "count": 5
+    },
+    {
+     "date": "2026-01-20",
+     "count": 5
+    },
+    {
+     "date": "2026-01-21",
+     "count": 5
+    },
+    {
+     "date": "2026-01-22",
+     "count": 5
+    },
+    {
+     "date": "2026-01-23",
+     "count": 5
+    },
+    {
+     "date": "2026-01-24",
+     "count": 5
+    },
+    {
+     "date": "2026-01-25",
+     "count": 5
+    },
+    {
+     "date": "2026-01-26",
+     "count": 5
+    },
+    {
+     "date": "2026-01-27",
+     "count": 5
+    },
+    {
+     "date": "2026-01-28",
+     "count": 5
+    },
+    {
+     "date": "2026-01-29",
+     "count": 5
+    },
+    {
+     "date": "2026-01-30",
+     "count": 5
+    },
+    {
+     "date": "2026-01-31",
+     "count": 5
+    },
+    {
+     "date": "2026-02-01",
+     "count": 5
+    },
+    {
+     "date": "2026-02-02",
+     "count": 5
+    },
+    {
+     "date": "2026-02-03",
+     "count": 5
+    }
+   ],
+   "horizon": 3,
+   "history_days": 14,
+   "value": {
+    "method": "moving_average_7 + linear_trend (50/50 blend)",
+    "horizon": 3,
+    "history_days": 14,
+    "reliable": true,
+    "slope_per_day": 0.0,
+    "recent_daily_average": 5.0,
+    "backtest_mae": 0.0,
+    "predicted_total": 15,
+    "forecast": [
+     {
+      "date": "2026-02-04",
+      "predicted": 5
+     },
+     {
+      "date": "2026-02-05",
+      "predicted": 5
+     },
+     {
+      "date": "2026-02-06",
+      "predicted": 5
+     }
+    ]
+   }
+  },
+  {
+   "label": "short h7",
+   "by_day": [
+    {
+     "date": "2026-01-05",
+     "count": 5
+    },
+    {
+     "date": "2026-01-06",
+     "count": 6
+    },
+    {
+     "date": "2026-01-07",
+     "count": 4
+    },
+    {
+     "date": "2026-01-08",
+     "count": 5
+    }
+   ],
+   "horizon": 7,
+   "history_days": null,
+   "value": {
+    "method": "moving_average_7 + linear_trend (50/50 blend)",
+    "horizon": 7,
+    "history_days": 4,
+    "reliable": false,
+    "slope_per_day": -0.2,
+    "recent_daily_average": 5.0,
+    "backtest_mae": 3.0,
+    "predicted_total": 32,
+    "forecast": [
+     {
+      "date": "2026-01-09",
+      "predicted": 5
+     },
+     {
+      "date": "2026-01-10",
+      "predicted": 5
+     },
+     {
+      "date": "2026-01-11",
+      "predicted": 5
+     },
+     {
+      "date": "2026-01-12",
+      "predicted": 5
+     },
+     {
+      "date": "2026-01-13",
+      "predicted": 4
+     },
+     {
+      "date": "2026-01-14",
+      "predicted": 4
+     },
+     {
+      "date": "2026-01-15",
+      "predicted": 4
+     }
+    ]
+   }
+  },
+  {
+   "label": "short h3 last14",
+   "by_day": [
+    {
+     "date": "2026-01-05",
+     "count": 5
+    },
+    {
+     "date": "2026-01-06",
+     "count": 6
+    },
+    {
+     "date": "2026-01-07",
+     "count": 4
+    },
+    {
+     "date": "2026-01-08",
+     "count": 5
+    }
+   ],
+   "horizon": 3,
+   "history_days": 14,
+   "value": {
+    "method": "moving_average_7 + linear_trend (50/50 blend)",
+    "horizon": 3,
+    "history_days": 4,
+    "reliable": false,
+    "slope_per_day": -0.2,
+    "recent_daily_average": 5.0,
+    "backtest_mae": 3.0,
+    "predicted_total": 15,
+    "forecast": [
+     {
+      "date": "2026-01-09",
+      "predicted": 5
+     },
+     {
+      "date": "2026-01-10",
+      "predicted": 5
+     },
+     {
+      "date": "2026-01-11",
+      "predicted": 5
+     }
+    ]
+   }
+  },
+  {
+   "label": "spike h7",
+   "by_day": [
+    {
+     "date": "2026-01-05",
+     "count": 4
+    },
+    {
+     "date": "2026-01-06",
+     "count": 4
+    },
+    {
+     "date": "2026-01-07",
+     "count": 5
+    },
+    {
+     "date": "2026-01-08",
+     "count": 4
+    },
+    {
+     "date": "2026-01-09",
+     "count": 30
+    },
+    {
+     "date": "2026-01-10",
+     "count": 4
+    },
+    {
+     "date": "2026-01-11",
+     "count": 5
+    },
+    {
+     "date": "2026-01-12",
+     "count": 4
+    },
+    {
+     "date": "2026-01-13",
+     "count": 6
+    },
+    {
+     "date": "2026-01-14",
+     "count": 4
+    },
+    {
+     "date": "2026-01-15",
+     "count": 5
+    },
+    {
+     "date": "2026-01-16",
+     "count": 4
+    },
+    {
+     "date": "2026-01-17",
+     "count": 4
+    },
+    {
+     "date": "2026-01-18",
+     "count": 5
+    },
+    {
+     "date": "2026-01-19",
+     "count": 4
+    },
+    {
+     "date": "2026-01-20",
+     "count": 6
+    },
+    {
+     "date": "2026-01-21",
+     "count": 4
+    },
+    {
+     "date": "2026-01-22",
+     "count": 5
+    },
+    {
+     "date": "2026-01-23",
+     "count": 4
+    },
+    {
+     "date": "2026-01-24",
+     "count": 4
+    }
+   ],
+   "horizon": 7,
+   "history_days": null,
+   "value": {
+    "method": "moving_average_7 + linear_trend (50/50 blend)",
+    "horizon": 7,
+    "history_days": 20,
+    "reliable": true,
+    "slope_per_day": -0.202,
+    "recent_daily_average": 4.57,
+    "backtest_mae": 0.86,
+    "predicted_total": 28,
+    "forecast": [
+     {
+      "date": "2026-01-25",
+      "predicted": 4
+     },
+     {
+      "date": "2026-01-26",
+      "predicted": 4
+     },
+     {
+      "date": "2026-01-27",
+      "predicted": 4
+     },
+     {
+      "date": "2026-01-28",
+      "predicted": 4
+     },
+     {
+      "date": "2026-01-29",
+      "predicted": 4
+     },
+     {
+      "date": "2026-01-30",
+      "predicted": 4
+     },
+     {
+      "date": "2026-01-31",
+      "predicted": 4
+     }
+    ]
+   }
+  },
+  {
+   "label": "spike h3 last14",
+   "by_day": [
+    {
+     "date": "2026-01-05",
+     "count": 4
+    },
+    {
+     "date": "2026-01-06",
+     "count": 4
+    },
+    {
+     "date": "2026-01-07",
+     "count": 5
+    },
+    {
+     "date": "2026-01-08",
+     "count": 4
+    },
+    {
+     "date": "2026-01-09",
+     "count": 30
+    },
+    {
+     "date": "2026-01-10",
+     "count": 4
+    },
+    {
+     "date": "2026-01-11",
+     "count": 5
+    },
+    {
+     "date": "2026-01-12",
+     "count": 4
+    },
+    {
+     "date": "2026-01-13",
+     "count": 6
+    },
+    {
+     "date": "2026-01-14",
+     "count": 4
+    },
+    {
+     "date": "2026-01-15",
+     "count": 5
+    },
+    {
+     "date": "2026-01-16",
+     "count": 4
+    },
+    {
+     "date": "2026-01-17",
+     "count": 4
+    },
+    {
+     "date": "2026-01-18",
+     "count": 5
+    },
+    {
+     "date": "2026-01-19",
+     "count": 4
+    },
+    {
+     "date": "2026-01-20",
+     "count": 6
+    },
+    {
+     "date": "2026-01-21",
+     "count": 4
+    },
+    {
+     "date": "2026-01-22",
+     "count": 5
+    },
+    {
+     "date": "2026-01-23",
+     "count": 4
+    },
+    {
+     "date": "2026-01-24",
+     "count": 4
+    }
+   ],
+   "horizon": 3,
+   "history_days": 14,
+   "value": {
+    "method": "moving_average_7 + linear_trend (50/50 blend)",
+    "horizon": 3,
+    "history_days": 14,
+    "reliable": true,
+    "slope_per_day": -0.035,
+    "recent_daily_average": 4.57,
+    "backtest_mae": 0.65,
+    "predicted_total": 12,
+    "forecast": [
+     {
+      "date": "2026-01-25",
+      "predicted": 4
+     },
+     {
+      "date": "2026-01-26",
+      "predicted": 4
+     },
+     {
+      "date": "2026-01-27",
+      "predicted": 4
+     }
+    ]
+   }
+  },
+  {
+   "label": "rounding ties h7",
+   "by_day": [
+    {
+     "date": "2026-01-05",
+     "count": 1
+    },
+    {
+     "date": "2026-01-06",
+     "count": 2
+    },
+    {
+     "date": "2026-01-07",
+     "count": 3
+    },
+    {
+     "date": "2026-01-08",
+     "count": 3
+    },
+    {
+     "date": "2026-01-09",
+     "count": 3
+    },
+    {
+     "date": "2026-01-10",
+     "count": 1
+    },
+    {
+     "date": "2026-01-11",
+     "count": 1
+    },
+    {
+     "date": "2026-01-12",
+     "count": 3
+    },
+    {
+     "date": "2026-01-13",
+     "count": 3
+    },
+    {
+     "date": "2026-01-14",
+     "count": 3
+    },
+    {
+     "date": "2026-01-15",
+     "count": 2
+    },
+    {
+     "date": "2026-01-16",
+     "count": 3
+    },
+    {
+     "date": "2026-01-17",
+     "count": 3
+    },
+    {
+     "date": "2026-01-18",
+     "count": 3
+    },
+    {
+     "date": "2026-01-19",
+     "count": 2
+    },
+    {
+     "date": "2026-01-20",
+     "count": 3
+    },
+    {
+     "date": "2026-01-21",
+     "count": 2
+    },
+    {
+     "date": "2026-01-22",
+     "count": 1
+    },
+    {
+     "date": "2026-01-23",
+     "count": 1
+    },
+    {
+     "date": "2026-01-24",
+     "count": 3
+    },
+    {
+     "date": "2026-01-25",
+     "count": 1
+    }
+   ],
+   "horizon": 7,
+   "history_days": null,
+   "value": {
+    "method": "moving_average_7 + linear_trend (50/50 blend)",
+    "horizon": 7,
+    "history_days": 21,
+    "reliable": true,
+    "slope_per_day": -0.017,
+    "recent_daily_average": 1.86,
+    "backtest_mae": 1.45,
+    "predicted_total": 14,
+    "forecast": [
+     {
+      "date": "2026-01-26",
+      "predicted": 2
+     },
+     {
+      "date": "2026-01-27",
+      "predicted": 2
+     },
+     {
+      "date": "2026-01-28",
+      "predicted": 2
+     },
+     {
+      "date": "2026-01-29",
+      "predicted": 2
+     },
+     {
+      "date": "2026-01-30",
+      "predicted": 2
+     },
+     {
+      "date": "2026-01-31",
+      "predicted": 2
+     },
+     {
+      "date": "2026-02-01",
+      "predicted": 2
+     }
+    ]
+   }
+  },
+  {
+   "label": "rounding ties h3 last14",
+   "by_day": [
+    {
+     "date": "2026-01-05",
+     "count": 1
+    },
+    {
+     "date": "2026-01-06",
+     "count": 2
+    },
+    {
+     "date": "2026-01-07",
+     "count": 3
+    },
+    {
+     "date": "2026-01-08",
+     "count": 3
+    },
+    {
+     "date": "2026-01-09",
+     "count": 3
+    },
+    {
+     "date": "2026-01-10",
+     "count": 1
+    },
+    {
+     "date": "2026-01-11",
+     "count": 1
+    },
+    {
+     "date": "2026-01-12",
+     "count": 3
+    },
+    {
+     "date": "2026-01-13",
+     "count": 3
+    },
+    {
+     "date": "2026-01-14",
+     "count": 3
+    },
+    {
+     "date": "2026-01-15",
+     "count": 2
+    },
+    {
+     "date": "2026-01-16",
+     "count": 3
+    },
+    {
+     "date": "2026-01-17",
+     "count": 3
+    },
+    {
+     "date": "2026-01-18",
+     "count": 3
+    },
+    {
+     "date": "2026-01-19",
+     "count": 2
+    },
+    {
+     "date": "2026-01-20",
+     "count": 3
+    },
+    {
+     "date": "2026-01-21",
+     "count": 2
+    },
+    {
+     "date": "2026-01-22",
+     "count": 1
+    },
+    {
+     "date": "2026-01-23",
+     "count": 1
+    },
+    {
+     "date": "2026-01-24",
+     "count": 3
+    },
+    {
+     "date": "2026-01-25",
+     "count": 1
+    }
+   ],
+   "horizon": 3,
+   "history_days": 14,
+   "value": {
+    "method": "moving_average_7 + linear_trend (50/50 blend)",
+    "horizon": 3,
+    "history_days": 14,
+    "reliable": true,
+    "slope_per_day": -0.125,
+    "recent_daily_average": 1.86,
+    "backtest_mae": 1.14,
+    "predicted_total": 6,
+    "forecast": [
+     {
+      "date": "2026-01-26",
+      "predicted": 2
+     },
+     {
+      "date": "2026-01-27",
+      "predicted": 2
+     },
+     {
+      "date": "2026-01-28",
+      "predicted": 2
+     }
+    ]
+   }
+  },
+  {
+   "label": "empty h4",
+   "by_day": [],
+   "horizon": 4,
+   "history_days": null,
+   "value": {
+    "method": "none",
+    "horizon": 4,
+    "history_days": 0,
+    "reliable": false,
+    "backtest_mae": null,
+    "predicted_total": 0,
+    "forecast": []
+   }
+  },
+  {
+   "label": "single day",
+   "by_day": [
+    {
+     "date": "2026-01-05",
+     "count": 7
+    }
+   ],
+   "horizon": 2,
+   "history_days": null,
+   "value": {
+    "method": "moving_average_7 + linear_trend (50/50 blend)",
+    "horizon": 2,
+    "history_days": 1,
+    "reliable": false,
+    "slope_per_day": 0.0,
+    "recent_daily_average": 7.0,
+    "backtest_mae": null,
+    "predicted_total": 14,
+    "forecast": [
+     {
+      "date": "2026-01-06",
+      "predicted": 7
+     },
+     {
+      "date": "2026-01-07",
+      "predicted": 7
+     }
+    ]
+   }
+  },
+  {
+   "label": "zero horizon",
+   "by_day": [
+    {
+     "date": "2026-01-05",
+     "count": 3
+    },
+    {
+     "date": "2026-01-06",
+     "count": 4
+    },
+    {
+     "date": "2026-01-07",
+     "count": 5
+    },
+    {
+     "date": "2026-01-08",
+     "count": 6
+    },
+    {
+     "date": "2026-01-09",
+     "count": 7
+    },
+    {
+     "date": "2026-01-10",
+     "count": 8
+    }
+   ],
+   "horizon": 0,
+   "history_days": null,
+   "value": {
+    "method": "moving_average_7 + linear_trend (50/50 blend)",
+    "horizon": 0,
+    "history_days": 6,
+    "reliable": true,
+    "slope_per_day": 1.0,
+    "recent_daily_average": 5.5,
+    "backtest_mae": 0.0,
+    "predicted_total": 0,
+    "forecast": []
+   }
+  },
+  {
+   "label": "history_days wider than history",
+   "by_day": [
+    {
+     "date": "2026-01-05",
+     "count": 3
+    },
+    {
+     "date": "2026-01-06",
+     "count": 4
+    },
+    {
+     "date": "2026-01-07",
+     "count": 5
+    },
+    {
+     "date": "2026-01-08",
+     "count": 6
+    },
+    {
+     "date": "2026-01-09",
+     "count": 7
+    }
+   ],
+   "horizon": 2,
+   "history_days": 99,
+   "value": {
+    "method": "moving_average_7 + linear_trend (50/50 blend)",
+    "horizon": 2,
+    "history_days": 5,
+    "reliable": true,
+    "slope_per_day": 1.0,
+    "recent_daily_average": 5.0,
+    "backtest_mae": 0.0,
+    "predicted_total": 12,
+    "forecast": [
+     {
+      "date": "2026-01-10",
+      "predicted": 6
+     },
+     {
+      "date": "2026-01-11",
+      "predicted": 6
+     }
+    ]
+   }
+  },
+  {
+   "label": "unsorted input",
+   "by_day": [
+    {
+     "date": "2026-01-11",
+     "count": 8
+    },
+    {
+     "date": "2026-01-10",
+     "count": 3
+    },
+    {
+     "date": "2026-01-09",
+     "count": 6
+    },
+    {
+     "date": "2026-01-08",
+     "count": 2
+    },
+    {
+     "date": "2026-01-07",
+     "count": 4
+    },
+    {
+     "date": "2026-01-06",
+     "count": 1
+    },
+    {
+     "date": "2026-01-05",
+     "count": 9
+    }
+   ],
+   "horizon": 3,
+   "history_days": null,
+   "value": {
+    "method": "moving_average_7 + linear_trend (50/50 blend)",
+    "horizon": 3,
+    "history_days": 7,
+    "reliable": true,
+    "slope_per_day": 0.107,
+    "recent_daily_average": 4.71,
+    "backtest_mae": 7.97,
+    "predicted_total": 15,
+    "forecast": [
+     {
+      "date": "2026-01-12",
+      "predicted": 5
+     },
+     {
+      "date": "2026-01-13",
+      "predicted": 5
+     },
+     {
+      "date": "2026-01-14",
+      "predicted": 5
+     }
+    ]
+   }
+  }
+ ],
+ "comparisons": [
+  {
+   "label": "demo history seed1",
+   "by_day": [
+    {
+     "date": "2026-10-17",
+     "count": 1
+    },
+    {
+     "date": "2026-10-18",
+     "count": 2
+    },
+    {
+     "date": "2026-10-19",
+     "count": 5
+    },
+    {
+     "date": "2026-10-20",
+     "count": 3
+    },
+    {
+     "date": "2026-10-21",
+     "count": 6
+    },
+    {
+     "date": "2026-10-22",
+     "count": 6
+    },
+    {
+     "date": "2026-10-23",
+     "count": 3
+    },
+    {
+     "date": "2026-10-24",
+     "count": 1
+    },
+    {
+     "date": "2026-10-25",
+     "count": 1
+    },
+    {
+     "date": "2026-10-26",
+     "count": 4
+    },
+    {
+     "date": "2026-10-27",
+     "count": 12
+    },
+    {
+     "date": "2026-10-28",
+     "count": 9
+    },
+    {
+     "date": "2026-10-29",
+     "count": 12
+    },
+    {
+     "date": "2026-10-30",
+     "count": 6
+    },
+    {
+     "date": "2026-10-31",
+     "count": 3
+    },
+    {
+     "date": "2026-11-01",
+     "count": 1
+    },
+    {
+     "date": "2026-11-02",
+     "count": 7
+    },
+    {
+     "date": "2026-11-03",
+     "count": 5
+    },
+    {
+     "date": "2026-11-04",
+     "count": 7
+    },
+    {
+     "date": "2026-11-05",
+     "count": 4
+    },
+    {
+     "date": "2026-11-06",
+     "count": 5
+    }
+   ],
+   "seed": 1,
+   "value": {
+    "comparable": true,
+    "days": 21,
+    "test_days": 11,
+    "methods": [
+     {
+      "method": "flat 7-day average",
+      "mae": 3.09
+     },
+     {
+      "method": "same weekday, all past weeks",
+      "mae": 3.36
+     },
+     {
+      "method": "yesterday repeated",
+      "mae": 3.55
+     }
+    ],
+    "best": "flat 7-day average",
+    "runner_up": "same weekday, all past weeks",
+    "advantage_tickets_per_day": 0.27,
+    "interval_95": [
+     -1.18,
+     1.45
+    ],
+    "interval_95_exact": [
+     -1.13,
+     1.67
+    ],
+    "distinguishable_from_luck": false,
+    "verdict": "'flat 7-day average' scored best (3.09 tickets/day average miss), but its edge over 'same weekday, all past weeks' (+0.27 tickets/day) is within what luck alone produces on 11 test days. Treat the methods as equally good until there is more history."
+   }
+  },
+  {
+   "label": "clean weekly cycle seed1",
+   "by_day": [
+    {
+     "date": "2026-01-05",
+     "count": 8
+    },
+    {
+     "date": "2026-01-06",
+     "count": 9
+    },
+    {
+     "date": "2026-01-07",
+     "count": 9
+    },
+    {
+     "date": "2026-01-08",
+     "count": 8
+    },
+    {
+     "date": "2026-01-09",
+     "count": 7
+    },
+    {
+     "date": "2026-01-10",
+     "count": 1
+    },
+    {
+     "date": "2026-01-11",
+     "count": 1
+    },
+    {
+     "date": "2026-01-12",
+     "count": 8
+    },
+    {
+     "date": "2026-01-13",
+     "count": 9
+    },
+    {
+     "date": "2026-01-14",
+     "count": 9
+    },
+    {
+     "date": "2026-01-15",
+     "count": 8
+    },
+    {
+     "date": "2026-01-16",
+     "count": 7
+    },
+    {
+     "date": "2026-01-17",
+     "count": 1
+    },
+    {
+     "date": "2026-01-18",
+     "count": 1
+    },
+    {
+     "date": "2026-01-19",
+     "count": 8
+    },
+    {
+     "date": "2026-01-20",
+     "count": 9
+    },
+    {
+     "date": "2026-01-21",
+     "count": 9
+    },
+    {
+     "date": "2026-01-22",
+     "count": 8
+    },
+    {
+     "date": "2026-01-23",
+     "count": 7
+    },
+    {
+     "date": "2026-01-24",
+     "count": 1
+    },
+    {
+     "date": "2026-01-25",
+     "count": 1
+    },
+    {
+     "date": "2026-01-26",
+     "count": 8
+    },
+    {
+     "date": "2026-01-27",
+     "count": 9
+    },
+    {
+     "date": "2026-01-28",
+     "count": 9
+    },
+    {
+     "date": "2026-01-29",
+     "count": 8
+    },
+    {
+     "date": "2026-01-30",
+     "count": 7
+    },
+    {
+     "date": "2026-01-31",
+     "count": 1
+    },
+    {
+     "date": "2026-02-01",
+     "count": 1
+    },
+    {
+     "date": "2026-02-02",
+     "count": 8
+    },
+    {
+     "date": "2026-02-03",
+     "count": 9
+    },
+    {
+     "date": "2026-02-04",
+     "count": 9
+    },
+    {
+     "date": "2026-02-05",
+     "count": 8
+    },
+    {
+     "date": "2026-02-06",
+     "count": 7
+    },
+    {
+     "date": "2026-02-07",
+     "count": 1
+    },
+    {
+     "date": "2026-02-08",
+     "count": 1
+    },
+    {
+     "date": "2026-02-09",
+     "count": 8
+    },
+    {
+     "date": "2026-02-10",
+     "count": 9
+    },
+    {
+     "date": "2026-02-11",
+     "count": 9
+    },
+    {
+     "date": "2026-02-12",
+     "count": 8
+    },
+    {
+     "date": "2026-02-13",
+     "count": 7
+    },
+    {
+     "date": "2026-02-14",
+     "count": 1
+    },
+    {
+     "date": "2026-02-15",
+     "count": 1
+    },
+    {
+     "date": "2026-02-16",
+     "count": 8
+    },
+    {
+     "date": "2026-02-17",
+     "count": 9
+    },
+    {
+     "date": "2026-02-18",
+     "count": 9
+    },
+    {
+     "date": "2026-02-19",
+     "count": 8
+    },
+    {
+     "date": "2026-02-20",
+     "count": 7
+    },
+    {
+     "date": "2026-02-21",
+     "count": 1
+    },
+    {
+     "date": "2026-02-22",
+     "count": 1
+    },
+    {
+     "date": "2026-02-23",
+     "count": 8
+    },
+    {
+     "date": "2026-02-24",
+     "count": 9
+    },
+    {
+     "date": "2026-02-25",
+     "count": 9
+    },
+    {
+     "date": "2026-02-26",
+     "count": 8
+    },
+    {
+     "date": "2026-02-27",
+     "count": 7
+    },
+    {
+     "date": "2026-02-28",
+     "count": 1
+    },
+    {
+     "date": "2026-03-01",
+     "count": 1
+    },
+    {
+     "date": "2026-03-02",
+     "count": 8
+    },
+    {
+     "date": "2026-03-03",
+     "count": 9
+    },
+    {
+     "date": "2026-03-04",
+     "count": 9
+    },
+    {
+     "date": "2026-03-05",
+     "count": 8
+    },
+    {
+     "date": "2026-03-06",
+     "count": 7
+    },
+    {
+     "date": "2026-03-07",
+     "count": 1
+    },
+    {
+     "date": "2026-03-08",
+     "count": 1
+    },
+    {
+     "date": "2026-03-09",
+     "count": 8
+    },
+    {
+     "date": "2026-03-10",
+     "count": 9
+    },
+    {
+     "date": "2026-03-11",
+     "count": 9
+    },
+    {
+     "date": "2026-03-12",
+     "count": 8
+    },
+    {
+     "date": "2026-03-13",
+     "count": 7
+    },
+    {
+     "date": "2026-03-14",
+     "count": 1
+    },
+    {
+     "date": "2026-03-15",
+     "count": 1
+    },
+    {
+     "date": "2026-03-16",
+     "count": 8
+    },
+    {
+     "date": "2026-03-17",
+     "count": 9
+    },
+    {
+     "date": "2026-03-18",
+     "count": 9
+    },
+    {
+     "date": "2026-03-19",
+     "count": 8
+    },
+    {
+     "date": "2026-03-20",
+     "count": 7
+    },
+    {
+     "date": "2026-03-21",
+     "count": 1
+    },
+    {
+     "date": "2026-03-22",
+     "count": 1
+    },
+    {
+     "date": "2026-03-23",
+     "count": 8
+    },
+    {
+     "date": "2026-03-24",
+     "count": 9
+    },
+    {
+     "date": "2026-03-25",
+     "count": 9
+    },
+    {
+     "date": "2026-03-26",
+     "count": 8
+    },
+    {
+     "date": "2026-03-27",
+     "count": 7
+    },
+    {
+     "date": "2026-03-28",
+     "count": 1
+    },
+    {
+     "date": "2026-03-29",
+     "count": 1
+    }
+   ],
+   "seed": 1,
+   "value": {
+    "comparable": true,
+    "days": 84,
+    "test_days": 42,
+    "methods": [
+     {
+      "method": "same weekday, all past weeks",
+      "mae": 0
+     },
+     {
+      "method": "yesterday repeated",
+      "mae": 2.29
+     },
+     {
+      "method": "flat 7-day average",
+      "mae": 3
+     }
+    ],
+    "best": "same weekday, all past weeks",
+    "runner_up": "yesterday repeated",
+    "advantage_tickets_per_day": 2.29,
+    "interval_95": [
+     1.5,
+     3.12
+    ],
+    "interval_95_exact": [
+     1.46,
+     3.12
+    ],
+    "distinguishable_from_luck": true,
+    "verdict": "'same weekday, all past weeks' is the most accurate method here (average miss 0.00 tickets/day) and its edge over 'yesterday repeated' is larger than chance would explain."
+   }
+  },
+  {
+   "label": "pure noise seed1",
+   "by_day": [
+    {
+     "date": "2026-01-05",
+     "count": 4
+    },
+    {
+     "date": "2026-01-06",
+     "count": 3
+    },
+    {
+     "date": "2026-01-07",
+     "count": 5
+    },
+    {
+     "date": "2026-01-08",
+     "count": 7
+    },
+    {
+     "date": "2026-01-09",
+     "count": 2
+    },
+    {
+     "date": "2026-01-10",
+     "count": 2
+    },
+    {
+     "date": "2026-01-11",
+     "count": 8
+    },
+    {
+     "date": "2026-01-12",
+     "count": 6
+    },
+    {
+     "date": "2026-01-13",
+     "count": 2
+    },
+    {
+     "date": "2026-01-14",
+     "count": 4
+    },
+    {
+     "date": "2026-01-15",
+     "count": 6
+    },
+    {
+     "date": "2026-01-16",
+     "count": 2
+    },
+    {
+     "date": "2026-01-17",
+     "count": 6
+    },
+    {
+     "date": "2026-01-18",
+     "count": 3
+    },
+    {
+     "date": "2026-01-19",
+     "count": 2
+    },
+    {
+     "date": "2026-01-20",
+     "count": 2
+    },
+    {
+     "date": "2026-01-21",
+     "count": 5
+    },
+    {
+     "date": "2026-01-22",
+     "count": 5
+    },
+    {
+     "date": "2026-01-23",
+     "count": 2
+    },
+    {
+     "date": "2026-01-24",
+     "count": 3
+    },
+    {
+     "date": "2026-01-25",
+     "count": 2
+    },
+    {
+     "date": "2026-01-26",
+     "count": 6
+    },
+    {
+     "date": "2026-01-27",
+     "count": 5
+    },
+    {
+     "date": "2026-01-28",
+     "count": 2
+    },
+    {
+     "date": "2026-01-29",
+     "count": 8
+    },
+    {
+     "date": "2026-01-30",
+     "count": 6
+    },
+    {
+     "date": "2026-01-31",
+     "count": 2
+    },
+    {
+     "date": "2026-02-01",
+     "count": 3
+    }
+   ],
+   "seed": 1,
+   "value": {
+    "comparable": true,
+    "days": 28,
+    "test_days": 14,
+    "methods": [
+     {
+      "method": "flat 7-day average",
+      "mae": 1.86
+     },
+     {
+      "method": "same weekday, all past weeks",
+      "mae": 1.93
+     },
+     {
+      "method": "yesterday repeated",
+      "mae": 2.14
+     }
+    ],
+    "best": "flat 7-day average",
+    "runner_up": "same weekday, all past weeks",
+    "advantage_tickets_per_day": 0.07,
+    "interval_95": [
+     -0.71,
+     0.86
+    ],
+    "interval_95_exact": [
+     -0.76,
+     0.91
+    ],
+    "distinguishable_from_luck": false,
+    "verdict": "'flat 7-day average' scored best (1.86 tickets/day average miss), but its edge over 'same weekday, all past weeks' (+0.07 tickets/day) is within what luck alone produces on 14 test days. Treat the methods as equally good until there is more history."
+   }
+  },
+  {
+   "label": "declining seed1",
+   "by_day": [
+    {
+     "date": "2026-01-05",
+     "count": 12
+    },
+    {
+     "date": "2026-01-06",
+     "count": 12
+    },
+    {
+     "date": "2026-01-07",
+     "count": 12
+    },
+    {
+     "date": "2026-01-08",
+     "count": 11
+    },
+    {
+     "date": "2026-01-09",
+     "count": 11
+    },
+    {
+     "date": "2026-01-10",
+     "count": 8
+    },
+    {
+     "date": "2026-01-11",
+     "count": 7
+    },
+    {
+     "date": "2026-01-12",
+     "count": 10
+    },
+    {
+     "date": "2026-01-13",
+     "count": 10
+    },
+    {
+     "date": "2026-01-14",
+     "count": 9
+    },
+    {
+     "date": "2026-01-15",
+     "count": 9
+    },
+    {
+     "date": "2026-01-16",
+     "count": 9
+    },
+    {
+     "date": "2026-01-17",
+     "count": 5
+    },
+    {
+     "date": "2026-01-18",
+     "count": 5
+    },
+    {
+     "date": "2026-01-19",
+     "count": 8
+    },
+    {
+     "date": "2026-01-20",
+     "count": 7
+    },
+    {
+     "date": "2026-01-21",
+     "count": 7
+    },
+    {
+     "date": "2026-01-22",
+     "count": 7
+    },
+    {
+     "date": "2026-01-23",
+     "count": 6
+    },
+    {
+     "date": "2026-01-24",
+     "count": 3
+    },
+    {
+     "date": "2026-01-25",
+     "count": 3
+    },
+    {
+     "date": "2026-01-26",
+     "count": 5
+    },
+    {
+     "date": "2026-01-27",
+     "count": 5
+    },
+    {
+     "date": "2026-01-28",
+     "count": 5
+    },
+    {
+     "date": "2026-01-29",
+     "count": 4
+    },
+    {
+     "date": "2026-01-30",
+     "count": 4
+    },
+    {
+     "date": "2026-01-31",
+     "count": 1
+    },
+    {
+     "date": "2026-02-01",
+     "count": 0
+    },
+    {
+     "date": "2026-02-02",
+     "count": 3
+    },
+    {
+     "date": "2026-02-03",
+     "count": 3
+    },
+    {
+     "date": "2026-02-04",
+     "count": 2
+    },
+    {
+     "date": "2026-02-05",
+     "count": 2
+    },
+    {
+     "date": "2026-02-06",
+     "count": 2
+    },
+    {
+     "date": "2026-02-07",
+     "count": -2
+    },
+    {
+     "date": "2026-02-08",
+     "count": -2
+    }
+   ],
+   "seed": 1,
+   "value": {
+    "comparable": true,
+    "days": 35,
+    "test_days": 18,
+    "methods": [
+     {
+      "method": "yesterday repeated",
+      "mae": 1.06
+     },
+     {
+      "method": "flat 7-day average",
+      "mae": 1.33
+     },
+     {
+      "method": "same weekday, all past weeks",
+      "mae": 4.83
+     }
+    ],
+    "best": "yesterday repeated",
+    "runner_up": "flat 7-day average",
+    "advantage_tickets_per_day": 0.28,
+    "interval_95": [
+     -0.39,
+     0.89
+    ],
+    "interval_95_exact": [
+     -0.39,
+     0.95
+    ],
+    "distinguishable_from_luck": false,
+    "verdict": "'yesterday repeated' scored best (1.06 tickets/day average miss), but its edge over 'flat 7-day average' (+0.28 tickets/day) is within what luck alone produces on 18 test days. Treat the methods as equally good until there is more history."
+   }
+  },
+  {
+   "label": "rising seed1",
+   "by_day": [
+    {
+     "date": "2026-01-05",
+     "count": 2
+    },
+    {
+     "date": "2026-01-06",
+     "count": 3
+    },
+    {
+     "date": "2026-01-07",
+     "count": 4
+    },
+    {
+     "date": "2026-01-08",
+     "count": 5
+    },
+    {
+     "date": "2026-01-09",
+     "count": 6
+    },
+    {
+     "date": "2026-01-10",
+     "count": 7
+    },
+    {
+     "date": "2026-01-11",
+     "count": 8
+    },
+    {
+     "date": "2026-01-12",
+     "count": 9
+    },
+    {
+     "date": "2026-01-13",
+     "count": 10
+    },
+    {
+     "date": "2026-01-14",
+     "count": 11
+    },
+    {
+     "date": "2026-01-15",
+     "count": 12
+    },
+    {
+     "date": "2026-01-16",
+     "count": 13
+    },
+    {
+     "date": "2026-01-17",
+     "count": 14
+    },
+    {
+     "date": "2026-01-18",
+     "count": 15
+    },
+    {
+     "date": "2026-01-19",
+     "count": 16
+    },
+    {
+     "date": "2026-01-20",
+     "count": 17
+    },
+    {
+     "date": "2026-01-21",
+     "count": 18
+    },
+    {
+     "date": "2026-01-22",
+     "count": 19
+    },
+    {
+     "date": "2026-01-23",
+     "count": 20
+    },
+    {
+     "date": "2026-01-24",
+     "count": 21
+    }
+   ],
+   "seed": 1,
+   "value": {
+    "comparable": true,
+    "days": 20,
+    "test_days": 10,
+    "methods": [
+     {
+      "method": "yesterday repeated",
+      "mae": 1
+     },
+     {
+      "method": "flat 7-day average",
+      "mae": 4
+     },
+     {
+      "method": "same weekday, all past weeks",
+      "mae": 9.1
+     }
+    ],
+    "best": "yesterday repeated",
+    "runner_up": "flat 7-day average",
+    "advantage_tickets_per_day": 3,
+    "interval_95": [
+     3.0,
+     3.0
+    ],
+    "interval_95_exact": [
+     3.0,
+     3.0
+    ],
+    "distinguishable_from_luck": true,
+    "verdict": "'yesterday repeated' is the most accurate method here (average miss 1.00 tickets/day) and its edge over 'flat 7-day average' is larger than chance would explain."
+   }
+  },
+  {
+   "label": "flat seed1",
+   "by_day": [
+    {
+     "date": "2026-01-05",
+     "count": 5
+    },
+    {
+     "date": "2026-01-06",
+     "count": 5
+    },
+    {
+     "date": "2026-01-07",
+     "count": 5
+    },
+    {
+     "date": "2026-01-08",
+     "count": 5
+    },
+    {
+     "date": "2026-01-09",
+     "count": 5
+    },
+    {
+     "date": "2026-01-10",
+     "count": 5
+    },
+    {
+     "date": "2026-01-11",
+     "count": 5
+    },
+    {
+     "date": "2026-01-12",
+     "count": 5
+    },
+    {
+     "date": "2026-01-13",
+     "count": 5
+    },
+    {
+     "date": "2026-01-14",
+     "count": 5
+    },
+    {
+     "date": "2026-01-15",
+     "count": 5
+    },
+    {
+     "date": "2026-01-16",
+     "count": 5
+    },
+    {
+     "date": "2026-01-17",
+     "count": 5
+    },
+    {
+     "date": "2026-01-18",
+     "count": 5
+    },
+    {
+     "date": "2026-01-19",
+     "count": 5
+    },
+    {
+     "date": "2026-01-20",
+     "count": 5
+    },
+    {
+     "date": "2026-01-21",
+     "count": 5
+    },
+    {
+     "date": "2026-01-22",
+     "count": 5
+    },
+    {
+     "date": "2026-01-23",
+     "count": 5
+    },
+    {
+     "date": "2026-01-24",
+     "count": 5
+    },
+    {
+     "date": "2026-01-25",
+     "count": 5
+    },
+    {
+     "date": "2026-01-26",
+     "count": 5
+    },
+    {
+     "date": "2026-01-27",
+     "count": 5
+    },
+    {
+     "date": "2026-01-28",
+     "count": 5
+    },
+    {
+     "date": "2026-01-29",
+     "count": 5
+    },
+    {
+     "date": "2026-01-30",
+     "count": 5
+    },
+    {
+     "date": "2026-01-31",
+     "count": 5
+    },
+    {
+     "date": "2026-02-01",
+     "count": 5
+    },
+    {
+     "date": "2026-02-02",
+     "count": 5
+    },
+    {
+     "date": "2026-02-03",
+     "count": 5
+    }
+   ],
+   "seed": 1,
+   "value": {
+    "comparable": true,
+    "days": 30,
+    "test_days": 15,
+    "methods": [
+     {
+      "method": "flat 7-day average",
+      "mae": 0
+     },
+     {
+      "method": "same weekday, all past weeks",
+      "mae": 0
+     },
+     {
+      "method": "yesterday repeated",
+      "mae": 0
+     }
+    ],
+    "best": "flat 7-day average",
+    "runner_up": "same weekday, all past weeks",
+    "advantage_tickets_per_day": 0,
+    "interval_95": [
+     0.0,
+     0.0
+    ],
+    "interval_95_exact": [
+     0.0,
+     0.0
+    ],
+    "distinguishable_from_luck": false,
+    "verdict": "'flat 7-day average' scored best (0.00 tickets/day average miss), but its edge over 'same weekday, all past weeks' (+0.00 tickets/day) is within what luck alone produces on 15 test days. Treat the methods as equally good until there is more history."
+   }
+  },
+  {
+   "label": "short seed1",
+   "by_day": [
+    {
+     "date": "2026-01-05",
+     "count": 5
+    },
+    {
+     "date": "2026-01-06",
+     "count": 6
+    },
+    {
+     "date": "2026-01-07",
+     "count": 4
+    },
+    {
+     "date": "2026-01-08",
+     "count": 5
+    }
+   ],
+   "seed": 1,
+   "value": {
+    "comparable": false,
+    "days": 4,
+    "verdict": "Only 4 days of history. A method comparison needs at least 14, so no method is recommended yet.",
+    "methods": []
+   }
+  },
+  {
+   "label": "spike seed1",
+   "by_day": [
+    {
+     "date": "2026-01-05",
+     "count": 4
+    },
+    {
+     "date": "2026-01-06",
+     "count": 4
+    },
+    {
+     "date": "2026-01-07",
+     "count": 5
+    },
+    {
+     "date": "2026-01-08",
+     "count": 4
+    },
+    {
+     "date": "2026-01-09",
+     "count": 30
+    },
+    {
+     "date": "2026-01-10",
+     "count": 4
+    },
+    {
+     "date": "2026-01-11",
+     "count": 5
+    },
+    {
+     "date": "2026-01-12",
+     "count": 4
+    },
+    {
+     "date": "2026-01-13",
+     "count": 6
+    },
+    {
+     "date": "2026-01-14",
+     "count": 4
+    },
+    {
+     "date": "2026-01-15",
+     "count": 5
+    },
+    {
+     "date": "2026-01-16",
+     "count": 4
+    },
+    {
+     "date": "2026-01-17",
+     "count": 4
+    },
+    {
+     "date": "2026-01-18",
+     "count": 5
+    },
+    {
+     "date": "2026-01-19",
+     "count": 4
+    },
+    {
+     "date": "2026-01-20",
+     "count": 6
+    },
+    {
+     "date": "2026-01-21",
+     "count": 4
+    },
+    {
+     "date": "2026-01-22",
+     "count": 5
+    },
+    {
+     "date": "2026-01-23",
+     "count": 4
+    },
+    {
+     "date": "2026-01-24",
+     "count": 4
+    }
+   ],
+   "seed": 1,
+   "value": {
+    "comparable": true,
+    "days": 20,
+    "test_days": 10,
+    "methods": [
+     {
+      "method": "yesterday repeated",
+      "mae": 1
+     },
+     {
+      "method": "flat 7-day average",
+      "mae": 1.3
+     },
+     {
+      "method": "same weekday, all past weeks",
+      "mae": 4.2
+     }
+    ],
+    "best": "yesterday repeated",
+    "runner_up": "flat 7-day average",
+    "advantage_tickets_per_day": 0.3,
+    "interval_95": [
+     -0.5,
+     1.1
+    ],
+    "interval_95_exact": [
+     -0.58,
+     1.18
+    ],
+    "distinguishable_from_luck": false,
+    "verdict": "'yesterday repeated' scored best (1.00 tickets/day average miss), but its edge over 'flat 7-day average' (+0.30 tickets/day) is within what luck alone produces on 10 test days. Treat the methods as equally good until there is more history."
+   }
+  },
+  {
+   "label": "rounding ties seed1",
+   "by_day": [
+    {
+     "date": "2026-01-05",
+     "count": 1
+    },
+    {
+     "date": "2026-01-06",
+     "count": 2
+    },
+    {
+     "date": "2026-01-07",
+     "count": 3
+    },
+    {
+     "date": "2026-01-08",
+     "count": 3
+    },
+    {
+     "date": "2026-01-09",
+     "count": 3
+    },
+    {
+     "date": "2026-01-10",
+     "count": 1
+    },
+    {
+     "date": "2026-01-11",
+     "count": 1
+    },
+    {
+     "date": "2026-01-12",
+     "count": 3
+    },
+    {
+     "date": "2026-01-13",
+     "count": 3
+    },
+    {
+     "date": "2026-01-14",
+     "count": 3
+    },
+    {
+     "date": "2026-01-15",
+     "count": 2
+    },
+    {
+     "date": "2026-01-16",
+     "count": 3
+    },
+    {
+     "date": "2026-01-17",
+     "count": 3
+    },
+    {
+     "date": "2026-01-18",
+     "count": 3
+    },
+    {
+     "date": "2026-01-19",
+     "count": 2
+    },
+    {
+     "date": "2026-01-20",
+     "count": 3
+    },
+    {
+     "date": "2026-01-21",
+     "count": 2
+    },
+    {
+     "date": "2026-01-22",
+     "count": 1
+    },
+    {
+     "date": "2026-01-23",
+     "count": 1
+    },
+    {
+     "date": "2026-01-24",
+     "count": 3
+    },
+    {
+     "date": "2026-01-25",
+     "count": 1
+    }
+   ],
+   "seed": 1,
+   "value": {
+    "comparable": true,
+    "days": 21,
+    "test_days": 11,
+    "methods": [
+     {
+      "method": "flat 7-day average",
+      "mae": 0.82
+     },
+     {
+      "method": "yesterday repeated",
+      "mae": 0.91
+     },
+     {
+      "method": "same weekday, all past weeks",
+      "mae": 1.09
+     }
+    ],
+    "best": "flat 7-day average",
+    "runner_up": "yesterday repeated",
+    "advantage_tickets_per_day": 0.09,
+    "interval_95": [
+     -0.36,
+     0.55
+    ],
+    "interval_95_exact": [
+     -0.4,
+     0.58
+    ],
+    "distinguishable_from_luck": false,
+    "verdict": "'flat 7-day average' scored best (0.82 tickets/day average miss), but its edge over 'yesterday repeated' (+0.09 tickets/day) is within what luck alone produces on 11 test days. Treat the methods as equally good until there is more history."
+   }
+  },
+  {
+   "label": "clean weekly cycle seed5",
+   "by_day": [
+    {
+     "date": "2026-01-05",
+     "count": 8
+    },
+    {
+     "date": "2026-01-06",
+     "count": 9
+    },
+    {
+     "date": "2026-01-07",
+     "count": 9
+    },
+    {
+     "date": "2026-01-08",
+     "count": 8
+    },
+    {
+     "date": "2026-01-09",
+     "count": 7
+    },
+    {
+     "date": "2026-01-10",
+     "count": 1
+    },
+    {
+     "date": "2026-01-11",
+     "count": 1
+    },
+    {
+     "date": "2026-01-12",
+     "count": 8
+    },
+    {
+     "date": "2026-01-13",
+     "count": 9
+    },
+    {
+     "date": "2026-01-14",
+     "count": 9
+    },
+    {
+     "date": "2026-01-15",
+     "count": 8
+    },
+    {
+     "date": "2026-01-16",
+     "count": 7
+    },
+    {
+     "date": "2026-01-17",
+     "count": 1
+    },
+    {
+     "date": "2026-01-18",
+     "count": 1
+    },
+    {
+     "date": "2026-01-19",
+     "count": 8
+    },
+    {
+     "date": "2026-01-20",
+     "count": 9
+    },
+    {
+     "date": "2026-01-21",
+     "count": 9
+    },
+    {
+     "date": "2026-01-22",
+     "count": 8
+    },
+    {
+     "date": "2026-01-23",
+     "count": 7
+    },
+    {
+     "date": "2026-01-24",
+     "count": 1
+    },
+    {
+     "date": "2026-01-25",
+     "count": 1
+    },
+    {
+     "date": "2026-01-26",
+     "count": 8
+    },
+    {
+     "date": "2026-01-27",
+     "count": 9
+    },
+    {
+     "date": "2026-01-28",
+     "count": 9
+    },
+    {
+     "date": "2026-01-29",
+     "count": 8
+    },
+    {
+     "date": "2026-01-30",
+     "count": 7
+    },
+    {
+     "date": "2026-01-31",
+     "count": 1
+    },
+    {
+     "date": "2026-02-01",
+     "count": 1
+    },
+    {
+     "date": "2026-02-02",
+     "count": 8
+    },
+    {
+     "date": "2026-02-03",
+     "count": 9
+    },
+    {
+     "date": "2026-02-04",
+     "count": 9
+    },
+    {
+     "date": "2026-02-05",
+     "count": 8
+    },
+    {
+     "date": "2026-02-06",
+     "count": 7
+    },
+    {
+     "date": "2026-02-07",
+     "count": 1
+    },
+    {
+     "date": "2026-02-08",
+     "count": 1
+    },
+    {
+     "date": "2026-02-09",
+     "count": 8
+    },
+    {
+     "date": "2026-02-10",
+     "count": 9
+    },
+    {
+     "date": "2026-02-11",
+     "count": 9
+    },
+    {
+     "date": "2026-02-12",
+     "count": 8
+    },
+    {
+     "date": "2026-02-13",
+     "count": 7
+    },
+    {
+     "date": "2026-02-14",
+     "count": 1
+    },
+    {
+     "date": "2026-02-15",
+     "count": 1
+    },
+    {
+     "date": "2026-02-16",
+     "count": 8
+    },
+    {
+     "date": "2026-02-17",
+     "count": 9
+    },
+    {
+     "date": "2026-02-18",
+     "count": 9
+    },
+    {
+     "date": "2026-02-19",
+     "count": 8
+    },
+    {
+     "date": "2026-02-20",
+     "count": 7
+    },
+    {
+     "date": "2026-02-21",
+     "count": 1
+    },
+    {
+     "date": "2026-02-22",
+     "count": 1
+    },
+    {
+     "date": "2026-02-23",
+     "count": 8
+    },
+    {
+     "date": "2026-02-24",
+     "count": 9
+    },
+    {
+     "date": "2026-02-25",
+     "count": 9
+    },
+    {
+     "date": "2026-02-26",
+     "count": 8
+    },
+    {
+     "date": "2026-02-27",
+     "count": 7
+    },
+    {
+     "date": "2026-02-28",
+     "count": 1
+    },
+    {
+     "date": "2026-03-01",
+     "count": 1
+    },
+    {
+     "date": "2026-03-02",
+     "count": 8
+    },
+    {
+     "date": "2026-03-03",
+     "count": 9
+    },
+    {
+     "date": "2026-03-04",
+     "count": 9
+    },
+    {
+     "date": "2026-03-05",
+     "count": 8
+    },
+    {
+     "date": "2026-03-06",
+     "count": 7
+    },
+    {
+     "date": "2026-03-07",
+     "count": 1
+    },
+    {
+     "date": "2026-03-08",
+     "count": 1
+    },
+    {
+     "date": "2026-03-09",
+     "count": 8
+    },
+    {
+     "date": "2026-03-10",
+     "count": 9
+    },
+    {
+     "date": "2026-03-11",
+     "count": 9
+    },
+    {
+     "date": "2026-03-12",
+     "count": 8
+    },
+    {
+     "date": "2026-03-13",
+     "count": 7
+    },
+    {
+     "date": "2026-03-14",
+     "count": 1
+    },
+    {
+     "date": "2026-03-15",
+     "count": 1
+    },
+    {
+     "date": "2026-03-16",
+     "count": 8
+    },
+    {
+     "date": "2026-03-17",
+     "count": 9
+    },
+    {
+     "date": "2026-03-18",
+     "count": 9
+    },
+    {
+     "date": "2026-03-19",
+     "count": 8
+    },
+    {
+     "date": "2026-03-20",
+     "count": 7
+    },
+    {
+     "date": "2026-03-21",
+     "count": 1
+    },
+    {
+     "date": "2026-03-22",
+     "count": 1
+    },
+    {
+     "date": "2026-03-23",
+     "count": 8
+    },
+    {
+     "date": "2026-03-24",
+     "count": 9
+    },
+    {
+     "date": "2026-03-25",
+     "count": 9
+    },
+    {
+     "date": "2026-03-26",
+     "count": 8
+    },
+    {
+     "date": "2026-03-27",
+     "count": 7
+    },
+    {
+     "date": "2026-03-28",
+     "count": 1
+    },
+    {
+     "date": "2026-03-29",
+     "count": 1
+    }
+   ],
+   "seed": 5,
+   "value": {
+    "comparable": true,
+    "days": 84,
+    "test_days": 42,
+    "methods": [
+     {
+      "method": "same weekday, all past weeks",
+      "mae": 0
+     },
+     {
+      "method": "yesterday repeated",
+      "mae": 2.29
+     },
+     {
+      "method": "flat 7-day average",
+      "mae": 3
+     }
+    ],
+    "best": "same weekday, all past weeks",
+    "runner_up": "yesterday repeated",
+    "advantage_tickets_per_day": 2.29,
+    "interval_95": [
+     1.48,
+     3.14
+    ],
+    "interval_95_exact": [
+     1.46,
+     3.12
+    ],
+    "distinguishable_from_luck": true,
+    "verdict": "'same weekday, all past weeks' is the most accurate method here (average miss 0.00 tickets/day) and its edge over 'yesterday repeated' is larger than chance would explain."
+   }
+  },
+  {
+   "label": "pure noise seed12",
+   "by_day": [
+    {
+     "date": "2026-01-05",
+     "count": 4
+    },
+    {
+     "date": "2026-01-06",
+     "count": 3
+    },
+    {
+     "date": "2026-01-07",
+     "count": 5
+    },
+    {
+     "date": "2026-01-08",
+     "count": 7
+    },
+    {
+     "date": "2026-01-09",
+     "count": 2
+    },
+    {
+     "date": "2026-01-10",
+     "count": 2
+    },
+    {
+     "date": "2026-01-11",
+     "count": 8
+    },
+    {
+     "date": "2026-01-12",
+     "count": 6
+    },
+    {
+     "date": "2026-01-13",
+     "count": 2
+    },
+    {
+     "date": "2026-01-14",
+     "count": 4
+    },
+    {
+     "date": "2026-01-15",
+     "count": 6
+    },
+    {
+     "date": "2026-01-16",
+     "count": 2
+    },
+    {
+     "date": "2026-01-17",
+     "count": 6
+    },
+    {
+     "date": "2026-01-18",
+     "count": 3
+    },
+    {
+     "date": "2026-01-19",
+     "count": 2
+    },
+    {
+     "date": "2026-01-20",
+     "count": 2
+    },
+    {
+     "date": "2026-01-21",
+     "count": 5
+    },
+    {
+     "date": "2026-01-22",
+     "count": 5
+    },
+    {
+     "date": "2026-01-23",
+     "count": 2
+    },
+    {
+     "date": "2026-01-24",
+     "count": 3
+    },
+    {
+     "date": "2026-01-25",
+     "count": 2
+    },
+    {
+     "date": "2026-01-26",
+     "count": 6
+    },
+    {
+     "date": "2026-01-27",
+     "count": 5
+    },
+    {
+     "date": "2026-01-28",
+     "count": 2
+    },
+    {
+     "date": "2026-01-29",
+     "count": 8
+    },
+    {
+     "date": "2026-01-30",
+     "count": 6
+    },
+    {
+     "date": "2026-01-31",
+     "count": 2
+    },
+    {
+     "date": "2026-02-01",
+     "count": 3
+    }
+   ],
+   "seed": 12,
+   "value": {
+    "comparable": true,
+    "days": 28,
+    "test_days": 14,
+    "methods": [
+     {
+      "method": "flat 7-day average",
+      "mae": 1.86
+     },
+     {
+      "method": "same weekday, all past weeks",
+      "mae": 1.93
+     },
+     {
+      "method": "yesterday repeated",
+      "mae": 2.14
+     }
+    ],
+    "best": "flat 7-day average",
+    "runner_up": "same weekday, all past weeks",
+    "advantage_tickets_per_day": 0.07,
+    "interval_95": [
+     -0.79,
+     0.86
+    ],
+    "interval_95_exact": [
+     -0.76,
+     0.91
+    ],
+    "distinguishable_from_luck": false,
+    "verdict": "'flat 7-day average' scored best (1.86 tickets/day average miss), but its edge over 'same weekday, all past weeks' (+0.07 tickets/day) is within what luck alone produces on 14 test days. Treat the methods as equally good until there is more history."
+   }
+  },
+  {
+   "label": "rising seed0",
+   "by_day": [
+    {
+     "date": "2026-01-05",
+     "count": 2
+    },
+    {
+     "date": "2026-01-06",
+     "count": 3
+    },
+    {
+     "date": "2026-01-07",
+     "count": 4
+    },
+    {
+     "date": "2026-01-08",
+     "count": 5
+    },
+    {
+     "date": "2026-01-09",
+     "count": 6
+    },
+    {
+     "date": "2026-01-10",
+     "count": 7
+    },
+    {
+     "date": "2026-01-11",
+     "count": 8
+    },
+    {
+     "date": "2026-01-12",
+     "count": 9
+    },
+    {
+     "date": "2026-01-13",
+     "count": 10
+    },
+    {
+     "date": "2026-01-14",
+     "count": 11
+    },
+    {
+     "date": "2026-01-15",
+     "count": 12
+    },
+    {
+     "date": "2026-01-16",
+     "count": 13
+    },
+    {
+     "date": "2026-01-17",
+     "count": 14
+    },
+    {
+     "date": "2026-01-18",
+     "count": 15
+    },
+    {
+     "date": "2026-01-19",
+     "count": 16
+    },
+    {
+     "date": "2026-01-20",
+     "count": 17
+    },
+    {
+     "date": "2026-01-21",
+     "count": 18
+    },
+    {
+     "date": "2026-01-22",
+     "count": 19
+    },
+    {
+     "date": "2026-01-23",
+     "count": 20
+    },
+    {
+     "date": "2026-01-24",
+     "count": 21
+    }
+   ],
+   "seed": 0,
+   "value": {
+    "comparable": true,
+    "days": 20,
+    "test_days": 10,
+    "methods": [
+     {
+      "method": "yesterday repeated",
+      "mae": 1
+     },
+     {
+      "method": "flat 7-day average",
+      "mae": 4
+     },
+     {
+      "method": "same weekday, all past weeks",
+      "mae": 9.1
+     }
+    ],
+    "best": "yesterday repeated",
+    "runner_up": "flat 7-day average",
+    "advantage_tickets_per_day": 3,
+    "interval_95": [
+     3.0,
+     3.0
+    ],
+    "interval_95_exact": [
+     3.0,
+     3.0
+    ],
+    "distinguishable_from_luck": true,
+    "verdict": "'yesterday repeated' is the most accurate method here (average miss 1.00 tickets/day) and its edge over 'flat 7-day average' is larger than chance would explain."
+   }
+  },
+  {
+   "label": "undated rows ignored",
+   "by_day": [
+    {
+     "date": "2026-01-05",
+     "count": 5
+    },
+    {
+     "date": "2026-01-06",
+     "count": 5
+    },
+    {
+     "date": "2026-01-07",
+     "count": 5
+    },
+    {
+     "date": "2026-01-08",
+     "count": 5
+    },
+    {
+     "date": "2026-01-09",
+     "count": 5
+    },
+    {
+     "date": "2026-01-10",
+     "count": 5
+    },
+    {
+     "date": "2026-01-11",
+     "count": 5
+    },
+    {
+     "date": "2026-01-12",
+     "count": 5
+    },
+    {
+     "date": "2026-01-13",
+     "count": 5
+    },
+    {
+     "date": "2026-01-14",
+     "count": 5
+    },
+    {
+     "date": "2026-01-15",
+     "count": 5
+    },
+    {
+     "date": "2026-01-16",
+     "count": 5
+    },
+    {
+     "date": "2026-01-17",
+     "count": 5
+    },
+    {
+     "date": "2026-01-18",
+     "count": 5
+    },
+    {
+     "date": "2026-01-19",
+     "count": 5
+    },
+    {
+     "date": "2026-01-20",
+     "count": 5
+    },
+    {
+     "date": "2026-01-21",
+     "count": 5
+    },
+    {
+     "date": "2026-01-22",
+     "count": 5
+    },
+    {
+     "date": "2026-01-23",
+     "count": 5
+    },
+    {
+     "date": "2026-01-24",
+     "count": 5
+    },
+    {
+     "date": null,
+     "count": 99
+    },
+    {
+     "count": 50
+    }
+   ],
+   "seed": 3,
+   "value": {
+    "comparable": true,
+    "days": 20,
+    "test_days": 10,
+    "methods": [
+     {
+      "method": "flat 7-day average",
+      "mae": 0
+     },
+     {
+      "method": "same weekday, all past weeks",
+      "mae": 0
+     },
+     {
+      "method": "yesterday repeated",
+      "mae": 0
+     }
+    ],
+    "best": "flat 7-day average",
+    "runner_up": "same weekday, all past weeks",
+    "advantage_tickets_per_day": 0,
+    "interval_95": [
+     0.0,
+     0.0
+    ],
+    "interval_95_exact": [
+     0.0,
+     0.0
+    ],
+    "distinguishable_from_luck": false,
+    "verdict": "'flat 7-day average' scored best (0.00 tickets/day average miss), but its edge over 'same weekday, all past weeks' (+0.00 tickets/day) is within what luck alone produces on 10 test days. Treat the methods as equally good until there is more history."
+   }
+  },
+  {
+   "label": "too few days",
+   "by_day": [
+    {
+     "date": "2026-01-05",
+     "count": 3
+    },
+    {
+     "date": "2026-01-06",
+     "count": 4
+    },
+    {
+     "date": "2026-01-07",
+     "count": 5
+    },
+    {
+     "date": "2026-01-08",
+     "count": 4
+    },
+    {
+     "date": "2026-01-09",
+     "count": 3
+    },
+    {
+     "date": "2026-01-10",
+     "count": 5
+    }
+   ],
+   "seed": 1,
+   "value": {
+    "comparable": false,
+    "days": 6,
+    "verdict": "Only 6 days of history. A method comparison needs at least 14, so no method is recommended yet.",
+    "methods": []
+   }
+  }
+ ],
+ "prioritizer": [
+  {
+   "message": "theatre aircon failed, surgery list cannot proceed",
+   "sender": "",
+   "priority": "High"
+  },
+  {
+   "message": "ward 4 oxygen tank is almost empty, patients on it",
+   "sender": "",
+   "priority": "Medium"
+  },
+  {
+   "message": "Die lift is stukkend en pasi\u00ebnte kan nie boontoe kom nie, dit is dringend",
+   "sender": "",
+   "priority": "Low"
+  },
+  {
+   "message": "Umshini we-dialysis ya-4 awusebenzi, iziguli zilindile, siyadinga usizo ngokushesha",
+   "sender": "",
+   "priority": "Medium"
+  },
+  {
+   "message": "blood fridge is warm and the alarm keeps going off",
+   "sender": "",
+   "priority": "Medium"
+  },
+  {
+   "message": "Daar is 'n pyp gebars en die gang is vol water, dit moet nou reggemaak word",
+   "sender": "",
+   "priority": "Low"
+  },
+  {
+   "message": "URGENT: the theatre air conditioning has failed and the surgical list cannot proceed immediately.",
+   "sender": "",
+   "priority": "High"
+  },
+  {
+   "message": "Emergency: critical oxygen supply low in ward 4, patients on oxygen at risk, act asap.",
+   "sender": "",
+   "priority": "High"
+  },
+  {
+   "message": "The lift is broken and patients cannot get upstairs, this is urgent.",
+   "sender": "",
+   "priority": "Medium"
+  },
+  {
+   "message": "Dialysis machine 4 is not working, patients are waiting, we need help immediately.",
+   "sender": "",
+   "priority": "High"
+  },
+  {
+   "message": "Critical: the blood bank refrigerator is not working and the temperature alarm is active, urgent.",
+   "sender": "",
+   "priority": "Medium"
+  },
+  {
+   "message": "A pipe has burst and the corridor is flooded, this must be fixed now.",
+   "sender": "",
+   "priority": "Medium"
+  },
+  {
+   "message": "Ventilator will not start in ICU, alarm screaming, patient on it now - Sr. Naidoo",
+   "sender": "",
+   "priority": "High"
+  },
+  {
+   "message": "Umshini we-dialysis ya-4 awusebenzi, iziguli zilindile, siyadinga usizo ngokushesha",
+   "sender": "",
+   "priority": "Medium"
+  },
+  {
+   "message": "Umshini awusebenzi iziguli zilindile ngokushesha",
+   "sender": "",
+   "priority": "Low"
+  },
+  {
+   "message": "Die lift is stukkend en pasi\u00ebnte kan nie boontoe kom nie, dit is dringend",
+   "sender": "",
+   "priority": "Low"
+  },
+  {
+   "message": "Die rekenaar in ontvangs werk nie, ons kan nie pasiente help nie",
+   "sender": "",
+   "priority": "Low"
+  },
+  {
+   "message": "Die water is nie warm nie en dit is 'n probleem in die kombuis",
+   "sender": "",
+   "priority": "Low"
+  },
+  {
+   "message": "Daar is 'n pyp gebars en die gang is vol water, dit moet nou reggemaak word",
+   "sender": "",
+   "priority": "Low"
+  },
+  {
+   "message": "Mr Dlamini ID 8001015800083 in bed 12 needs the ventilator urgent",
+   "sender": "",
+   "priority": "High"
+  },
+  {
+   "message": "Please can you check why my payslip shows no overtime for October",
+   "sender": "",
+   "priority": "Low"
+  },
+  {
+   "message": "Invoice from MedSupply is double what we agreed, R48 000 instead of R24 000",
+   "sender": "",
+   "priority": "Low"
+  },
+  {
+   "message": "Generator did not start during load shedding, theatre backup failed",
+   "sender": "",
+   "priority": "High"
+  },
+  {
+   "message": "Theatre 2 aircon is blowing hot air, surgeons complaining",
+   "sender": "",
+   "priority": "Medium"
+  },
+  {
+   "message": "Umshini we-dialysis wont start now, iziguli zilindile, urgent",
+   "sender": "",
+   "priority": "High"
+  },
+  {
+   "message": "hello",
+   "sender": "",
+   "priority": "Low"
+  },
+  {
+   "message": "asdfgh qwerty zxcv",
+   "sender": "",
+   "priority": "Low"
+  },
+  {
+   "message": "Pasi\u00ebnte kla dat die hysbak dikwels staan",
+   "sender": "",
+   "priority": "Low"
+  },
+  {
+   "message": "Ward 4 oxygen tank is almost empty, patients on it \ud83d\ude37 \u2014 act now",
+   "sender": "",
+   "priority": "Medium"
+  },
+  {
+   "message": "Ventilator down",
+   "sender": "ICU",
+   "priority": "High"
+  },
+  {
+   "message": "bed 3 monitor offline",
+   "sender": "Emergency Ward",
+   "priority": "High"
+  },
+  {
+   "message": "monthly invoice query",
+   "sender": "Finance",
+   "priority": "Low"
+  },
+  {
+   "message": "rosters for December",
+   "sender": "HR",
+   "priority": "Low"
+  }
+ ],
+ "bias_audit": {
+  "pairs": [
+   {
+    "need": "theatre air conditioning failed",
+    "a_label": "plain English",
+    "a_text": "theatre aircon failed, surgery list cannot proceed",
+    "b_label": "keyword-rich English",
+    "b_text": "URGENT: the theatre air conditioning has failed and the surgical list cannot proceed immediately."
+   },
+   {
+    "need": "low oxygen on a ward",
+    "a_label": "plain English",
+    "a_text": "ward 4 oxygen tank is almost empty, patients on it",
+    "b_label": "keyword-rich English",
+    "b_text": "Emergency: critical oxygen supply low in ward 4, patients on oxygen at risk, act asap."
+   },
+   {
+    "need": "lift out of service",
+    "a_label": "Afrikaans",
+    "a_text": "Die lift is stukkend en pasi\u00ebnte kan nie boontoe kom nie, dit is dringend",
+    "b_label": "English",
+    "b_text": "The lift is broken and patients cannot get upstairs, this is urgent."
+   },
+   {
+    "need": "dialysis machine down",
+    "a_label": "isiZulu",
+    "a_text": "Umshini we-dialysis ya-4 awusebenzi, iziguli zilindile, siyadinga usizo ngokushesha",
+    "b_label": "English",
+    "b_text": "Dialysis machine 4 is not working, patients are waiting, we need help immediately."
+   },
+   {
+    "need": "fridge holding blood products failing",
+    "a_label": "plain English",
+    "a_text": "blood fridge is warm and the alarm keeps going off",
+    "b_label": "keyword-rich English",
+    "b_text": "Critical: the blood bank refrigerator is not working and the temperature alarm is active, urgent."
+   },
+   {
+    "need": "burst pipe flooding a corridor",
+    "a_label": "Afrikaans",
+    "a_text": "Daar is 'n pyp gebars en die gang is vol water, dit moet nou reggemaak word",
+    "b_label": "English",
+    "b_text": "A pipe has burst and the corridor is flooded, this must be fixed now."
+   }
+  ],
+  "audits": [
+   {
+    "label": "real prioritizer",
+    "value": {
+     "pairs_tested": 6,
+     "inconsistent": 4,
+     "consistency_rate": 33.3,
+     "worst_gap_levels": 1,
+     "by_group": {
+      "plain English": {
+       "pairs": 3,
+       "under_served": 1
+      },
+      "Afrikaans": {
+       "pairs": 2,
+       "under_served": 2
+      },
+      "isiZulu": {
+       "pairs": 1,
+       "under_served": 1
+      }
+     },
+     "rows": [
+      {
+       "need": "theatre air conditioning failed",
+       "variant_a": "plain English",
+       "variant_b": "keyword-rich English",
+       "priority_a": "High",
+       "priority_b": "High",
+       "levels_apart": 0,
+       "under_served": null,
+       "consistent": true
+      },
+      {
+       "need": "low oxygen on a ward",
+       "variant_a": "plain English",
+       "variant_b": "keyword-rich English",
+       "priority_a": "Medium",
+       "priority_b": "High",
+       "levels_apart": 1,
+       "under_served": "plain English",
+       "consistent": false
+      },
+      {
+       "need": "lift out of service",
+       "variant_a": "Afrikaans",
+       "variant_b": "English",
+       "priority_a": "Low",
+       "priority_b": "Medium",
+       "levels_apart": 1,
+       "under_served": "Afrikaans",
+       "consistent": false
+      },
+      {
+       "need": "dialysis machine down",
+       "variant_a": "isiZulu",
+       "variant_b": "English",
+       "priority_a": "Medium",
+       "priority_b": "High",
+       "levels_apart": 1,
+       "under_served": "isiZulu",
+       "consistent": false
+      },
+      {
+       "need": "fridge holding blood products failing",
+       "variant_a": "plain English",
+       "variant_b": "keyword-rich English",
+       "priority_a": "Medium",
+       "priority_b": "Medium",
+       "levels_apart": 0,
+       "under_served": null,
+       "consistent": true
+      },
+      {
+       "need": "burst pipe flooding a corridor",
+       "variant_a": "Afrikaans",
+       "variant_b": "English",
+       "priority_a": "Low",
+       "priority_b": "Medium",
+       "levels_apart": 1,
+       "under_served": "Afrikaans",
+       "consistent": false
+      }
+     ],
+     "verdict": "4 of 6 matched pairs received different priority for the same underlying need. The wording that lost out: Afrikaans, isiZulu, plain English. Priority should reflect the situation, not how it was phrased.",
+     "limits": "Six matched pairs show that a bias exists; they cannot measure how large it is or generalise to every phrasing. A production audit needs far more pairs, written by native speakers, and re-run whenever the rules change."
+    }
+   },
+   {
+    "label": "keyword-biased classifier",
+    "value": {
+     "pairs_tested": 6,
+     "inconsistent": 6,
+     "consistency_rate": 0.0,
+     "worst_gap_levels": 2,
+     "by_group": {
+      "plain English": {
+       "pairs": 3,
+       "under_served": 3
+      },
+      "Afrikaans": {
+       "pairs": 2,
+       "under_served": 2
+      },
+      "isiZulu": {
+       "pairs": 1,
+       "under_served": 1
+      }
+     },
+     "rows": [
+      {
+       "need": "theatre air conditioning failed",
+       "variant_a": "plain English",
+       "variant_b": "keyword-rich English",
+       "priority_a": "Low",
+       "priority_b": "High",
+       "levels_apart": 2,
+       "under_served": "plain English",
+       "consistent": false
+      },
+      {
+       "need": "low oxygen on a ward",
+       "variant_a": "plain English",
+       "variant_b": "keyword-rich English",
+       "priority_a": "Low",
+       "priority_b": "High",
+       "levels_apart": 2,
+       "under_served": "plain English",
+       "consistent": false
+      },
+      {
+       "need": "lift out of service",
+       "variant_a": "Afrikaans",
+       "variant_b": "English",
+       "priority_a": "Low",
+       "priority_b": "High",
+       "levels_apart": 2,
+       "under_served": "Afrikaans",
+       "consistent": false
+      },
+      {
+       "need": "dialysis machine down",
+       "variant_a": "isiZulu",
+       "variant_b": "English",
+       "priority_a": "Low",
+       "priority_b": "High",
+       "levels_apart": 2,
+       "under_served": "isiZulu",
+       "consistent": false
+      },
+      {
+       "need": "fridge holding blood products failing",
+       "variant_a": "plain English",
+       "variant_b": "keyword-rich English",
+       "priority_a": "Low",
+       "priority_b": "High",
+       "levels_apart": 2,
+       "under_served": "plain English",
+       "consistent": false
+      },
+      {
+       "need": "burst pipe flooding a corridor",
+       "variant_a": "Afrikaans",
+       "variant_b": "English",
+       "priority_a": "Low",
+       "priority_b": "High",
+       "levels_apart": 2,
+       "under_served": "Afrikaans",
+       "consistent": false
+      }
+     ],
+     "verdict": "6 of 6 matched pairs received different priority for the same underlying need. The wording that lost out: Afrikaans, isiZulu, plain English. Priority should reflect the situation, not how it was phrased.",
+     "limits": "Six matched pairs show that a bias exists; they cannot measure how large it is or generalise to every phrasing. A production audit needs far more pairs, written by native speakers, and re-run whenever the rules change."
+    }
+   },
+   {
+    "label": "always high (fair)",
+    "value": {
+     "pairs_tested": 6,
+     "inconsistent": 0,
+     "consistency_rate": 100.0,
+     "worst_gap_levels": 0,
+     "by_group": {
+      "plain English": {
+       "pairs": 3,
+       "under_served": 0
+      },
+      "Afrikaans": {
+       "pairs": 2,
+       "under_served": 0
+      },
+      "isiZulu": {
+       "pairs": 1,
+       "under_served": 0
+      }
+     },
+     "rows": [
+      {
+       "need": "theatre air conditioning failed",
+       "variant_a": "plain English",
+       "variant_b": "keyword-rich English",
+       "priority_a": "High",
+       "priority_b": "High",
+       "levels_apart": 0,
+       "under_served": null,
+       "consistent": true
+      },
+      {
+       "need": "low oxygen on a ward",
+       "variant_a": "plain English",
+       "variant_b": "keyword-rich English",
+       "priority_a": "High",
+       "priority_b": "High",
+       "levels_apart": 0,
+       "under_served": null,
+       "consistent": true
+      },
+      {
+       "need": "lift out of service",
+       "variant_a": "Afrikaans",
+       "variant_b": "English",
+       "priority_a": "High",
+       "priority_b": "High",
+       "levels_apart": 0,
+       "under_served": null,
+       "consistent": true
+      },
+      {
+       "need": "dialysis machine down",
+       "variant_a": "isiZulu",
+       "variant_b": "English",
+       "priority_a": "High",
+       "priority_b": "High",
+       "levels_apart": 0,
+       "under_served": null,
+       "consistent": true
+      },
+      {
+       "need": "fridge holding blood products failing",
+       "variant_a": "plain English",
+       "variant_b": "keyword-rich English",
+       "priority_a": "High",
+       "priority_b": "High",
+       "levels_apart": 0,
+       "under_served": null,
+       "consistent": true
+      },
+      {
+       "need": "burst pipe flooding a corridor",
+       "variant_a": "Afrikaans",
+       "variant_b": "English",
+       "priority_a": "High",
+       "priority_b": "High",
+       "levels_apart": 0,
+       "under_served": null,
+       "consistent": true
+      }
+     ],
+     "verdict": "Every matched pair received the same priority. No wording bias was detected in this sample.",
+     "limits": "Six matched pairs show that a bias exists; they cannot measure how large it is or generalise to every phrasing. A production audit needs far more pairs, written by native speakers, and re-run whenever the rules change."
+    }
+   }
+  ]
+ },
+ "records": [
+  {
+   "message": "Ventilator will not start in ICU, alarm screaming, patient on it now - Sr. Naidoo",
+   "ticket": {
+    "ticket_id": "MED-101",
+    "category": "IT & Medical Tech",
+    "priority": "High",
+    "assigned_to": "IT & Biomedical Engineering on-call"
+   },
+   "signals": [
+    "clinical_context",
+    "clinical_equipment",
+    "urgency_words"
+   ],
+   "language_hint": "english_or_unknown",
+   "record": {
+    "ticket_id": "MED-101",
+    "category": "IT & Medical Tech",
+    "priority": "High",
+    "assigned_to": "IT & Biomedical Engineering on-call",
+    "signals_fired": [
+     "clinical_context",
+     "clinical_equipment",
+     "urgency_words"
+    ],
+    "language_hint": "english_or_unknown",
+    "message_fingerprint": "58114cb15e3d",
+    "message_length": 81,
+    "needs_bias_review": false,
+    "note": ""
+   }
+  },
+  {
+   "message": "Umshini we-dialysis ya-4 awusebenzi, iziguli zilindile, siyadinga usizo ngokushesha",
+   "ticket": {
+    "ticket_id": "MED-102",
+    "category": "IT & Medical Tech",
+    "priority": "Medium",
+    "assigned_to": "Biomed"
+   },
+   "signals": [
+    "clinical_equipment"
+   ],
+   "language_hint": "likely_isizulu",
+   "record": {
+    "ticket_id": "MED-102",
+    "category": "IT & Medical Tech",
+    "priority": "Medium",
+    "assigned_to": "Biomed",
+    "signals_fired": [
+     "clinical_equipment"
+    ],
+    "language_hint": "likely_isizulu",
+    "message_fingerprint": "cd1c813fe808",
+    "message_length": 83,
+    "needs_bias_review": true,
+    "note": "Non-English wording and no urgency signal fired: priority may under-state need. A person should confirm it."
+   }
+  },
+  {
+   "message": "Umshini awusebenzi iziguli zilindile ngokushesha",
+   "ticket": {
+    "ticket_id": "MED-103",
+    "category": "IT & Medical Tech",
+    "priority": "Low",
+    "assigned_to": null
+   },
+   "signals": [],
+   "language_hint": "likely_isizulu",
+   "record": {
+    "ticket_id": "MED-103",
+    "category": "IT & Medical Tech",
+    "priority": "Low",
+    "assigned_to": null,
+    "signals_fired": [],
+    "language_hint": "likely_isizulu",
+    "message_fingerprint": "c60a270f88c7",
+    "message_length": 48,
+    "needs_bias_review": true,
+    "note": "Non-English wording and no urgency signal fired: priority may under-state need. A person should confirm it."
+   }
+  },
+  {
+   "message": "Die lift is stukkend en pasi\u00ebnte kan nie boontoe kom nie, dit is dringend",
+   "ticket": {
+    "ticket_id": "MED-104",
+    "category": "Operations",
+    "priority": "Medium",
+    "assigned_to": "Facilities"
+   },
+   "signals": [],
+   "language_hint": "likely_afrikaans",
+   "record": {
+    "ticket_id": "MED-104",
+    "category": "Operations",
+    "priority": "Medium",
+    "assigned_to": "Facilities",
+    "signals_fired": [],
+    "language_hint": "likely_afrikaans",
+    "message_fingerprint": "0e4adca893dc",
+    "message_length": 73,
+    "needs_bias_review": true,
+    "note": "Non-English wording and no urgency signal fired: priority may under-state need. A person should confirm it."
+   }
+  },
+  {
+   "message": "Die rekenaar in ontvangs werk nie, ons kan nie pasiente help nie",
+   "ticket": {
+    "ticket_id": "MED-105",
+    "category": "IT & Medical Tech",
+    "priority": "Low",
+    "assigned_to": "Helpdesk"
+   },
+   "signals": [],
+   "language_hint": "likely_afrikaans",
+   "record": {
+    "ticket_id": "MED-105",
+    "category": "IT & Medical Tech",
+    "priority": "Low",
+    "assigned_to": "Helpdesk",
+    "signals_fired": [],
+    "language_hint": "likely_afrikaans",
+    "message_fingerprint": "b6448d2445e5",
+    "message_length": 64,
+    "needs_bias_review": true,
+    "note": "Non-English wording and no urgency signal fired: priority may under-state need. A person should confirm it."
+   }
+  },
+  {
+   "message": "Die water is nie warm nie en dit is 'n probleem in die kombuis",
+   "ticket": {
+    "ticket_id": "MED-106",
+    "category": "Operations",
+    "priority": "Low",
+    "assigned_to": "Facilities"
+   },
+   "signals": [],
+   "language_hint": "likely_afrikaans",
+   "record": {
+    "ticket_id": "MED-106",
+    "category": "Operations",
+    "priority": "Low",
+    "assigned_to": "Facilities",
+    "signals_fired": [],
+    "language_hint": "likely_afrikaans",
+    "message_fingerprint": "de33a9f68b20",
+    "message_length": 62,
+    "needs_bias_review": true,
+    "note": "Non-English wording and no urgency signal fired: priority may under-state need. A person should confirm it."
+   }
+  },
+  {
+   "message": "Daar is 'n pyp gebars en die gang is vol water, dit moet nou reggemaak word",
+   "ticket": {
+    "ticket_id": "MED-107",
+    "category": "Operations",
+    "priority": "High",
+    "assigned_to": "Facilities"
+   },
+   "signals": [],
+   "language_hint": "likely_afrikaans",
+   "record": {
+    "ticket_id": "MED-107",
+    "category": "Operations",
+    "priority": "High",
+    "assigned_to": "Facilities",
+    "signals_fired": [],
+    "language_hint": "likely_afrikaans",
+    "message_fingerprint": "f96ca89e8ae4",
+    "message_length": 75,
+    "needs_bias_review": true,
+    "note": "Non-English wording and no urgency signal fired: priority may under-state need. A person should confirm it."
+   }
+  },
+  {
+   "message": "Mr Dlamini ID 8001015800083 in bed 12 needs the ventilator urgent",
+   "ticket": {
+    "ticket_id": "MED-108",
+    "category": "IT & Medical Tech",
+    "priority": "High",
+    "assigned_to": "Biomed"
+   },
+   "signals": [
+    "clinical_equipment",
+    "urgency_words"
+   ],
+   "language_hint": "english_or_unknown",
+   "record": {
+    "ticket_id": "MED-108",
+    "category": "IT & Medical Tech",
+    "priority": "High",
+    "assigned_to": "Biomed",
+    "signals_fired": [
+     "clinical_equipment",
+     "urgency_words"
+    ],
+    "language_hint": "english_or_unknown",
+    "message_fingerprint": "1a9f3be69f00",
+    "message_length": 65,
+    "needs_bias_review": false,
+    "note": ""
+   }
+  },
+  {
+   "message": "Please can you check why my payslip shows no overtime for October",
+   "ticket": {
+    "ticket_id": "MED-109",
+    "category": "HR",
+    "priority": "Low",
+    "assigned_to": "HR Shared Services"
+   },
+   "signals": [],
+   "language_hint": "english_or_unknown",
+   "record": {
+    "ticket_id": "MED-109",
+    "category": "HR",
+    "priority": "Low",
+    "assigned_to": "HR Shared Services",
+    "signals_fired": [],
+    "language_hint": "english_or_unknown",
+    "message_fingerprint": "23a820c3e41f",
+    "message_length": 65,
+    "needs_bias_review": false,
+    "note": ""
+   }
+  },
+  {
+   "message": "Invoice from MedSupply is double what we agreed, R48 000 instead of R24 000",
+   "ticket": {
+    "ticket_id": "MED-110",
+    "category": "Finance",
+    "priority": "Medium",
+    "assigned_to": "Finance"
+   },
+   "signals": [
+    "routine_words"
+   ],
+   "language_hint": "english_or_unknown",
+   "record": {
+    "ticket_id": "MED-110",
+    "category": "Finance",
+    "priority": "Medium",
+    "assigned_to": "Finance",
+    "signals_fired": [
+     "routine_words"
+    ],
+    "language_hint": "english_or_unknown",
+    "message_fingerprint": "1770a82d4155",
+    "message_length": 75,
+    "needs_bias_review": false,
+    "note": ""
+   }
+  },
+  {
+   "message": "Generator did not start during load shedding, theatre backup failed",
+   "ticket": {
+    "ticket_id": "MED-111",
+    "category": "Operations",
+    "priority": "High",
+    "assigned_to": "Facilities"
+   },
+   "signals": [
+    "clinical_context",
+    "safety_hazard",
+    "urgency_words"
+   ],
+   "language_hint": "english_or_unknown",
+   "record": {
+    "ticket_id": "MED-111",
+    "category": "Operations",
+    "priority": "High",
+    "assigned_to": "Facilities",
+    "signals_fired": [
+     "clinical_context",
+     "safety_hazard",
+     "urgency_words"
+    ],
+    "language_hint": "english_or_unknown",
+    "message_fingerprint": "33da87c5294c",
+    "message_length": 67,
+    "needs_bias_review": false,
+    "note": ""
+   }
+  },
+  {
+   "message": "Theatre 2 aircon is blowing hot air, surgeons complaining",
+   "ticket": {
+    "ticket_id": "MED-112",
+    "category": "Operations",
+    "priority": "Medium",
+    "assigned_to": "Facilities"
+   },
+   "signals": [
+    "clinical_context"
+   ],
+   "language_hint": "english_or_unknown",
+   "record": {
+    "ticket_id": "MED-112",
+    "category": "Operations",
+    "priority": "Medium",
+    "assigned_to": "Facilities",
+    "signals_fired": [
+     "clinical_context"
+    ],
+    "language_hint": "english_or_unknown",
+    "message_fingerprint": "670ed44b5f4e",
+    "message_length": 57,
+    "needs_bias_review": false,
+    "note": ""
+   }
+  },
+  {
+   "message": "Umshini we-dialysis wont start now, iziguli zilindile, urgent",
+   "ticket": {
+    "ticket_id": "MED-113",
+    "category": "IT & Medical Tech",
+    "priority": "High",
+    "assigned_to": "Biomed"
+   },
+   "signals": [
+    "clinical_equipment",
+    "urgency_words"
+   ],
+   "language_hint": "likely_isizulu",
+   "record": {
+    "ticket_id": "MED-113",
+    "category": "IT & Medical Tech",
+    "priority": "High",
+    "assigned_to": "Biomed",
+    "signals_fired": [
+     "clinical_equipment",
+     "urgency_words"
+    ],
+    "language_hint": "likely_isizulu",
+    "message_fingerprint": "9ed40f0b1ccb",
+    "message_length": 61,
+    "needs_bias_review": false,
+    "note": ""
+   }
+  },
+  {
+   "message": "hello",
+   "ticket": {
+    "ticket_id": "MED-114",
+    "category": "Operations",
+    "priority": "Low",
+    "assigned_to": ""
+   },
+   "signals": [],
+   "language_hint": "english_or_unknown",
+   "record": {
+    "ticket_id": "MED-114",
+    "category": "Operations",
+    "priority": "Low",
+    "assigned_to": "",
+    "signals_fired": [],
+    "language_hint": "english_or_unknown",
+    "message_fingerprint": "2cf24dba5fb0",
+    "message_length": 5,
+    "needs_bias_review": false,
+    "note": ""
+   }
+  },
+  {
+   "message": "asdfgh qwerty zxcv",
+   "ticket": {
+    "ticket_id": "MED-115",
+    "category": "HR",
+    "priority": "Low",
+    "assigned_to": null
+   },
+   "signals": [],
+   "language_hint": "english_or_unknown",
+   "record": {
+    "ticket_id": "MED-115",
+    "category": "HR",
+    "priority": "Low",
+    "assigned_to": null,
+    "signals_fired": [],
+    "language_hint": "english_or_unknown",
+    "message_fingerprint": "4f144553e894",
+    "message_length": 18,
+    "needs_bias_review": false,
+    "note": ""
+   }
+  },
+  {
+   "message": "Pasi\u00ebnte kla dat die hysbak dikwels staan",
+   "ticket": {
+    "ticket_id": "MED-116",
+    "category": "Operations",
+    "priority": "Medium",
+    "assigned_to": "Facilities"
+   },
+   "signals": [],
+   "language_hint": "likely_afrikaans",
+   "record": {
+    "ticket_id": "MED-116",
+    "category": "Operations",
+    "priority": "Medium",
+    "assigned_to": "Facilities",
+    "signals_fired": [],
+    "language_hint": "likely_afrikaans",
+    "message_fingerprint": "6249c9147f5c",
+    "message_length": 41,
+    "needs_bias_review": true,
+    "note": "Non-English wording and no urgency signal fired: priority may under-state need. A person should confirm it."
+   }
+  },
+  {
+   "message": "Ward 4 oxygen tank is almost empty, patients on it \ud83d\ude37 \u2014 act now",
+   "ticket": {
+    "ticket_id": "MED-117",
+    "category": "IT & Medical Tech",
+    "priority": "High",
+    "assigned_to": "Biomed"
+   },
+   "signals": [
+    "clinical_equipment"
+   ],
+   "language_hint": "english_or_unknown",
+   "record": {
+    "ticket_id": "MED-117",
+    "category": "IT & Medical Tech",
+    "priority": "High",
+    "assigned_to": "Biomed",
+    "signals_fired": [
+     "clinical_equipment"
+    ],
+    "language_hint": "english_or_unknown",
+    "message_fingerprint": "a1c767a99afe",
+    "message_length": 62,
+    "needs_bias_review": false,
+    "note": ""
+   }
+  }
+ ],
+ "transparency": {
+  "empty": {
+   "decisions": 0,
+   "note": "No decisions have been logged yet."
+  },
+  "all": {
+   "decisions": 17,
+   "by_priority": {
+    "High": 6,
+    "Medium": 5,
+    "Low": 6
+   },
+   "non_english_messages": 8,
+   "flagged_for_bias_review": 7,
+   "note": "17 automated decisions logged. 7 were flagged because the message looked non-English and no urgency signal fired, which is the pattern the bias audit found under-prioritises need. The log stores no message text, only category, priority, which signal groups fired and a short fingerprint.",
+   "limits": "Language is a cheap hint, not a detector, so counts are approximate. The flag asks a person to look; it does not change the priority."
+  },
+  "only_flagged": {
+   "decisions": 7,
+   "by_priority": {
+    "Medium": 3,
+    "Low": 3,
+    "High": 1
+   },
+   "non_english_messages": 7,
+   "flagged_for_bias_review": 7,
+   "note": "7 automated decisions logged. 7 were flagged because the message looked non-English and no urgency signal fired, which is the pattern the bias audit found under-prioritises need. The log stores no message text, only category, priority, which signal groups fired and a short fingerprint.",
+   "limits": "Language is a cheap hint, not a detector, so counts are approximate. The flag asks a person to look; it does not change the priority."
+  }
+ }
+}

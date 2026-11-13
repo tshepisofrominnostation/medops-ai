@@ -123,6 +123,9 @@
       '<h3>Drafted reply <span class="tiny muted">(' + esc(ai.tone || 'formal') + ' tone · ' + esc(ai.engine || '') + ')</span></h3>' +
       '<p style="margin:8px 0 0">' + esc(ai.draft || 'No reply drafted.') + '</p></div>';
 
+    window.__lastTicket = t;
+    if (window.MedOpsViews && window.MedOpsViews.enhanceReply) window.MedOpsViews.enhanceReply(t);
+
     var stored = Object.assign({}, t);
     delete stored.raw_message;
     $('json').textContent = JSON.stringify(stored, null, 2);
@@ -340,6 +343,8 @@
     $('footmeta').textContent = rows().length + ' tickets in this browser' +
       ' · ' + bundle.semantic.trained_on + ' training documents · ' +
       Object.keys(bundle.semantic.idf).length + ' idf terms';
+    if (window.MedOpsViews && window.MedOpsViews.renderAll) window.MedOpsViews.renderAll();
+    if (window.MedOpsViews && window.MedOpsViews.queueCount) window.MedOpsViews.queueCount();
   }
 
   /* ---- wiring ----------------------------------------------------------- */
@@ -437,5 +442,5 @@
   seedIfEmpty();
   renderQuick();
   renderAll();
-  window.__medops = { rows: rows, renderAll: renderAll, seedSize: SEED.length };
+  window.__medops = { rows: rows, renderAll: renderAll, renderTicket: renderTicket, seedSize: SEED.length };
 })();

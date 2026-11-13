@@ -1,0 +1,169 @@
+/* MedOps AI clinical console: design system.
+   Principles (Apple HIG, applied to a hospital):
+   - Colour is information. Blue means "you can act on this" and nothing else.
+     Red/amber/green are reserved for urgency, compliance and system status, so a
+     triage nurse can read the queue in a glance without learning a legend.
+   - Hierarchy comes from size, weight and space, not from boxes and decoration.
+   - Numbers that change (counts, times, percentages) use tabular figures so columns
+     do not jitter as data updates.
+   Contrast was measured, not assumed: ink 16.5:1, secondary 7.3:1, tertiary 4.9:1,
+   every semantic colour >= 4.7:1 on its tint. */
+:root{
+  --canvas:#f7f8fa; --surface:#ffffff; --surface-2:#f1f3f6; --hairline:#dfe3e8; --hairline-strong:#c9d0d8;
+  --ink:#14202b; --ink-2:#4a5866; --ink-3:#66727f;
+  --action:#0a5cc2; --action-tint:#e6eff9; --action-press:#084a9d;
+  --critical:#b42318; --critical-tint:#f8e9e8;
+  --high:#b54708;     --high-tint:#f8ede6;
+  --routine:#1a6b3c;  --routine-tint:#e8f0ec;
+  --review:#7a3e9d;   --review-tint:#f2ecf5;
+  --radius:12px; --radius-sm:8px;
+  --shadow:0 1px 2px rgba(20,32,43,.04),0 1px 1px rgba(20,32,43,.03);
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Inter","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+/* clip, not hidden: clip keeps position:sticky working on the rail while stopping
+   a stray few pixels from turning the whole page into a sideways scroll. */
+html,body{max-width:100%;overflow-x:clip}
+body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.5;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;font-feature-settings:"cv11","ss01"}
+.num,.kpi .value,td.num,time,.tnum{font-variant-numeric:tabular-nums;font-feature-settings:"tnum"}
+h1,h2,h3{margin:0;font-weight:650;letter-spacing:-.011em;color:var(--ink)}
+h1{font-size:22px;line-height:1.25}
+h2{font-size:17px;line-height:1.3}
+h3{font-size:14px;line-height:1.35}
+p{margin:0 0 10px}
+a{color:var(--action);text-underline-offset:2px}
+:focus-visible{outline:3px solid var(--action);outline-offset:2px;border-radius:6px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.hide{display:none!important}
+.muted{color:var(--ink-2)} .faint{color:var(--ink-3)} .small{font-size:13px} .tiny{font-size:12px}
+.mono{font-family:var(--mono);font-size:12.5px}
+
+/* ---- shell ---- */
+.shell{display:grid;grid-template-columns:232px minmax(0,1fr);min-height:100vh}
+.rail{position:sticky;top:0;align-self:start;height:100vh;padding:20px 12px;border-right:1px solid var(--hairline);background:var(--surface);display:flex;flex-direction:column;gap:6px}
+.brand{display:flex;align-items:center;gap:10px;padding:4px 10px 18px}
+.brand-mark{width:30px;height:30px;border-radius:8px;background:var(--ink);display:grid;place-items:center}
+.brand-name{font-weight:650;font-size:15px;letter-spacing:-.01em}
+.brand-sub{font-size:12px;color:var(--ink-3);margin-top:-2px}
+.nav{display:flex;flex-direction:column;gap:2px}
+.tab{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:none;border:0;padding:9px 10px;border-radius:var(--radius-sm);
+  font:inherit;font-size:14px;font-weight:550;color:var(--ink-2);cursor:pointer;transition:background .12s,color .12s}
+.tab:hover{background:var(--surface-2);color:var(--ink)}
+.tab.on{background:var(--action-tint);color:var(--action)}
+.tab .count{margin-left:auto;font-size:12px;font-weight:650;padding:1px 7px;border-radius:999px;background:var(--surface-2);color:var(--ink-2);font-variant-numeric:tabular-nums}
+.tab.on .count{background:#fff;color:var(--action)}
+.tab svg{flex:none;opacity:.85}
+.rail-foot{margin-top:auto;padding:10px;font-size:12px;color:var(--ink-3);border-top:1px solid var(--hairline)}
+.main{padding:28px 32px 64px;max-width:1240px;width:100%}
+.page-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+.page-head p{margin:4px 0 0;color:var(--ink-2);font-size:14px;max-width:70ch}
+.panel{display:none}.panel.on{display:block}
+
+/* ---- surfaces ---- */
+.card{background:var(--surface);border:1px solid var(--hairline);border-radius:var(--radius);padding:20px;margin-bottom:16px;box-shadow:var(--shadow)}
+.card>h2:first-child,.card>h3:first-child{margin-bottom:4px}
+.card-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+.split{display:grid;gap:16px;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.kpi{background:var(--surface);border:1px solid var(--hairline);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow)}
+.kpi .label{font-size:12px;font-weight:600;color:var(--ink-2);letter-spacing:.02em}
+.kpi .value{font-size:30px;font-weight:650;letter-spacing:-.02em;margin-top:4px;line-height:1.1}
+.kpi .note{font-size:12.5px;color:var(--ink-2);margin-top:6px}
+
+/* ---- controls ---- */
+.btn{background:var(--action);color:#fff;border:0;border-radius:var(--radius-sm);padding:10px 18px;font:inherit;font-size:14px;font-weight:600;cursor:pointer;transition:background .12s,transform .06s}
+.btn:hover{background:var(--action-press)} .btn:active{transform:translateY(1px)}
+.btn[disabled]{background:var(--hairline-strong);cursor:not-allowed}
+.btn2{background:var(--surface);border:1px solid var(--hairline-strong);color:var(--ink);border-radius:var(--radius-sm);padding:9px 14px;font:inherit;font-size:13.5px;font-weight:550;cursor:pointer}
+.btn2:hover{background:var(--surface-2)} .btn2.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.linkbtn{background:none;border:0;color:var(--action);cursor:pointer;font:inherit;font-size:13px;padding:0;text-decoration:underline;text-underline-offset:2px}
+textarea,select,input[type=text]{width:100%;background:var(--surface);border:1px solid var(--hairline-strong);border-radius:var(--radius-sm);color:var(--ink);padding:11px 12px;font:inherit;font-size:14.5px;resize:vertical}
+textarea:focus,select:focus,input:focus{outline:none;border-color:var(--action);box-shadow:0 0 0 3px var(--action-tint)}
+.seg{display:inline-flex;background:var(--surface-2);border-radius:9px;padding:2px;gap:2px}
+.seg button{border:0;background:none;padding:6px 14px;border-radius:7px;font:inherit;font-size:13px;font-weight:600;color:var(--ink-2);cursor:pointer}
+.seg button.on{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(20,32,43,.12)}
+
+/* ---- status language: the ONLY places colour carries meaning ---- */
+.chip{display:inline-flex;align-items:center;gap:6px;padding:2px 10px;border-radius:999px;font-size:12.5px;font-weight:650;line-height:1.6;white-space:nowrap}
+.chip::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.hi{background:var(--critical-tint);color:var(--critical)}
+.med{background:var(--high-tint);color:var(--high)}
+.low{background:var(--routine-tint);color:var(--routine)}
+.warn{background:var(--review-tint);color:var(--review)}
+.neutral,.cat{background:var(--surface-2);color:var(--ink-2)}
+.neutral::before,.cat::before{background:var(--ink-3)}
+.sev{border-left:4px solid var(--hairline-strong)}
+.sev.hi{border-left-color:var(--critical);background:var(--surface);color:inherit}
+.sev.med{border-left-color:var(--high);background:var(--surface);color:inherit}
+.sev.low{border-left-color:var(--routine);background:var(--surface);color:inherit}
+.sev::before{display:none}
+
+/* ---- tables ---- */
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;font-size:12px;font-weight:600;color:var(--ink-2);padding:8px 10px;border-bottom:1px solid var(--hairline-strong);white-space:nowrap}
+td{padding:10px;border-bottom:1px solid var(--hairline);vertical-align:top}
+tr:last-child td{border-bottom:0}
+tbody tr:hover{background:var(--surface-2)}
+td.num,th.num{text-align:right}
+
+/* ---- charts: neutral ink, colour only where it means something ---- */
+.bar{height:8px;background:var(--ink-2);border-radius:4px}
+.bartrack{background:var(--surface-2);border-radius:4px;overflow:hidden;height:8px}
+.dept{display:grid;grid-template-columns:1fr auto;gap:4px 10px;margin-bottom:12px;font-size:14px}
+.dept .val{color:var(--ink-2);font-variant-numeric:tabular-nums}
+.dept .track{grid-column:1/-1}
+
+/* ---- findings, confidence, disclosure ---- */
+.finding{background:var(--surface);border:1px solid var(--hairline);border-left:4px solid var(--ink-3);border-radius:var(--radius-sm);padding:12px 14px;margin-bottom:10px}
+.finding.watch{border-left-color:var(--high)} .finding.act{border-left-color:var(--critical)} .finding.unknown{border-left-color:var(--ink-3)}
+.conf{display:flex;align-items:center;gap:10px}
+.conf-track{flex:1;height:6px;background:var(--surface-2);border-radius:3px;overflow:hidden;max-width:160px}
+.conf-fill{height:100%;background:var(--ink-2);border-radius:3px}
+details.why{margin-top:10px;border-top:1px solid var(--hairline);padding-top:8px}
+details.why summary{cursor:pointer;font-size:13px;font-weight:600;color:var(--action);list-style:none}
+details.why summary::-webkit-details-marker{display:none}
+details.why summary::before{content:"\25B8";display:inline-block;margin-right:6px;transition:transform .12s}
+details.why[open] summary::before{transform:rotate(90deg)}
+pre{background:var(--surface-2);border:1px solid var(--hairline);border-radius:var(--radius-sm);padding:12px;overflow:auto;font-size:12.5px;line-height:1.55;margin:8px 0 0;font-family:var(--mono)}
+
+/* ---- states ---- */
+.empty{display:grid;place-items:center;text-align:center;gap:6px;padding:36px 16px;color:var(--ink-2);font-size:14px;border:1px dashed var(--hairline-strong);border-radius:var(--radius);background:var(--surface)}
+.empty strong{color:var(--ink);font-size:15px}
+.skeleton{background:linear-gradient(90deg,var(--surface-2),#e8ebef,var(--surface-2));background-size:200% 100%;animation:sk 1.3s infinite;border-radius:6px;min-height:14px}
+@keyframes sk{from{background-position:200% 0}to{background-position:-200% 0}}
+.alert{display:flex;gap:10px;padding:12px 14px;border-radius:var(--radius-sm);font-size:14px;border:1px solid var(--hairline)}
+.alert.err{background:var(--critical-tint);border-color:#e9c3c0;color:#7a1810}
+.alert.info{background:var(--action-tint);border-color:#c5dbf2;color:#073f87}
+.footer{margin-top:28px;color:var(--ink-3);font-size:12.5px;border-top:1px solid var(--hairline);padding-top:14px}
+
+/* ---- responsive: desktop, tablet, phone ---- */
+@media (max-width:1024px){
+  /* minmax(0,1fr) + min-width:0 is what stops a wide child turning the whole page
+     into a scrollbar; the nav scrolls inside the rail instead of pushing the layout. */
+  .shell{grid-template-columns:minmax(0,1fr)}
+  .rail{position:sticky;top:0;z-index:20;height:auto;flex-direction:row;align-items:center;
+    padding:8px 10px;border-right:0;border-bottom:1px solid var(--hairline);
+    gap:8px;min-width:0;max-width:100%;overflow-x:auto;overscroll-behavior-x:contain}
+  .brand{padding:0 8px 0 0;flex:none}.brand-sub,.rail-foot{display:none}
+  .nav{flex-direction:row;gap:4px;min-width:0;flex:1 1 auto;overflow-x:auto;padding-bottom:2px}
+  .tab{white-space:nowrap;width:auto;flex:0 0 auto}
+  .main{padding:20px 16px 56px;min-width:0}
+  .split{grid-template-columns:1fr}
+  .card{min-width:0}
+  table{min-width:0}
+  td,th{overflow-wrap:anywhere}
+}
+/* Wide data tables scroll inside their card on a phone. The page itself must never
+   scroll sideways: a nurse holding a tablet in one hand should not lose the column
+   labels off the edge of the screen. */
+@media (max-width:640px){
+  .card{overflow-x:auto}
+  table{min-width:460px}
+  .kpi .value{font-size:26px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{.rail{display:none}.shell{display:block}.card{box-shadow:none}}
