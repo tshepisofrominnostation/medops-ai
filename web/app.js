@@ -101,20 +101,47 @@
   }
 
   /* Draft the reply, and log what produced it so the record is auditable. */
-  function draftReply(ticket) {
-    var tone = S.tone(ticket.raw_message || '');
+  var REQUESTABLE_TONES = ['formal', 'friendly', 'urgent'];
+
+  /* Week 2 tone control. A requested tone changes courtesy, never facts: the ticket
+     id, the assigned team and the response window are identical in all three. */
+  function draftReply(ticket, requested) {
+    var detected = S.tone(ticket.raw_message || '');
     var bank = REPLY[ticket.category] || REPLY.Operations;
-    var body = ticket.priority === 'High'
-      ? bank.high(ticket.assigned_to, ticket.ticket_id, locationOf(ticket.raw_message))
-      : bank.normal(ticket.assigned_to, ticket.ticket_id);
-    var opener = tone.tone === 'friendly' ? 'Thank you for reaching out. ' : 'Thank you for logging this. ';
-    var closing = ticket.priority === 'High'
-      ? ''
-      : ' Expect an update within ' + WINDOW[ticket.priority] + '.';
+    var loc = locationOf(ticket.raw_message);
+    var window = WINDOW[ticket.priority] || 'two working days';
+    var tid = ticket.ticket_id, team = ticket.assigned_to;
+
+    if (requested && REQUESTABLE_TONES.indexOf(requested) === -1) {
+      throw new Error('unsupported tone: ' + requested);
+    }
+    if (requested === 'urgent') {
+      return { draft: bank.high(team, tid, loc), tone: 'urgent', requested: true,
+               tone_evidence: detected.evidence, engine: 'template (requested tone)', generated_at: nowIso() };
+    }
+    if (requested === 'formal') {
+      return { draft: 'Please be advised that ' + tid + ' has been received and assigned to ' + team +
+               '. An update is to be expected within ' + window + '; written confirmation will follow upon completion. ' +
+               'Kindly append any further detail to this ticket reference.',
+               tone: 'formal', requested: true, tone_evidence: detected.evidence,
+               engine: 'template (requested tone)', generated_at: nowIso() };
+    }
+    if (requested === 'friendly') {
+      return { draft: "Thanks for flagging this. " + tid + ' is with ' + team + " now and they'll sort it. " +
+               "You'll hear from us within " + window + ", and we'll confirm in writing once it's done. " +
+               'If anything changes, just reply here with ' + tid + '.',
+               tone: 'friendly', requested: true, tone_evidence: detected.evidence,
+               engine: 'template (requested tone)', generated_at: nowIso() };
+    }
+
+    // No tone requested: historical behaviour, unchanged.
+    var body = ticket.priority === 'High' ? bank.high(team, tid, loc) : bank.normal(team, tid);
+    var opener = detected.tone === 'friendly' ? 'Thank you for reaching out. ' : 'Thank you for logging this. ';
+    var closing = ticket.priority === 'High' ? '' : ' Expect an update within ' + window + '.';
     return {
       draft: opener + body + closing,
-      tone: tone.tone,
-      tone_evidence: tone.evidence,
+      tone: detected.tone,
+      tone_evidence: detected.evidence,
       engine: 'semantic-tfidf → signals → template',
       generated_at: nowIso()
     };
