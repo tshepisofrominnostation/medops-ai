@@ -1,5 +1,6 @@
 """Tickets generated on the published page must survive the trip into the store."""
 import json
+from pathlib import Path
 
 import pytest
 
@@ -84,7 +85,7 @@ def test_cli_import_honours_store_flag(tmp_path):
     store.write_text("[]")
     result = subprocess.run(
         [sys.executable, "-m", "app.cli", "import", str(export), "--store", str(store)],
-        cwd=__file__.rsplit("/tests/", 1)[0], capture_output=True, text=True,
+        cwd=Path(__file__).resolve().parents[1], capture_output=True, text=True,
     )
     assert result.returncode == 0, result.stderr
     report = json.loads(result.stdout)
