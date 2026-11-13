@@ -226,6 +226,79 @@
 
   function renderAll() { renderForecast(); renderGovernance(); }
 
+
+  /* ---------- 4. role views ----------
+     This HIDES views; it does not enforce access. Any visitor can change the role,
+     and there is no server to refuse them, so the note on screen says exactly that.
+     Real scopes belong in the API once it is hosted (#17). */
+  var ROLE_KEY = 'medops.role.v1';
+  var ROLES = {
+    staff: {
+      tabs: ['log'],
+      hideQueueCount: true,
+      hideLogTable: true,
+      note: '<b>Staff view.</b> You can submit a request and see the one you submitted. ' +
+            'Not enforced: this page has no sign-in, so it hides the queue rather than locking it.'
+    },
+    operations: {
+      tabs: ['log', 'dash', 'forecast', 'weekly'],
+      hideQueueCount: false,
+      hideLogTable: false,
+      note: '<b>Operations view.</b> Triage queue, workload and reporting for the whole hospital.'
+    },
+    governance: {
+      tabs: ['governance'],
+      hideQueueCount: true,
+      hideLogTable: true,
+      note: '<b>Governance view, read-only.</b> Bias audit, decision log and transparency note. ' +
+            'No ability to change a ticket.'
+    }
+  };
+
+  function currentRole() {
+    try { return root.localStorage.getItem(ROLE_KEY) || 'operations'; } catch (e) { return 'operations'; }
+  }
+
+  function applyRole(role) {
+    var cfg = ROLES[role] ? role : 'operations';
+    var spec = ROLES[cfg];
+
+    document.querySelectorAll('[data-tab]').forEach(function (btn) {
+      var tab = btn.getAttribute('data-tab');
+      var allowed = spec.tabs.indexOf(tab) !== -1;
+      btn.classList.toggle('hide', !allowed);
+      btn.setAttribute('aria-hidden', allowed ? 'false' : 'true');
+      btn.tabIndex = allowed ? 0 : -1;
+    });
+    document.querySelectorAll('.panel').forEach(function (p) {
+      var tab = p.id.replace('panel-', '');
+      if (spec.tabs.indexOf(tab) === -1) p.classList.remove('on');
+    });
+
+    // Keep the user somewhere they are allowed to be.
+    var active = document.querySelector('.tab.on');
+    if (!active || active.classList.contains('hide')) {
+      var first = document.querySelector('[data-tab="' + spec.tabs[0] + '"]');
+      if (first) first.click();
+    }
+
+    var count = $('queueCount');
+    if (count) count.classList.toggle('hide', spec.hideQueueCount);
+
+    var logCard = $('log') && $('log').closest('.card');
+    if (logCard) logCard.classList.toggle('hide', spec.hideLogTable);
+
+    var note = $('roleNote');
+    if (note) note.innerHTML = spec.note;
+
+    var sel = $('roleSel');
+    if (sel && sel.value !== cfg) sel.value = cfg;
+
+    try { root.localStorage.setItem(ROLE_KEY, cfg); } catch (e) { /* private mode */ }
+    if (cfg === 'governance') renderGovernance();
+    if (cfg === 'operations' && $('panel-forecast') && $('panel-forecast').classList.contains('on')) renderForecast();
+  }
+
   function queueCount() {
     var el = $('queueCount');
     if (!el) return;
@@ -236,6 +309,12 @@
   function bootstrap() {
     renderAll();
     queueCount();
+    var sel = $('roleSel');
+    if (sel) {
+      sel.addEventListener('change', function () { applyRole(sel.value); });
+      sel.value = currentRole();
+    }
+    applyRole(currentRole());
     // Views only compute when shown: a tablet opening the triage queue should not pay
     // for a bootstrap over every ticket.
     document.addEventListener('click', function (e) {
@@ -250,7 +329,7 @@
     });
   }
 
-  root.MedOpsViews = { enhanceReply: enhanceReply, renderForecast: renderForecast, renderGovernance: renderGovernance, renderAll: renderAll, queueCount: queueCount };
+  root.MedOpsViews = { applyRole: applyRole, enhanceReply: enhanceReply, renderForecast: renderForecast, renderGovernance: renderGovernance, renderAll: renderAll, queueCount: queueCount };
   if (typeof document !== 'undefined') {
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bootstrap);
     else bootstrap();

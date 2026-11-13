@@ -62,7 +62,12 @@ a{color:var(--action);text-underline-offset:2px}
 .tab .count{margin-left:auto;font-size:12px;font-weight:650;padding:1px 7px;border-radius:999px;background:var(--surface-2);color:var(--ink-2);font-variant-numeric:tabular-nums}
 .tab.on .count{background:#fff;color:var(--action)}
 .tab svg{flex:none;opacity:.85}
-.rail-foot{margin-top:auto;padding:10px;font-size:12px;color:var(--ink-3);border-top:1px solid var(--hairline)}
+.role{margin-top:auto;padding:12px 10px 10px;border-top:1px solid var(--hairline)}
+.role-label{display:block;font-size:11.5px;font-weight:650;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px}
+.role select{width:100%;padding:7px 9px;font-size:13.5px;font-weight:600;background:var(--surface);border:1px solid var(--hairline-strong);border-radius:8px;color:var(--ink)}
+.role-note{margin:8px 0 0;font-size:11.5px;line-height:1.45;color:var(--ink-2)}
+.role-note b{color:var(--ink);font-weight:650}
+.rail-foot{padding-bottom:0;margin-top:0;padding:10px;font-size:12px;color:var(--ink-3);border-top:1px solid var(--hairline)}
 .main{padding:28px 32px 64px;max-width:1240px;width:100%}
 .page-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:20px}
 .page-head p{margin:4px 0 0;color:var(--ink-2);font-size:14px;max-width:70ch}
@@ -214,6 +219,16 @@ pre{background:var(--surface-2);border:1px solid var(--hairline);border-radius:v
       </button>
     </div>
 
+    <div class="role">
+      <label class="role-label" for="roleSel">Viewing as</label>
+      <select id="roleSel" aria-describedby="roleNote">
+        <option value="operations">Operations</option>
+        <option value="staff">Staff</option>
+        <option value="governance">Governance</option>
+      </select>
+      <p class="role-note" id="roleNote"></p>
+    </div>
+
     <div class="rail-foot">
       Runs entirely in this browser.<br>Engine parity-tested against the Python service.
     </div>
@@ -346,7 +361,7 @@ pre{background:var(--surface-2);border:1px solid var(--hairline);border-radius:v
     </section>
 
     <div class="footer">
-      <span id="footmeta"></span><span class="tiny"> · built 13 Nov 2026, 07:20 UTC</span>
+      <span id="footmeta"></span><span class="tiny"> · built 13 Nov 2026, 07:46 UTC</span>
       <span> &middot; </span>
       <a href="artifacts/weekly_report.pdf">weekly report (PDF)</a>
       <span> &middot; </span>
@@ -2776,6 +2791,79 @@ pre{background:var(--surface-2);border:1px solid var(--hairline);border-radius:v
 
   function renderAll() { renderForecast(); renderGovernance(); }
 
+
+  /* ---------- 4. role views ----------
+     This HIDES views; it does not enforce access. Any visitor can change the role,
+     and there is no server to refuse them, so the note on screen says exactly that.
+     Real scopes belong in the API once it is hosted (#17). */
+  var ROLE_KEY = 'medops.role.v1';
+  var ROLES = {
+    staff: {
+      tabs: ['log'],
+      hideQueueCount: true,
+      hideLogTable: true,
+      note: '<b>Staff view.</b> You can submit a request and see the one you submitted. ' +
+            'Not enforced: this page has no sign-in, so it hides the queue rather than locking it.'
+    },
+    operations: {
+      tabs: ['log', 'dash', 'forecast', 'weekly'],
+      hideQueueCount: false,
+      hideLogTable: false,
+      note: '<b>Operations view.</b> Triage queue, workload and reporting for the whole hospital.'
+    },
+    governance: {
+      tabs: ['governance'],
+      hideQueueCount: true,
+      hideLogTable: true,
+      note: '<b>Governance view, read-only.</b> Bias audit, decision log and transparency note. ' +
+            'No ability to change a ticket.'
+    }
+  };
+
+  function currentRole() {
+    try { return root.localStorage.getItem(ROLE_KEY) || 'operations'; } catch (e) { return 'operations'; }
+  }
+
+  function applyRole(role) {
+    var cfg = ROLES[role] ? role : 'operations';
+    var spec = ROLES[cfg];
+
+    document.querySelectorAll('[data-tab]').forEach(function (btn) {
+      var tab = btn.getAttribute('data-tab');
+      var allowed = spec.tabs.indexOf(tab) !== -1;
+      btn.classList.toggle('hide', !allowed);
+      btn.setAttribute('aria-hidden', allowed ? 'false' : 'true');
+      btn.tabIndex = allowed ? 0 : -1;
+    });
+    document.querySelectorAll('.panel').forEach(function (p) {
+      var tab = p.id.replace('panel-', '');
+      if (spec.tabs.indexOf(tab) === -1) p.classList.remove('on');
+    });
+
+    // Keep the user somewhere they are allowed to be.
+    var active = document.querySelector('.tab.on');
+    if (!active || active.classList.contains('hide')) {
+      var first = document.querySelector('[data-tab="' + spec.tabs[0] + '"]');
+      if (first) first.click();
+    }
+
+    var count = $('queueCount');
+    if (count) count.classList.toggle('hide', spec.hideQueueCount);
+
+    var logCard = $('log') && $('log').closest('.card');
+    if (logCard) logCard.classList.toggle('hide', spec.hideLogTable);
+
+    var note = $('roleNote');
+    if (note) note.innerHTML = spec.note;
+
+    var sel = $('roleSel');
+    if (sel && sel.value !== cfg) sel.value = cfg;
+
+    try { root.localStorage.setItem(ROLE_KEY, cfg); } catch (e) { /* private mode */ }
+    if (cfg === 'governance') renderGovernance();
+    if (cfg === 'operations' && $('panel-forecast') && $('panel-forecast').classList.contains('on')) renderForecast();
+  }
+
   function queueCount() {
     var el = $('queueCount');
     if (!el) return;
@@ -2786,6 +2874,12 @@ pre{background:var(--surface-2);border:1px solid var(--hairline);border-radius:v
   function bootstrap() {
     renderAll();
     queueCount();
+    var sel = $('roleSel');
+    if (sel) {
+      sel.addEventListener('change', function () { applyRole(sel.value); });
+      sel.value = currentRole();
+    }
+    applyRole(currentRole());
     // Views only compute when shown: a tablet opening the triage queue should not pay
     // for a bootstrap over every ticket.
     document.addEventListener('click', function (e) {
@@ -2800,7 +2894,7 @@ pre{background:var(--surface-2);border:1px solid var(--hairline);border-radius:v
     });
   }
 
-  root.MedOpsViews = { enhanceReply: enhanceReply, renderForecast: renderForecast, renderGovernance: renderGovernance, renderAll: renderAll, queueCount: queueCount };
+  root.MedOpsViews = { applyRole: applyRole, enhanceReply: enhanceReply, renderForecast: renderForecast, renderGovernance: renderGovernance, renderAll: renderAll, queueCount: queueCount };
   if (typeof document !== 'undefined') {
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bootstrap);
     else bootstrap();
