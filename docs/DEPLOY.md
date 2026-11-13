@@ -79,3 +79,61 @@ engine, not the production deployment; production runs the API with a persistent
 ## Option B — Render (API + persistent store)
 
 Use this when the store must survive restarts.
+
+---
+
+## Deploying the API as a container (added 13 Nov, #17)
+
+`render.yaml` targets one vendor. The `Dockerfile` does not: it runs anywhere a
+container runs. What is still missing is an account with billing details, which is an
+owner decision, not an engineering one.
+
+**Run it locally in one line** (verified: builds nothing, runs the real service):
+
+```bash
+docker build -t medops-api .
+docker run -p 8000:8000 medops-api
+curl -s localhost:8000/health
+```
+
+Environment it honours:
+
+| Variable | Purpose | Default |
+|---|---|---|
+| `PORT` | port uvicorn binds | 8000 |
+| `MEDOPS_DB_PATH` | ticket store | in-image data dir |
+| `MEDOPS_DECISION_LOG` | append-only decision log | `data/decisions.jsonl` |
+| `MEDOPS_ALERTS`, `MEDOPS_WEBHOOK_URL`, `MEDOPS_SMTP_*` | assignment alerts | off, dry-run |
+
+**Publishing the image without a new account.** `docs/ci/api-image.yml` is a GitHub
+Actions workflow that builds the image, starts the container, calls `/health`,
+`/tickets`, `/replies` (with a tone), `/forecast/compare`, `/governance/bias-audit`
+and `/report.csv`, then publishes to `ghcr.io/tshepisofrominnostation/medops-ai/api`.
+
+It is **not installed at `.github/workflows/api-image.yml`** because the token available
+to this work does not carry the `workflow` scope, and GitHub rightly refuses to let a
+token without it create workflow files. To install it, either:
+
+- **Web UI (no token change):** GitHub → Add file → Create new file → name it
+  `.github/workflows/api-image.yml` → paste the contents of `docs/ci/api-image.yml` →
+  commit. It runs on the next push to `main`.
+- **Token change:** issue a PAT with `workflow` scope, then
+  `git mv docs/ci/api-image.yml .github/workflows/api-image.yml`.
+
+After that the image is public at:
+
+```bash
+docker run -p 8000:8000 ghcr.io/tshepisofrominnostation/medops-ai/api:latest
+```
+
+**Still needed for a public URL** (pick one, all need an account):
+
+| Host | Free tier fits? | What it needs from the owner |
+|---|---|---|
+| Render | yes, sleeps when idle | account; the existing `render.yaml` works |
+| Koyeb / Fly.io | small free allowance | account, card on some plans |
+| Hugging Face Spaces (Docker) | yes, public | account; paste the Dockerfile |
+| Any VPS | no free tier | server + card |
+
+Until one of these exists, `https://tshepisofrominnostation.github.io/medops-ai/` runs the
+same engine in the browser, which is why the console is complete without the API.

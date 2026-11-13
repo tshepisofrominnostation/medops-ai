@@ -1,0 +1,95 @@
+name: API image
+
+# Why this exists (#17): the API was never deployed because deploying needs a host
+# account, and that is the owner's decision, not an engineering one. This workflow
+# removes the engineering half of the blocker:
+#   * it proves the Dockerfile actually builds (it had never been built),
+#   * it starts the container and calls the real endpoints, so "it runs" is a fact
+#     rather than a claim,
+#   * it publishes the image to GitHub's registry using the token GitHub already
+#     gives the job, so no new account is involved.
+# Running it somewhere public is still one click on a host of the owner's choosing.
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  workflow_dispatch:
+
+jobs:
+  build-and-smoke:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build the image
+        run: docker build -t medops-ai-api:ci .
+
+      - name: Start the container
+        run: |
+          docker run -d --name api -p 8000:8000 \
+            -e MEDOPS_DB_PATH=/tmp/tickets.json \
+            -e MEDOPS_DECISION_LOG=/tmp/decisions.jsonl \
+            medops-ai-api:ci
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:8000/health >/dev/null 2>&1; then
+              echo "healthy after ${i}s"; exit 0
+            fi
+            sleep 1
+          done
+          echo "container never became healthy"; docker logs api; exit 1
+
+      - name: Smoke-test the real endpoints
+        run: |
+          set -e
+          echo "--- /health ---";        curl -fsS http://127.0.0.1:8000/health
+          echo "--- POST /tickets ---"
+          curl -fsS -X POST http://127.0.0.1:8000/tickets \
+            -H 'Content-Type: application/json' \
+            -d '{"message":"The ventilator in ICU will not start, alarm is going, patients waiting"}'
+          echo "--- POST /replies with tone ---"
+          curl -fsS -X POST http://127.0.0.1:8000/replies \
+            -H 'Content-Type: application/json' \
+            -d '{"message":"Invoice query from MedSupply","tone":"friendly"}' | head -c 400
+          echo "--- GET /forecast/compare ---"
+          curl -fsS http://127.0.0.1:8000/forecast/compare | head -c 300
+          echo "--- GET /governance/bias-audit ---"
+          curl -fsS http://127.0.0.1:8000/governance/bias-audit | head -c 300
+          echo "--- GET /report.csv ---"
+          curl -fsS -o /dev/null -w 'report.csv %{http_code}\n' http://127.0.0.1:8000/report.csv
+
+      - name: Container logs
+        if: always()
+        run: docker logs api || true
+
+      - name: Log in to GitHub Container Registry
+        if: github.event_name != 'pull_request'
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+
+      - name: Publish the image
+        if: github.event_name != 'pull_request'
+        run: |
+          IMAGE=ghcr.io/${{ github.repository }}/api
+          docker tag medops-ai-api:ci "$IMAGE:${GITHUB_SHA::7}"
+          docker tag medops-ai-api:ci "$IMAGE:latest"
+          docker push "$IMAGE:${GITHUB_SHA::7}"
+          docker push "$IMAGE:latest"
+
+      - name: Summary
+        run: |
+          {
+            echo "### API image built and smoke-tested"
+            echo ""
+            echo "Pull it with:"
+            echo ""
+            echo '```'
+            echo "docker run -p 8000:8000 ghcr.io/${{ github.repository }}/api:latest"
+            echo '```'
+            echo ""
+            echo "The container answered /health, accepted a ticket, drafted a toned reply,"
+            echo "and served the forecast comparison and bias audit."
+          } >> "$GITHUB_STEP_SUMMARY"
