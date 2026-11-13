@@ -23,6 +23,9 @@
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
+/* clip, not hidden: clip keeps position:sticky working on the rail while stopping
+   a stray few pixels from turning the whole page into a sideways scroll. */
+html,body{max-width:100%;overflow-x:clip}
 body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.5;
   -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;font-feature-settings:"cv11","ss01"}
 .num,.kpi .value,td.num,time,.tnum{font-variant-numeric:tabular-nums;font-feature-settings:"tnum"}
@@ -139,11 +142,28 @@ pre{background:var(--surface-2);border:1px solid var(--hairline);border-radius:v
 
 /* ---- responsive: desktop, tablet, phone ---- */
 @media (max-width:1024px){
-  .shell{grid-template-columns:1fr}
-  .rail{position:sticky;top:0;z-index:20;height:auto;flex-direction:row;align-items:center;padding:8px 12px;border-right:0;border-bottom:1px solid var(--hairline);overflow-x:auto;gap:8px}
-  .brand{padding:0 8px 0 0}.brand-sub,.rail-foot{display:none}
-  .nav{flex-direction:row;gap:4px}.tab{white-space:nowrap;width:auto}
-  .main{padding:20px 16px 56px}.split{grid-template-columns:1fr}
+  /* minmax(0,1fr) + min-width:0 is what stops a wide child turning the whole page
+     into a scrollbar; the nav scrolls inside the rail instead of pushing the layout. */
+  .shell{grid-template-columns:minmax(0,1fr)}
+  .rail{position:sticky;top:0;z-index:20;height:auto;flex-direction:row;align-items:center;
+    padding:8px 10px;border-right:0;border-bottom:1px solid var(--hairline);
+    gap:8px;min-width:0;max-width:100%;overflow-x:auto;overscroll-behavior-x:contain}
+  .brand{padding:0 8px 0 0;flex:none}.brand-sub,.rail-foot{display:none}
+  .nav{flex-direction:row;gap:4px;min-width:0;flex:1 1 auto;overflow-x:auto;padding-bottom:2px}
+  .tab{white-space:nowrap;width:auto;flex:0 0 auto}
+  .main{padding:20px 16px 56px;min-width:0}
+  .split{grid-template-columns:1fr}
+  .card{min-width:0}
+  table{min-width:0}
+  td,th{overflow-wrap:anywhere}
+}
+/* Wide data tables scroll inside their card on a phone. The page itself must never
+   scroll sideways: a nurse holding a tablet in one hand should not lose the column
+   labels off the edge of the screen. */
+@media (max-width:640px){
+  .card{overflow-x:auto}
+  table{min-width:460px}
+  .kpi .value{font-size:26px}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 @media print{.rail{display:none}.shell{display:block}.card{box-shadow:none}}
