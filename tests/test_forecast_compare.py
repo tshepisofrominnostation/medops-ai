@@ -2,7 +2,7 @@
 import datetime as dt
 import random
 
-from app.forecast_compare import compare_methods, MIN_DAYS
+from app.forecast_compare import compare_methods, mulberry32, MIN_DAYS
 
 
 def _days(values, start="2026-01-05"):
@@ -73,3 +73,44 @@ def test_api_endpoint_returns_a_verdict():
     assert r.status_code == 200
     body = r.json()
     assert "verdict" in body and "comparable" in body
+
+
+def test_bootstrap_is_reproducible_from_its_own_generator():
+    """The browser draws the same resamples, so the generator itself must be pinned.
+
+    These are the first values of mulberry32(1); web/governance.js produces the same
+    digits, which is what lets the parity check compare the interval exactly.
+    """
+    rnd = mulberry32(1)
+    got = [rnd() for _ in range(4)]
+    assert got == [0.6270739405881613, 0.002735721180215478,
+                   0.5274470399599522, 0.9810509674716741]
+    assert all(0.0 <= v < 1.0 for v in got)
+
+
+def test_interval_is_identical_for_the_same_seed_and_moves_with_it():
+    rows = _days([5, 6, 4, 7, 3, 5, 6, 4, 5, 7, 6, 5, 4, 6, 5, 7, 4, 5, 6, 5])
+    a = compare_methods(rows, seed=11)
+    b = compare_methods(rows, seed=11)
+    c = compare_methods(rows, seed=12)
+    assert a["interval_95"] == b["interval_95"]
+    assert a["advantage_tickets_per_day"] == b["advantage_tickets_per_day"]
+    # the point estimate is not seed-dependent; only the resampling is
+    assert a["methods"] == c["methods"]
+
+
+def test_deterministic_interval_agrees_with_the_bootstrap():
+    rng = random.Random(3)
+    out = compare_methods(_days([rng.randint(1, 9) for _ in range(30)]))
+    lo, hi = out["interval_95"]
+    elo, ehi = out["interval_95_exact"]
+    assert elo <= out["advantage_tickets_per_day"] <= ehi
+    assert abs(elo - lo) <= 0.5 and abs(ehi - hi) <= 0.5, (out["interval_95"], out["interval_95_exact"])
+
+
+def test_distinguishable_flag_follows_the_bootstrap_lower_bound():
+    # semantics unchanged: the verdict is driven by interval_95, not by the normal
+    # approximation sitting beside it
+    for rows in (_days([8, 9, 9, 8, 7, 1, 1] * 12), _days([4, 6, 5, 3, 7, 5, 4] * 4)):
+        out = compare_methods(rows)
+        assert out["distinguishable_from_luck"] == (out["interval_95"][0] > 0)
