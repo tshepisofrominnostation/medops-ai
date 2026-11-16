@@ -1,5 +1,13 @@
 # MedOps AI — Smart Ticket Classification Engine
 
+## Start here
+
+**Manual:** [docs/USER_MANUAL.md](docs/USER_MANUAL.md) — how to use the console, the API, and what it cannot do.
+
+- Console: https://tshepisofrominnostation.github.io/medops-ai/
+- API: https://medops-api.onrender.com/docs
+
+
 **Live demo:** https://tshepisofrominnostation.github.io/medops-ai/ (browser console running the same rules; the FastAPI backend below is the production engine)
 
 Intelligent hospital operations platform (Sprint 1, Week 1): a FastAPI backend that ingests raw operational requests from hospital staff, classifies them into the correct department, assigns dynamic priority, and returns a strict structured JSON ticket that is persisted to a local database.

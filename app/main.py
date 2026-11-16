@@ -3,6 +3,7 @@ import re
 from typing import Literal, Optional
 
 from fastapi import FastAPI, HTTPException, Request
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from pydantic import ValidationError
@@ -32,6 +33,17 @@ app = FastAPI(
     title="MedOps AI",
     description="Smart Ticket Classification Engine + Reply Writer for hospital operations.",
     version="1.2.0",
+)
+
+# The console is a static page on GitHub Pages, so a browser calling this API comes
+# from a different origin and is refused without these headers. Only named origins
+# are allowed: a wildcard would let any site post tickets to a hospital system.
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["https://tshepisofrominnostation.github.io"],
+    allow_origin_regex=r"http://(localhost|127\.0\.0\.1)(:\d+)?",
+    allow_methods=["GET", "POST", "OPTIONS"],
+    allow_headers=["Content-Type"],
 )
 writer = ReplyWriter()
 

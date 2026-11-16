@@ -56,7 +56,13 @@ a{color:var(--action);text-underline-offset:2px}
 .tab .count{margin-left:auto;font-size:12px;font-weight:650;padding:1px 7px;border-radius:999px;background:var(--surface-2);color:var(--ink-2);font-variant-numeric:tabular-nums}
 .tab.on .count{background:#fff;color:var(--action)}
 .tab svg{flex:none;opacity:.85}
-.role{margin-top:auto;padding:12px 10px 10px;border-top:1px solid var(--hairline)}
+.api{padding:12px 10px;border-top:1px solid var(--hairline);margin-top:auto}
+.api-row{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;cursor:pointer}
+.api-row input{accent-color:var(--action);width:15px;height:15px}
+.api-note{margin:6px 0 0 23px;font-size:11.5px;color:var(--ink-2)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--hairline-strong);flex:none;margin-left:auto}
+.dot.ok{background:var(--routine)} .dot.bad{background:var(--critical)} .dot.wait{background:var(--high)}
+.role{margin-top:0;padding:12px 10px 10px;border-top:1px solid var(--hairline)}
 .role-label{display:block;font-size:11.5px;font-weight:650;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px}
 .role select{width:100%;padding:7px 9px;font-size:13.5px;font-weight:600;background:var(--surface);border:1px solid var(--hairline-strong);border-radius:8px;color:var(--ink)}
 .role-note{margin:8px 0 0;font-size:11.5px;line-height:1.45;color:var(--ink-2)}
