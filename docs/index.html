@@ -62,7 +62,13 @@ a{color:var(--action);text-underline-offset:2px}
 .tab .count{margin-left:auto;font-size:12px;font-weight:650;padding:1px 7px;border-radius:999px;background:var(--surface-2);color:var(--ink-2);font-variant-numeric:tabular-nums}
 .tab.on .count{background:#fff;color:var(--action)}
 .tab svg{flex:none;opacity:.85}
-.role{margin-top:auto;padding:12px 10px 10px;border-top:1px solid var(--hairline)}
+.api{padding:12px 10px;border-top:1px solid var(--hairline);margin-top:auto}
+.api-row{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;cursor:pointer}
+.api-row input{accent-color:var(--action);width:15px;height:15px}
+.api-note{margin:6px 0 0 23px;font-size:11.5px;color:var(--ink-2)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--hairline-strong);flex:none;margin-left:auto}
+.dot.ok{background:var(--routine)} .dot.bad{background:var(--critical)} .dot.wait{background:var(--high)}
+.role{margin-top:0;padding:12px 10px 10px;border-top:1px solid var(--hairline)}
 .role-label{display:block;font-size:11.5px;font-weight:650;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px}
 .role select{width:100%;padding:7px 9px;font-size:13.5px;font-weight:600;background:var(--surface);border:1px solid var(--hairline-strong);border-radius:8px;color:var(--ink)}
 .role-note{margin:8px 0 0;font-size:11.5px;line-height:1.45;color:var(--ink-2)}
@@ -219,6 +225,15 @@ pre{background:var(--surface-2);border:1px solid var(--hairline);border-radius:v
       </button>
     </div>
 
+    <div class="api">
+      <label class="api-row" for="apiToggle">
+        <input type="checkbox" id="apiToggle">
+        <span>Live API</span>
+        <span class="dot idle" id="apiState" aria-hidden="true"></span>
+      </label>
+      <p class="api-note" id="apiLabel">in-browser engine</p>
+    </div>
+
     <div class="role">
       <label class="role-label" for="roleSel">Viewing as</label>
       <select id="roleSel" aria-describedby="roleNote">
@@ -361,7 +376,7 @@ pre{background:var(--surface-2);border:1px solid var(--hairline);border-radius:v
     </section>
 
     <div class="footer">
-      <span id="footmeta"></span><span class="tiny"> · built 13 Nov 2026, 07:46 UTC</span>
+      <span id="footmeta"></span><span class="tiny"> · built 16 Nov 2026, 09:30 UTC</span>
       <span> &middot; </span>
       <a href="artifacts/weekly_report.pdf">weekly report (PDF)</a>
       <span> &middot; </span>
@@ -2584,6 +2599,7 @@ pre{background:var(--surface-2);border:1px solid var(--hairline);border-radius:v
   };
   var APP = root.MedOpsApp;
   var G = root.MedOpsGovernance;
+  var S = root.MedOpsSemantic;
 
   /* the parity module is authored alongside; accept either naming convention */
   function pick() {
@@ -2633,6 +2649,9 @@ pre{background:var(--surface-2);border:1px solid var(--hairline);border-radius:v
     bar.appendChild(seg);
     bar.appendChild(note);
     box.appendChild(bar);
+
+    var local = localCompliance((ticket.ai_response && ticket.ai_response.draft) || '');
+    if (local) box.insertAdjacentHTML('beforeend', complianceChip(local.verdict, local.counts));
   }
 
   function applyTone(ticketId, tone) {
@@ -2856,12 +2875,196 @@ pre{background:var(--surface-2);border:1px solid var(--hairline);border-radius:v
     var note = $('roleNote');
     if (note) note.innerHTML = spec.note;
 
+    wireApiToggle();
+    interceptSubmit();
     var sel = $('roleSel');
     if (sel && sel.value !== cfg) sel.value = cfg;
 
     try { root.localStorage.setItem(ROLE_KEY, cfg); } catch (e) { /* private mode */ }
     if (cfg === 'governance') renderGovernance();
     if (cfg === 'operations' && $('panel-forecast') && $('panel-forecast').classList.contains('on')) renderForecast();
+  }
+
+
+  /* ---------- 5. compliance verdict on every reply (#45) ----------
+     The service screens every draft before it can be sent. Showing the verdict next to
+     the reply is the difference between having a safety feature and a user being able
+     to rely on it. 'clean' is a heuristic, so the wording never claims safety. */
+  function complianceChip(verdict, counts) {
+    var blocked = (counts && counts.block) || 0;
+    var review = (counts && counts.review) || 0;
+    var cls = blocked ? 'hi' : review ? 'med' : 'low';
+    var label = blocked ? 'Blocked: patient data' : review ? 'Needs review' : 'Screen clean';
+    var detail = blocked || review
+      ? (blocked + ' block' + (blocked === 1 ? '' : 's') + ', ' + review + ' review')
+      : 'no known pattern found';
+    return '<div style="margin-top:12px"><span class="chip ' + cls + '">' + esc(label) + '</span>' +
+      ' <span class="tiny faint">' + esc(detail) + ' &middot; heuristic screen, a person still approves the send</span></div>';
+  }
+
+  function localCompliance(text) {
+    if (!S || !S.phiScan) return null;
+    var scan = S.phiScan(String(text || ''));
+    var block = scan.flags.filter(function (f) { return f.severity === 'block'; }).length;
+    var review = scan.flags.filter(function (f) { return f.severity === 'review'; }).length;
+    return { verdict: block ? 'blocked' : review ? 'review' : 'clean', counts: { block: block, review: review } };
+  }
+
+  /* ---------- 6. live API mode ----------
+     Posts to the deployed Render service instead of the in-page engine. Both engines
+     are the same code, parity-tested, but only this path proves the product can use
+     its own API. The badge says which one produced what is on screen, so the two can
+     never be confused. */
+  var API_KEY = 'medops.api.mode.v1';
+  var API_BASE_KEY = 'medops.api.base.v1';
+  var DEFAULT_API = 'https://medops-api.onrender.com';
+  var apiEnabled = false;
+
+  function apiBase() {
+    try { return root.localStorage.getItem(API_BASE_KEY) || DEFAULT_API; } catch (e) { return DEFAULT_API; }
+  }
+  function setApiBase(url) {
+    try { root.localStorage.setItem(API_BASE_KEY, url.replace(/\/+$/, '')); } catch (e) {}
+  }
+  function apiMode() {
+    try { return root.localStorage.getItem(API_KEY) === '1'; } catch (e) { return false; }
+  }
+  function setApiMode(on) {
+    apiEnabled = on;
+    try { root.localStorage.setItem(API_KEY, on ? '1' : '0'); } catch (e) {}
+  }
+
+  function apiFetch(path, body) {
+    var opts = { method: body ? 'POST' : 'GET', headers: {} };
+    if (body) { opts.headers['Content-Type'] = 'application/json'; opts.body = JSON.stringify(body); }
+    var started = Date.now();
+    return fetch(apiBase() + path, opts).then(function (r) {
+      if (!r.ok) return r.text().then(function (t) { throw new Error('API ' + r.status + ': ' + t.slice(0, 120)); });
+      return r.json().then(function (d) { return { data: d, ms: Date.now() - started }; });
+    });
+  }
+
+  function apiStatus(state, text) {
+    var dot = $('apiState');
+    var label = $('apiLabel');
+    if (!dot) return;
+    dot.className = 'dot ' + state;
+    if (label) label.textContent = text;
+  }
+
+  function apiWake() {
+    apiStatus('wait', 'waking');
+    return apiFetch('/health').then(function (r) {
+      apiStatus('ok', 'connected, ' + r.ms + ' ms');
+      return true;
+    }).catch(function (e) {
+      apiStatus('bad', 'unreachable');
+      var box = $('result');
+      if (box) {
+        box.classList.remove('hide');
+        $('verdict').innerHTML = '<div class="alert err">Live API not reachable: ' + esc(e.message) +
+          '. Free instances sleep, so the first call can take a minute. The in-browser engine still works.</div>';
+      }
+      return false;
+    });
+  }
+
+  function renderApiResult(ticket, reply, compliance, ms) {
+    $('result').classList.remove('hide');
+    var chip = function (cls, text) { return '<span class="chip ' + cls + '">' + esc(text) + '</span>'; };
+    $('verdict').innerHTML =
+      '<div class="row">' + chip('neutral', 'API') +
+      chip(ticket.priority === 'High' ? 'hi' : ticket.priority === 'Medium' ? 'med' : 'low', ticket.priority) +
+      chip('cat', ticket.category) + chip('neutral', ticket.ticket_id) +
+      '<span class="tiny faint">answered by the live service in ' + ms + ' ms</span></div>' +
+      '<p class="small muted" style="margin-top:8px">Assigned to <b>' + esc(ticket.assigned_to) + '</b>. ' +
+      esc(ticket.summary) + '</p>';
+
+    $('replybox').innerHTML =
+      '<div class="card" style="margin:0;background:var(--surface-2)">' +
+      '<h3>Drafted reply <span class="tiny faint">(' + esc(reply.tone) + ' tone &middot; ' + esc(reply.generated_by) + ')</span></h3>' +
+      '<p style="margin:8px 0 0">' + esc(reply.reply_body) + '</p>' +
+      complianceChip(compliance.verdict, compliance.counts) +
+      (compliance.disclaimer ? '<p class="tiny faint" style="margin-top:6px">' + esc(compliance.disclaimer) + '</p>' : '') +
+      '</div>';
+
+    var bar = document.createElement('div');
+    bar.className = 'row';
+    bar.style.marginTop = '10px';
+    bar.innerHTML = '<span class="small muted">Tone</span>';
+    var seg = document.createElement('div');
+    seg.className = 'seg';
+    TONES.forEach(function (tone) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = tone.label;
+      if (reply.tone === tone.id) b.className = 'on';
+      b.addEventListener('click', function () { submitViaApi(ticket.__message, tone.id); });
+      seg.appendChild(b);
+    });
+    bar.appendChild(seg);
+    $('replybox').appendChild(bar);
+  }
+
+  function submitViaApi(message, tone) {
+    apiStatus('wait', 'sending');
+    var payload = { message: message };
+    if (tone) payload.tone = tone;
+    apiFetch('/tickets', { message: message })
+      .then(function (t) {
+        var ticket = t.data;
+        ticket.__message = message;
+        return apiFetch('/replies', payload).then(function (r) {
+          renderApiResult(ticket, r.data.reply, r.data.compliance, t.ms + r.ms);
+          // Keep the local store in step so the queue and dashboard count it.
+          try {
+            var rows = APP.load();
+            rows.push({
+              ticket_id: ticket.ticket_id, timestamp: ticket.timestamp, sender: ticket.sender,
+              category: ticket.category, priority: ticket.priority, summary: ticket.summary,
+              assigned_to: ticket.assigned_to, status: 'Open', synthetic: false,
+              raw_message: message, via: 'api'
+            });
+            APP.save(rows);
+            if (root.__medops && root.__medops.renderAll) root.__medops.renderAll();
+          } catch (e) { /* the API result is still shown */ }
+          apiStatus('ok', 'connected');
+        });
+      })
+      .catch(function (e) {
+        apiStatus('bad', 'failed');
+        $('result').classList.remove('hide');
+        $('verdict').innerHTML = '<div class="alert err">' + esc(e.message) + '</div>';
+      });
+  }
+
+  /* Intercept the submit button only when API mode is on, so the offline path is
+     untouched. Capture phase beats the page's own listener. */
+  function interceptSubmit() {
+    var btn = $('submit');
+    if (!btn) return;
+    btn.addEventListener('click', function (e) {
+      if (!apiMode()) return;
+      var box = $('msg');
+      var text = box ? box.value.trim() : '';
+      if (!text) return;
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      submitViaApi(text, null);
+    }, true);
+  }
+
+  function wireApiToggle() {
+    var box = $('apiToggle');
+    if (!box) return;
+    apiEnabled = apiMode();
+    box.checked = apiEnabled;
+    apiStatus(apiEnabled ? 'wait' : 'idle', apiEnabled ? 'checking' : 'in-browser engine');
+    box.addEventListener('change', function () {
+      setApiMode(box.checked);
+      if (box.checked) apiWake(); else apiStatus('idle', 'in-browser engine');
+    });
+    if (apiEnabled) apiWake();
   }
 
   function queueCount() {
@@ -2894,7 +3097,7 @@ pre{background:var(--surface-2);border:1px solid var(--hairline);border-radius:v
     });
   }
 
-  root.MedOpsViews = { applyRole: applyRole, enhanceReply: enhanceReply, renderForecast: renderForecast, renderGovernance: renderGovernance, renderAll: renderAll, queueCount: queueCount };
+  root.MedOpsViews = { setApiBase: setApiBase, apiBase: apiBase, applyRole: applyRole, enhanceReply: enhanceReply, renderForecast: renderForecast, renderGovernance: renderGovernance, renderAll: renderAll, queueCount: queueCount };
   if (typeof document !== 'undefined') {
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bootstrap);
     else bootstrap();
